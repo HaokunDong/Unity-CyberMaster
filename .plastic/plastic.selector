@@ -1,0 +1,4 @@
+repository "CyberMaster@wechat_os_qy087kycxli721zs_bks4ykae@cloud.cn"
+  path "/"
+    br "/main"
+    co "/main"
