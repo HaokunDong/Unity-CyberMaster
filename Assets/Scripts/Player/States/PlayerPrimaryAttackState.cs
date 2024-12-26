@@ -36,7 +36,6 @@ public class PlayerPrimaryAttackState : PlayerState
 
         stateTimer = 0.1f;
 
-        //Debug.Log(comboCounter);
     }
 
     public override void Exit()

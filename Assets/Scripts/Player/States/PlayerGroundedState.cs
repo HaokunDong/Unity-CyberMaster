@@ -22,17 +22,23 @@ public class PlayerGroundedState : PlayerState
     {
         base.Update();
 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+
+        if (Input.GetKeyDown(KeyCode.L))
         {
             stateMachine.ChangeState(player.dodgeState);
         }
 
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.J))
         {
             stateMachine.ChangeState(player.primaryAttack);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && player.IsGroundDetected())
+        if (Input.GetKey(KeyCode.U))
+        {
+            stateMachine.ChangeState(player.chargeAttack);
+        }
+
+        if (Input.GetKeyDown(KeyCode.K) && player.IsGroundDetected())
         {
             stateMachine.ChangeState(player.jumpState);
         }

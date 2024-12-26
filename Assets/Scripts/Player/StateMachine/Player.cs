@@ -6,6 +6,7 @@ public class Player : Entity
 {
     [Header("Attack Details")]
     public Vector2[] attackMovement;//用于控制每段攻击向前或向上的位移
+    public float chargeAttackMovement;
 
     public bool isBusy { get; private set; }
 
@@ -32,6 +33,7 @@ public class Player : Entity
     public PlayerDodgeState dodgeState { get; private set; }
 
     public PlayerPrimaryAttackState primaryAttack { get; private set; }
+    public PlayerChargeAttackState chargeAttack { get; private set; }
     #endregion
     
 
@@ -51,6 +53,7 @@ public class Player : Entity
         dodgeState = new PlayerDodgeState(stateMachine, this, "Dodge");
 
         primaryAttack = new PlayerPrimaryAttackState(stateMachine, this, "Attack");
+        chargeAttack  = new PlayerChargeAttackState(stateMachine, this, "ChargeAttack");
     }
 
     protected override void Start()
@@ -91,5 +94,8 @@ public class Player : Entity
     //调用AnimationTrigger时可以调用到PlayerState中的AnimationFinishTrigger函数
     //可以从unity的动画结束帧上调用此函数
     public void AnimationTrigger() => stateMachine.currentState.AnimationFinishTrigger();
+
+    //帧事件用于充能攻击的位移
+    public void ChargeAttackMove() => stateMachine.currentState.AnimationEventTrigger();
 
 }

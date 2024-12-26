@@ -15,6 +15,7 @@ public class PlayerState
 
     protected float stateTimer;
     protected bool triggerCalled;
+    protected bool eventsTriggerCalled;
 
     public PlayerState(PlayerStateMachine _stateMachine, Player _player, string _animBoolNam)
     {
@@ -28,6 +29,7 @@ public class PlayerState
         player.animator.SetBool(animBoolName, true);
         rb = player.rb;
         triggerCalled = false;
+        eventsTriggerCalled = false;
     }
 
     public virtual void Update()
@@ -48,5 +50,10 @@ public class PlayerState
     public virtual void AnimationFinishTrigger()//在攻击结束帧调用此函数
     {
         triggerCalled = true;
+    }
+
+    public virtual void AnimationEventTrigger()//在动画过程中的帧事件中可以使用
+    {
+        eventsTriggerCalled = true;
     }
 }

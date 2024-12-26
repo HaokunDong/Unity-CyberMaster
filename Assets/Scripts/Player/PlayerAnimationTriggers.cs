@@ -11,4 +11,8 @@ public class PlayerAnimationTriggers : MonoBehaviour
         player.AnimationTrigger();
     }
 
+    private void ChargeAttackMove()
+    {
+        player.ChargeAttackMove();
+    }
 }
