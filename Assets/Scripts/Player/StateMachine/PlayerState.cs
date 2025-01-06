@@ -47,12 +47,12 @@ public class PlayerState
         player.animator.SetBool(animBoolName, false);
     }
 
-    public virtual void AnimationFinishTrigger()//在攻击结束帧调用此函数
+    public virtual void AnimationFinishTrigger()//锟节癸拷锟斤拷锟斤拷锟斤拷帧锟斤拷锟矫此猴拷锟斤拷
     {
         triggerCalled = true;
     }
 
-    public virtual void AnimationEventTrigger()//在动画过程中的帧事件中可以使用
+    public virtual void AnimationEventTrigger()//锟节讹拷锟斤拷锟斤拷锟斤拷锟叫碉拷帧锟铰硷拷锟叫匡拷锟斤拷使锟斤拷
     {
         eventsTriggerCalled = true;
     }

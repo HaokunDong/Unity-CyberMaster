@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : Entity
 {
     [Header("Attack Details")]
-    public Vector2[] attackMovement;//ÓÃÓÚ¿ØÖÆÃ¿¶Î¹¥»÷ÏòÇ°»òÏòÉÏµÄÎ»ÒÆ
+    public Vector2[] attackMovement;//ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½Ã¿ï¿½Î¹ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½Î»ï¿½ï¿½
     public float chargeAttackMovement;
 
     public bool isBusy { get; private set; }
@@ -35,7 +35,7 @@ public class Player : Entity
     public PlayerPrimaryAttackState primaryAttack { get; private set; }
     public PlayerChargeAttackState chargeAttack { get; private set; }
     #endregion
-    
+
 
     protected override void Awake()
     {
@@ -44,16 +44,16 @@ public class Player : Entity
 
         idleState = new PlayerIdleState(stateMachine, this, "Idle");
         moveState = new PlayerMoveState(stateMachine, this, "Move");
-        runState  = new PlayerRunState(stateMachine, this, "Run");
+        runState = new PlayerRunState(stateMachine, this, "Run");
         jumpState = new PlayerJumpState(stateMachine, this, "Jump");
         landState = new PlayerLandState(stateMachine, this, "Landing");
-        airState  = new PlayerAirState(stateMachine, this, "Jump");
+        airState = new PlayerAirState(stateMachine, this, "Jump");
         wallSlideState = new PlayerWallSlideState(stateMachine, this, "WallSlide");
-        wallJumpState  = new PlayerWallJumpState(stateMachine, this, "Jump");
+        wallJumpState = new PlayerWallJumpState(stateMachine, this, "Jump");
         dodgeState = new PlayerDodgeState(stateMachine, this, "Dodge");
 
         primaryAttack = new PlayerPrimaryAttackState(stateMachine, this, "Attack");
-        chargeAttack  = new PlayerChargeAttackState(stateMachine, this, "ChargeAttack");
+        chargeAttack = new PlayerChargeAttackState(stateMachine, this, "ChargeAttack");
     }
 
     protected override void Start()
@@ -62,7 +62,10 @@ public class Player : Entity
 
         stateMachine.Initialize(idleState);
     }
-
+    public void EnterRoom()
+    {
+        GameManager.Ins.Send(GameEvent.OnPlayerEnter, this);
+    }
     protected override void Update()
     {
         base.Update();
@@ -71,7 +74,7 @@ public class Player : Entity
         SetDodgeDirection();
     }
 
-    //Ê¹ÓÃÐ­³Ì£¬ËüµÄ×÷ÓÃÊÇ½«isBusy±ä³ÉfalseµÄ¹ý³Ì½øÐÐÒ»¸öÑÓ³Ù
+    //Ê¹ï¿½ï¿½Ð­ï¿½Ì£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç½ï¿½isBusyï¿½ï¿½ï¿½falseï¿½Ä¹ï¿½ï¿½Ì½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ó³ï¿½
     public IEnumerator BusyFor(float _seconds)
     {
         isBusy = true;
@@ -85,17 +88,17 @@ public class Player : Entity
     {
         dodgeDir = Input.GetAxisRaw("Horizontal");
 
-        if(dodgeDir == 0)
+        if (dodgeDir == 0)
         {
             dodgeDir = facingDir;
         }
     }
 
-    //µ÷ÓÃAnimationTriggerÊ±¿ÉÒÔµ÷ÓÃµ½PlayerStateÖÐµÄAnimationFinishTriggerº¯Êý
-    //¿ÉÒÔ´ÓunityµÄ¶¯»­½áÊøÖ¡ÉÏµ÷ÓÃ´Ëº¯Êý
+    //ï¿½ï¿½ï¿½ï¿½AnimationTriggerÊ±ï¿½ï¿½ï¿½Ôµï¿½ï¿½Ãµï¿½PlayerStateï¿½Ðµï¿½AnimationFinishTriggerï¿½ï¿½ï¿½ï¿½
+    //ï¿½ï¿½ï¿½Ô´ï¿½unityï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¡ï¿½Ïµï¿½ï¿½Ã´Ëºï¿½ï¿½ï¿½
     public void AnimationTrigger() => stateMachine.currentState.AnimationFinishTrigger();
 
-    //Ö¡ÊÂ¼þÓÃÓÚ³äÄÜ¹¥»÷µÄÎ»ÒÆ
+    //Ö¡ï¿½Â¼ï¿½ï¿½ï¿½ï¿½Ú³ï¿½ï¿½Ü¹ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
     public void ChargeAttackMove() => stateMachine.currentState.AnimationEventTrigger();
 
 }

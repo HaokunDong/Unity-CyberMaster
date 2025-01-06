@@ -10,7 +10,7 @@ public class Enemy_Boss_LiHuo : Enemy
     public LiHuoIdleState idleState { get; private set; }
 
     #endregion
-
+    private Player player;
 
     protected override void Awake()
     {
@@ -18,6 +18,7 @@ public class Enemy_Boss_LiHuo : Enemy
 
         idleState = new LiHuoIdleState(stateMachine, this, "Idle", this);
     }
+
 
     protected override void Start()
     {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class Enemy : Entity
@@ -16,8 +17,12 @@ public class Enemy : Entity
     {
         base.Awake();
         stateMachine = new EnemyStateMachine();
+        Register();
     }
+    public virtual void Register()
+    {
 
+    }
     protected override void Start()
     {
         base.Start();
