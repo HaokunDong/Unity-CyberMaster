@@ -1882,12 +1882,12 @@ SpriteRenderer:
   m_SortingLayerID: -1056458153
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1837021696, guid: d2c596bd051065d42998b707adc812f0, type: 3}
+  m_Sprite: {fileID: -2073533878, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 8, y: 8}
+  m_Size: {x: 16, y: 16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2124,7 +2124,7 @@ GameObject:
   - component: {fileID: 1125947440}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3067,8 +3067,7 @@ MonoBehaviour:
   wallCheckDistance: 0.8
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 0
-  playerObject: {fileID: 1125947436}
+    m_Bits: 8
   moveSpeed: 3
   jumpForce: 12
 --- !u!50 &1759786915

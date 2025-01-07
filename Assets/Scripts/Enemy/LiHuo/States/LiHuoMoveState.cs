@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class LiHuoMoveState : EnemyState
 {
-    private Enemy_Boss_LiHuo _liHuo;
+    private Enemy_Boss_LiHuo liHuo;
 
-    public LiHuoMoveState(EnemyStateMachine stateMachine, Enemy enemy, string animBoolName, Enemy_Boss_LiHuo liHuo) : base(stateMachine, enemy, animBoolName)
+    public LiHuoMoveState(EnemyStateMachine _stateMachine, Enemy _enemy, string _animBoolName, Enemy_Boss_LiHuo _liHuo) : base(_stateMachine, _enemy, _animBoolName)
     {
-        this._liHuo = liHuo;
+        this.liHuo = _liHuo;
     }
 
     public override void Enter()
     {
         base.Enter();
+
+        
     }
 
     public override void Exit()
@@ -25,6 +27,11 @@ public class LiHuoMoveState : EnemyState
     {
         base.Update();
 
+        liHuo.SetVelocity(liHuo.facingDir * liHuo.moveSpeed, liHuo.rb.velocity.y);
 
+        if (liHuo.facingDir != liHuo.RelativePosition())
+        {
+            stateMachine.ChangeState(liHuo.idleState);
+        }
     }
 }

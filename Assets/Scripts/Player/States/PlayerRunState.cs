@@ -28,7 +28,7 @@ public class PlayerRunState : PlayerGroundedState
             stateMachine.ChangeState(player.idleState);
         }
 
-        if (!Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftAlt))
         {
             stateMachine.ChangeState(player.moveState);
         }

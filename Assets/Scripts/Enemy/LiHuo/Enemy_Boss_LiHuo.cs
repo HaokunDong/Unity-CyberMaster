@@ -8,15 +8,16 @@ public class Enemy_Boss_LiHuo : Enemy
     #region States
 
     public LiHuoIdleState idleState { get; private set; }
+    public LiHuoMoveState moveState { get; private set; }
 
     #endregion
-    private Player player;
 
     protected override void Awake()
     {
         base.Awake();
 
         idleState = new LiHuoIdleState(stateMachine, this, "Idle", this);
+        moveState = new LiHuoMoveState(stateMachine, this, "Move", this);
     }
 
 
@@ -24,11 +25,17 @@ public class Enemy_Boss_LiHuo : Enemy
     {
         base.Start();
 
+        this.moveSpeed = base.moveSpeed * 1.5f;
+
+        Flip();
+
         stateMachine.Initialize(idleState);
+
     }
 
     protected override void Update()
     {
         base.Update();
+
     }
 }

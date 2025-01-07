@@ -66,6 +66,7 @@ public class Player : Entity
     {
         GameManager.Ins.Send(GameEvent.OnPlayerEnter, this);
     }
+
     protected override void Update()
     {
         base.Update();
