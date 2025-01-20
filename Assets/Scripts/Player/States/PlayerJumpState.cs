@@ -12,7 +12,7 @@ public class PlayerJumpState : PlayerState
     {
         base.Enter();
 
-        player.SetVelocity(rb.velocity.x, player.jumpForce);
+        player.SetVelocity(player.runSpeed * player.facingDir, player.jumpForce);
 
     }
 

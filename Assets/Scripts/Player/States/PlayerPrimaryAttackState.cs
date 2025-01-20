@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class PlayerPrimaryAttackState : PlayerState
 {
-    private int comboCounter;
-
-    private float lastTimeAttacked;
-    //comboWindow?????????????????????????????????????¦É????????????????????????
-    //??????????????????????????¦É????????????????????comboCounter????????.
-    private float comboWindow = 0.3f;
-
-
     public PlayerPrimaryAttackState(PlayerStateMachine _stateMachine, Player _player, string _animBoolNam) : base(_stateMachine, _player, _animBoolNam)
     {
     }
@@ -20,18 +12,16 @@ public class PlayerPrimaryAttackState : PlayerState
     {
         base.Enter();
 
+        xInput = 0;
+
         if (comboCounter > 4 || Time.time >= lastTimeAttacked + comboWindow)//Time.time(????????) ????????: ????????? + ?????(??)
         {
             comboCounter = 0;
-
         }
 
+        player.attackCount = comboCounter;
         player.animator.SetInteger("ComboCounter", comboCounter);
 
-        if (xInput != 0 && player.facingDir != xInput)
-        {
-            player.Flip();
-        }
         player.SetVelocity(player.attackMovement[comboCounter].x * player.facingDir, player.attackMovement[comboCounter].y);
 
         stateTimer = 0.1f;
@@ -41,6 +31,10 @@ public class PlayerPrimaryAttackState : PlayerState
     public override void Exit()
     {
         base.Exit();
+        if (xInput != 0 && player.facingDir != xInput)
+        {
+            player.Flip();
+        }
 
         player.StartCoroutine("BusyFor", 0.15f);
 
@@ -56,7 +50,7 @@ public class PlayerPrimaryAttackState : PlayerState
 
         if (stateTimer < 0)
         {
-            player.ZeroVelocity();
+            player.SetZeroVelocity();
         }
 
         if (triggerCalled)

@@ -5,10 +5,18 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
-
+    [SerializeField] protected LayerMask whatIsPlayer;
     [Header("Move Info")]
     public float moveSpeed = 3f;
     public float jumpForce = 12f;
+
+    [Header("Attack Info")]
+    public float attackDistance;
+    public float attackCooldown;
+    [HideInInspector] public float lastTimeAttacked;
+    public int attackCount;
+    public Vector2[] attackMovement;
+    public float[] attackForce;
 
     private Transform playerTrans;
 
@@ -35,6 +43,7 @@ public class Enemy : Entity
 
         stateMachine.currentState.Update();
     }
+
     public virtual bool IsPlayerExist()
     {
         if(playerTrans != null)
@@ -60,4 +69,39 @@ public class Enemy : Entity
         }
     }
 
+    public virtual float RelativeDistance()
+    {
+        if (this.transform.position.x - playerTrans.position.x < 0)
+        {
+            return -(this.transform.position.x - playerTrans.position.x);
+        }
+        else
+        {
+            return this.transform.position.x - playerTrans.position.x;
+        }
+    }
+
+    public virtual bool CanAttack()
+    {
+        if(Time.time >= lastTimeAttacked + attackCooldown)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    //public virtual RaycastHit2D IsPlayerDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, 50f, whatIsPlayer);
+
+
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x + attackDistance, transform.position.y));
+    }
+
+    public void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();
+
+    public void PreProcessTrigger() =>stateMachine.currentState.AnimationPreprocessTrigger();
 }

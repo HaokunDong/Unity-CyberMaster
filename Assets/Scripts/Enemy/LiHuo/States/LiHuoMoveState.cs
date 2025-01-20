@@ -2,20 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LiHuoMoveState : EnemyState
+public class LiHuoMoveState : LiHuoGroundState
 {
-    private Enemy_Boss_LiHuo liHuo;
-
-    public LiHuoMoveState(EnemyStateMachine _stateMachine, Enemy _enemy, string _animBoolName, Enemy_Boss_LiHuo _liHuo) : base(_stateMachine, _enemy, _animBoolName)
+    public LiHuoMoveState(EnemyStateMachine _stateMachine, Enemy _enemy, string _animBoolName, Enemy_Boss_LiHuo _liHuo) : base(_stateMachine, _enemy, _animBoolName, _liHuo)
     {
-        this.liHuo = _liHuo;
     }
 
     public override void Enter()
     {
         base.Enter();
 
-        
+
     }
 
     public override void Exit()
@@ -27,7 +24,12 @@ public class LiHuoMoveState : EnemyState
     {
         base.Update();
 
-        liHuo.SetVelocity(liHuo.facingDir * liHuo.moveSpeed, liHuo.rb.velocity.y);
+        liHuo.SetVelocity(liHuo.facingDir * liHuo.moveSpeed, rb.velocity.y);
+
+        if (enemy.RelativeDistance() < enemy.attackDistance)
+        {
+            stateMachine.ChangeState(liHuo.battleState);
+        }
 
         if (liHuo.facingDir != liHuo.RelativePosition())
         {

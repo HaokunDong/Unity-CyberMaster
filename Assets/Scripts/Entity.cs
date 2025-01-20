@@ -5,11 +5,16 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
     [Header("Collision Info")]
+    [SerializeField] public Transform[] attackCheck;
+    [SerializeField] public float[] attackCheckRadius;
     [SerializeField] protected Transform groundCheck;
     [SerializeField] protected float groundCheckDistance;
     [SerializeField] protected Transform wallCheck;
     [SerializeField] protected float wallCheckDistance;
     [SerializeField] protected LayerMask whatIsGround;//设置检测的物体是地面
+    [Header("BounceAttack Info")]
+    [SerializeField] public bool canBeBouncedAttack;
+    [SerializeField] public GameObject canBeBouncedImage;
 
     #region Components
     public Animator animator { get; private set; }
@@ -35,13 +40,35 @@ public class Entity : MonoBehaviour
         
     }
 
+    public virtual void CanBeBouncedAttack()
+    {
+        canBeBouncedAttack = true;
+        canBeBouncedImage.SetActive(true);
+    }
+
+    public virtual void CanNotBeBouncedAttack()
+    {
+        canBeBouncedAttack = false;
+        canBeBouncedImage.SetActive(false);
+    }
+
+    public virtual void HitTarget()
+    {
+        //Debug.Log(gameObject.name + "hit");
+    }
+
     #region Velocity
-    public virtual void ZeroVelocity() => rb.velocity = new Vector2(0, 0);
+    public virtual void SetZeroVelocity() => rb.velocity = new Vector2(0, 0);
 
     public virtual void SetVelocity(float _xVelocity, float _yVelocity)
     {
         rb.velocity = new Vector2(_xVelocity, _yVelocity);
         FlipController(_xVelocity);
+    }
+
+    public virtual void SetMovement(float _xVelocity, float _yVelocity)
+    {
+        rb.velocity = new Vector2(_xVelocity, _yVelocity);
     }
     #endregion
     #region Collision
@@ -74,4 +101,5 @@ public class Entity : MonoBehaviour
         }
     }
     #endregion
+
 }

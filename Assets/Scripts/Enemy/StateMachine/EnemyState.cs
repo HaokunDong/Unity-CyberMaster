@@ -6,17 +6,25 @@ public class EnemyState
 {
     protected EnemyStateMachine stateMachine;
     protected Enemy enemy;
+    protected Rigidbody2D rb;
 
     private string animBoolName;
 
     protected float stateTimer;
     protected bool triggerCalled;
+    protected bool PreprocessTriggerCalled;
 
-    public EnemyState(EnemyStateMachine stateMachine, Enemy enemy, string animBoolName)
+    protected int comboCounter;
+    protected float lastTimeAttacked;
+    protected float comboWindow = 0.3f;
+
+    protected int bounceAttackCounter;
+
+    public EnemyState(EnemyStateMachine _stateMachine, Enemy _enemy, string _animBoolName)
     {
-        this.stateMachine = stateMachine;
-        this.enemy = enemy;
-        this.animBoolName = animBoolName;
+        this.stateMachine = _stateMachine;
+        this.enemy = _enemy;
+        this.animBoolName = _animBoolName;
     }
 
     public virtual void Update()
@@ -26,14 +34,24 @@ public class EnemyState
 
     public virtual void Enter()
     {
-        triggerCalled = false;
-
         enemy.animator.SetBool(animBoolName, true);
+        rb = enemy.rb;
+        PreprocessTriggerCalled = false;
+        triggerCalled = false;
     }
 
     public virtual void Exit()
     {
         enemy.animator.SetBool(animBoolName, false);
+    }
 
+    public virtual void AnimationFinishTrigger()
+    {
+        triggerCalled = true;
+    }
+
+    public virtual void AnimationPreprocessTrigger()
+    {
+        PreprocessTriggerCalled = true;
     }
 }

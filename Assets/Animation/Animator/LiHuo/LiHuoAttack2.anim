@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerAttack1
+  m_Name: LiHuoAttack2
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,17 +21,27 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -1810765526, guid: 3819f8642c70a914ba8e398ffc3d703d, type: 3}
+      value: {fileID: 241214439, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
     - time: 0.07692308
-      value: {fileID: 209959202, guid: 3819f8642c70a914ba8e398ffc3d703d, type: 3}
+      value: {fileID: 1070582691, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
     - time: 0.15384616
-      value: {fileID: -1015590910, guid: 3819f8642c70a914ba8e398ffc3d703d, type: 3}
+      value: {fileID: -1513224639, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
     - time: 0.23076923
-      value: {fileID: 734635542, guid: 3819f8642c70a914ba8e398ffc3d703d, type: 3}
+      value: {fileID: -810063739, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
     - time: 0.30769232
-      value: {fileID: 2121443192, guid: 3819f8642c70a914ba8e398ffc3d703d, type: 3}
+      value: {fileID: 162963615, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
     - time: 0.3846154
-      value: {fileID: 857005445, guid: 3819f8642c70a914ba8e398ffc3d703d, type: 3}
+      value: {fileID: -1139104039, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
+    - time: 0.46153846
+      value: {fileID: -1655312716, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
+    - time: 0.53846157
+      value: {fileID: -1655312716, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
+    - time: 0.61538464
+      value: {fileID: -1655312716, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
+    - time: 0.6923077
+      value: {fileID: -1655312716, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
+    - time: 0.7692308
+      value: {fileID: -1655312716, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -54,18 +64,23 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -1810765526, guid: 3819f8642c70a914ba8e398ffc3d703d, type: 3}
-    - {fileID: 209959202, guid: 3819f8642c70a914ba8e398ffc3d703d, type: 3}
-    - {fileID: -1015590910, guid: 3819f8642c70a914ba8e398ffc3d703d, type: 3}
-    - {fileID: 734635542, guid: 3819f8642c70a914ba8e398ffc3d703d, type: 3}
-    - {fileID: 2121443192, guid: 3819f8642c70a914ba8e398ffc3d703d, type: 3}
-    - {fileID: 857005445, guid: 3819f8642c70a914ba8e398ffc3d703d, type: 3}
+    - {fileID: 241214439, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
+    - {fileID: 1070582691, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
+    - {fileID: -1513224639, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
+    - {fileID: -810063739, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
+    - {fileID: 162963615, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
+    - {fileID: -1139104039, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
+    - {fileID: -1655312716, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
+    - {fileID: -1655312716, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
+    - {fileID: -1655312716, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
+    - {fileID: -1655312716, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
+    - {fileID: -1655312716, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.46153846
+    m_StopTime: 0.84615386
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -85,29 +100,36 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0
+  - time: 0.07692308
     functionName: CanBeBouncedAttackTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.07692308
+  - time: 0.23076923
     functionName: AttackTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.15384616
+  - time: 0.23076923
     functionName: CanNotBeBouncedAttackTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.3846154
-    functionName: AnimationTrigger
+  - time: 0.6923077
+    functionName: PreProcessTrigger
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.7692308
+    functionName: FinishTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

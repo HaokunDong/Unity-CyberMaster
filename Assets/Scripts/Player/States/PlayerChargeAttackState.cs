@@ -25,7 +25,7 @@ public class PlayerChargeAttackState : PlayerState
 
         if (stateTimer < 0)
         {
-            player.ZeroVelocity();
+            player.SetZeroVelocity();
         }
 
         if (eventsTriggerCalled)
