@@ -13,7 +13,7 @@ TagManager:
   - UI
   - Player
   - Enemy
-  - 
+  - Dodge
   - 
   - 
   - 
@@ -52,4 +52,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 1276745979
+    locked: 0
+  - name: Entity
+    uniqueID: 3069023567
     locked: 0

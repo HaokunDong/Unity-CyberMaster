@@ -12,12 +12,14 @@ public class PlayerDodgeState : PlayerState
     {
         base.Enter();
 
-        
+        player.ChangeLayer(player.gameObject,"Dodge");
     }
 
     public override void Exit()
     {
         base.Exit();
+
+        player.ChangeLayer(player.gameObject, "Player");
     }
 
     public override void Update()

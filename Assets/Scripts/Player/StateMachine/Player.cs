@@ -69,6 +69,8 @@ public class Player : Entity
     {
         base.Start();
 
+        //liHuo = EnemyManager.Ins.liHuo;
+
         stateMachine.Initialize(idleState);
     }
     public void EnterRoom()
@@ -107,14 +109,40 @@ public class Player : Entity
         isBusy = false;
     }
 
+    public void ChangeLayer(GameObject obj, string layerName)
+    {
+        obj.layer = LayerMask.NameToLayer(layerName);
+        foreach(Transform child in obj.transform)
+        {
+            ChangeLayer(child.gameObject, layerName);
+        }
+    }
+
+    public virtual int RelativePosition()//与Enemy的相对位置
+    {
+        if (this.transform.position.x - liHuo.transform.position.x < 0)
+        {
+            return 1;
+        }
+        else if (this.transform.position.x - liHuo.transform.position.x > 0)
+        {
+            return -1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
     public void SetDodgeDirection()
     {
-        dodgeDir = Input.GetAxisRaw("Horizontal");
+        dodgeDir = facingDir;
+        /*dodgeDir = Input.GetAxisRaw("Horizontal");
 
         if (dodgeDir == 0)
         {
             dodgeDir = facingDir;
-        }
+        }*/
     }
 
     //����AnimationTriggerʱ���Ե��õ�PlayerState�е�AnimationFinishTrigger����
