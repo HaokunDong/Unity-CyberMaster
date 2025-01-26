@@ -21,14 +21,14 @@ public class PlayerRunState : PlayerGroundedState
     public override void Update()
     {
         base.Update();
-        player.SetVelocity(xInput * player.moveSpeed * 3, rb.velocity.y);
+        player.SetVelocity(xInput * player.runSpeed, rb.velocity.y);
 
         if (xInput == 0)
         {
             stateMachine.ChangeState(player.idleState);
         }
 
-        if (!Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftAlt))
         {
             stateMachine.ChangeState(player.moveState);
         }

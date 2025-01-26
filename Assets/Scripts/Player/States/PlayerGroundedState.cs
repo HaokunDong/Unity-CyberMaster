@@ -30,12 +30,17 @@ public class PlayerGroundedState : PlayerState
 
         if (Input.GetKey(KeyCode.J))
         {
-            stateMachine.ChangeState(player.primaryAttack);
+            stateMachine.ChangeState(player.primaryAttackState);
         }
 
         if (Input.GetKey(KeyCode.U))
         {
-            stateMachine.ChangeState(player.chargeAttack);
+            stateMachine.ChangeState(player.chargeAttackState);
+        }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            stateMachine.ChangeState(player.postureState);
         }
 
         if (Input.GetKeyDown(KeyCode.K) && player.IsGroundDetected())

@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class Player : Entity
 {
+    public Enemy_Boss_LiHuo liHuo;
+
     [Header("Attack Details")]
+    public int attackCount;
     public Vector2[] attackMovement;//���ڿ���ÿ�ι�����ǰ�����ϵ�λ��
+    public float[] attackForce;
     public float chargeAttackMovement;
 
     public bool isBusy { get; private set; }
 
     [Header("Move Info")]
     public float moveSpeed = 3f;
+    public float runSpeed = 9f;
     public float jumpForce = 12f;
     [Header("Dodge Info")]
     public float dodgeSpeed = 10f;
@@ -31,9 +36,11 @@ public class Player : Entity
     public PlayerWallSlideState wallSlideState { get; private set; }
     public PlayerWallJumpState wallJumpState { get; private set; }
     public PlayerDodgeState dodgeState { get; private set; }
+    public PlayerPostureState postureState { get; private set; }
+    public PlayerBounceAttackState bounceAttackState { get; private set; }
 
-    public PlayerPrimaryAttackState primaryAttack { get; private set; }
-    public PlayerChargeAttackState chargeAttack { get; private set; }
+    public PlayerPrimaryAttackState primaryAttackState { get; private set; }
+    public PlayerChargeAttackState chargeAttackState { get; private set; }
     #endregion
 
 
@@ -51,14 +58,18 @@ public class Player : Entity
         wallSlideState = new PlayerWallSlideState(stateMachine, this, "WallSlide");
         wallJumpState = new PlayerWallJumpState(stateMachine, this, "Jump");
         dodgeState = new PlayerDodgeState(stateMachine, this, "Dodge");
+        postureState = new PlayerPostureState(stateMachine, this, "Posture");
+        bounceAttackState = new PlayerBounceAttackState(stateMachine, this, "BounceAttack");
 
-        primaryAttack = new PlayerPrimaryAttackState(stateMachine, this, "Attack");
-        chargeAttack = new PlayerChargeAttackState(stateMachine, this, "ChargeAttack");
+        primaryAttackState = new PlayerPrimaryAttackState(stateMachine, this, "Attack");
+        chargeAttackState = new PlayerChargeAttackState(stateMachine, this, "ChargeAttack");
     }
 
     protected override void Start()
     {
         base.Start();
+
+        //liHuo = EnemyManager.Ins.liHuo;
 
         stateMachine.Initialize(idleState);
     }
@@ -66,12 +77,26 @@ public class Player : Entity
     {
         GameManager.Ins.Send(GameEvent.OnPlayerEnter, this);
     }
+
     protected override void Update()
     {
         base.Update();
         stateMachine.currentState.Update();
 
         SetDodgeDirection();
+    }
+
+    public override void HitTarget()
+    {
+        base.HitTarget();
+
+        SetMovement(liHuo.attackForce[liHuo.attackCount] * liHuo.facingDir, rb.velocity.y);
+    }
+
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+        Gizmos.DrawWireSphere(attackCheck[attackCount].position, attackCheckRadius[attackCount]);
     }
 
     //ʹ��Э�̣����������ǽ�isBusy���false�Ĺ��̽���һ���ӳ�
@@ -84,14 +109,40 @@ public class Player : Entity
         isBusy = false;
     }
 
+    public void ChangeLayer(GameObject obj, string layerName)
+    {
+        obj.layer = LayerMask.NameToLayer(layerName);
+        foreach(Transform child in obj.transform)
+        {
+            ChangeLayer(child.gameObject, layerName);
+        }
+    }
+
+    public virtual int RelativePosition()//与Enemy的相对位置
+    {
+        if (this.transform.position.x - liHuo.transform.position.x < 0)
+        {
+            return 1;
+        }
+        else if (this.transform.position.x - liHuo.transform.position.x > 0)
+        {
+            return -1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
     public void SetDodgeDirection()
     {
-        dodgeDir = Input.GetAxisRaw("Horizontal");
+        dodgeDir = facingDir;
+        /*dodgeDir = Input.GetAxisRaw("Horizontal");
 
         if (dodgeDir == 0)
         {
             dodgeDir = facingDir;
-        }
+        }*/
     }
 
     //����AnimationTriggerʱ���Ե��õ�PlayerState�е�AnimationFinishTrigger����

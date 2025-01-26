@@ -1,0 +1,9 @@
+diff a/.gitignore b/.gitignore	(rejected hunks)
+@@ -46,6 +46,7 @@
+ *.mdb
+ *.opendb
+ *.VC.db
++.plastic
+ 
+ # Unity3D generated meta files
+ *.pidb.meta

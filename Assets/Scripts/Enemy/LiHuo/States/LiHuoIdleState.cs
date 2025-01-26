@@ -2,18 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LiHuoIdleState : EnemyState
+public class LiHuoIdleState : LiHuoGroundState
 {
-    private Enemy_Boss_LiHuo _liHuo;
-
-    public LiHuoIdleState(EnemyStateMachine stateMachine, Enemy enemy, string animBoolName, Enemy_Boss_LiHuo liHuo) : base(stateMachine, enemy, animBoolName)
+    public LiHuoIdleState(EnemyStateMachine _stateMachine, Enemy _enemy, string _animBoolName, Enemy_Boss_LiHuo _liHuo) : base(_stateMachine, _enemy, _animBoolName, _liHuo)
     {
-        this._liHuo = liHuo;
     }
 
     public override void Enter()
     {
         base.Enter();
+
+        stateTimer = 1f;
+
+        liHuo.SetZeroVelocity();
+
     }
 
     public override void Exit()
@@ -25,6 +27,15 @@ public class LiHuoIdleState : EnemyState
     {   
         base.Update();
 
-        
+        if (liHuo.IsPlayerExist() && liHuo.facingDir == liHuo.RelativePosition() && stateTimer < 0)
+        {
+            stateMachine.ChangeState(liHuo.moveState);
+        }
+
+        if (liHuo.facingDir != liHuo.RelativePosition() && stateTimer < 0)
+        {
+            liHuo.FlipController(liHuo.RelativePosition());
+        }
+
     }
 }
