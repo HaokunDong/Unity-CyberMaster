@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,10 @@ public class Player : Entity
     public float dodgeDir { get; private set; }
 
     public float velocityY { get; private set; }
+    [Header("Bar Com")]
+    public Transform barFolder;
+    public BarCom lifeBar;
+    public PlayerInfo info = new PlayerInfo();
 
     #region States
     public PlayerStateMachine stateMachine { get; private set; }
@@ -72,6 +77,16 @@ public class Player : Entity
         //liHuo = EnemyManager.Ins.liHuo;
 
         stateMachine.Initialize(idleState);
+        BarInfo lifeInfo = new BarInfo()
+        {
+            title = "刃势",
+            segments = new List<SegmentInfo>(){
+                new SegmentInfo() { weight = 1, color = Color.red, text = "竭刃" },
+                new SegmentInfo() { weight = 1, color = Color.green , text = "盈刃" },
+            }
+        };
+        this.lifeBar.SetInfo(lifeInfo);
+        this.RefreshInfoState();
     }
     public void EnterRoom()
     {
@@ -91,6 +106,8 @@ public class Player : Entity
         base.HitTarget();
 
         SetMovement(liHuo.attackForce[liHuo.attackCount] * liHuo.facingDir, rb.velocity.y);
+        info.life = Mathf.Clamp(info.life - 5, 0, 100);
+        RefreshInfoState();
     }
 
     protected override void OnDrawGizmos()
@@ -112,7 +129,7 @@ public class Player : Entity
     public void ChangeLayer(GameObject obj, string layerName)
     {
         obj.layer = LayerMask.NameToLayer(layerName);
-        foreach(Transform child in obj.transform)
+        foreach (Transform child in obj.transform)
         {
             ChangeLayer(child.gameObject, layerName);
         }
@@ -151,5 +168,9 @@ public class Player : Entity
 
     //֡�¼����ڳ��ܹ�����λ��
     public void ChargeAttackMove() => stateMachine.currentState.AnimationEventTrigger();
+    public void RefreshInfoState()
+    {
+        this.lifeBar.t = info.life / 100;
+    }
 
 }
