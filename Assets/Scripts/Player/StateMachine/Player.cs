@@ -106,7 +106,7 @@ public class Player : Entity
         base.HitTarget();
 
         SetMovement(liHuo.attackForce[liHuo.attackCount] * liHuo.facingDir, rb.velocity.y);
-        info.life = Mathf.Clamp(info.life - 5, 0, 100);
+        stateMachine.currentState.OnHit();
         RefreshInfoState();
     }
 

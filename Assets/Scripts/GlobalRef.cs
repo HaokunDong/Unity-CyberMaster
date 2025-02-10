@@ -5,4 +5,5 @@ using UnityEngine;
 public class GlobalRef : SingletonComp<GlobalRef>
 {
     public GameObject barCom;
+    public GameConfig cfg;
 }

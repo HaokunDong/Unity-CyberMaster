@@ -6,6 +6,7 @@ public class PlayerMoveState : PlayerGroundedState
 {
     public PlayerMoveState(PlayerStateMachine _stateMachine, Player _player, string _animBoolNam) : base(_stateMachine, _player, _animBoolNam)
     {
+        
 
     }
 

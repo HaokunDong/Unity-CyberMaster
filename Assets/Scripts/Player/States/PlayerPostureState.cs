@@ -5,9 +5,11 @@ using UnityEngine;
 public class PlayerPostureState : PlayerState
 {
     protected Enemy_Boss_LiHuo liHuo;
+    const string onHitBeforeKey = "onHitBefore";
+    const string onHitAfterKey = "onHitAfter";
     public PlayerPostureState(PlayerStateMachine _stateMachine, Player _player, string _animBoolNam) : base(_stateMachine, _player, _animBoolNam)
     {
-        
+
     }
 
     public override void Enter()
@@ -16,12 +18,18 @@ public class PlayerPostureState : PlayerState
         this.liHuo = EnemyManager.Ins.liHuo;
 
         postureTimer = 0;
+        player.info.isBlock = true;
 
     }
 
     public override void Exit()
     {
         base.Exit();
+        player.info.isBlock = false;
+    }
+    public override void OnHit()
+    {
+        
     }
 
     public override void Update()
@@ -54,7 +62,5 @@ public class PlayerPostureState : PlayerState
                 }
             }
         }
-
-
     }
 }
