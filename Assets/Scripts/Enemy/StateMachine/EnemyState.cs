@@ -50,6 +50,10 @@ public class EnemyState
     {
         triggerCalled = true;
     }
+    public virtual void OnHit(Entity from)
+    {
+
+    }
 
     public virtual void AnimationPreprocessTrigger()
     {

@@ -27,9 +27,10 @@ public class PlayerPostureState : PlayerState
         base.Exit();
         player.info.isBlock = false;
     }
-    public override void OnHit()
+    public override void OnHit(Entity from)
     {
-        
+        HitEffectController.Create((from.transform.position + player.transform.position) / 2f, new HitEffectInfo() { type = HitEffectType.BlockHit });
+        player.info.life = Mathf.Clamp(player.info.life - GlobalRef.Ins.cfg.playerDecayLife_defense, 0, 100);
     }
 
     public override void Update()

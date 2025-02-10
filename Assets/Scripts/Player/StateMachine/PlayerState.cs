@@ -67,7 +67,7 @@ public class PlayerState
     {
         eventsTriggerCalled = true;
     }
-    public virtual void OnHit() //受到攻击
+    public virtual void OnHit(Entity from) //受到攻击
     {
         player.info.life = Mathf.Clamp(player.info.life - GlobalRef.Ins.cfg.playerDecayLife_hitted, 0, 100);
     }

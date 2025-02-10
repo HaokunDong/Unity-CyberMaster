@@ -25,7 +25,7 @@ public class EnemyAnimationTriggers : MonoBehaviour
         {
             if (hit.GetComponent<Player>() != null)
             {
-                hit.GetComponent<Player>().HitTarget();
+                hit.GetComponent<Player>().HitTarget(enemy);
             }
         }
     }

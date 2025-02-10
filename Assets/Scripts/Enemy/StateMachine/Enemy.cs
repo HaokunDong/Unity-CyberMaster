@@ -46,14 +46,14 @@ public class Enemy : Entity
 
     public virtual bool IsPlayerExist()
     {
-        if(playerTrans != null)
+        if (playerTrans != null)
         {
             return true;
         }
         return false;
     }
 
-    public virtual int RelativePosition()//ÓëplayerµÄÏà¶ÔÎ»ÖÃ
+    public virtual int RelativePosition()//ï¿½ï¿½playerï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
     {
         if (this.transform.position.x - playerTrans.position.x < 0)
         {
@@ -83,7 +83,7 @@ public class Enemy : Entity
 
     public virtual bool CanAttack()
     {
-        if(Time.time >= lastTimeAttacked + attackCooldown)
+        if (Time.time >= lastTimeAttacked + attackCooldown)
         {
             return true;
         }
@@ -103,5 +103,5 @@ public class Enemy : Entity
 
     public void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();
 
-    public void PreProcessTrigger() =>stateMachine.currentState.AnimationPreprocessTrigger();
+    public void PreProcessTrigger() => stateMachine.currentState.AnimationPreprocessTrigger();
 }

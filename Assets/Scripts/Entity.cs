@@ -11,7 +11,7 @@ public class Entity : MonoBehaviour
     [SerializeField] protected float groundCheckDistance;
     [SerializeField] protected Transform wallCheck;
     [SerializeField] protected float wallCheckDistance;
-    [SerializeField] protected LayerMask whatIsGround;//ÉèÖÃ¼ì²âµÄÎïÌåÊÇµØÃæ
+    [SerializeField] protected LayerMask whatIsGround;//ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Çµï¿½ï¿½ï¿½
     [Header("BounceAttack Info")]
     [SerializeField] public bool canBeBouncedAttack;
     [SerializeField] public GameObject canBeBouncedImage;
@@ -26,7 +26,7 @@ public class Entity : MonoBehaviour
 
     protected virtual void Awake()
     {
-        
+
     }
 
     protected virtual void Start()
@@ -37,7 +37,7 @@ public class Entity : MonoBehaviour
 
     protected virtual void Update()
     {
-        
+
     }
 
     public virtual void CanBeBouncedAttack()
@@ -52,7 +52,7 @@ public class Entity : MonoBehaviour
         canBeBouncedImage.SetActive(false);
     }
 
-    public virtual void HitTarget()
+    public virtual void HitTarget(Entity from)
     {
         //Debug.Log(gameObject.name + "hit");
     }
@@ -73,7 +73,7 @@ public class Entity : MonoBehaviour
     #endregion
     #region Collision
     public virtual bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
-    public virtual bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);//µÚ¶þ¸ö²ÎÊýÒª³ËÉÏ·½ÏòÏòÁ¿
+    public virtual bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);//ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
     protected virtual void OnDrawGizmos()
     {

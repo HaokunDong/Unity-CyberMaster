@@ -101,12 +101,12 @@ public class Player : Entity
         SetDodgeDirection();
     }
 
-    public override void HitTarget()
+    public override void HitTarget(Entity from)
     {
-        base.HitTarget();
+        base.HitTarget(from);
 
         SetMovement(liHuo.attackForce[liHuo.attackCount] * liHuo.facingDir, rb.velocity.y);
-        stateMachine.currentState.OnHit();
+        stateMachine.currentState.OnHit(from);
         RefreshInfoState();
     }
 

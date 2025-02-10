@@ -21,29 +21,27 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 241214439, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
-    - time: 0.07692308
-      value: {fileID: 1070582691, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
-    - time: 0.15384616
-      value: {fileID: -1513224639, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
-    - time: 0.23076923
-      value: {fileID: -810063739, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
-    - time: 0.30769232
-      value: {fileID: 162963615, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
-    - time: 0.3846154
-      value: {fileID: -1139104039, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
-    - time: 0.46153846
-      value: {fileID: -1655312716, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
-    - time: 0.53846157
-      value: {fileID: -1655312716, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
-    - time: 0.61538464
-      value: {fileID: -1655312716, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
+      value: {fileID: 359528563, guid: 253118d68adf30b48bddb7e2a88ebafa, type: 3}
+    - time: 0.1
+      value: {fileID: -91632, guid: 253118d68adf30b48bddb7e2a88ebafa, type: 3}
+    - time: 0.2
+      value: {fileID: -1046747588, guid: 253118d68adf30b48bddb7e2a88ebafa, type: 3}
+    - time: 0.3
+      value: {fileID: -1309734335, guid: 253118d68adf30b48bddb7e2a88ebafa, type: 3}
+    - time: 0.4
+      value: {fileID: -1618305900, guid: 253118d68adf30b48bddb7e2a88ebafa, type: 3}
+    - time: 0.5
+      value: {fileID: -1792944290, guid: 253118d68adf30b48bddb7e2a88ebafa, type: 3}
+    - time: 0.6
+      value: {fileID: 1606607021, guid: 253118d68adf30b48bddb7e2a88ebafa, type: 3}
+    - time: 0.7
+      value: {fileID: 1606607021, guid: 253118d68adf30b48bddb7e2a88ebafa, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 13
+  m_SampleRate: 10
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -60,21 +58,20 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 241214439, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
-    - {fileID: 1070582691, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
-    - {fileID: -1513224639, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
-    - {fileID: -810063739, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
-    - {fileID: 162963615, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
-    - {fileID: -1139104039, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
-    - {fileID: -1655312716, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
-    - {fileID: -1655312716, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
-    - {fileID: -1655312716, guid: a3dd2e78faa55cf4fa7cb741d6b5e232, type: 3}
+    - {fileID: 359528563, guid: 253118d68adf30b48bddb7e2a88ebafa, type: 3}
+    - {fileID: -91632, guid: 253118d68adf30b48bddb7e2a88ebafa, type: 3}
+    - {fileID: -1046747588, guid: 253118d68adf30b48bddb7e2a88ebafa, type: 3}
+    - {fileID: -1309734335, guid: 253118d68adf30b48bddb7e2a88ebafa, type: 3}
+    - {fileID: -1618305900, guid: 253118d68adf30b48bddb7e2a88ebafa, type: 3}
+    - {fileID: -1792944290, guid: 253118d68adf30b48bddb7e2a88ebafa, type: 3}
+    - {fileID: 1606607021, guid: 253118d68adf30b48bddb7e2a88ebafa, type: 3}
+    - {fileID: 1606607021, guid: 253118d68adf30b48bddb7e2a88ebafa, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.6923077
+    m_StopTime: 0.8
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -94,35 +91,35 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.07692308
+  - time: 0.1
     functionName: CanBeBouncedAttackTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.23076923
+  - time: 0.3
     functionName: AttackTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.23076923
+  - time: 0.3
     functionName: CanNotBeBouncedAttackTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.53846157
+  - time: 0.5
     functionName: PreProcessTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.61538464
+  - time: 0.7
     functionName: FinishTrigger
     data: 
     objectReferenceParameter: {fileID: 0}

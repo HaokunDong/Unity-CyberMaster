@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3d3b19c0ecccd6745bd6b3b66dfdf24e
+guid: 260a54f8fa22bf94caa3e42ed43f1db1
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Effect_0
+      name: Effect 2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f57fcddaa91d5e438492038990bebe5
-      internalID: 396421583
+      spriteID: cd84e6208c226d04a8c5d07a93350432
+      internalID: -1894832705
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Effect_1
+      name: Effect 2_1
       rect:
         serializedVersion: 2
         x: 128
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7581468fa0b96c34ebc7ae78e299fba0
-      internalID: -235318119
+      spriteID: 77d9fbed5d6821549a85c29efaace6ca
+      internalID: 773663372
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Effect_2
+      name: Effect 2_2
       rect:
         serializedVersion: 2
         x: 256
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f62bd8e635f52a47acf516df1609ef9
-      internalID: 1654884956
+      spriteID: 2a10b71b00ba7614a8874830d39b5154
+      internalID: -403043547
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Effect_3
+      name: Effect 2_3
       rect:
         serializedVersion: 2
         x: 384
@@ -174,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed45cf39e7ff5c64a9aade3010e770bb
-      internalID: -1145991333
+      spriteID: 59712a82e1fd33d4c9c2a659d10edccc
+      internalID: 556004814
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Effect_4
+      name: Effect 2_4
       rect:
         serializedVersion: 2
         x: 0
@@ -195,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16eafcbdf5217994c8aa24f9cbb96e60
-      internalID: -457484814
+      spriteID: 04668dd6a0908904f9c4f858feb9284e
+      internalID: -236640810
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Effect_5
+      name: Effect 2_5
       rect:
         serializedVersion: 2
         x: 128
@@ -216,14 +216,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d85a35d2d65f34c4d8226a3b8940fe04
-      internalID: 969708093
+      spriteID: ebcfc575ab63bb648ad127d19ea17e08
+      internalID: -729722083
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Effect_6
+      name: Effect 2_6
       rect:
         serializedVersion: 2
         x: 256
@@ -237,14 +237,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 39e42c0d06cfead498e2ab9cd0b3a91d
-      internalID: -1398233289
+      spriteID: 68cb684ae4135894d993899251a46ebc
+      internalID: -1203452948
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Effect_7
+      name: Effect 2_7
       rect:
         serializedVersion: 2
         x: 384
@@ -258,14 +258,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 499b410345906e04a8cac89adbb31256
-      internalID: 691196655
+      spriteID: 6943195d2be6dd8469525df69fe80450
+      internalID: -971904933
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Effect_8
+      name: Effect 2_8
       rect:
         serializedVersion: 2
         x: 0
@@ -279,14 +279,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f9aafaf965089849a2788ba302e4ae5
-      internalID: -1936621248
+      spriteID: 7a7b5c82dac877844ad38c91996369d1
+      internalID: 132550699
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Effect_9
+      name: Effect 2_9
       rect:
         serializedVersion: 2
         x: 128
@@ -300,14 +300,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb8898b2d030ba545a9d8db3a6bdcfdf
-      internalID: 423723746
+      spriteID: 9fde71c042f23cb48bb77674c88c3822
+      internalID: -1416306499
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Effect_10
+      name: Effect 2_10
       rect:
         serializedVersion: 2
         x: 256
@@ -321,14 +321,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d2728433fbb5f245823fd04db566262
-      internalID: 916444746
+      spriteID: e872f0f8751c06e4d92e74a236229db1
+      internalID: 1121611859
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Effect_11
+      name: Effect 2_11
       rect:
         serializedVersion: 2
         x: 384
@@ -342,14 +342,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c11c9c9accf6ab449b68f58b9eeab36
-      internalID: 1414121988
+      spriteID: d8a622e4d6b44d64bab48a6aeaef139c
+      internalID: -1092112643
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Effect_12
+      name: Effect 2_12
       rect:
         serializedVersion: 2
         x: 512
@@ -363,29 +363,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 48248dca7709d60408fec2202fa2c8d6
-      internalID: 97363913
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Effect_13
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9ea6320712404f04ab18d063c5644ab8
-      internalID: 1704827546
+      spriteID: 3f565fd8247697e49bc4bf0cd94e2f18
+      internalID: -434801387
       vertices: []
       indices: 
       edges: []
@@ -401,20 +380,19 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Effect_0: 396421583
-      Effect_1: -235318119
-      Effect_10: 916444746
-      Effect_11: 1414121988
-      Effect_12: 97363913
-      Effect_13: 1704827546
-      Effect_2: 1654884956
-      Effect_3: -1145991333
-      Effect_4: -457484814
-      Effect_5: 969708093
-      Effect_6: -1398233289
-      Effect_7: 691196655
-      Effect_8: -1936621248
-      Effect_9: 423723746
+      Effect 2_0: -1894832705
+      Effect 2_1: 773663372
+      Effect 2_10: 1121611859
+      Effect 2_11: -1092112643
+      Effect 2_12: -434801387
+      Effect 2_2: -403043547
+      Effect 2_3: 556004814
+      Effect 2_4: -236640810
+      Effect 2_5: -729722083
+      Effect 2_6: -1203452948
+      Effect 2_7: -971904933
+      Effect 2_8: 132550699
+      Effect 2_9: -1416306499
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

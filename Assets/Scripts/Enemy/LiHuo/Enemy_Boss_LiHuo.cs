@@ -46,11 +46,12 @@ public class Enemy_Boss_LiHuo : Enemy
 
     }
 
-    public override void HitTarget()
+    public override void HitTarget(Entity from)
     {
-        base.HitTarget();
-
+        base.HitTarget(from);
+        stateMachine.currentState.OnHit(from);
         SetMovement(player.attackForce[player.attackCount] * player.facingDir, rb.velocity.y);
+
     }
 
     protected override void OnDrawGizmos()

@@ -7,9 +7,9 @@ public class GameConfig : ScriptableObject
     public float playerDecayLife_hitted = 15f;
     [Header("玩家防御扣减刃势值")]
     public float playerDecayLife_defense = 5f;
-    [Header("玩家弹反判定时间（前）")]
-    public float playerBounceTimeBefore = 0.05f;
-    [Header("玩家弹反判定时间（后）")]
-    public float playerBounceTimeAfter = 0.1f;
+    [Header("玩家弹反增加刃势值")]
+    public float playerIncreaseLife_bounce = 10f;
+    [Header("玩家攻击增加刃势值")]
+    public float playerIncreaseLife_attack = 3f;
 
 }

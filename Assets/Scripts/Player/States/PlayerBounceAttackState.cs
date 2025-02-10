@@ -12,7 +12,7 @@ public class PlayerBounceAttackState : PlayerState
     {
         base.Enter();
 
-        if(bounceAttackCounter > 1)
+        if (bounceAttackCounter > 1)
         {
             bounceAttackCounter = 0;
         }
@@ -34,5 +34,11 @@ public class PlayerBounceAttackState : PlayerState
         {
             stateMachine.ChangeState(player.postureState);
         }
+    }
+    public override void OnHit(Entity from)
+    {
+        HitEffectController.Create((from.transform.position + player.transform.position) / 2, new HitEffectInfo() { type = HitEffectType.BounceHit });
+        player.info.life = Mathf.Clamp(player.info.life + GlobalRef.Ins.cfg.playerIncreaseLife_bounce, 0, 100);
+
     }
 }
