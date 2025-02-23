@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8593982319013466108}
   - component: {fileID: 4620076522330716969}
   - component: {fileID: 63313813975855079}
+  - component: {fileID: 1537147611689238653}
   m_Layer: 0
   m_Name: hitEffect
   m_TagString: Untagged
@@ -80,10 +81,10 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 8, y: 8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &4620076522330716969
@@ -119,3 +120,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1537147611689238653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5908320797415904013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d79f36fc5d54d744ebf63d18f4d719e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackEffectPrefab: {fileID: 0}
+  effectSpawnPoint: {fileID: 0}
+  attackSFX: {fileID: 0}

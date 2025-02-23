@@ -25,6 +25,7 @@ public class PlayerPrimaryAttackState : PlayerState
         player.SetVelocity(player.attackMovement[comboCounter].x * player.facingDir, player.attackMovement[comboCounter].y);
 
         stateTimer = 0.1f;
+        
 
     }
 

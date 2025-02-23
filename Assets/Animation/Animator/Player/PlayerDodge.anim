@@ -21,25 +21,23 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 751832759, guid: f751a5ecdcb479847adf569f5022b156, type: 3}
+      value: {fileID: 796085894, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
     - time: 0.0625
-      value: {fileID: -1547377609, guid: f751a5ecdcb479847adf569f5022b156, type: 3}
+      value: {fileID: 1206734912, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
     - time: 0.125
-      value: {fileID: 114659651, guid: f751a5ecdcb479847adf569f5022b156, type: 3}
+      value: {fileID: 1365687096, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
     - time: 0.1875
-      value: {fileID: 814271824, guid: f751a5ecdcb479847adf569f5022b156, type: 3}
+      value: {fileID: 1271543361, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
     - time: 0.25
-      value: {fileID: 927746972, guid: f751a5ecdcb479847adf569f5022b156, type: 3}
+      value: {fileID: 79513110, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
     - time: 0.3125
-      value: {fileID: 260898012, guid: f751a5ecdcb479847adf569f5022b156, type: 3}
+      value: {fileID: -1335584130, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
     - time: 0.375
-      value: {fileID: 104392270, guid: f751a5ecdcb479847adf569f5022b156, type: 3}
+      value: {fileID: -1240628080, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
     - time: 0.4375
-      value: {fileID: 207549815, guid: f751a5ecdcb479847adf569f5022b156, type: 3}
+      value: {fileID: -11272850, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
     - time: 0.5
-      value: {fileID: -539613799, guid: f751a5ecdcb479847adf569f5022b156, type: 3}
-    - time: 0.5625
-      value: {fileID: 671499166, guid: f751a5ecdcb479847adf569f5022b156, type: 3}
+      value: {fileID: -126921442, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -62,22 +60,21 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 751832759, guid: f751a5ecdcb479847adf569f5022b156, type: 3}
-    - {fileID: -1547377609, guid: f751a5ecdcb479847adf569f5022b156, type: 3}
-    - {fileID: 114659651, guid: f751a5ecdcb479847adf569f5022b156, type: 3}
-    - {fileID: 814271824, guid: f751a5ecdcb479847adf569f5022b156, type: 3}
-    - {fileID: 927746972, guid: f751a5ecdcb479847adf569f5022b156, type: 3}
-    - {fileID: 260898012, guid: f751a5ecdcb479847adf569f5022b156, type: 3}
-    - {fileID: 104392270, guid: f751a5ecdcb479847adf569f5022b156, type: 3}
-    - {fileID: 207549815, guid: f751a5ecdcb479847adf569f5022b156, type: 3}
-    - {fileID: -539613799, guid: f751a5ecdcb479847adf569f5022b156, type: 3}
-    - {fileID: 671499166, guid: f751a5ecdcb479847adf569f5022b156, type: 3}
+    - {fileID: 796085894, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
+    - {fileID: 1206734912, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
+    - {fileID: 1365687096, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
+    - {fileID: 1271543361, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
+    - {fileID: 79513110, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
+    - {fileID: -1335584130, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
+    - {fileID: -1240628080, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
+    - {fileID: -11272850, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
+    - {fileID: -126921442, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.625
+    m_StopTime: 0.5625
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -97,7 +94,14 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.625
+  - time: 0
+    functionName: PlaySFX
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: 539092b09e2110b43b9897625e711566, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.5
     functionName: AnimationTrigger
     data: 
     objectReferenceParameter: {fileID: 0}

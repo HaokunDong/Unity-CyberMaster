@@ -10,6 +10,7 @@ public class PlayerAnimationTriggers : MonoBehaviour
     {
         player.AnimationTrigger();
     }
+
     private void AttackTrigger()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll
@@ -31,4 +32,13 @@ public class PlayerAnimationTriggers : MonoBehaviour
 
     private void CanBeBouncedAttackTrigger() => player.CanBeBouncedAttack();
     private void CanNotBeBouncedAttackTrigger() => player.CanNotBeBouncedAttack();
+
+    // 播放音效的方法，供动画事件调用
+    public void PlaySFX(AudioClip clip)
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySFX(clip, clip.length);
+        }
+    }
 }

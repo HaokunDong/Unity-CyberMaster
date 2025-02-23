@@ -22,9 +22,13 @@ public class PlayerAirState : PlayerState
     {
         base.Update();
 
-        if(xInput != 0)
+        float targetSpeed = player.moveSpeed * xInput;
+
+        // 只有当 x 方向输入发生变化时，才调整速度
+        if (Mathf.Abs(targetSpeed - rb.velocity.x) > 0.1f)
         {
-            player.SetVelocity(player.moveSpeed * 0.8f * xInput, rb.velocity.y);
+            float smoothedSpeed = Mathf.MoveTowards(rb.velocity.x, targetSpeed, Time.deltaTime * player.moveSpeed * 2f);
+            player.SetVelocity(smoothedSpeed, rb.velocity.y);
         }
 
         if (player.IsWallDetected())
@@ -32,15 +36,10 @@ public class PlayerAirState : PlayerState
             stateMachine.ChangeState(player.wallSlideState);
         }
 
-        if(player.IsGroundDetected())
+        if (player.IsGroundDetected())
         {
             stateMachine.ChangeState(player.landState);
         }
-
-        /*if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            stateMachine.ChangeState(player.dodgeState);
-        }*/
-
     }
+
 }
