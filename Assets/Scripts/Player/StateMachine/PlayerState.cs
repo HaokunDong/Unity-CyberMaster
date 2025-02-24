@@ -51,6 +51,8 @@ public class PlayerState
 
         player.animator.SetFloat("yVelocity", rb.velocity.y);
         player.animator.SetFloat("PostureFloat", postureTimer);
+
+        player.animator.SetInteger("BounceAttackCounter", bounceAttackCounter);
     }
 
     public virtual void Exit()
@@ -67,8 +69,12 @@ public class PlayerState
     {
         eventsTriggerCalled = true;
     }
+
     public virtual void OnHit(Entity from) //受到攻击
     {
+        player.stateMachine.ChangeState(player.beAttackedState);
         player.info.life = Mathf.Clamp(player.info.life - GlobalRef.Ins.cfg.playerDecayLife_hitted, 0, 100);
     }
+
+
 }

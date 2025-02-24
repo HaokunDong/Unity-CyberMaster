@@ -16,7 +16,7 @@ public class PlayerBounceAttackState : PlayerState
         {
             bounceAttackCounter = 0;
         }
-        player.animator.SetInteger("BounceAttackCounter", bounceAttackCounter);
+        //player.animator.SetInteger("BounceAttackCounter", bounceAttackCounter);
     }
 
     public override void Exit()
@@ -32,6 +32,7 @@ public class PlayerBounceAttackState : PlayerState
 
         if (triggerCalled)
         {
+            
             stateMachine.ChangeState(player.postureState);
         }
     }

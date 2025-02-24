@@ -43,6 +43,7 @@ public class Player : Entity
     public PlayerDodgeState dodgeState { get; private set; }
     public PlayerPostureState postureState { get; private set; }
     public PlayerBounceAttackState bounceAttackState { get; private set; }
+    public PlayerBeAttackedState beAttackedState { get; private set; }
 
     public PlayerPrimaryAttackState primaryAttackState { get; private set; }
     public PlayerChargeAttackState chargeAttackState { get; private set; }
@@ -65,6 +66,7 @@ public class Player : Entity
         dodgeState = new PlayerDodgeState(stateMachine, this, "Dodge");
         postureState = new PlayerPostureState(stateMachine, this, "Posture");
         bounceAttackState = new PlayerBounceAttackState(stateMachine, this, "BounceAttack");
+        beAttackedState = new PlayerBeAttackedState(stateMachine, this, "BeAttacked");
 
         primaryAttackState = new PlayerPrimaryAttackState(stateMachine, this, "Attack");
         chargeAttackState = new PlayerChargeAttackState(stateMachine, this, "ChargeAttack");
