@@ -62,8 +62,8 @@ public class Entity : MonoBehaviour
 
     public virtual void SetVelocity(float _xVelocity, float _yVelocity)
     {
-        rb.velocity = new Vector2(_xVelocity, _yVelocity);
         FlipController(_xVelocity);
+        rb.velocity = new Vector2(_xVelocity, _yVelocity);
     }
 
     public virtual void SetMovement(float _xVelocity, float _yVelocity)

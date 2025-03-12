@@ -134,4 +134,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackEffectPrefab: {fileID: 0}
   effectSpawnPoint: {fileID: 0}
-  attackSFX: {fileID: 0}
+  defaultAttackSFX: {fileID: 0}
+  attackSFXGrp: {fileID: 0}
+  sfxVolume: 1

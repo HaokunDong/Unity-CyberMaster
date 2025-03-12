@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce5bffa8b850b0e4baeb65b8b3452995, type: 3}
+  m_Name: Effect_Block_AudioGrp
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 98834f353184b1d47bd2966523f57fb6, type: 3}
+  - {fileID: 8300000, guid: c6eda757d5e913048b019bc6bf438008, type: 3}
+  - {fileID: 8300000, guid: 3202004c065a9c5408ec51286a2f46f3, type: 3}
+  - {fileID: 8300000, guid: dba7cdefe2369494a8c70e2658432368, type: 3}

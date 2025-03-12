@@ -36,7 +36,6 @@ public class LiHuoGroundState : EnemyState
             {
                 if (player.gameObject != null && player.canBeBouncedAttack)
                 {
-                    Debug.Log("1");
                     stateMachine.ChangeState(liHuo.bounceAttackState);
                 }
             }

@@ -49,7 +49,8 @@ public class PlayerPostureState : PlayerState
 
             foreach (var hit in colliders)
             {
-                if (hit.GetComponent<Enemy_Boss_LiHuo>() != null)
+
+                if (hit.GetComponent<Player>() != null)
                 {
                     if (liHuo.canBeBouncedAttack)
                     {
@@ -64,6 +65,8 @@ public class PlayerPostureState : PlayerState
     {
         HitEffectController.Create((from.transform.position + player.transform.position) / 2f, new HitEffectInfo() { type = HitEffectType.BlockHit });
         player.info.life = Mathf.Clamp(player.info.life - GlobalRef.Ins.cfg.playerDecayLife_defense, 0, 100);
+
+        stateMachine.ChangeState(player.postureMoveState);
     }
 
     

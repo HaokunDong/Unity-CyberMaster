@@ -39,21 +39,8 @@ AnimationClip:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
-    genericBindings:
-    - serializedVersion: 2
-      path: 0
-      attribute: 0
-      script: {fileID: 0}
-      typeID: 212
-      customType: 23
-      isPPtrCurve: 1
-      isIntCurve: 0
-      isSerializeReferenceCurve: 0
-    pptrCurveMapping:
-    - {fileID: -1894832705, guid: 260a54f8fa22bf94caa3e42ed43f1db1, type: 3}
-    - {fileID: 773663372, guid: 260a54f8fa22bf94caa3e42ed43f1db1, type: 3}
-    - {fileID: -403043547, guid: 260a54f8fa22bf94caa3e42ed43f1db1, type: 3}
-    - {fileID: 556004814, guid: 260a54f8fa22bf94caa3e42ed43f1db1, type: 3}
+    genericBindings: []
+    pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -80,9 +67,9 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: PlaySFX
+    functionName: PlaySFXGrp
     data: 
-    objectReferenceParameter: {fileID: 8300000, guid: 70d7f3b9b4608b940bc81f8427d26280, type: 3}
+    objectReferenceParameter: {fileID: 11400000, guid: b8005b0f4de052a44b42ac682d982fb8, type: 2}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

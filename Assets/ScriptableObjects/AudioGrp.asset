@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce5bffa8b850b0e4baeb65b8b3452995, type: 3}
+  m_Name: AudioGrp
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 11d67ef9513b78c459bcbdcee69964f2, type: 3}
+  - {fileID: 8300000, guid: 834bae1ccdf8e3949b93ec38b9b771d5, type: 3}
+  - {fileID: 8300000, guid: b113d4966e65161499137fcb6797499d, type: 3}
+  - {fileID: 8300000, guid: 7123e35e966b6694cbe8dfdb5c494d01, type: 3}
+  - {fileID: 8300000, guid: 4648abb0f10fd574895376ff66783a8b, type: 3}
+  - {fileID: 8300000, guid: 3061175bf78bdb849977a56812558d31, type: 3}

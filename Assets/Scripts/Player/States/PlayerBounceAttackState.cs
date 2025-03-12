@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerBounceAttackState : PlayerState
 {
+
+    protected int bounceAttackCounter;
+
     public PlayerBounceAttackState(PlayerStateMachine _stateMachine, Player _player, string _animBoolNam) : base(_stateMachine, _player, _animBoolNam)
     {
     }
@@ -16,7 +19,7 @@ public class PlayerBounceAttackState : PlayerState
         {
             bounceAttackCounter = 0;
         }
-        //player.animator.SetInteger("BounceAttackCounter", bounceAttackCounter);
+        player.animator.SetInteger("BounceAttackCounter", bounceAttackCounter);
     }
 
     public override void Exit()
@@ -29,6 +32,8 @@ public class PlayerBounceAttackState : PlayerState
     public override void Update()
     {
         base.Update();
+
+        //player.animator.SetInteger("BounceAttackCounter", bounceAttackCounter);
 
         if (triggerCalled)
         {

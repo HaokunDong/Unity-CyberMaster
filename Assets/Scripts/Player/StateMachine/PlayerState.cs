@@ -18,13 +18,6 @@ public class PlayerState
     protected bool triggerCalled;
     protected bool eventsTriggerCalled;
 
-    protected int comboCounter;
-    protected float lastTimeAttacked;
-    //comboWindow?????????????????????????????????????ι????????????????????????
-    //??????????????????????????ι????????????????????comboCounter????????.
-    protected float comboWindow = 0.3f;
-
-    protected int bounceAttackCounter;
 
     public PlayerState(PlayerStateMachine _stateMachine, Player _player, string _animBoolNam)
     {
@@ -52,7 +45,7 @@ public class PlayerState
         player.animator.SetFloat("yVelocity", rb.velocity.y);
         player.animator.SetFloat("PostureFloat", postureTimer);
 
-        player.animator.SetInteger("BounceAttackCounter", bounceAttackCounter);
+        
     }
 
     public virtual void Exit()
@@ -60,20 +53,25 @@ public class PlayerState
         player.animator.SetBool(animBoolName, false);
     }
 
-    public virtual void AnimationFinishTrigger()//�ڹ�������֡���ô˺���
+    public virtual void AnimationFinishTrigger()
     {
         triggerCalled = true;
     }
 
-    public virtual void AnimationEventTrigger()//�ڶ��������е�֡�¼��п���ʹ��
+    public virtual void AnimationEventTrigger()
     {
         eventsTriggerCalled = true;
     }
 
     public virtual void OnHit(Entity from) //受到攻击
     {
-        player.stateMachine.ChangeState(player.beAttackedState);
         player.info.life = Mathf.Clamp(player.info.life - GlobalRef.Ins.cfg.playerDecayLife_hitted, 0, 100);
+        if (player.facingDir != player.RelativePosition())
+        {
+            player.FlipController(player.RelativePosition());
+        }
+        stateMachine.ChangeState(player.beAttackedState);
+
     }
 
 

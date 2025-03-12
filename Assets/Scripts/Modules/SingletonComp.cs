@@ -3,10 +3,15 @@ using UnityEngine;
 
 public class SingletonComp<T> : MonoBehaviour where T : SingletonComp<T>
 {
+	private static T instance;
 	public static T Ins
 	{
 		get
 		{
+/*			if(instance == null)
+            {
+				instance = this as T;
+            }*/
 			return instance;
 		}
 	}
@@ -29,5 +34,4 @@ public class SingletonComp<T> : MonoBehaviour where T : SingletonComp<T>
 		instance = this as T;
 	}
 
-	private static T instance;
 }

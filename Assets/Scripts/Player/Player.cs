@@ -42,6 +42,7 @@ public class Player : Entity
     public PlayerWallJumpState wallJumpState { get; private set; }
     public PlayerDodgeState dodgeState { get; private set; }
     public PlayerPostureState postureState { get; private set; }
+    public PlayerPostureMoveState postureMoveState { get; private set; }
     public PlayerBounceAttackState bounceAttackState { get; private set; }
     public PlayerBeAttackedState beAttackedState { get; private set; }
 
@@ -65,6 +66,7 @@ public class Player : Entity
         wallJumpState = new PlayerWallJumpState(stateMachine, this, "Jump");
         dodgeState = new PlayerDodgeState(stateMachine, this, "Dodge");
         postureState = new PlayerPostureState(stateMachine, this, "Posture");
+        postureMoveState = new PlayerPostureMoveState(stateMachine, this, "PostureMove");
         bounceAttackState = new PlayerBounceAttackState(stateMachine, this, "BounceAttack");
         beAttackedState = new PlayerBeAttackedState(stateMachine, this, "BeAttacked");
 
@@ -164,11 +166,7 @@ public class Player : Entity
         }*/
     }
 
-    //����AnimationTriggerʱ���Ե��õ�PlayerState�е�AnimationFinishTrigger����
-    //���Դ�unity�Ķ�������֡�ϵ��ô˺���
     public void AnimationTrigger() => stateMachine.currentState.AnimationFinishTrigger();
-
-    //֡�¼����ڳ��ܹ�����λ��
     public void ChargeAttackMove() => stateMachine.currentState.AnimationEventTrigger();
     public void RefreshInfoState()
     {

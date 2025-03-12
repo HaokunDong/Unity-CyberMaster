@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerPrimaryAttackState : PlayerState
 {
+
+    protected int comboCounter;
+    protected float lastTimeAttacked;
+    protected float comboWindow = 0.3f;
+
     public PlayerPrimaryAttackState(PlayerStateMachine _stateMachine, Player _player, string _animBoolNam) : base(_stateMachine, _player, _animBoolNam)
     {
     }
@@ -14,7 +19,7 @@ public class PlayerPrimaryAttackState : PlayerState
 
         xInput = 0;
 
-        if (comboCounter > 4 || Time.time >= lastTimeAttacked + comboWindow)//Time.time(????????) ????????: ????????? + ?????(??)
+        if (comboCounter > 4 || Time.time >= lastTimeAttacked + comboWindow)
         {
             comboCounter = 0;
         }

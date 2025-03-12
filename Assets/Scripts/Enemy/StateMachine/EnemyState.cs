@@ -15,10 +15,6 @@ public class EnemyState
     protected bool triggerCalled;
     protected bool PreprocessTriggerCalled;
 
-    protected int comboCounter;
-    protected float lastTimeAttacked;
-    protected float comboWindow = 0.3f;
-
     protected int bounceAttackCounter;
 
     public EnemyState(EnemyStateMachine _stateMachine, Enemy _enemy, string _animBoolName)

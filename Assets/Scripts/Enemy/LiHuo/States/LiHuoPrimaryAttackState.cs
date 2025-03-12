@@ -6,6 +6,10 @@ public class LiHuoPrimaryAttackState : EnemyState
 {
     private Enemy_Boss_LiHuo liHuo;
 
+    protected int comboCounter;
+    protected float lastTimeAttacked;
+    protected float comboWindow = 0.3f;
+
     public LiHuoPrimaryAttackState(EnemyStateMachine _stateMachine, Enemy _enemy, string _animBoolName, Enemy_Boss_LiHuo _liHuo) : base(_stateMachine, _enemy, _animBoolName)
     {
         this.liHuo = _liHuo;
@@ -15,7 +19,7 @@ public class LiHuoPrimaryAttackState : EnemyState
     {
         base.Enter();
 
-        if (comboCounter > 2 || Time.time >= liHuo.lastTimeAttacked + comboWindow)//Time.time(????????) ????????: ????????? + ?????(??)
+        if (comboCounter > 2 || Time.time >= liHuo.lastTimeAttacked + comboWindow)
         {
             comboCounter = 0;
         }

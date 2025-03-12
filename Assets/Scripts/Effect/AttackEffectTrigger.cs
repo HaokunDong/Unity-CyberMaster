@@ -7,9 +7,9 @@ public class AttackEffectTrigger : MonoBehaviour
     public GameObject attackEffectPrefab; // 预设的攻击特效
     public Transform effectSpawnPoint;   // 特效生成位置
     
-    // 允许在Inspector中手动分配不同的音效
-    public AudioClip defaultAttackSFX;
-    public float sfxVolume = 1.0f; // 在Inspector中调整音量
+    public AudioClip defaultAttackSFX;  // 默认攻击音效
+    public AudioGrp attackSFXGrp;       // 攻击音效组
+    public float sfxVolume = 0.5f;      // 音量调整
 
     private void PlayAttackEffect()
     {
@@ -19,7 +19,7 @@ public class AttackEffectTrigger : MonoBehaviour
         }
     }
 
-    // 播放音效的方法，可供动画事件调用，允许手动分配音效
+    // 播放单个音效
     public void PlaySFX(AudioClip clip)
     {
         if (AudioManager.Instance != null && clip != null)
@@ -28,9 +28,19 @@ public class AttackEffectTrigger : MonoBehaviour
         }
     }
     
-    // 直接使用默认音效的方法，可绑定到动画事件
+    // 播放默认攻击音效
     public void PlayDefaultSFX()
     {
         PlaySFX(defaultAttackSFX);
+    }
+
+    // 复刻 PlayerAnimationTriggers 的音效组播放逻辑
+    public void PlaySFXGrp(AudioGrp grp)
+    {
+        if (grp != null && grp.clips.Count > 0 && AudioManager.Instance != null)
+        {
+            AudioClip clip = grp.GetRandomClip(); // ✅ 这里改为调用 GetRandomClip()
+            AudioManager.Instance.PlaySFX(clip, sfxVolume);
+        }
     }
 }

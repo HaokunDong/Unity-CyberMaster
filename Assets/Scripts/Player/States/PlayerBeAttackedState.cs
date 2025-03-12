@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerBeAttackedState : PlayerState
 {
+    private Enemy enemy;
+
     public PlayerBeAttackedState(PlayerStateMachine _stateMachine, Player _player, string _animBoolNam) : base(_stateMachine, _player, _animBoolNam)
     {
     }
@@ -11,6 +13,9 @@ public class PlayerBeAttackedState : PlayerState
     public override void Enter()
     {
         base.Enter();
+
+        player.SetMovement(-player.facingDir * 15, rb.velocity.y);
+
     }
 
     public override void Exit()

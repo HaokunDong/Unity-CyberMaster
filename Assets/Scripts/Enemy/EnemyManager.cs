@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class EnemyManager : SingletonComp<EnemyManager>
 {
+    public Enemy enemy;
     public Enemy_Boss_LiHuo liHuo;
 }

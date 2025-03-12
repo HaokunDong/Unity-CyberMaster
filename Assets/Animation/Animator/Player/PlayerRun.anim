@@ -22,26 +22,26 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: -618478599, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
-    - time: 0.083333336
+    - time: 0.09090909
       value: {fileID: -1487505904, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
-    - time: 0.16666667
+    - time: 0.18181819
       value: {fileID: 806225512, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
-    - time: 0.25
+    - time: 0.27272728
       value: {fileID: -1345385807, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
-    - time: 0.33333334
+    - time: 0.36363637
       value: {fileID: -68023127, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
-    - time: 0.41666666
+    - time: 0.45454547
       value: {fileID: -1965920629, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
-    - time: 0.5
+    - time: 0.54545456
       value: {fileID: -279932044, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
-    - time: 0.5833333
+    - time: 0.6363636
       value: {fileID: -2061340045, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 12
+  m_SampleRate: 11
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -71,7 +71,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.6666666
+    m_StopTime: 0.72727275
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -92,30 +92,30 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: PlaySFX
+    functionName: PlaySFXGrp
     data: 
-    objectReferenceParameter: {fileID: 8300000, guid: 3061175bf78bdb849977a56812558d31, type: 3}
+    objectReferenceParameter: {fileID: 11400000, guid: a308f8e48570acc459744c4620dfdee9, type: 2}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.16666667
-    functionName: PlaySFX
+  - time: 0.18181819
+    functionName: PlaySFXGrp
     data: 
-    objectReferenceParameter: {fileID: 8300000, guid: 4648abb0f10fd574895376ff66783a8b, type: 3}
+    objectReferenceParameter: {fileID: 11400000, guid: a308f8e48570acc459744c4620dfdee9, type: 2}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.33333334
-    functionName: PlaySFX
+  - time: 0.36363637
+    functionName: PlaySFXGrp
     data: 
-    objectReferenceParameter: {fileID: 8300000, guid: 7123e35e966b6694cbe8dfdb5c494d01, type: 3}
+    objectReferenceParameter: {fileID: 11400000, guid: a308f8e48570acc459744c4620dfdee9, type: 2}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.5
-    functionName: PlaySFX
+  - time: 0.54545456
+    functionName: PlaySFXGrp
     data: 
-    objectReferenceParameter: {fileID: 8300000, guid: 834bae1ccdf8e3949b93ec38b9b771d5, type: 3}
+    objectReferenceParameter: {fileID: 11400000, guid: a308f8e48570acc459744c4620dfdee9, type: 2}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

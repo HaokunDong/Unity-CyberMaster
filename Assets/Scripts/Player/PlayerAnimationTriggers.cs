@@ -33,12 +33,25 @@ public class PlayerAnimationTriggers : MonoBehaviour
     private void CanBeBouncedAttackTrigger() => player.CanBeBouncedAttack();
     private void CanNotBeBouncedAttackTrigger() => player.CanNotBeBouncedAttack();
 
-    // 播放音效的方法，供动画事件调用
     public void PlaySFX(AudioClip clip)
     {
-        if (AudioManager.Instance != null)
-        {
-            AudioManager.Instance.PlaySFX(clip, clip.length);
-        }
+        AudioManager.Instance.PlaySFX(clip, clip.length);
     }
+
+    public void PlaySFXGrp(AudioGrp grp)
+    {
+        List<AudioClip> clips = grp.clips;
+        AudioClip clip = clips[Random.Range(0, clips.Count)];
+        AudioManager.Instance.PlaySFX(clip, clip.length);
+
+    }
+
+
+
+    // ✅ 让 Animator 能调用 `HurtKnockback()`，用于事件帧触发击退
+    /*public void HurtKnockback()
+    {
+        player.HurtKnockback();
+    }*/
+
 }
