@@ -2209,6 +2209,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a77623a2d4d00824a8b95989951b5e52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxGroup: {fileID: 0}
+  sfxVolume: 0.5
 --- !u!1 &933653984
 GameObject:
   m_ObjectHideFlags: 0
@@ -2957,6 +2959,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aedbc5c7354341f4a9f55e42010a2326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
   liHuo: {fileID: 1759786914}
 --- !u!1 &1212833049
 GameObject:
@@ -4096,7 +4099,7 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64
-  moveSpeed: 3
+  moveSpeed: 2
   jumpForce: 12
   attackDistance: 3.5
   attackCooldown: 0
