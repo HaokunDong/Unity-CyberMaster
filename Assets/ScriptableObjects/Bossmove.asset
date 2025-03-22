@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Bossmove
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: 67eabbf87eb497141a0169ff3880721e, type: 3}
-  - {fileID: 8300000, guid: 7fc566ca32583d241bb2e0f4ce8b1f07, type: 3}
-  - {fileID: 8300000, guid: ba6fcdc3faef3324999ee3896b2ef5d8, type: 3}
+  - {fileID: 8300000, guid: 469d6d654c11a054683f2d9c4a8d3be2, type: 3}
+  - {fileID: 8300000, guid: cbb19355242e8334e84a4ce7049bbb1e, type: 3}
+  - {fileID: 8300000, guid: d13d45d752b29d645a4d3d4f410824b0, type: 3}
