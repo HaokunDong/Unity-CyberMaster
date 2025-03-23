@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect_Block_AudioGrp
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: 98834f353184b1d47bd2966523f57fb6, type: 3}
-  - {fileID: 8300000, guid: c6eda757d5e913048b019bc6bf438008, type: 3}
-  - {fileID: 8300000, guid: 3202004c065a9c5408ec51286a2f46f3, type: 3}
-  - {fileID: 8300000, guid: dba7cdefe2369494a8c70e2658432368, type: 3}
+  - {fileID: 8300000, guid: 8f4b0c284d7d0024b997413a09cf7c99, type: 3}
+  - {fileID: 8300000, guid: d747d574e90eccc428bcc1a0f35a0b46, type: 3}
+  - {fileID: 8300000, guid: 574b4b7eafd2673438dfe27b7d1a2ec0, type: 3}
+  - {fileID: 8300000, guid: e19d8c746cb1a7648aae1e5d181909e0, type: 3}

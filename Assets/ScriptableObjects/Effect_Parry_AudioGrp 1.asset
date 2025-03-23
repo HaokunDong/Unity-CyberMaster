@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Effect_Parry_AudioGrp 1
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: 60a0b042dc5a0cd499c2a11502af5132, type: 3}
-  - {fileID: 8300000, guid: d3e35116fb1b8e9498558c9fdfcea430, type: 3}
-  - {fileID: 8300000, guid: ca0da1ab684bcb949bb49e079fb205ab, type: 3}
-  - {fileID: 8300000, guid: c96d569f64ef54744816001b4db4d62a, type: 3}
-  - {fileID: 8300000, guid: 488962132255cd54e995bd335b0b24d8, type: 3}
+  - {fileID: 8300000, guid: 3076f233639df684ab79a078ba59c90d, type: 3}
+  - {fileID: 8300000, guid: ed66c666924910547aa1fbd8159979a4, type: 3}
+  - {fileID: 8300000, guid: 018f3bfb863197c439f8764e5b578739, type: 3}
+  - {fileID: 8300000, guid: 125cc68d40d6ce740991b7b72a8070a0, type: 3}
