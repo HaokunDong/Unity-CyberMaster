@@ -9,10 +9,9 @@ public class Player : Entity
 
     [Header("Attack Details")]
     public int attackCount;
-    public Vector2[] attackMovement;//���ڿ���ÿ�ι�����ǰ�����ϵ�λ��
+    public Vector2[] attackMovement;
     public float[] attackForce;
     public float chargeAttackMovement;
-
     public bool isBusy { get; private set; }
 
     [Header("Move Info")]
@@ -22,6 +21,7 @@ public class Player : Entity
     [Header("Dodge Info")]
     public float dodgeSpeed = 10f;
     public float dodgeDir { get; private set; }
+    public bool isInvincible = false;
 
     public float velocityY { get; private set; }
     [Header("Bar Com")]
@@ -109,6 +109,8 @@ public class Player : Entity
     {
         base.HitTarget(from);
 
+        if (isInvincible) return;
+
         SetMovement(liHuo.attackForce[liHuo.attackCount] * liHuo.facingDir, rb.velocity.y);
         stateMachine.currentState.OnHit(from);
         RefreshInfoState();
@@ -120,14 +122,19 @@ public class Player : Entity
         Gizmos.DrawWireSphere(attackCheck[attackCount].position, attackCheckRadius[attackCount]);
     }
 
-    //ʹ��Э�̣����������ǽ�isBusy���false�Ĺ��̽���һ���ӳ�
-    public IEnumerator BusyFor(float _seconds)
+    public IEnumerator BusyFor(float _seconds)//used to control the attack interval
     {
         isBusy = true;
 
         yield return new WaitForSeconds(_seconds);
 
         isBusy = false;
+    }
+    public IEnumerator Invincibility()
+    {
+        isInvincible = true;
+        yield return new WaitForSeconds(0.2f);
+        isInvincible = false;
     }
 
     public void ChangeLayer(GameObject obj, string layerName)

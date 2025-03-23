@@ -15,6 +15,7 @@ public class PlayerState
 
     protected float stateTimer;
     protected float postureTimer;
+
     protected bool triggerCalled;
     protected bool eventsTriggerCalled;
 
@@ -66,12 +67,12 @@ public class PlayerState
     public virtual void OnHit(Entity from) //受到攻击
     {
         player.info.life = Mathf.Clamp(player.info.life - GlobalRef.Ins.cfg.playerDecayLife_hitted, 0, 100);
-        if (player.facingDir != player.RelativePosition())
+
+        if (player.facingDir != player.RelativePosition())//Flip when player is attecked.
         {
             player.FlipController(player.RelativePosition());
         }
         stateMachine.ChangeState(player.beAttackedState);
-
     }
 
 

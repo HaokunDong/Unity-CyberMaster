@@ -33,6 +33,8 @@ public class PlayerAnimationTriggers : MonoBehaviour
     private void CanBeBouncedAttackTrigger() => player.CanBeBouncedAttack();
     private void CanNotBeBouncedAttackTrigger() => player.CanNotBeBouncedAttack();
 
+    private void InvinciblityTrigger() => StartCoroutine(player.Invincibility());
+
     public void PlaySFX(AudioClip clip)
     {
         AudioManager.Instance.PlaySFX(clip, clip.length);
@@ -45,13 +47,5 @@ public class PlayerAnimationTriggers : MonoBehaviour
         AudioManager.Instance.PlaySFX(clip, clip.length);
 
     }
-
-
-
-    // ✅ 让 Animator 能调用 `HurtKnockback()`，用于事件帧触发击退
-    /*public void HurtKnockback()
-    {
-        player.HurtKnockback();
-    }*/
 
 }

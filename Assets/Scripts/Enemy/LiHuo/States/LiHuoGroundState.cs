@@ -27,18 +27,25 @@ public class LiHuoGroundState : EnemyState
     {
         base.Update();
 
-        Collider2D[] colliders = Physics2D.OverlapCircleAll
-            (player.attackCheck[player.attackCount].position, player.attackCheckRadius[player.attackCount]);
+        
+    }
 
-        foreach (var hit in colliders)
+    public override void OnHit(Entity from)
+    {
+        base.OnHit(from);
+
+        if (player.canBeBouncedAttack)
         {
-            if (hit.GetComponent<Enemy_Boss_LiHuo>() != null)
-            {
-                if (player.gameObject != null && player.canBeBouncedAttack)
-                {
-                    stateMachine.ChangeState(liHuo.bounceAttackState);
-                }
-            }
+            stateMachine.ChangeState(liHuo.bounceAttackState);
+        }
+
+        //Play the HitEffect and sound effect clips
+        HitEffectController.Create((from.transform.position + enemy.transform.position) / 2f, new HitEffectInfo() { type = HitEffectType.BlockHit });
+        if (from is Player)
+        {
+            Player p = from as Player;
+            p.info.life = Mathf.Clamp(p.info.life + GlobalRef.Ins.cfg.playerIncreaseLife_attack, 0, 100);
+            p.RefreshInfoState();
         }
     }
 }

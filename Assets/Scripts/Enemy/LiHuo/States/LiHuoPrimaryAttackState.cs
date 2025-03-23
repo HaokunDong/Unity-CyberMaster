@@ -19,7 +19,7 @@ public class LiHuoPrimaryAttackState : EnemyState
     {
         base.Enter();
 
-        if (comboCounter > 2 || Time.time >= liHuo.lastTimeAttacked + comboWindow)
+        if (comboCounter > 2 || Time.time >= lastTimeAttacked + comboWindow)
         {
             comboCounter = 0;
         }
@@ -39,7 +39,7 @@ public class LiHuoPrimaryAttackState : EnemyState
 
         comboCounter++;
 
-        liHuo.lastTimeAttacked = Time.time;
+        lastTimeAttacked = Time.time;
     }
 
     public override void Update()

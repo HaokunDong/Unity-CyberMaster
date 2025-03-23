@@ -37,15 +37,5 @@ public class LiHuoBounceAttackState : EnemyState
             stateMachine.ChangeState(liHuo.idleState);
         }
     }
-    public override void OnHit(Entity from)
-    {
-        base.OnHit(from);
-        HitEffectController.Create((from.transform.position + enemy.transform.position) / 2f, new HitEffectInfo() { type = HitEffectType.BlockHit });
-        if (from is Player)
-        {
-            Player p = from as Player;
-            p.info.life = Mathf.Clamp(p.info.life + GlobalRef.Ins.cfg.playerIncreaseLife_attack, 0, 100);
-            p.RefreshInfoState();
-        }
-    }
+
 }
