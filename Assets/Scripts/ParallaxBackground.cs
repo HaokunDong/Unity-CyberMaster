@@ -27,13 +27,13 @@ public class ParallaxBackground : MonoBehaviour
 
         transform.position = new Vector3(xPosition + distanceToMove, transform.position.y);
 
-        if(distanceMoved > xPosition + length)
-        {
-            xPosition = xPosition + length;
-        }
-        else if(distanceMoved < xPosition - length)
-        {
-            xPosition = xPosition - length;
-        }
+        //if(distanceMoved > xPosition + length)
+        //{
+        //    xPosition = xPosition + length;
+        //}
+        //else if(distanceMoved < xPosition - length)
+        //{
+        //    xPosition = xPosition - length;
+        //}
     }
 }
