@@ -26,6 +26,7 @@ public class Enemy : Entity
     protected override void Awake()
     {
         base.Awake();
+
         stateMachine = new EnemyStateMachine();
 
     }
@@ -53,7 +54,7 @@ public class Enemy : Entity
         return false;
     }
 
-    public virtual int RelativePosition()//��player�����λ��
+    public virtual int RelativePosition()//The RelativePosition with Player
     {
         if (this.transform.position.x - playerTrans.position.x < 0)
         {
@@ -79,6 +80,8 @@ public class Enemy : Entity
         {
             return this.transform.position.x - playerTrans.position.x;
         }
+
+        //return Vector2.Distance(transform.position, playerTrans.position);
     }
 
     public virtual bool CanAttack()

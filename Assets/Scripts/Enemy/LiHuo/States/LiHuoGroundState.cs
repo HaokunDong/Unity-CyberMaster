@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class LiHuoGroundState : EnemyState
 {
-    protected Player player;
     protected Enemy_Boss_LiHuo liHuo;
-    public LiHuoGroundState(EnemyStateMachine _stateMachine, Enemy _enemy, string _animBoolName, Enemy_Boss_LiHuo _liHuo) : base(_stateMachine, _enemy, _animBoolName)
+    public LiHuoGroundState(EnemyStateMachine _stateMachine, Enemy _enemy, string _animBoolName, Enemy_Boss_LiHuo _liHuo)
+        : base(_stateMachine, _enemy, _animBoolName)
     {
-        this.liHuo = _liHuo;
-        this.player = PlayerManager.Ins.player;
+        liHuo = _liHuo;
     }
 
     public override void Enter()
@@ -34,10 +33,10 @@ public class LiHuoGroundState : EnemyState
     {
         base.OnHit(from);
 
-        if (player.canBeBouncedAttack)
+        /*if (player.canBeBouncedAttack)              TODO
         {
             stateMachine.ChangeState(liHuo.bounceAttackState);
-        }
+        }*/
 
         //Play the HitEffect and sound effect clips
         HitEffectController.Create((from.transform.position + enemy.transform.position) / 2f, new HitEffectInfo() { type = HitEffectType.BlockHit });

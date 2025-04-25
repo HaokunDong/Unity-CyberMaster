@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace BehaviourTrees
 {
-    public abstract class Composer : Node
+    public abstract class Composer : BTNode
     {
         
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BehaviourTrees;
 
 public class EnemyState
 {
@@ -17,16 +18,19 @@ public class EnemyState
 
     protected int bounceAttackCounter;
 
+    protected BTNode behaviourTree;
+
     public EnemyState(EnemyStateMachine _stateMachine, Enemy _enemy, string _animBoolName)
     {
-        this.stateMachine = _stateMachine;
-        this.enemy = _enemy;
-        this.animBoolName = _animBoolName;
+        stateMachine = _stateMachine;
+        enemy = _enemy;
+        animBoolName = _animBoolName;
     }
 
     public virtual void Update()
     {
         stateTimer -= Time.deltaTime;
+
     }
 
     public virtual void Enter()

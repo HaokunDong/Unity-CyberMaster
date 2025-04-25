@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class LiHuoBounceAttackState : EnemyState
 {
-    Enemy_Boss_LiHuo liHuo;
-    public LiHuoBounceAttackState(EnemyStateMachine _stateMachine, Enemy _enemy, string _animBoolName, Enemy_Boss_LiHuo _liHuo) : base(_stateMachine, _enemy, _animBoolName)
+    private Enemy_Boss_LiHuo liHuo;
+    public LiHuoBounceAttackState(EnemyStateMachine _stateMachine, Enemy _enemy, string _animBoolName, Enemy_Boss_LiHuo _liHuo)
+        : base(_stateMachine, _enemy, _animBoolName)
     {
-        this.liHuo = _liHuo;
+        liHuo = _liHuo;
     }
 
     public override void Enter()
@@ -32,10 +33,10 @@ public class LiHuoBounceAttackState : EnemyState
     {
         base.Update();
 
-        if (triggerCalled)
+        /*if (triggerCalled)
         {
             stateMachine.ChangeState(liHuo.idleState);
-        }
+        }*/
     }
 
 }

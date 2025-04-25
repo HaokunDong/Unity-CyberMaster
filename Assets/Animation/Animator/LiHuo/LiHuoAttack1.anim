@@ -101,22 +101,22 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.3846154
+  - time: 0.46153846
     functionName: PlaySFX
     data: 
     objectReferenceParameter: {fileID: 8300000, guid: e371e3d6d510f974f9dc3779bbbaf6c2, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.3846154
-    functionName: AttackTrigger
+  - time: 0.46153846
+    functionName: CanNotBeBouncedAttackTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.3846154
-    functionName: CanNotBeBouncedAttackTrigger
+  - time: 0.46153846
+    functionName: AttackTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -129,7 +129,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.7692308
+  - time: 0.6923077
     functionName: FinishTrigger
     data: 
     objectReferenceParameter: {fileID: 0}

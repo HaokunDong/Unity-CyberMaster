@@ -50,6 +50,7 @@ public class Player : Entity
     public PlayerChargeAttackState chargeAttackState { get; private set; }
     #endregion
 
+    //public Animator animator { get; private set; }
 
     protected override void Awake()
     {
@@ -77,6 +78,7 @@ public class Player : Entity
     protected override void Start()
     {
         base.Start();
+        //animator = GetComponentInChildren<Animator>();
 
         //liHuo = EnemyManager.Ins.liHuo;
 

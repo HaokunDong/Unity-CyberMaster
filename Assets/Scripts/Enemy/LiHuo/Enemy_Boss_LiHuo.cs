@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BehaviourTrees;
 
 public class Enemy_Boss_LiHuo : Enemy
 {
     public Player player;
+    //private BTNode behaviourTree;
+
+    //public bool bossFightBegun;
 
     #region States
 
@@ -25,6 +29,8 @@ public class Enemy_Boss_LiHuo : Enemy
         battleState = new LiHuoBattleState(stateMachine, this, "Idle", this);
         primaryAttackState = new LiHuoPrimaryAttackState(stateMachine, this, "Attack", this);
         bounceAttackState = new LiHuoBounceAttackState(stateMachine, this, "BounceAttack", this);
+
+        //BuildLihuoBehaviourTree();
     }
 
 
@@ -44,6 +50,7 @@ public class Enemy_Boss_LiHuo : Enemy
     {
         base.Update();
 
+        //behaviourTree.Execute();
     }
 
     public override void HitTarget(Entity from)
@@ -58,5 +65,43 @@ public class Enemy_Boss_LiHuo : Enemy
     {
         base.OnDrawGizmos();
         Gizmos.DrawWireSphere(attackCheck[attackCount].position, attackCheckRadius[attackCount]);
+    }
+
+    /*public void BuildLihuoBehaviourTree()
+    {
+        behaviourTree = new Selector(
+            new Sequencer(
+                new ConditionNode(() => IsPlayerInAttackRange()),
+                new ActionNode(() => stateMachine.ChangeState(primaryAttackState))
+                ),
+
+            new Sequencer(
+                new ConditionNode(() => IsPlayerInViewRange()),
+                new ActionNode(() => stateMachine.ChangeState(moveState))
+                ),
+
+            new ActionNode(() => stateMachine.ChangeState(idleState))
+            );
+    }*/
+
+    public bool IsPlayerInAttackRange()
+    {
+        if (RelativeDistance() < attackDistance)
+        {
+            if (CanAttack())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool IsPlayerInViewRange()
+    {
+        if (Vector2.Distance(player.transform.position, transform.position) < 10)
+        {
+            return true;
+        }
+        return false;
     }
 }

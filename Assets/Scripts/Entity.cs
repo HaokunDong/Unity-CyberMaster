@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class Entity : MonoBehaviour
     [SerializeField] protected float groundCheckDistance;
     [SerializeField] protected Transform wallCheck;
     [SerializeField] protected float wallCheckDistance;
-    [SerializeField] protected LayerMask whatIsGround;//���ü��������ǵ���
+    [SerializeField] protected LayerMask whatIsGround;
     [Header("BounceAttack Info")]
     [SerializeField] public bool canBeBouncedAttack;
     [SerializeField] public GameObject canBeBouncedImage;
@@ -58,6 +59,8 @@ public class Entity : MonoBehaviour
     }
 
     #region Velocity
+    /*public static event Action SetZeroVelocity;
+    public static void */
     public virtual void SetZeroVelocity() => rb.velocity = new Vector2(0, 0);
 
     public virtual void SetVelocity(float _xVelocity, float _yVelocity)

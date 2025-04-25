@@ -10,9 +10,10 @@ public class LiHuoPrimaryAttackState : EnemyState
     protected float lastTimeAttacked;
     protected float comboWindow = 0.3f;
 
-    public LiHuoPrimaryAttackState(EnemyStateMachine _stateMachine, Enemy _enemy, string _animBoolName, Enemy_Boss_LiHuo _liHuo) : base(_stateMachine, _enemy, _animBoolName)
+    public LiHuoPrimaryAttackState(EnemyStateMachine _stateMachine, Enemy _enemy, string _animBoolName, Enemy_Boss_LiHuo _liHuo)
+        : base(_stateMachine, _enemy, _animBoolName)
     {
-        this.liHuo = _liHuo;
+        liHuo = _liHuo;
     }
 
     public override void Enter()

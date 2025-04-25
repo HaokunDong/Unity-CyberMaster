@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class LiHuoMoveState : LiHuoGroundState
 {
-    public LiHuoMoveState(EnemyStateMachine _stateMachine, Enemy _enemy, string _animBoolName, Enemy_Boss_LiHuo _liHuo) : base(_stateMachine, _enemy, _animBoolName, _liHuo)
+    /*public LiHuoMoveState(EnemyStateMachine _stateMachine, Enemy _enemy, EnemyBehaviourTree _enemyBehaviour, string _animBoolName, Enemy_Boss_LiHuo _liHuo, LihuoBehaviourTree _liHuoBehaviour)
+        : base(_stateMachine, _enemy, _enemyBehaviour, _animBoolName, _liHuo, _liHuoBehaviour)
+    {
+    }*/
+    public LiHuoMoveState(EnemyStateMachine _stateMachine, Enemy _enemy, string _animBoolName, Enemy_Boss_LiHuo _liHuo)
+        : base(_stateMachine, _enemy, _animBoolName, _liHuo)
     {
     }
 
@@ -31,9 +36,9 @@ public class LiHuoMoveState : LiHuoGroundState
             stateMachine.ChangeState(liHuo.battleState);
         }
 
-        if (liHuo.facingDir != liHuo.RelativePosition())
+/*        if (liHuo.facingDir != liHuo.RelativePosition())
         {
             stateMachine.ChangeState(liHuo.idleState);
-        }
+        }*/
     }
 }
