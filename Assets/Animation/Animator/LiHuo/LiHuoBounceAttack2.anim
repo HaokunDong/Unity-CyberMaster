@@ -91,7 +91,7 @@ AnimationClip:
   - time: 0
     functionName: PlaySFX
     data: 
-    objectReferenceParameter: {fileID: 8300000, guid: a331ca993ce50c449a2a18a1dc212e6d, type: 3}
+    objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
