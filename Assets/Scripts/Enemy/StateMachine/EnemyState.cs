@@ -14,7 +14,6 @@ public class EnemyState
 
     protected float stateTimer;
     protected bool triggerCalled;
-    protected bool PreprocessTriggerCalled;
 
     protected int bounceAttackCounter;
 
@@ -37,7 +36,6 @@ public class EnemyState
     {
         enemy.animator.SetBool(animBoolName, true);
         rb = enemy.rb;
-        PreprocessTriggerCalled = false;
         triggerCalled = false;
     }
 
@@ -53,10 +51,5 @@ public class EnemyState
     public virtual void OnHit(Entity from)
     {
 
-    }
-
-    public virtual void AnimationPreprocessTrigger()
-    {
-        PreprocessTriggerCalled = true;
     }
 }

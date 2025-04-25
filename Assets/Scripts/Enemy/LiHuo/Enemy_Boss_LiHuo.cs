@@ -6,7 +6,6 @@ using BehaviourTrees;
 public class Enemy_Boss_LiHuo : Enemy
 {
     public Player player;
-    //private BTNode behaviourTree;
 
     //public bool bossFightBegun;
 
@@ -15,6 +14,7 @@ public class Enemy_Boss_LiHuo : Enemy
     public LiHuoIdleState idleState { get; private set; }
     public LiHuoMoveState moveState { get; private set; }
     public LiHuoBattleState battleState { get; private set; }
+    public LiHuoCDState cdState { get; private set; }
     public LiHuoPrimaryAttackState primaryAttackState { get; private set; }
     public LiHuoBounceAttackState bounceAttackState { get; private set; }
 
@@ -27,10 +27,9 @@ public class Enemy_Boss_LiHuo : Enemy
         idleState = new LiHuoIdleState(stateMachine, this, "Idle", this);
         moveState = new LiHuoMoveState(stateMachine, this, "Move", this);
         battleState = new LiHuoBattleState(stateMachine, this, "Idle", this);
+        cdState = new LiHuoCDState(stateMachine, this, "Idle", this);
         primaryAttackState = new LiHuoPrimaryAttackState(stateMachine, this, "Attack", this);
         bounceAttackState = new LiHuoBounceAttackState(stateMachine, this, "BounceAttack", this);
-
-        //BuildLihuoBehaviourTree();
     }
 
 
@@ -38,7 +37,7 @@ public class Enemy_Boss_LiHuo : Enemy
     {
         base.Start();
 
-        this.moveSpeed = base.moveSpeed * 1.5f;
+        moveSpeed = moveSpeed * 1.5f;
 
         Flip();
 
@@ -49,14 +48,12 @@ public class Enemy_Boss_LiHuo : Enemy
     protected override void Update()
     {
         base.Update();
-
-        //behaviourTree.Execute();
     }
 
     public override void HitTarget(Entity from)
     {
         base.HitTarget(from);
-        stateMachine.currentState.OnHit(from);
+        //stateMachine.currentState.OnHit(from);
         SetMovement(player.attackForce[player.attackCount] * player.facingDir, rb.velocity.y);
 
     }
@@ -66,23 +63,6 @@ public class Enemy_Boss_LiHuo : Enemy
         base.OnDrawGizmos();
         Gizmos.DrawWireSphere(attackCheck[attackCount].position, attackCheckRadius[attackCount]);
     }
-
-    /*public void BuildLihuoBehaviourTree()
-    {
-        behaviourTree = new Selector(
-            new Sequencer(
-                new ConditionNode(() => IsPlayerInAttackRange()),
-                new ActionNode(() => stateMachine.ChangeState(primaryAttackState))
-                ),
-
-            new Sequencer(
-                new ConditionNode(() => IsPlayerInViewRange()),
-                new ActionNode(() => stateMachine.ChangeState(moveState))
-                ),
-
-            new ActionNode(() => stateMachine.ChangeState(idleState))
-            );
-    }*/
 
     public bool IsPlayerInAttackRange()
     {

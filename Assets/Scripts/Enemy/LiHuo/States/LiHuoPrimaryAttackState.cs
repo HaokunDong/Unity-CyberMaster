@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LiHuoPrimaryAttackState : EnemyState
 {
-    private Enemy_Boss_LiHuo liHuo;
+    protected Enemy_Boss_LiHuo liHuo;
 
     protected int comboCounter;
     protected float lastTimeAttacked;
@@ -52,14 +52,16 @@ public class LiHuoPrimaryAttackState : EnemyState
             liHuo.SetZeroVelocity();
         }
 
-        if (PreprocessTriggerCalled)
-        {
-            stateMachine.ChangeState(liHuo.battleState);
-        }
-
         if (triggerCalled)
         {
-            stateMachine.ChangeState(liHuo.idleState);
+            if(comboCounter == 2)
+            {
+                stateMachine.ChangeState(liHuo.cdState);
+            }
+            else
+            {
+                stateMachine.ChangeState(liHuo.battleState);
+            }
         }
     }
 }

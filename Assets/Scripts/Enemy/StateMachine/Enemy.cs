@@ -45,6 +45,13 @@ public class Enemy : Entity
         stateMachine.currentState.Update();
     }
 
+    public override void HitTarget(Entity from)
+    {
+        base.HitTarget(from);
+        stateMachine.currentState.OnHit(from);
+        PlayerManager.Ins.player.attackLimitation++;
+    }
+
     public virtual bool IsPlayerExist()
     {
         if (playerTrans != null)
@@ -106,5 +113,4 @@ public class Enemy : Entity
 
     public void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();
 
-    public void PreProcessTrigger() => stateMachine.currentState.AnimationPreprocessTrigger();
 }

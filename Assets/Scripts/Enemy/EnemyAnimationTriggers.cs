@@ -14,11 +14,6 @@ public class EnemyAnimationTriggers : MonoBehaviour
         enemy.AnimationFinishTrigger();
     }
 
-    private void PreProcessTrigger()
-    {
-        enemy.PreProcessTrigger();
-    }
-
     private void AttackTrigger()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll

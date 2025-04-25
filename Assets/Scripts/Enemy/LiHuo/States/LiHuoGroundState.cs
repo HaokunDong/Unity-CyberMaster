@@ -26,25 +26,6 @@ public class LiHuoGroundState : EnemyState
     {
         base.Update();
 
-        
     }
 
-    public override void OnHit(Entity from)
-    {
-        base.OnHit(from);
-
-        /*if (player.canBeBouncedAttack)              TODO
-        {
-            stateMachine.ChangeState(liHuo.bounceAttackState);
-        }*/
-
-        //Play the HitEffect and sound effect clips
-        HitEffectController.Create((from.transform.position + enemy.transform.position) / 2f, new HitEffectInfo() { type = HitEffectType.BlockHit });
-        if (from is Player)
-        {
-            Player p = from as Player;
-            p.info.life = Mathf.Clamp(p.info.life + GlobalRef.Ins.cfg.playerIncreaseLife_attack, 0, 100);
-            p.RefreshInfoState();
-        }
-    }
 }

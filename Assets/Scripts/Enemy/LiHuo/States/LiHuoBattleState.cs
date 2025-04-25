@@ -5,7 +5,7 @@ using BehaviourTrees;
 
 public class LiHuoBattleState : EnemyState
 {
-    private Enemy_Boss_LiHuo liHuo;
+    protected Enemy_Boss_LiHuo liHuo;
     public LiHuoBattleState(EnemyStateMachine _stateMachine, Enemy _enemy, string _animBoolName, Enemy_Boss_LiHuo _liHuo)
         : base(_stateMachine, _enemy, _animBoolName)
     {
@@ -29,26 +29,8 @@ public class LiHuoBattleState : EnemyState
     {
         base.Update();
 
-        Debug.Log("battle");
-
         behaviourTree.Execute();
 
-        /*if (enemy.RelativeDistance() < enemy.attackDistance)
-        {
-            if (enemy.CanAttack())
-            {
-                stateMachine.ChangeState(liHuo.primaryAttackState);
-            }
-        }
-        else
-        {
-            stateMachine.ChangeState(liHuo.idleState);
-        }
-
-        if (liHuo.facingDir != liHuo.RelativePosition())
-        {
-            stateMachine.ChangeState(liHuo.idleState);
-        }*/
     }
 
     public void BuildLihuoBehaviourTree()

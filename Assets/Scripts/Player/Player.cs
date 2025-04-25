@@ -9,6 +9,7 @@ public class Player : Entity
 
     [Header("Attack Details")]
     public int attackCount;
+    public int attackLimitation = 0;//Limit the attack combo count.
     public Vector2[] attackMovement;
     public float[] attackForce;
     public float chargeAttackMovement;
@@ -45,12 +46,10 @@ public class Player : Entity
     public PlayerPostureMoveState postureMoveState { get; private set; }
     public PlayerBounceAttackState bounceAttackState { get; private set; }
     public PlayerBeAttackedState beAttackedState { get; private set; }
-
+    public PlayerBeStunnedState beStunnedState { get; private set; }
     public PlayerPrimaryAttackState primaryAttackState { get; private set; }
     public PlayerChargeAttackState chargeAttackState { get; private set; }
     #endregion
-
-    //public Animator animator { get; private set; }
 
     protected override void Awake()
     {
@@ -70,6 +69,7 @@ public class Player : Entity
         postureMoveState = new PlayerPostureMoveState(stateMachine, this, "PostureMove");
         bounceAttackState = new PlayerBounceAttackState(stateMachine, this, "BounceAttack");
         beAttackedState = new PlayerBeAttackedState(stateMachine, this, "BeAttacked");
+        beStunnedState = new PlayerBeStunnedState(stateMachine, this, "BeStunned");
 
         primaryAttackState = new PlayerPrimaryAttackState(stateMachine, this, "Attack");
         chargeAttackState = new PlayerChargeAttackState(stateMachine, this, "ChargeAttack");
@@ -78,9 +78,6 @@ public class Player : Entity
     protected override void Start()
     {
         base.Start();
-        //animator = GetComponentInChildren<Animator>();
-
-        //liHuo = EnemyManager.Ins.liHuo;
 
         stateMachine.Initialize(idleState);
         BarInfo lifeInfo = new BarInfo()

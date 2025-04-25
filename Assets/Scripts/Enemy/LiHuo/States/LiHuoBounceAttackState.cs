@@ -33,10 +33,10 @@ public class LiHuoBounceAttackState : EnemyState
     {
         base.Update();
 
-        /*if (triggerCalled)
+        if (triggerCalled)
         {
-            stateMachine.ChangeState(liHuo.idleState);
-        }*/
+            stateMachine.ChangeState(liHuo.cdState);
+        }
     }
 
 }

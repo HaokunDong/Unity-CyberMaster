@@ -73,6 +73,7 @@ public class PlayerState
             player.FlipController(player.RelativePosition());
         }
         stateMachine.ChangeState(player.beAttackedState);
+
     }
 
 

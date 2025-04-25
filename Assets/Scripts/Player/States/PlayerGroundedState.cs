@@ -30,7 +30,15 @@ public class PlayerGroundedState : PlayerState
 
         if (Input.GetKey(KeyCode.J))
         {
-            stateMachine.ChangeState(player.primaryAttackState);
+            if (player.attackLimitation >= 10)
+            {
+                player.attackLimitation = 0;
+                stateMachine.ChangeState(player.beStunnedState);
+            }
+            else
+            {
+                stateMachine.ChangeState(player.primaryAttackState);
+            }
         }
 
         if (Input.GetKey(KeyCode.U))
