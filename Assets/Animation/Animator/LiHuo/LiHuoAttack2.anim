@@ -237,7 +237,7 @@ AnimationClip:
   - time: 0.84615386
     functionName: PlaySFX
     data: 
-    objectReferenceParameter: {fileID: 8300000, guid: 3dba11f6ecb8e584da85f8c8d04bfdac, type: 3}
+    objectReferenceParameter: {fileID: 8300000, guid: e371e3d6d510f974f9dc3779bbbaf6c2, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
@@ -262,10 +262,10 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.1538463
+  - time: 1.1538461
     functionName: PlaySFX
     data: 
-    objectReferenceParameter: {fileID: 8300000, guid: 3dba11f6ecb8e584da85f8c8d04bfdac, type: 3}
+    objectReferenceParameter: {fileID: 8300000, guid: e371e3d6d510f974f9dc3779bbbaf6c2, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
@@ -293,7 +293,7 @@ AnimationClip:
   - time: 1.6923077
     functionName: PlaySFX
     data: 
-    objectReferenceParameter: {fileID: 8300000, guid: 3dba11f6ecb8e584da85f8c8d04bfdac, type: 3}
+    objectReferenceParameter: {fileID: 8300000, guid: 8c79e581ae8537a43a869c359591c1c2, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
@@ -321,7 +321,7 @@ AnimationClip:
   - time: 2.3076923
     functionName: PlaySFX
     data: 
-    objectReferenceParameter: {fileID: 8300000, guid: 3dba11f6ecb8e584da85f8c8d04bfdac, type: 3}
+    objectReferenceParameter: {fileID: 8300000, guid: e371e3d6d510f974f9dc3779bbbaf6c2, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
