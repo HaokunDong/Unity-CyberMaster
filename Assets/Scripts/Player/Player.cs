@@ -80,20 +80,17 @@ public class Player : Entity
         base.Start();
 
         stateMachine.Initialize(idleState);
-        BarInfo lifeInfo = new BarInfo()
-        {
-            title = "刃势",
-            segments = new List<SegmentInfo>(){
-                new SegmentInfo() { weight = 1, color = Color.red, text = "竭刃" },
-                new SegmentInfo() { weight = 1, color = Color.green , text = "盈刃" },
-            }
-        };
-        this.lifeBar.SetInfo(lifeInfo);
         this.RefreshInfoState();
+        lifeBar.On(BarComEvent.MAX_ARRIVE, PlayerWin);
+        lifeBar.On(BarComEvent.MIN_ARRIVE, PlayerLose);
     }
-    public void EnterRoom()
+    void PlayerWin()
     {
-        GameManager.Ins.Send(GameEvent.OnPlayerEnter, this);
+        Debug.Log("Player Win!");
+    }
+    void PlayerLose()
+    {
+        Debug.Log("Player Lose!");
     }
 
     protected override void Update()
@@ -176,7 +173,7 @@ public class Player : Entity
     public void ChargeAttackMove() => stateMachine.currentState.AnimationEventTrigger();
     public void RefreshInfoState()
     {
-        this.lifeBar.t = info.life / 100;
+        this.lifeBar.t = (info.life - 50) / 50;
     }
 
 }

@@ -32,7 +32,6 @@ public class PlayerGroundedState : PlayerState
         {
             if (player.attackLimitation >= 10)
             {
-                player.attackLimitation = 0;
                 stateMachine.ChangeState(player.beStunnedState);
             }
             else

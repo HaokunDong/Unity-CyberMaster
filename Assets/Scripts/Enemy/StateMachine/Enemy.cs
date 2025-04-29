@@ -49,7 +49,6 @@ public class Enemy : Entity
     {
         base.HitTarget(from);
         stateMachine.currentState.OnHit(from);
-        PlayerManager.Ins.player.attackLimitation++;
     }
 
     public virtual bool IsPlayerExist()

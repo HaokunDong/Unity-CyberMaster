@@ -50,6 +50,6 @@ public class EnemyState
     }
     public virtual void OnHit(Entity from)
     {
-
+        PlayerManager.Ins.player.attackLimitation++;
     }
 }

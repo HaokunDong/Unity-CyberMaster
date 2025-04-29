@@ -1,55 +1,75 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+public static class BarComEvent
+{
+    public static readonly string MIN_ARRIVE = "MIN_ARRIVE";
+    public static readonly string MAX_ARRIVE = "MAX_ARRIVE";
+    public static readonly string ZERO = "ZERO";
+}
 public class BarCom : MonoBehaviour
 {
-    public BarInfo info;
-    public RectTransform bottom;
-    public RectTransform points;
-    public Text title;
-    public Transform segmentFolder;
-    public GameObject segmentPrefab;
-    private List<SegmentCom> segmentComs = new List<SegmentCom>();
+    public RectTransform floatPoint;
+    public RectTransform leftMask;
+    public RectTransform rightMask;
+    public RectTransform bar;
+    public GameObject changePrefab;
+
+    public float _t = 0;
     public float t
     {
-        get => info.point_t;
+        get => _t;
         set
         {
-            info.point_t = value;
-            points.anchoredPosition = new Vector2(t * bottom.sizeDelta.x, 0);
-        }
-    }
-    public void SetInfo(BarInfo info)
-    {
-        this.info = info;
-        Refresh();
-    }
-    public void Refresh()
-    {
-        float total = info.allWei;
-        float left = 0;
-        List<SegmentCom> list = new List<SegmentCom>();
-        for (int i = 0; i < info.segments.Count; i++)
-        {
-            if (i >= segmentComs.Count)
+            bool flag = value != _t;
+            float diff = value - _t;
+            _t = Mathf.Clamp(value, -1f, 1f);
+            float width = this.GetComponent<RectTransform>().rect.width;
+            if (flag)
             {
-                SegmentCom c = segmentPrefab.OPGet().GetComponent<SegmentCom>();
-                segmentComs.Add(c);
-                c.transform.SetParent(segmentFolder);
+                float posX = t * (width / 2);
+                bar.anchoredPosition = new Vector2(posX, 0);
+                floatPoint.anchoredPosition = new Vector2(posX, 0);
+                if (diff > 0)
+                {
+                    GameObject go = changePrefab.OPGet();
+                    RectTransform rt = go.GetComponent<RectTransform>();
+                    go.transform.SetParent(leftMask, false);
+                    float changeWid = rt.rect.width;
+                    rt.localScale = Vector3.one;
+                    rt.anchoredPosition = new Vector2(0, 0);
+                    rt.DOAnchorPos(new Vector2(changeWid, 0), 0.5f).onComplete = () =>
+                    {
+                        go.OPPush();
+                    };
+                    if (t >= 1)
+                    {
+                        this.Send(BarComEvent.MAX_ARRIVE);
+                    }
+                }
+                else if (diff < 0)
+                {
+                    GameObject go = changePrefab.OPGet();
+                    RectTransform rt = go.GetComponent<RectTransform>();
+                    go.transform.SetParent(rightMask, false);
+                    float changeWid = rt.rect.width;
+                    rt.localScale = new Vector3(-1, 1, 1);
+                    rt.anchoredPosition = new Vector2(-changeWid, 0);
+                    rt.DOAnchorPos(new Vector2(-changeWid * 2, 0), 0.5f).onComplete = () =>
+                    {
+                        go.OPPush();
+                    };
+                    if (t <= -1)
+                    {
+                        this.Send(BarComEvent.MIN_ARRIVE);
+                    }
+                }
+                else
+                {
+                    this.Send(BarComEvent.ZERO);
+                }
             }
-            SegmentCom com = segmentComs[i];
-            RectTransform rt = com.GetComponent<RectTransform>();
-            rt.anchoredPosition = new Vector2(left, 0);
-            rt.sizeDelta = new Vector2(info.segments[i].weight / total * bottom.sizeDelta.x, bottom.sizeDelta.y);
-            rt.localScale = Vector3.one;
-            left += rt.sizeDelta.x;
-            com.SetInfo(info.segments[i]);
-            list.Add(com);
         }
-        for (int i = info.segments.Count; i < segmentComs.Count; i++)
-        {
-            segmentComs[i].gameObject.OPPush();
-        }
-        segmentComs = list;
     }
 }
