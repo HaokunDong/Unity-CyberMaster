@@ -27,10 +27,10 @@ public class LiHuoCDState : EnemyState
     {
         base.Update();
 
-        if (stateTimer < 0)
-        {
-            stateMachine.ChangeState(liHuo.battleState);
-        }
+        // if (stateTimer < 0)
+        // {
+        //     stateMachine.ChangeState(liHuo.battleState);
+        // }
     }
 
     public override void OnHit(Entity from)

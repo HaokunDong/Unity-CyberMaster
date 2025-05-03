@@ -41,7 +41,7 @@ public class Enemy_Boss_LiHuo : Enemy
 
         Flip();
 
-        stateMachine.Initialize(idleState);
+        stateMachine.Initialize(cdState);
 
     }
 

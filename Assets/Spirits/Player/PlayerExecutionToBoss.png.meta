@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -101,9 +101,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1080
-        width: 360
-        height: 180
+        y: 1536
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d8a13b42ec28f234dbabae3a2716b357
-      internalID: -1185190596
+      spriteID: 89cf75345f7c49944a6858d9b22c1b0b
+      internalID: 2009999554
       vertices: []
       indices: 
       edges: []
@@ -121,10 +121,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_1
       rect:
         serializedVersion: 2
-        x: 360
-        y: 1080
-        width: 360
-        height: 180
+        x: 256
+        y: 1536
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c973a18a0ba1a7d4bbe239881ac220dc
-      internalID: 411001098
+      spriteID: 98956a80343c3a147ae6874f09df00da
+      internalID: 1659701333
       vertices: []
       indices: 
       edges: []
@@ -142,10 +142,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_2
       rect:
         serializedVersion: 2
-        x: 720
-        y: 1080
-        width: 360
-        height: 180
+        x: 512
+        y: 1536
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d33becdca7cdac54abf6864929e88d0c
-      internalID: -834111093
+      spriteID: 7de870481d9804a4d9ce8f0db957cef1
+      internalID: 912661816
       vertices: []
       indices: 
       edges: []
@@ -163,10 +163,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_3
       rect:
         serializedVersion: 2
-        x: 1080
-        y: 1080
-        width: 360
-        height: 180
+        x: 768
+        y: 1536
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0726835d3ac84145bf06f07ec1c6464
-      internalID: -987351885
+      spriteID: 8515de0f0f853294ea28dcf25bcc40d9
+      internalID: 1515965755
       vertices: []
       indices: 
       edges: []
@@ -184,10 +184,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_4
       rect:
         serializedVersion: 2
-        x: 1440
-        y: 1080
-        width: 360
-        height: 180
+        x: 1280
+        y: 1536
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,8 +195,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91412cd0ee60b6843bf080f0f49e0bdb
-      internalID: 2074968355
+      spriteID: 616ceb987bf2ae94fa56fa71b97979c6
+      internalID: 1567357929
       vertices: []
       indices: 
       edges: []
@@ -205,10 +205,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_5
       rect:
         serializedVersion: 2
-        x: 1800
-        y: 1080
-        width: 360
-        height: 180
+        x: 1536
+        y: 1536
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,8 +216,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 644897cc4c8f8e4419180b3bb32ed50a
-      internalID: 1695813004
+      spriteID: f2f29cefdd682704fbe10c7d066fb291
+      internalID: 1171213861
       vertices: []
       indices: 
       edges: []
@@ -226,10 +226,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_6
       rect:
         serializedVersion: 2
-        x: 2160
-        y: 1080
-        width: 360
-        height: 180
+        x: 0
+        y: 1280
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,8 +237,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 580561d757a08f54e859908755f65efc
-      internalID: 1097802103
+      spriteID: c3b77b067fe4cc447ba18dd7f5a6c6d6
+      internalID: -912528969
       vertices: []
       indices: 
       edges: []
@@ -247,10 +247,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_7
       rect:
         serializedVersion: 2
-        x: 360
-        y: 900
-        width: 360
-        height: 180
+        x: 256
+        y: 1280
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -258,8 +258,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc3ce9e81cba9e34bb197ec6151076fa
-      internalID: -1391795002
+      spriteID: 222fdd4a534bdc84fbe1196b955bfd27
+      internalID: 1086584853
       vertices: []
       indices: 
       edges: []
@@ -268,10 +268,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_8
       rect:
         serializedVersion: 2
-        x: 720
-        y: 900
-        width: 360
-        height: 180
+        x: 512
+        y: 1280
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -279,8 +279,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1c0af4f1100380f4f933891406923687
-      internalID: -471241849
+      spriteID: 20f37e6334a225544b8bd668e001a0ca
+      internalID: 336304243
       vertices: []
       indices: 
       edges: []
@@ -289,10 +289,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_9
       rect:
         serializedVersion: 2
-        x: 1080
-        y: 900
-        width: 360
-        height: 180
+        x: 768
+        y: 1280
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -300,8 +300,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f5bcad5be898a04f827127464a5acb0
-      internalID: -1385294363
+      spriteID: 1dc35dc483576d14897d688414a55e2b
+      internalID: 471183716
       vertices: []
       indices: 
       edges: []
@@ -310,10 +310,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_10
       rect:
         serializedVersion: 2
-        x: 1440
-        y: 900
-        width: 360
-        height: 180
+        x: 1024
+        y: 1280
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -321,8 +321,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f9cbee12233e23a43bb04c2ba82a5a2f
-      internalID: 227382540
+      spriteID: b4a37d1baba294447bd561b8720f1d30
+      internalID: -2122244439
       vertices: []
       indices: 
       edges: []
@@ -331,10 +331,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_11
       rect:
         serializedVersion: 2
-        x: 1800
-        y: 900
-        width: 360
-        height: 180
+        x: 1280
+        y: 1280
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -342,8 +342,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8cf026c08d8db84499ad5f5da081d4f3
-      internalID: 1450859807
+      spriteID: c21228f9df0fe2e48858d1f87701649d
+      internalID: 424237814
       vertices: []
       indices: 
       edges: []
@@ -352,10 +352,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_12
       rect:
         serializedVersion: 2
-        x: 2160
-        y: 900
-        width: 360
-        height: 180
+        x: 1536
+        y: 1280
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -363,8 +363,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b023833ee9f439b4999f76039e99f876
-      internalID: 545209245
+      spriteID: 569ab57e0bd39334cbe7f2fb04e5c513
+      internalID: -1332782419
       vertices: []
       indices: 
       edges: []
@@ -374,9 +374,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 720
-        width: 360
-        height: 180
+        y: 1024
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -384,8 +384,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 66bda3963f28dc84ab296c3aa357f449
-      internalID: -289368419
+      spriteID: 8866dc1e8e50741418716504110f5179
+      internalID: 32331292
       vertices: []
       indices: 
       edges: []
@@ -394,10 +394,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_14
       rect:
         serializedVersion: 2
-        x: 360
-        y: 720
-        width: 360
-        height: 180
+        x: 256
+        y: 1024
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -405,8 +405,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 857ffe79877d79440a1e48eace646a18
-      internalID: -1840754740
+      spriteID: 7e6002a55a392dd4c9483592eac559b8
+      internalID: 73141884
       vertices: []
       indices: 
       edges: []
@@ -415,10 +415,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_15
       rect:
         serializedVersion: 2
-        x: 720
-        y: 720
-        width: 360
-        height: 180
+        x: 512
+        y: 1024
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -426,8 +426,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6f3721dbb7a45e409bffc3b3f66fd1c
-      internalID: -1312804613
+      spriteID: ed8792c41b164fc4586e23ab50031f53
+      internalID: -2124218829
       vertices: []
       indices: 
       edges: []
@@ -436,10 +436,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_16
       rect:
         serializedVersion: 2
-        x: 1080
-        y: 720
-        width: 360
-        height: 180
+        x: 768
+        y: 1024
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -447,8 +447,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0e524952fa016524f8fb3cd246fba578
-      internalID: 292392056
+      spriteID: 4383c9d27365c914caf604dbcfb74094
+      internalID: -2086534941
       vertices: []
       indices: 
       edges: []
@@ -457,10 +457,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_17
       rect:
         serializedVersion: 2
-        x: 1440
-        y: 720
-        width: 360
-        height: 180
+        x: 1024
+        y: 1024
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -468,8 +468,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 31d6b9848a0ccca45aa5a388fba93c6f
-      internalID: 62092609
+      spriteID: 4c6b600b433e32d48a9028240ccad315
+      internalID: 675500936
       vertices: []
       indices: 
       edges: []
@@ -478,10 +478,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_18
       rect:
         serializedVersion: 2
-        x: 1800
-        y: 720
-        width: 360
-        height: 180
+        x: 1280
+        y: 1024
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -489,8 +489,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 785e85255f4716642b3f6c23b2482ee0
-      internalID: 1645225791
+      spriteID: 8ac0c3961e335244c9f24e4dcea96f67
+      internalID: 475149785
       vertices: []
       indices: 
       edges: []
@@ -499,10 +499,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_19
       rect:
         serializedVersion: 2
-        x: 2160
-        y: 720
-        width: 360
-        height: 180
+        x: 1536
+        y: 1024
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -510,8 +510,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0e393b9569df96429583aea2783bd1f
-      internalID: 1635416423
+      spriteID: 3c4e909d33575a64a9e1db80cbd75510
+      internalID: 2004120314
       vertices: []
       indices: 
       edges: []
@@ -521,9 +521,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 540
-        width: 360
-        height: 180
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -531,8 +531,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 505f978426442d64f884afdf1388de3c
-      internalID: -2092718183
+      spriteID: 22eb6e2a9bd8f684dba4809444e7bcec
+      internalID: 23230230
       vertices: []
       indices: 
       edges: []
@@ -541,10 +541,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_21
       rect:
         serializedVersion: 2
-        x: 360
-        y: 540
-        width: 360
-        height: 180
+        x: 256
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -552,8 +552,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 33d7a2eaddc5e24489961a548aaefb20
-      internalID: 900521146
+      spriteID: d5ab621b4b8be86419a4bcbbbd5c6f6e
+      internalID: 1490837763
       vertices: []
       indices: 
       edges: []
@@ -562,10 +562,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_22
       rect:
         serializedVersion: 2
-        x: 720
-        y: 540
-        width: 360
-        height: 180
+        x: 512
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -573,8 +573,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e9066482be3d9f342ae4033ca5e0d57e
-      internalID: -1679288331
+      spriteID: 33755a63f04030047b342da9fcf71674
+      internalID: 1457994252
       vertices: []
       indices: 
       edges: []
@@ -583,10 +583,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_23
       rect:
         serializedVersion: 2
-        x: 1080
-        y: 540
-        width: 360
-        height: 180
+        x: 768
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -594,8 +594,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f07b8407edac2e43ad6dd37d58ca80b
-      internalID: -427550304
+      spriteID: c44f40a0232b84e4da65580bfdf8a4dd
+      internalID: -273788896
       vertices: []
       indices: 
       edges: []
@@ -604,10 +604,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_24
       rect:
         serializedVersion: 2
-        x: 1440
-        y: 540
-        width: 360
-        height: 180
+        x: 1024
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -615,8 +615,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b46609b4a4507b547af41d28bdeb00af
-      internalID: 318618101
+      spriteID: 8ddb41f3f8fdaf342b0ea09da445190f
+      internalID: 827972655
       vertices: []
       indices: 
       edges: []
@@ -625,10 +625,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_25
       rect:
         serializedVersion: 2
-        x: 1800
-        y: 540
-        width: 360
-        height: 180
+        x: 1280
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -636,8 +636,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1bcbba506032299488307cc722447a14
-      internalID: -899850903
+      spriteID: c2fe7f34f9d23bb4fae476acfc0436d9
+      internalID: 293212551
       vertices: []
       indices: 
       edges: []
@@ -646,10 +646,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_26
       rect:
         serializedVersion: 2
-        x: 2160
-        y: 540
-        width: 360
-        height: 180
+        x: 1536
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -657,8 +657,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 269ac4f6f871a2a49b8cecf7578d858d
-      internalID: -231908771
+      spriteID: ba955f8d40ef07a4a96a97a591edb2f5
+      internalID: -617232344
       vertices: []
       indices: 
       edges: []
@@ -668,9 +668,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 360
-        width: 360
-        height: 180
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -678,8 +678,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9ef7a67d8a8745541981bd9b4165f262
-      internalID: -1138754500
+      spriteID: 638a701934cd42e47a12a103f088034e
+      internalID: 20212713
       vertices: []
       indices: 
       edges: []
@@ -688,10 +688,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_28
       rect:
         serializedVersion: 2
-        x: 360
-        y: 360
-        width: 360
-        height: 180
+        x: 256
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -699,8 +699,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c83e75c80998704a8bba42b7fa2226c
-      internalID: -1605216555
+      spriteID: 03cfd859f4d74bd4a898f20ea5872f42
+      internalID: -80501441
       vertices: []
       indices: 
       edges: []
@@ -709,10 +709,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_29
       rect:
         serializedVersion: 2
-        x: 720
-        y: 360
-        width: 360
-        height: 180
+        x: 512
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -720,8 +720,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cdaec9a0124bb5d4e8c371fa64a76b86
-      internalID: 236627901
+      spriteID: 70d3ec88ddd5e8c4685dbe3f7f074379
+      internalID: -1598072609
       vertices: []
       indices: 
       edges: []
@@ -730,10 +730,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_30
       rect:
         serializedVersion: 2
-        x: 1080
-        y: 360
-        width: 360
-        height: 180
+        x: 768
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -741,8 +741,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 448b96decb512094ab75ad49a188af03
-      internalID: -1490115728
+      spriteID: 4490e4b0aa5ba984fb2d33802ddfb06e
+      internalID: -278270217
       vertices: []
       indices: 
       edges: []
@@ -751,10 +751,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_31
       rect:
         serializedVersion: 2
-        x: 1440
-        y: 360
-        width: 360
-        height: 180
+        x: 1024
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -762,8 +762,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26952d7fedaef9a4592bd1d9788dc07d
-      internalID: 538732362
+      spriteID: 66214ebb719bdf44d80bf2b6b1c72158
+      internalID: 354743507
       vertices: []
       indices: 
       edges: []
@@ -772,10 +772,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_32
       rect:
         serializedVersion: 2
-        x: 1800
-        y: 360
-        width: 360
-        height: 180
+        x: 1280
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -783,8 +783,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cbfc771b082aa2142be7200075bfad63
-      internalID: 1678009345
+      spriteID: 4e64e6677af6f914d8e460c349f879f0
+      internalID: -361008058
       vertices: []
       indices: 
       edges: []
@@ -793,10 +793,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_33
       rect:
         serializedVersion: 2
-        x: 2160
-        y: 360
-        width: 360
-        height: 180
+        x: 1536
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -804,8 +804,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8cdc1de02ecc5544ca908277b6df44ba
-      internalID: -116724867
+      spriteID: 24210088880b60d46bbc0a107f1fc38a
+      internalID: -1923338085
       vertices: []
       indices: 
       edges: []
@@ -815,9 +815,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 180
-        width: 360
-        height: 180
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -825,8 +825,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d821f97f9dc6be4e82ddece6fe63344
-      internalID: -156966713
+      spriteID: 1df9a9a39ef789b48a95f13d3cd42d56
+      internalID: -1631054177
       vertices: []
       indices: 
       edges: []
@@ -835,10 +835,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_35
       rect:
         serializedVersion: 2
-        x: 360
-        y: 180
-        width: 360
-        height: 180
+        x: 256
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -846,8 +846,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3a537ba01e73f44abc752a16eba79d9
-      internalID: -546763994
+      spriteID: 8dbcd9e1762eddc4fa9c5c37a4cadeab
+      internalID: 683200838
       vertices: []
       indices: 
       edges: []
@@ -856,10 +856,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_36
       rect:
         serializedVersion: 2
-        x: 720
-        y: 180
-        width: 360
-        height: 180
+        x: 512
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -867,8 +867,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1efa6ca19c4edf041bd7d2f2fcab4015
-      internalID: -1121128082
+      spriteID: 174a3e25aeba16b49922f3a6de6cf766
+      internalID: 1754023079
       vertices: []
       indices: 
       edges: []
@@ -877,10 +877,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_37
       rect:
         serializedVersion: 2
-        x: 1080
-        y: 180
-        width: 360
-        height: 180
+        x: 768
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -888,8 +888,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d69ace3b4b379fb4eb643d8d166b5600
-      internalID: 1474043034
+      spriteID: e5d1e2f6da8f9be49bcab0da52a549e9
+      internalID: -1306347909
       vertices: []
       indices: 
       edges: []
@@ -898,10 +898,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_38
       rect:
         serializedVersion: 2
-        x: 1440
-        y: 180
-        width: 360
-        height: 180
+        x: 1024
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -909,8 +909,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b9298595198a334a8c78b8c79d5f4f3
-      internalID: -139598259
+      spriteID: fbe0894bd2248984c96b05339c92ce55
+      internalID: 1055313307
       vertices: []
       indices: 
       edges: []
@@ -919,10 +919,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_39
       rect:
         serializedVersion: 2
-        x: 1800
-        y: 180
-        width: 360
-        height: 180
+        x: 1280
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -930,8 +930,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 78cd714dd9fc8274abbe64ce5d755381
-      internalID: -1453120783
+      spriteID: 36b25f3d62cca614593fd540a5903b63
+      internalID: 247141762
       vertices: []
       indices: 
       edges: []
@@ -940,10 +940,10 @@ TextureImporter:
       name: PlayerExecutionToBoss_40
       rect:
         serializedVersion: 2
-        x: 2160
-        y: 180
-        width: 360
-        height: 180
+        x: 1536
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -951,8 +951,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7097446dba814349b8adcaef4e5d489
-      internalID: -1253748344
+      spriteID: 075307679b534cd41bff84674d374905
+      internalID: 1774314400
       vertices: []
       indices: 
       edges: []
@@ -963,8 +963,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 360
-        height: 180
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -972,50 +972,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5023b573268011c479c7a0913d8fd73b
-      internalID: 573959619
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerExecutionToBoss_42
-      rect:
-        serializedVersion: 2
-        x: 360
-        y: 0
-        width: 360
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2e288f144c9c3ef4890fd27b667d3e96
-      internalID: 1513177152
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerExecutionToBoss_43
-      rect:
-        serializedVersion: 2
-        x: 720
-        y: 0
-        width: 360
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6b952a790a816754db987bda26ab0b81
-      internalID: 111975581
+      spriteID: 13edfae5abd66c54c9f31820dab575a7
+      internalID: -828192266
       vertices: []
       indices: 
       edges: []
@@ -1031,50 +989,48 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PlayerExecutionToBoss_0: -1185190596
-      PlayerExecutionToBoss_1: 411001098
-      PlayerExecutionToBoss_10: 227382540
-      PlayerExecutionToBoss_11: 1450859807
-      PlayerExecutionToBoss_12: 545209245
-      PlayerExecutionToBoss_13: -289368419
-      PlayerExecutionToBoss_14: -1840754740
-      PlayerExecutionToBoss_15: -1312804613
-      PlayerExecutionToBoss_16: 292392056
-      PlayerExecutionToBoss_17: 62092609
-      PlayerExecutionToBoss_18: 1645225791
-      PlayerExecutionToBoss_19: 1635416423
-      PlayerExecutionToBoss_2: -834111093
-      PlayerExecutionToBoss_20: -2092718183
-      PlayerExecutionToBoss_21: 900521146
-      PlayerExecutionToBoss_22: -1679288331
-      PlayerExecutionToBoss_23: -427550304
-      PlayerExecutionToBoss_24: 318618101
-      PlayerExecutionToBoss_25: -899850903
-      PlayerExecutionToBoss_26: -231908771
-      PlayerExecutionToBoss_27: -1138754500
-      PlayerExecutionToBoss_28: -1605216555
-      PlayerExecutionToBoss_29: 236627901
-      PlayerExecutionToBoss_3: -987351885
-      PlayerExecutionToBoss_30: -1490115728
-      PlayerExecutionToBoss_31: 538732362
-      PlayerExecutionToBoss_32: 1678009345
-      PlayerExecutionToBoss_33: -116724867
-      PlayerExecutionToBoss_34: -156966713
-      PlayerExecutionToBoss_35: -546763994
-      PlayerExecutionToBoss_36: -1121128082
-      PlayerExecutionToBoss_37: 1474043034
-      PlayerExecutionToBoss_38: -139598259
-      PlayerExecutionToBoss_39: -1453120783
-      PlayerExecutionToBoss_4: 2074968355
-      PlayerExecutionToBoss_40: -1253748344
-      PlayerExecutionToBoss_41: 573959619
-      PlayerExecutionToBoss_42: 1513177152
-      PlayerExecutionToBoss_43: 111975581
-      PlayerExecutionToBoss_5: 1695813004
-      PlayerExecutionToBoss_6: 1097802103
-      PlayerExecutionToBoss_7: -1391795002
-      PlayerExecutionToBoss_8: -471241849
-      PlayerExecutionToBoss_9: -1385294363
+      PlayerExecutionToBoss_0: 2009999554
+      PlayerExecutionToBoss_1: 1659701333
+      PlayerExecutionToBoss_10: -2122244439
+      PlayerExecutionToBoss_11: 424237814
+      PlayerExecutionToBoss_12: -1332782419
+      PlayerExecutionToBoss_13: 32331292
+      PlayerExecutionToBoss_14: 73141884
+      PlayerExecutionToBoss_15: -2124218829
+      PlayerExecutionToBoss_16: -2086534941
+      PlayerExecutionToBoss_17: 675500936
+      PlayerExecutionToBoss_18: 475149785
+      PlayerExecutionToBoss_19: 2004120314
+      PlayerExecutionToBoss_2: 912661816
+      PlayerExecutionToBoss_20: 23230230
+      PlayerExecutionToBoss_21: 1490837763
+      PlayerExecutionToBoss_22: 1457994252
+      PlayerExecutionToBoss_23: -273788896
+      PlayerExecutionToBoss_24: 827972655
+      PlayerExecutionToBoss_25: 293212551
+      PlayerExecutionToBoss_26: -617232344
+      PlayerExecutionToBoss_27: 20212713
+      PlayerExecutionToBoss_28: -80501441
+      PlayerExecutionToBoss_29: -1598072609
+      PlayerExecutionToBoss_3: 1515965755
+      PlayerExecutionToBoss_30: -278270217
+      PlayerExecutionToBoss_31: 354743507
+      PlayerExecutionToBoss_32: -361008058
+      PlayerExecutionToBoss_33: -1923338085
+      PlayerExecutionToBoss_34: -1631054177
+      PlayerExecutionToBoss_35: 683200838
+      PlayerExecutionToBoss_36: 1754023079
+      PlayerExecutionToBoss_37: -1306347909
+      PlayerExecutionToBoss_38: 1055313307
+      PlayerExecutionToBoss_39: 247141762
+      PlayerExecutionToBoss_4: 1567357929
+      PlayerExecutionToBoss_40: 1774314400
+      PlayerExecutionToBoss_41: -828192266
+      PlayerExecutionToBoss_5: 1171213861
+      PlayerExecutionToBoss_6: -912528969
+      PlayerExecutionToBoss_7: 1086584853
+      PlayerExecutionToBoss_8: 336304243
+      PlayerExecutionToBoss_9: 471183716
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
