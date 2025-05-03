@@ -45,9 +45,9 @@ public class Enemy : Entity
         stateMachine.currentState.Update();
     }
 
-    public override void HitTarget(Entity from)
+    public override void OnHitFromTarget(Entity from)
     {
-        base.HitTarget(from);
+        base.OnHitFromTarget(from);
         stateMachine.currentState.OnHit(from);
     }
 

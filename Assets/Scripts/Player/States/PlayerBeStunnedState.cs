@@ -11,10 +11,6 @@ public class PlayerBeStunnedState : PlayerState
     public override void Enter()
     {
         base.Enter();
-
-        //EnemyManager.Ins.liHuo.HitTarget(player);
-        
-        player.attackLimitation = 0;
     }
 
     public override void Exit()

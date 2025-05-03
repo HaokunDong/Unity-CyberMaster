@@ -76,5 +76,8 @@ public class PlayerState
 
     }
 
+    public virtual void Hit()
+    {
 
+    }
 }

@@ -20,30 +20,22 @@ public class PlayerAnimationTriggers : MonoBehaviour
         {
             if (hit.GetComponent<Enemy>() != null)
             {
-                hit.GetComponent<Enemy>().HitTarget(player);
+                hit.GetComponent<Enemy>().OnHitFromTarget(player);
+                player.HitTarget();
             }
         }
     }
 
     private void BeStunnedTrigger()
     {
-        /*Collider2D colliders = Physics2D.OverlapCircle(player.attackCheck[1].position, player.attackCheckRadius[1]);
-        if(colliders.GetComponent<Enemy>() != null)
-        {
-            Debug.Log("111111111");
-            colliders.GetComponent<Enemy>().HitTarget(player);
-        }*/
-
         Collider2D[] colliders = Physics2D.OverlapCircleAll
-            (player.attackCheck[0].position, player.attackCheckRadius[0]);
+            (player.attackCheck[player.attackCount].position, player.attackCheckRadius[player.attackCount]);
 
         foreach (var hit in colliders)
         {
-            Debug.Log(hit.gameObject.name);
-            if (hit.GetComponent<Enemy>() != null)  
+            if (hit.GetComponent<Enemy>() != null)
             {
-                Debug.Log("111111111");
-                hit.GetComponent<Enemy>().HitTarget(player);
+                hit.GetComponent<Enemy>().OnHitFromTarget(player);
             }
         }
     }

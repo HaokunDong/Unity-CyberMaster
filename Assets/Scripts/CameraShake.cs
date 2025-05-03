@@ -41,7 +41,7 @@ public class CameraShake : MonoBehaviour
 
     private IEnumerator ShakeCoroutine(float duration, float magnitude)
     {
-        Debug.Log($"[Shake Started] Duration={duration}, Magnitude={magnitude}");
+        //Debug.Log($"[Shake Started] Duration={duration}, Magnitude={magnitude}");
 
         perlin.m_AmplitudeGain = magnitude * 2f;  // 🚀 增大震动强度
         perlin.m_FrequencyGain = 3.0f;  // 🚀 增大震动速度
@@ -57,7 +57,7 @@ public class CameraShake : MonoBehaviour
         perlin.m_AmplitudeGain = 0f;  // 震动结束后恢复
         perlin.m_FrequencyGain = 0f;
         
-        Debug.Log("[Shake Ended]");
+        //Debug.Log("[Shake Ended]");
     }
 
 }

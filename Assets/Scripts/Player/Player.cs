@@ -101,9 +101,17 @@ public class Player : Entity
         SetDodgeDirection();
     }
 
-    public override void HitTarget(Entity from)
+    public override void HitTarget()
     {
-        base.HitTarget(from);
+        base.HitTarget();
+
+        attackLimitation++;
+
+    }
+
+    public override void OnHitFromTarget(Entity from)
+    {
+        base.OnHitFromTarget(from);
 
         if (isInvincible) return;
 
@@ -126,7 +134,7 @@ public class Player : Entity
 
         isBusy = false;
     }
-    public IEnumerator Invincibility()
+    public IEnumerator Invincibility()//Invincible in dodge state 
     {
         isInvincible = true;
         yield return new WaitForSeconds(0.2f);

@@ -28,10 +28,11 @@ public class PlayerGroundedState : PlayerState
             stateMachine.ChangeState(player.dodgeState);
         }
 
-        if (Input.GetKey(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.J))
         {
-            if (player.attackLimitation >= 5)
+            if (IsStunned())
             {
+                player.attackLimitation = 0;
                 stateMachine.ChangeState(player.beStunnedState);
             }
             else
@@ -59,5 +60,20 @@ public class PlayerGroundedState : PlayerState
         {
             stateMachine.ChangeState(player.airState);
         }
+    }
+
+    public bool IsStunned()
+    {
+        Collider2D []colliders = Physics2D.OverlapCircleAll
+            (player.attackCheck[player.attackCount].position, player.attackCheckRadius[player.attackCount]);
+
+        foreach (var hit in colliders)
+        {
+            if (hit.GetComponent<Enemy>() != null && player.attackLimitation >= 1)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

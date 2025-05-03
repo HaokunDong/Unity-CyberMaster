@@ -35,7 +35,7 @@ public class HitEffectController : Singleton<HitEffectController>
                     break;
             }
 
-            Debug.Log($"Triggering Camera Shake: Duration={duration}, Magnitude={magnitude}");
+            //Debug.Log($"Triggering Camera Shake: Duration={duration}, Magnitude={magnitude}");
             CameraShake.Instance.Shake(duration, magnitude);
         }
         else

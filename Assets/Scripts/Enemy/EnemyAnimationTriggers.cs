@@ -23,7 +23,8 @@ public class EnemyAnimationTriggers : MonoBehaviour
         {
             if (hit.GetComponent<Player>() != null)
             {
-                hit.GetComponent<Player>().HitTarget(enemy);
+                hit.GetComponent<Player>().OnHitFromTarget(enemy);
+                enemy.HitTarget();
             }
         }
     }

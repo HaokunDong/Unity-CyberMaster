@@ -53,9 +53,14 @@ public class Entity : MonoBehaviour
         canBeBouncedImage.SetActive(false);
     }
 
-    public virtual void HitTarget(Entity from)
+    public virtual void HitTarget()
     {
-        //Debug.Log(gameObject.name + "hit");
+        
+    }
+
+    public virtual void OnHitFromTarget(Entity from)
+    {
+
     }
 
     #region Velocity

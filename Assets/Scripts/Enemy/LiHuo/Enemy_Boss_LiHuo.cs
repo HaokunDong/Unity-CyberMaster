@@ -50,10 +50,9 @@ public class Enemy_Boss_LiHuo : Enemy
         base.Update();
     }
 
-    public override void HitTarget(Entity from)
+    public override void OnHitFromTarget(Entity from)
     {
-        base.HitTarget(from);
-        //stateMachine.currentState.OnHit(from);
+        base.OnHitFromTarget(from);
         SetMovement(player.attackForce[player.attackCount] * player.facingDir, rb.velocity.y);
 
     }
