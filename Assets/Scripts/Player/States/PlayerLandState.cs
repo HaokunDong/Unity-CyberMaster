@@ -22,9 +22,17 @@ public class PlayerLandState : PlayerState
     {
         base.Update();
 
+        float xInput = Input.GetAxisRaw("Horizontal");
+        float xVelocity = xInput * player.moveSpeed;
+        player.SetVelocity(xVelocity, rb.velocity.y); // 保持落地时流畅移动
+
         if (triggerCalled)
         {
-            stateMachine.ChangeState(player.idleState);
+            if (xInput != 0)
+                stateMachine.ChangeState(player.moveState);
+            else
+                stateMachine.ChangeState(player.idleState);
         }
-    }
+}
+
 }

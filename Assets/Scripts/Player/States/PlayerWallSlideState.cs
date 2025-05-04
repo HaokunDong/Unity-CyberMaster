@@ -22,6 +22,7 @@ public class PlayerWallSlideState : PlayerState
 
     public override void Update()
     {
+        
         base.Update();
 
         if (xInput != 0 && player.facingDir == xInput)
@@ -29,7 +30,7 @@ public class PlayerWallSlideState : PlayerState
             stateMachine.ChangeState(player.idleState);
         }
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.K))
         {
             stateMachine.ChangeState(player.wallJumpState);
             return;
