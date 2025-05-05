@@ -85,13 +85,6 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0
-    functionName: PlaySFX
-    data: 
-    objectReferenceParameter: {fileID: 8300000, guid: c8e8704bf697bf7499802220e5fc1d9c, type: 3}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
   - time: 0.26666668
     functionName: AnimationTrigger
     data: 

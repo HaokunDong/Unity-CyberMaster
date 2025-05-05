@@ -92,14 +92,14 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: PlaySFXGrp
+    functionName: PlayMove
     data: 
     objectReferenceParameter: {fileID: 11400000, guid: a308f8e48570acc459744c4620dfdee9, type: 2}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.5
-    functionName: PlaySFXGrp
+    functionName: PlayMove
     data: 
     objectReferenceParameter: {fileID: 11400000, guid: a308f8e48570acc459744c4620dfdee9, type: 2}
     floatParameter: 0

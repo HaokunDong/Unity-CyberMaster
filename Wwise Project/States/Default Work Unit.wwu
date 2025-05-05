@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{3DBB781D-4DC6-4099-9AAA-28ADC5B249F8}" SchemaVersion="110">
+	<States>
+		<WorkUnit Name="Default Work Unit" ID="{3DBB781D-4DC6-4099-9AAA-28ADC5B249F8}" PersistMode="Standalone">
+			<ChildrenList>
+				<StateGroup Name="ENV_Reverb" ID="{9BFF2ED9-745A-4D77-9BDE-C46C6733CE4F}">
+					<PropertyList>
+						<Property Name="DefaultTransitionTime" Type="Real64" Value="0"/>
+					</PropertyList>
+					<ChildrenList>
+						<State Name="None" ID="{D6AFD0AC-C296-4F2E-AD6E-D1749D5020DF}"/>
+						<State Name="BossRoom" ID="{2911B7B5-AE37-4F66-AE32-A6762197F8B4}"/>
+					</ChildrenList>
+					<TransitionList>
+						<Transition>
+							<StartState Name="None" ID="{D6AFD0AC-C296-4F2E-AD6E-D1749D5020DF}"/>
+							<EndState Name="BossRoom" ID="{2911B7B5-AE37-4F66-AE32-A6762197F8B4}"/>
+							<Time>0</Time>
+							<IsShared>false</IsShared>
+						</Transition>
+						<Transition>
+							<StartState Name="BossRoom" ID="{2911B7B5-AE37-4F66-AE32-A6762197F8B4}"/>
+							<EndState Name="None" ID="{D6AFD0AC-C296-4F2E-AD6E-D1749D5020DF}"/>
+							<Time>0.5</Time>
+							<IsShared>false</IsShared>
+						</Transition>
+					</TransitionList>
+				</StateGroup>
+			</ChildrenList>
+		</WorkUnit>
+	</States>
+</WwiseDocument>

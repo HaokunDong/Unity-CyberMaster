@@ -95,7 +95,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: PlaySFX
+    functionName: PlayDodge
     data: 
     objectReferenceParameter: {fileID: 8300000, guid: 539092b09e2110b43b9897625e711566, type: 3}
     floatParameter: 0

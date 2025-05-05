@@ -102,7 +102,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.46153846
-    functionName: PlaySFX
+    functionName: Play_BO_ATK01_1
     data: 
     objectReferenceParameter: {fileID: 8300000, guid: e371e3d6d510f974f9dc3779bbbaf6c2, type: 3}
     floatParameter: 0
