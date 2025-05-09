@@ -7,25 +7,12 @@ namespace BehaviourTrees
 {
     public class Selector : Composer
     {
-        /*protected override Status OnEvaluate(Transform agent, Blackboard blackboard)
-        {
-            bool isRunning = false;
-            bool failed = children.All((child) =>
-            {
-                Status status = child.Evaluate(agent, blackboard);
-                if(status == Status.Running) isRunning = true;
-                return status == Status.Failure;
-            });
-
-            return isRunning ? Status.Running : failed ? Status.Failure : Status.Success;
-        }*/
-
         private BTNode[] children;
         private int currentChildIndex;
 
         public Selector(params BTNode[] _children)
         {
-            this.children = _children;
+            children = _children;
             currentChildIndex = 0;
         }
 

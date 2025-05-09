@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : Entity
 {
@@ -30,6 +31,8 @@ public class Player : Entity
     public BarCom lifeBar;
     public PlayerInfo info = new PlayerInfo();
 
+    public UnityEvent OnExecution;
+    public bool canExecution = false;
     #region States
     public PlayerStateMachine stateMachine { get; private set; }
 
@@ -47,6 +50,7 @@ public class Player : Entity
     public PlayerBounceAttackState bounceAttackState { get; private set; }
     public PlayerBeAttackedState beAttackedState { get; private set; }
     public PlayerBeStunnedState beStunnedState { get; private set; }
+    public PlayerExecutionState executionState { get; private set; }
     public PlayerPrimaryAttackState primaryAttackState { get; private set; }
     public PlayerChargeAttackState chargeAttackState { get; private set; }
     #endregion
@@ -70,6 +74,7 @@ public class Player : Entity
         bounceAttackState = new PlayerBounceAttackState(stateMachine, this, "BounceAttack");
         beAttackedState = new PlayerBeAttackedState(stateMachine, this, "BeAttacked");
         beStunnedState = new PlayerBeStunnedState(stateMachine, this, "BeStunned");
+        executionState = new PlayerExecutionState(stateMachine, this, "Execution");
 
         primaryAttackState = new PlayerPrimaryAttackState(stateMachine, this, "Attack");
         chargeAttackState = new PlayerChargeAttackState(stateMachine, this, "ChargeAttack");
@@ -80,17 +85,10 @@ public class Player : Entity
         base.Start();
 
         stateMachine.Initialize(idleState);
+
         this.RefreshInfoState();
         lifeBar.On(BarComEvent.MAX_ARRIVE, PlayerWin);
         lifeBar.On(BarComEvent.MIN_ARRIVE, PlayerLose);
-    }
-    void PlayerWin()
-    {
-        Debug.Log("Player Win!");
-    }
-    void PlayerLose()
-    {
-        Debug.Log("Player Lose!");
     }
 
     protected override void Update()
@@ -139,6 +137,17 @@ public class Player : Entity
         isInvincible = true;
         yield return new WaitForSeconds(0.2f);
         isInvincible = false;
+    }
+
+    public void PlayerWin()
+    {
+        Debug.Log("Player Win!");
+        canExecution = true;
+        OnExecution.Invoke();
+    }
+    public void PlayerLose()
+    {
+        Debug.Log("Player Lose!");
     }
 
     public void ChangeLayer(GameObject obj, string layerName)

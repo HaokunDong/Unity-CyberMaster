@@ -1,10 +1,8 @@
 
-public static class GameEvent
+public class GameManager : SingletonComp<GameManager>
 {
-    public const string OnPlayerEnter = "OnPlayerEnter";
-}
-public class GameManager : Singleton<GameManager>
-{
+    public float interactionDistance = 10.0f;//
+
     public void Start()
     {
 

@@ -2,18 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LiHuoPrimaryAttackState : EnemyState
+public class LiHuoPrimaryAttackState : LiHuoComboAttackState
 {
-    protected Enemy_Boss_LiHuo liHuo;
-
     protected int comboCounter;
     protected float lastTimeAttacked;
     protected float comboWindow = 0.3f;
 
     public LiHuoPrimaryAttackState(EnemyStateMachine _stateMachine, Enemy _enemy, string _animBoolName, Enemy_Boss_LiHuo _liHuo)
-        : base(_stateMachine, _enemy, _animBoolName)
+        : base(_stateMachine, _enemy, _animBoolName, _liHuo)
     {
-        liHuo = _liHuo;
     }
 
     public override void Enter()
@@ -54,14 +51,15 @@ public class LiHuoPrimaryAttackState : EnemyState
 
         if (triggerCalled)
         {
-            if(comboCounter == 2)
+            stateMachine.ChangeState(liHuo.comboAttackState);
+            /*if (comboCounter == 2)
             {
                 stateMachine.ChangeState(liHuo.cdState);
             }
             else
             {
-                stateMachine.ChangeState(liHuo.battleState);
-            }
+                stateMachine.ChangeState(liHuo.comboAttackState);
+            }*/
         }
     }
 }

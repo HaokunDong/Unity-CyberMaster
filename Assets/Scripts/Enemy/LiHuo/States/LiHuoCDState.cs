@@ -15,7 +15,7 @@ public class LiHuoCDState : EnemyState
     {
         base.Enter();
 
-        stateTimer = 1.0f;
+        stateTimer = 1.5f;
     }
 
     public override void Exit()
@@ -27,10 +27,16 @@ public class LiHuoCDState : EnemyState
     {
         base.Update();
 
-        // if (stateTimer < 0)
-        // {
-        //     stateMachine.ChangeState(liHuo.battleState);
-        // }
+        if (stateTimer < 0)
+        {
+            if (liHuo.facingDir != liHuo.RelativePosition())
+            {
+                liHuo.FlipController(liHuo.RelativePosition());
+            }
+            stateMachine.ChangeState(liHuo.battleState);
+        }
+
+        PlayerManager.Ins.player.OnExecution.AddListener(Dead);
     }
 
     public override void OnHit(Entity from)
@@ -50,5 +56,10 @@ public class LiHuoCDState : EnemyState
             p.info.life = Mathf.Clamp(p.info.life + GlobalRef.Ins.cfg.playerIncreaseLife_attack, 0, 100);
             p.RefreshInfoState();
         }
+    }
+
+    public void Dead()
+    {
+        stateMachine.ChangeState(liHuo.deadState);
     }
 }

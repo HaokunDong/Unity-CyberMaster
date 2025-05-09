@@ -12,7 +12,8 @@ public class Enemy : Entity
 
     [Header("Attack Info")]
     public float attackDistance;
-    public float attackCooldown;
+    //public float attackCooldown;
+    public bool isAttackCD = false;
     [HideInInspector] public float lastTimeAttacked;
     public int attackCount;
     public Vector2[] attackMovement;
@@ -90,14 +91,14 @@ public class Enemy : Entity
         //return Vector2.Distance(transform.position, playerTrans.position);
     }
 
-    public virtual bool CanAttack()
+    /*public virtual bool CanAttack()
     {
         if (Time.time >= lastTimeAttacked + attackCooldown)
         {
             return true;
         }
         return false;
-    }
+    }*/
 
     //public virtual RaycastHit2D IsPlayerDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, 50f, whatIsPlayer);
 

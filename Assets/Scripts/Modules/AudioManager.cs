@@ -223,7 +223,7 @@ public class AudioManager : MonoBehaviour
 
 	// Singleton placeholder
 	private static AudioManager instance;
-	// Lock instance object for execution
+	// Lock instance object for canExecution
 	private static object key = new object();
 	// Is application up and running
 	private static bool alive = true;

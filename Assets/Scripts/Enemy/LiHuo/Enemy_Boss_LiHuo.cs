@@ -7,6 +7,16 @@ public class Enemy_Boss_LiHuo : Enemy
 {
     public Player player;
 
+    public float stabDistance;
+
+    [Header("LiHuoSkills Info")]
+    private float lastTimeMove;
+    [SerializeField] public float moveCD;
+    private float lastTimeLeapAttack;
+    [SerializeField] public float leapAttackCD;
+    private float lastTimeStabAttack;
+    [SerializeField] public float stabAttackCD;
+
     //public bool bossFightBegun;
 
     #region States
@@ -15,8 +25,13 @@ public class Enemy_Boss_LiHuo : Enemy
     public LiHuoMoveState moveState { get; private set; }
     public LiHuoBattleState battleState { get; private set; }
     public LiHuoCDState cdState { get; private set; }
+    public LiHuoComboAttackState comboAttackState { get; private set; }
     public LiHuoPrimaryAttackState primaryAttackState { get; private set; }
+    public LiHuoLeapAttackState leapAttackState { get; private set; }
+    public LiHuoStabAttackState stabAttackState { get; private set; }
     public LiHuoBounceAttackState bounceAttackState { get; private set; }
+    public LiHuoDeadState deadState { get; private set; }
+    public LiHuoBeExecutedState beExecutedState { get; private set; }
 
     #endregion
 
@@ -28,8 +43,14 @@ public class Enemy_Boss_LiHuo : Enemy
         moveState = new LiHuoMoveState(stateMachine, this, "Move", this);
         battleState = new LiHuoBattleState(stateMachine, this, "Idle", this);
         cdState = new LiHuoCDState(stateMachine, this, "Idle", this);
+        comboAttackState = new LiHuoComboAttackState(stateMachine, this, "Idle", this);
         primaryAttackState = new LiHuoPrimaryAttackState(stateMachine, this, "Attack", this);
+        leapAttackState = new LiHuoLeapAttackState(stateMachine, this, "LeapAttack", this);
+        stabAttackState = new LiHuoStabAttackState(stateMachine, this, "StabAttack", this);
         bounceAttackState = new LiHuoBounceAttackState(stateMachine, this, "BounceAttack", this);
+        deadState = new LiHuoDeadState(stateMachine, this, "Idle", this);
+        beExecutedState = new LiHuoBeExecutedState(stateMachine, this, "BeExecuted", this);
+
     }
 
 
@@ -41,7 +62,7 @@ public class Enemy_Boss_LiHuo : Enemy
 
         Flip();
 
-        stateMachine.Initialize(cdState);
+        stateMachine.Initialize(idleState);
 
     }
 
@@ -63,18 +84,7 @@ public class Enemy_Boss_LiHuo : Enemy
         Gizmos.DrawWireSphere(attackCheck[attackCount].position, attackCheckRadius[attackCount]);
     }
 
-    public bool IsPlayerInAttackRange()
-    {
-        if (RelativeDistance() < attackDistance)
-        {
-            if (CanAttack())
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
+    #region DistanceJudge
     public bool IsPlayerInViewRange()
     {
         if (Vector2.Distance(player.transform.position, transform.position) < 10)
@@ -83,4 +93,73 @@ public class Enemy_Boss_LiHuo : Enemy
         }
         return false;
     }
+    public bool IsPlayerInAttackRange()
+    {
+        if (RelativeDistance() < attackDistance)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool IsPlayerInStabRange()
+    {
+        if (RelativeDistance() < stabDistance)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool IsPlayerFar()
+    {
+        if (RelativeDistance() > 5.0f)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool IsPlayerClose()
+    {
+        if (RelativeDistance() <= 5.0f)
+        {
+            return true;
+        }
+        return false;
+    }
+    #endregion
+
+    #region CanUseSkill
+    public bool CanMove()
+    {
+        if(Time.time >= lastTimeMove + moveCD)
+        {
+            lastTimeMove = Time.time;
+            return true;
+        }
+        return false;
+    }
+
+    public bool CanLeapAttack()
+    {
+        if (Time.time >= lastTimeLeapAttack + leapAttackCD)
+        {
+            lastTimeLeapAttack = Time.time;
+            return true;
+        }
+        return false;
+    }
+
+    public bool CanStabAttack()
+    {
+        if (Time.time >= lastTimeStabAttack + stabAttackCD)
+        {
+            lastTimeStabAttack = Time.time;
+            return true;
+        }
+        return false;
+    }
+
+    #endregion
 }

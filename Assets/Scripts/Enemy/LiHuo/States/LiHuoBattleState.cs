@@ -37,13 +37,47 @@ public class LiHuoBattleState : EnemyState
     {
         behaviourTree = new Selector(
             new Sequencer(
-                new ConditionNode(() => IsPlayerInAttackRange()),
-                new ActionNode(() => stateMachine.ChangeState(liHuo.primaryAttackState))
+                new ConditionNode(() => liHuo.facingDir != liHuo.RelativePosition()),
+                new ActionNode(() => stateMachine.ChangeState(liHuo.cdState))
                 ),
 
             new Sequencer(
-                new ConditionNode(() => liHuo.facingDir != liHuo.RelativePosition()),
-                new ActionNode(() => liHuo.FlipController(liHuo.RelativePosition()))
+                new ConditionNode(() => liHuo.IsPlayerFar()),
+                new RandomSelector(
+                    new Sequencer(
+                        new ConditionNode(() => liHuo.CanLeapAttack()),
+                        new ActionNode(() => stateMachine.ChangeState(liHuo.leapAttackState))
+                        ),
+                    new Sequencer(
+                        new ConditionNode(() => liHuo.CanMove()),
+                        new ActionNode(() => stateMachine.ChangeState(liHuo.moveState))
+                        )
+                    ),
+
+            new Sequencer(
+                new ConditionNode(() => liHuo.IsPlayerClose())),
+                new Selector(
+                    new Sequencer(
+                        new ConditionNode(() => liHuo.IsPlayerInAttackRange() && !liHuo.isAttackCD),
+                        new ActionNode(() => stateMachine.ChangeState(liHuo.primaryAttackState))
+                        ),
+
+                    new Sequencer(
+                        new ConditionNode(() => liHuo.IsPlayerInStabRange() && !liHuo.isAttackCD),
+                        new RandomSelector(
+                            new Sequencer(
+                                new ConditionNode(() => liHuo.CanStabAttack()),
+                                new ActionNode(() => stateMachine.ChangeState(liHuo.stabAttackState))
+                                ),
+                            new Sequencer(
+                                new ConditionNode(() => liHuo.CanMove()),
+                                new ActionNode(() => stateMachine.ChangeState(liHuo.moveState))
+                                )
+                            )
+                        ),
+
+                    new ActionNode(() => stateMachine.ChangeState(liHuo.cdState))
+                    )
                 ),
 
             new Sequencer(
@@ -55,17 +89,6 @@ public class LiHuoBattleState : EnemyState
             );
     }
 
-    public bool IsPlayerInAttackRange()
-    {
-        if (enemy.RelativeDistance() < enemy.attackDistance)
-        {
-            if (enemy.CanAttack())
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
+    
 }
 

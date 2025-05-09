@@ -64,8 +64,6 @@ public class Entity : MonoBehaviour
     }
 
     #region Velocity
-    /*public static event Action SetZeroVelocity;
-    public static void */
     public virtual void SetZeroVelocity() => rb.velocity = new Vector2(0, 0);
 
     public virtual void SetVelocity(float _xVelocity, float _yVelocity)

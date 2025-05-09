@@ -28,12 +28,19 @@ public class PlayerGroundedState : PlayerState
             stateMachine.ChangeState(player.dodgeState);
         }
 
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKey(KeyCode.J))
         {
+            //Debug.Log(player.canExecution);
             if (IsStunned())
             {
                 player.attackLimitation = 0;
                 stateMachine.ChangeState(player.beStunnedState);
+            }
+            else if (player.canExecution)
+            {
+                Debug.Log(player.canExecution);
+                player.canExecution = false;
+                stateMachine.ChangeState(player.executionState);
             }
             else
             {
@@ -69,7 +76,7 @@ public class PlayerGroundedState : PlayerState
 
         foreach (var hit in colliders)
         {
-            if (hit.GetComponent<Enemy>() != null && player.attackLimitation >= 1)
+            if (hit.GetComponent<Enemy>() != null && player.attackLimitation >= 100)
             {
                 return true;
             }
