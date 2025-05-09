@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 4620076522330716969}
   - component: {fileID: 63313813975855079}
   - component: {fileID: 1537147611689238653}
+  - component: {fileID: 8354985176681640097}
+  - component: {fileID: 1597371572677852994}
   m_Layer: 0
   m_Name: hitEffect
   m_TagString: Untagged
@@ -137,3 +139,51 @@ MonoBehaviour:
   defaultAttackSFX: {fileID: 0}
   attackSFXGrp: {fileID: 0}
   sfxVolume: 1
+--- !u!114 &8354985176681640097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5908320797415904013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627d10f82d0734f86b59bb3a2aba4eac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: ae8d9d44
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 0ad875cb40fb84b719453ca18207255f, type: 2}
+  decodeBank: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
+--- !u!114 &1597371572677852994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5908320797415904013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1736bc2f5317b4a6aa8e5acb8dffab05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BlockHit_1:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 65203e0f5827b481cb89e0e87e62cf8c, type: 2}
+  BounceHit_1:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: b96b6cafd18a343daaf7502225993635, type: 2}
+  BounceHit_2:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}

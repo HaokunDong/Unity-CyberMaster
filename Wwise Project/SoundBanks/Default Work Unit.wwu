@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{62943D67-61FE-4225-B54B-F684511A8A04}" SchemaVersion="110">
+	<SoundBanks>
+		<WorkUnit Name="Default Work Unit" ID="{62943D67-61FE-4225-B54B-F684511A8A04}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundBank Name="Boss" ID="{76178397-C232-45BE-8519-D009A6565039}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Boss" ID="{BF8E8B15-098B-495B-938B-A849A46C6C33}" WorkUnitID="{6C27D820-346A-4C53-B6D8-CAA853C81026}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="Player" ID="{28D3B1E7-FBDC-4466-9D4A-F29D0A28A2F6}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Player" ID="{3B3AA147-CA3B-497D-9733-1D1372C0266E}" WorkUnitID="{6C27D820-346A-4C53-B6D8-CAA853C81026}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="UI" ID="{325714B3-DDC6-466A-BF5D-121E6FD91A58}">
+					<ObjectInclusionList/>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="Environment" ID="{D6E2D16E-0375-4346-A9BC-36CDAB630B70}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Enviroment" ID="{5DBB792A-F29C-45DE-8EA9-C5942D43AFF4}" WorkUnitID="{6C27D820-346A-4C53-B6D8-CAA853C81026}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="Music" ID="{DB2A7546-DBDA-4EC5-AACE-488260959811}">
+					<ObjectInclusionList/>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="NPC" ID="{C4C6AB86-885C-4C46-9CF5-9E12CEE8804F}">
+					<ObjectInclusionList/>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="Common" ID="{CF71A843-9A6B-45FE-BF89-71DB564C360F}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Common" ID="{C800E989-729A-4FB6-9705-2635DDE4F165}" WorkUnitID="{6C27D820-346A-4C53-B6D8-CAA853C81026}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+			</ChildrenList>
+		</WorkUnit>
+	</SoundBanks>
+</WwiseDocument>

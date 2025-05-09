@@ -1,0 +1,6 @@
+Auxiliary Bus	ID	Name			Wwise Object Path	Notes
+	359562144	SC_Aux			\Default Work Unit\Master Audio Bus\SC_Aux	
+
+Effect plug-ins	ID	Name	Type				Notes
+	713892870	Meter (Custom)	Wwise Meter			
+

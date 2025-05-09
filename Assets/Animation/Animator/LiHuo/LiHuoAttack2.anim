@@ -207,7 +207,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.15384616
-    functionName: PlaySFX
+    functionName: Play_BO_ATK01_2
     data: 
     objectReferenceParameter: {fileID: 8300000, guid: 3dba11f6ecb8e584da85f8c8d04bfdac, type: 3}
     floatParameter: 0
@@ -235,7 +235,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.84615386
-    functionName: PlaySFX
+    functionName: Play_BO_ATK01_3
     data: 
     objectReferenceParameter: {fileID: 8300000, guid: e371e3d6d510f974f9dc3779bbbaf6c2, type: 3}
     floatParameter: 0
@@ -263,7 +263,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 1.1538461
-    functionName: PlaySFX
+    functionName: Play_BO_ATK02_1
     data: 
     objectReferenceParameter: {fileID: 8300000, guid: e371e3d6d510f974f9dc3779bbbaf6c2, type: 3}
     floatParameter: 0
@@ -291,7 +291,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 1.6923077
-    functionName: PlaySFX
+    functionName: Play_BO_ATK02_2
     data: 
     objectReferenceParameter: {fileID: 8300000, guid: 8c79e581ae8537a43a869c359591c1c2, type: 3}
     floatParameter: 0
@@ -319,7 +319,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 2.3076923
-    functionName: PlaySFX
+    functionName: Play_BO_ATK02_3
     data: 
     objectReferenceParameter: {fileID: 8300000, guid: e371e3d6d510f974f9dc3779bbbaf6c2, type: 3}
     floatParameter: 0
@@ -347,7 +347,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 2.9230769
-    functionName: PlaySFX
+    functionName: Play_BO_ATK02_4
     data: 
     objectReferenceParameter: {fileID: 8300000, guid: 3dba11f6ecb8e584da85f8c8d04bfdac, type: 3}
     floatParameter: 0

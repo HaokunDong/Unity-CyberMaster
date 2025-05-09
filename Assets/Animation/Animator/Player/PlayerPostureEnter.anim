@@ -77,7 +77,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: PlaySFX
+    functionName: PlayPostureEnter
     data: 
     objectReferenceParameter: {fileID: 8300000, guid: 34191cfa7c5377e4185720fd89858e73, type: 3}
     floatParameter: 0

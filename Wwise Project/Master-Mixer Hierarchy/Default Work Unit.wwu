@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{5E76171F-EBE7-4513-8BA3-6225EAE57330}" SchemaVersion="110">
+	<Busses>
+		<WorkUnit Name="Default Work Unit" ID="{5E76171F-EBE7-4513-8BA3-6225EAE57330}" PersistMode="Standalone">
+			<ChildrenList>
+				<Bus Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}">
+					<ReferenceList>
+						<Reference Name="AudioDevice" PluginName="System" CompanyID="0" PluginID="174" PluginType="7">
+							<ObjectRef Name="System" ID="{68509E9F-AB10-4C27-90FB-B6D1046B5FFC}" WorkUnitID="{4B80A998-8178-42E3-BCB1-FC3C41D8C21F}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<Bus Name="UI" ID="{FE3A9F50-AD25-4676-8F13-AED783D03B9D}">
+							<PropertyList>
+								<Property Name="Color" Type="int16" Value="12"/>
+								<Property Name="OverrideColor" Type="bool" Value="True"/>
+							</PropertyList>
+						</Bus>
+						<Bus Name="Music" ID="{59B76870-4F7D-457C-8B91-A7B095B06814}">
+							<PropertyList>
+								<Property Name="Color" Type="int16" Value="6"/>
+								<Property Name="OverrideColor" Type="bool" Value="True"/>
+							</PropertyList>
+						</Bus>
+						<Bus Name="Environment" ID="{09105E4A-EC79-4FC0-86E3-1D6B06F83EFC}">
+							<PropertyList>
+								<Property Name="Color" Type="int16" Value="4"/>
+								<Property Name="OverrideColor" Type="bool" Value="True"/>
+							</PropertyList>
+						</Bus>
+						<Bus Name="Common" ID="{1839C133-DAF7-4B79-A1E9-4583E129F352}">
+							<PropertyList>
+								<Property Name="Color" Type="int16" Value="19"/>
+								<Property Name="OverrideColor" Type="bool" Value="True"/>
+							</PropertyList>
+							<ChildrenList>
+								<Bus Name="CO_Posture_Hit" ID="{9C3EE59A-47B1-4B7F-945D-28F36709AEE0}">
+									<ReferenceList>
+										<Reference Name="UserAuxSend0">
+											<ObjectRef Name="SC_Aux" ID="{24E06012-FB0E-424C-982F-09AC14C24D90}" WorkUnitID="{5E76171F-EBE7-4513-8BA3-6225EAE57330}"/>
+										</Reference>
+									</ReferenceList>
+								</Bus>
+							</ChildrenList>
+						</Bus>
+						<AuxBus Name="BossRoom_Reverb" ID="{10C515DD-CB1D-4DEB-AAD3-E1F06C515D06}">
+							<ReferenceList>
+								<Reference Name="Effect0" PluginName="Wwise RoomVerb" CompanyID="0" PluginID="118" PluginType="3">
+									<ObjectRef Name="Hall_Large_Dark" ID="{0F6A7D6D-131C-4650-9561-FC05F5C7A37B}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}"/>
+								</Reference>
+							</ReferenceList>
+							<StateInfo>
+								<StateGroupList>
+									<StateGroupInfo>
+										<StateGroupRef Name="ENV_Reverb" ID="{9BFF2ED9-745A-4D77-9BDE-C46C6733CE4F}"/>
+									</StateGroupInfo>
+								</StateGroupList>
+								<CustomStateList>
+									<CustomState>
+										<StateRef Name="BossRoom" ID="{2911B7B5-AE37-4F66-AE32-A6762197F8B4}"/>
+										<CustomState Name="" ID="{11C812BD-96F2-41B6-B1D8-F06DAE42AD1F}" ShortID="1005699135">
+											<PropertyList>
+												<Property Name="BusVolume" Type="Real64" Value="-15"/>
+											</PropertyList>
+										</CustomState>
+									</CustomState>
+								</CustomStateList>
+							</StateInfo>
+						</AuxBus>
+						<Bus Name="Battle" ID="{23F39F2A-5BC6-48FD-AFC0-2D19331F05B8}">
+							<ReferenceList>
+								<Reference Name="UserAuxSend0">
+									<ObjectRef Name="BossRoom_Reverb" ID="{10C515DD-CB1D-4DEB-AAD3-E1F06C515D06}" WorkUnitID="{5E76171F-EBE7-4513-8BA3-6225EAE57330}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Bus Name="Boss" ID="{C056F1C0-BB4E-4D4A-9619-F6F87AFA2DDA}">
+									<PropertyList>
+										<Property Name="Color" Type="int16" Value="1"/>
+										<Property Name="OverrideColor" Type="bool" Value="True"/>
+									</PropertyList>
+								</Bus>
+								<Bus Name="NPC" ID="{40DE01AD-1925-48A5-A2A9-88A516BE1627}">
+									<PropertyList>
+										<Property Name="Color" Type="int16" Value="7"/>
+										<Property Name="OverrideColor" Type="bool" Value="True"/>
+									</PropertyList>
+								</Bus>
+								<Bus Name="Player" ID="{C8D4A9C9-6E36-475D-8188-53EBD062346F}">
+									<PropertyList>
+										<Property Name="Color" Type="int16" Value="9"/>
+										<Property Name="OverrideColor" Type="bool" Value="True"/>
+									</PropertyList>
+								</Bus>
+							</ChildrenList>
+							<ObjectLists>
+								<ObjectList Name="RTPC">
+									<Reference>
+										<Local>
+											<RTPC Name="" ID="{3B3D1DB2-7FDE-4740-B588-D45B197E78B6}" ShortID="457228240">
+												<PropertyList>
+													<Property Name="PropertyName" Type="string" Value="BusVolume"/>
+												</PropertyList>
+												<ReferenceList>
+													<Reference Name="ControlInput">
+														<ObjectRef Name="SC" ID="{02B2F3AC-49F2-4842-9F30-6F40229D51A6}" WorkUnitID="{FA56E503-ABC2-4872-8782-93F905E0B28A}"/>
+													</Reference>
+													<Reference Name="Curve">
+														<Custom>
+															<Curve Name="" ID="{0D9483E1-E571-46AB-BFD8-6C1745598F7F}">
+																<PropertyList>
+																	<Property Name="Flags" Type="int32" Value="3"/>
+																</PropertyList>
+																<PointList>
+																	<Point>
+																		<XPos>-48</XPos>
+																		<YPos>-6.0206</YPos>
+																		<Flags>5</Flags>
+																		<SegmentShape>Log3</SegmentShape>
+																	</Point>
+																	<Point>
+																		<XPos>0</XPos>
+																		<YPos>0</YPos>
+																		<Flags>37</Flags>
+																	</Point>
+																</PointList>
+															</Curve>
+														</Custom>
+													</Reference>
+												</ReferenceList>
+											</RTPC>
+										</Local>
+									</Reference>
+								</ObjectList>
+							</ObjectLists>
+						</Bus>
+						<AuxBus Name="SC_Aux" ID="{24E06012-FB0E-424C-982F-09AC14C24D90}">
+							<PropertyList>
+								<Property Name="BusVolume" Type="Real64">
+									<ValueList>
+										<Value>-96</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Effect0">
+									<Custom>
+										<Effect Name="Meter (Custom)" ID="{9EA715CE-7A1E-41C6-B1B2-E9FD6F1887D7}" ShortID="713892870" PluginName="Wwise Meter" CompanyID="0" PluginID="129" PluginType="3">											<PluginData>
+	<GameParameter Name="SC" ID="{02B2F3AC-49F2-4842-9F30-6F40229D51A6}"/>
+</PluginData>
+										</Effect>
+									</Custom>
+								</Reference>
+							</ReferenceList>
+						</AuxBus>
+					</ChildrenList>
+				</Bus>
+			</ChildrenList>
+		</WorkUnit>
+	</Busses>
+</WwiseDocument>
