@@ -5,7 +5,8 @@ using UnityEngine;
 public class LiHuoComboAttackState : EnemyState
 {
     protected Enemy_Boss_LiHuo liHuo;
-    public LiHuoComboAttackState(EnemyStateMachine _stateMachine, Enemy _enemy, string _animBoolName, Enemy_Boss_LiHuo _liHuo) : base(_stateMachine, _enemy, _animBoolName)
+    public LiHuoComboAttackState(EnemyStateMachine _stateMachine, Enemy _enemy, string _animBoolName, Enemy_Boss_LiHuo _liHuo)
+        : base(_stateMachine, _enemy, _animBoolName)
     {
         liHuo = _liHuo;
     }
@@ -13,6 +14,7 @@ public class LiHuoComboAttackState : EnemyState
     public override void Enter()
     {
         base.Enter();
+        liHuo.SetZeroVelocity();
     }
 
     public override void Exit()
@@ -23,5 +25,10 @@ public class LiHuoComboAttackState : EnemyState
     public override void Update()
     {
         base.Update();
+
+        if (liHuo.IsPlayerInAttackRange())
+        {
+            stateMachine.ChangeState(liHuo.primaryAttackState);
+        }
     }
 }

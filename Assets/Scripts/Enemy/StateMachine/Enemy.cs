@@ -12,9 +12,8 @@ public class Enemy : Entity
 
     [Header("Attack Info")]
     public float attackDistance;
-    //public float attackCooldown;
-    public bool isAttackCD = false;
-    [HideInInspector] public float lastTimeAttacked;
+    public float nextTimeReadyToComboAttack;
+    [SerializeField] public float ComboAttackCD;
     public int attackCount;
     public Vector2[] attackMovement;
     public float[] attackForce;
@@ -36,7 +35,7 @@ public class Enemy : Entity
     {
         base.Start();
 
-        playerTrans = GameObject.FindGameObjectWithTag("Player").transform;
+        playerTrans = PlayerManager.Ins.player.transform;
     }
 
     protected override void Update()
@@ -90,15 +89,6 @@ public class Enemy : Entity
 
         //return Vector2.Distance(transform.position, playerTrans.position);
     }
-
-    /*public virtual bool CanAttack()
-    {
-        if (Time.time >= lastTimeAttacked + attackCooldown)
-        {
-            return true;
-        }
-        return false;
-    }*/
 
     //public virtual RaycastHit2D IsPlayerDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, 50f, whatIsPlayer);
 

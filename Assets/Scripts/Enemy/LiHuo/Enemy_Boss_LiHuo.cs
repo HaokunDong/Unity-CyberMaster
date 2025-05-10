@@ -10,11 +10,11 @@ public class Enemy_Boss_LiHuo : Enemy
     public float stabDistance;
 
     [Header("LiHuoSkills Info")]
-    private float lastTimeMove;
+    private float nextTimeReadyToMove;
     [SerializeField] public float moveCD;
-    private float lastTimeLeapAttack;
+    private float nextTimeReadyToLeapAttack;
     [SerializeField] public float leapAttackCD;
-    private float lastTimeStabAttack;
+    private float nextTimeReadyToStabAttack;
     [SerializeField] public float stabAttackCD;
 
     //public bool bossFightBegun;
@@ -93,7 +93,16 @@ public class Enemy_Boss_LiHuo : Enemy
         }
         return false;
     }
-    public bool IsPlayerInAttackRange()
+
+    public bool IsEnterAttackState()//Enter Attack State
+    {
+        if (RelativeDistance() < attackDistance - 1)
+        {
+            return true;
+        }
+        return false;
+    }
+    public bool IsPlayerInAttackRange()//After enter attack state
     {
         if (RelativeDistance() < attackDistance)
         {
@@ -133,9 +142,19 @@ public class Enemy_Boss_LiHuo : Enemy
     #region CanUseSkill
     public bool CanMove()
     {
-        if(Time.time >= lastTimeMove + moveCD)
+        if (Time.time >= nextTimeReadyToMove)
         {
-            lastTimeMove = Time.time;
+            nextTimeReadyToMove = Time.time + moveCD;
+            return true;
+        }
+        return false;
+    }
+
+    public bool CanComboAttack()
+    {
+        if (Time.time >= nextTimeReadyToComboAttack)
+        {
+            nextTimeReadyToComboAttack = Time.time + ComboAttackCD;
             return true;
         }
         return false;
@@ -143,9 +162,9 @@ public class Enemy_Boss_LiHuo : Enemy
 
     public bool CanLeapAttack()
     {
-        if (Time.time >= lastTimeLeapAttack + leapAttackCD)
+        if (Time.time >= nextTimeReadyToLeapAttack)
         {
-            lastTimeLeapAttack = Time.time;
+            nextTimeReadyToLeapAttack = Time.time + leapAttackCD;
             return true;
         }
         return false;
@@ -153,9 +172,9 @@ public class Enemy_Boss_LiHuo : Enemy
 
     public bool CanStabAttack()
     {
-        if (Time.time >= lastTimeStabAttack + stabAttackCD)
+        if (Time.time >= nextTimeReadyToStabAttack)
         {
-            lastTimeStabAttack = Time.time;
+            nextTimeReadyToStabAttack = Time.time + stabAttackCD;
             return true;
         }
         return false;

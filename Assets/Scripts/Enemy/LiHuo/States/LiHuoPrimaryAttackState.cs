@@ -2,20 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LiHuoPrimaryAttackState : LiHuoComboAttackState
+public class LiHuoPrimaryAttackState : EnemyState
 {
+    protected Enemy_Boss_LiHuo liHuo;
+
     protected int comboCounter;
     protected float lastTimeAttacked;
     protected float comboWindow = 0.3f;
 
     public LiHuoPrimaryAttackState(EnemyStateMachine _stateMachine, Enemy _enemy, string _animBoolName, Enemy_Boss_LiHuo _liHuo)
-        : base(_stateMachine, _enemy, _animBoolName, _liHuo)
+        : base(_stateMachine, _enemy, _animBoolName)
     {
+        liHuo = _liHuo;
     }
 
     public override void Enter()
     {
         base.Enter();
+
+        Debug.Log(comboCounter);
 
         if (comboCounter > 2 || Time.time >= lastTimeAttacked + comboWindow)
         {
@@ -51,15 +56,15 @@ public class LiHuoPrimaryAttackState : LiHuoComboAttackState
 
         if (triggerCalled)
         {
-            stateMachine.ChangeState(liHuo.comboAttackState);
-            /*if (comboCounter == 2)
+            if (comboCounter == 2 || !liHuo.IsPlayerInAttackRange())
             {
-                stateMachine.ChangeState(liHuo.cdState);
+                liHuo.nextTimeReadyToComboAttack = Time.time + liHuo.ComboAttackCD;
+                stateMachine.ChangeState(liHuo.battleState);
             }
             else
             {
                 stateMachine.ChangeState(liHuo.comboAttackState);
-            }*/
+            }
         }
     }
 }
