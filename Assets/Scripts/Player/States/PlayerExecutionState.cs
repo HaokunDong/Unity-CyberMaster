@@ -7,14 +7,15 @@ public class PlayerExecutionState : PlayerState
     protected Vector2 originalPosition;
     public PlayerExecutionState(PlayerStateMachine _stateMachine, Player _player, string _animBoolNam) : base(_stateMachine, _player, _animBoolNam)
     {
-        originalPosition = player.transform.position;
+        
     }
 
     public override void Enter()
     {
         base.Enter();
-        player.ChangeLayer(player.gameObject, "Dodge");
+        originalPosition = player.transform.position;
 
+        player.ChangeLayer(player.gameObject, "Dodge");
         rb.position = new Vector2(EnemyManager.Ins.liHuo.transform.position.x, rb.position.y);
     }
 

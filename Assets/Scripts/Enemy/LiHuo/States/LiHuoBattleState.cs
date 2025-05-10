@@ -31,6 +31,7 @@ public class LiHuoBattleState : EnemyState
 
         behaviourTree.Execute();
 
+        Debug.Log("Battle");
     }
 
     public void BuildLihuoBehaviourTree()
@@ -52,18 +53,19 @@ public class LiHuoBattleState : EnemyState
                         new ConditionNode(() => liHuo.CanMove()),
                         new ActionNode(() => stateMachine.ChangeState(liHuo.moveState))
                         )
-                    ),
+                    )
+                ),
 
             new Sequencer(
-                new ConditionNode(() => liHuo.IsPlayerClose())),
+                new ConditionNode(() => liHuo.IsPlayerClose()),
                 new Selector(
                     new Sequencer(
-                        new ConditionNode(() => liHuo.IsPlayerInAttackRange() && !liHuo.isAttackCD),
+                        new ConditionNode(() => liHuo.IsEnterAttackState() && liHuo.CanComboAttack()),
                         new ActionNode(() => stateMachine.ChangeState(liHuo.primaryAttackState))
                         ),
 
                     new Sequencer(
-                        new ConditionNode(() => liHuo.IsPlayerInStabRange() && !liHuo.isAttackCD),
+                        new ConditionNode(() => liHuo.IsPlayerInStabRange()),
                         new RandomSelector(
                             new Sequencer(
                                 new ConditionNode(() => liHuo.CanStabAttack()),
@@ -78,11 +80,6 @@ public class LiHuoBattleState : EnemyState
 
                     new ActionNode(() => stateMachine.ChangeState(liHuo.cdState))
                     )
-                ),
-
-            new Sequencer(
-                new ConditionNode(() => liHuo.IsPlayerInViewRange()),
-                new ActionNode(() => stateMachine.ChangeState(liHuo.moveState))
                 ),
 
             new ActionNode(() => stateMachine.ChangeState(liHuo.idleState))

@@ -16,9 +16,9 @@ public class LiHuoMoveState : EnemyState
     {
         base.Enter();
 
-        stateTimer = 2.0f;
+        //stateTimer = 2.0f;
 
-        BuildLihuoBehaviourTree();
+        //BuildLihuoBehaviourTree();
     }
 
     public override void Exit()
@@ -30,12 +30,17 @@ public class LiHuoMoveState : EnemyState
     {
         base.Update();
 
-        behaviourTree.Execute();
+        //behaviourTree.Execute();
 
         liHuo.SetVelocity(liHuo.facingDir * liHuo.moveSpeed, rb.velocity.y);
+
+        if (liHuo.IsEnterAttackState())
+        {
+            stateMachine.ChangeState(liHuo.battleState);
+        }
     }
 
-    public void BuildLihuoBehaviourTree()
+/*    public void BuildLihuoBehaviourTree()
     {
         behaviourTree = new Selector(
             new Sequencer(
@@ -53,5 +58,5 @@ public class LiHuoMoveState : EnemyState
                 new ActionNode(() => stateMachine.ChangeState(liHuo.battleState))
                 )
             );
-    }
+    }*/
 }
