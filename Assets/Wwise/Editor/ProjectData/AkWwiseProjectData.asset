@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cc79daf8fcd34c1195730108758dc6d, type: 3}
+  m_Script: {fileID: 11500000, guid: a9913f41cb3a140c998cec29558d88b0, type: 3}
   m_Name: AkWwiseProjectData
   m_EditorClassIdentifier: 
   AcousticTextureWwu:
@@ -24,7 +24,7 @@ MonoBehaviour:
     ParentPath: Virtual Acoustics/Default Work Unit
     guid: 240de5ef0e38e84294a6bbcb2783126b
     GuidInternal: 
-    m_lastTime: -8584554171288759998
+    m_lastTime: -8584548005972421733
     List: []
   - PhysicalPath: Virtual Acoustics/Factory Acoustic Textures.wwu
     PathAndIcons:
@@ -37,7 +37,7 @@ MonoBehaviour:
     ParentPath: Virtual Acoustics/Factory Acoustic Textures
     guid: 6b663d46a83ca54f8b4a5fef12b883f6
     GuidInternal: 
-    m_lastTime: -8584562196834775808
+    m_lastTime: -8584548005972421084
     List:
     - name: Acoustic_Banner
       guid: f2532d2fccda8e408b8898b1b52a26d6
@@ -303,7 +303,7 @@ MonoBehaviour:
     ParentPath: Master-Mixer Hierarchy/Default Work Unit
     guid: 1f17765ee7eb13458ba36225eae57330
     GuidInternal: 
-    m_lastTime: -8584553956723261009
+    m_lastTime: -8584548005975430462
     List:
     - name: Battle
       guid: 2a9ff323c65bfd48afc02d19331f05b8
@@ -359,6 +359,26 @@ MonoBehaviour:
         ObjectType: 1
         guid: dd15c5101dcbeb4daad3e1f06c515d06
       Path: Master-Mixer Hierarchy/Default Work Unit/Master Audio Bus/BossRoom_Reverb
+    - name: CO_Posture_Hit
+      guid: 9ae53e9cb1477f4b945d28f36709aee0
+      id: 3415664688
+      PathAndIcons:
+      - ElementName: Master-Mixer Hierarchy
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 1f17765ee7eb13458ba36225eae57330
+      - ElementName: Master Audio Bus
+        ObjectType: 2
+        guid: d8a41415a61d2a41a17e75ca0c2149f3
+      - ElementName: Common
+        ObjectType: 2
+        guid: 33c13918f7da794ba1e94583e129f352
+      - ElementName: CO_Posture_Hit
+        ObjectType: 2
+        guid: 9ae53e9cb1477f4b945d28f36709aee0
+      Path: Master-Mixer Hierarchy/Default Work Unit/Master Audio Bus/Common/CO_Posture_Hit
     - name: Common
       guid: 33c13918f7da794ba1e94583e129f352
       id: 2395677314
@@ -464,6 +484,23 @@ MonoBehaviour:
         ObjectType: 2
         guid: c9a9d4c8366e5d47818853ebd062346f
       Path: Master-Mixer Hierarchy/Default Work Unit/Master Audio Bus/Battle/Player
+    - name: SC_Aux
+      guid: 1260e0240efb4c42982f09ac14c24d90
+      id: 359562144
+      PathAndIcons:
+      - ElementName: Master-Mixer Hierarchy
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 1f17765ee7eb13458ba36225eae57330
+      - ElementName: Master Audio Bus
+        ObjectType: 2
+        guid: d8a41415a61d2a41a17e75ca0c2149f3
+      - ElementName: SC_Aux
+        ObjectType: 1
+        guid: 1260e0240efb4c42982f09ac14c24d90
+      Path: Master-Mixer Hierarchy/Default Work Unit/Master Audio Bus/SC_Aux
     - name: UI
       guid: 509f3afe25ad76468f13aed783d03b9d
       id: 1551306167
@@ -493,7 +530,7 @@ MonoBehaviour:
     ParentPath: SoundBanks/Default Work Unit
     guid: 673d9462fe612542b54bf684511a8a04
     GuidInternal: 
-    m_lastTime: -8584553956723102252
+    m_lastTime: -8584548005972426297
     List:
     - name: Boss
       guid: 9783177632c2be458519d009a6565039
@@ -605,7 +642,7 @@ MonoBehaviour:
     ParentPath: Events/Default Work Unit
     guid: 20d8276c6a34534cb6d8caa853c81026
     GuidInternal: 
-    m_lastTime: -8584553956723194898
+    m_lastTime: -8584548005975433664
     List:
     - name: BO_001
       guid: c0a4b420c483d54d9a7024c69fd6719e
@@ -1599,8 +1636,8 @@ MonoBehaviour:
         guid: 1b338e34eb13f54594828046eeb4bbaa
       Path: Events/Default Work Unit/Player/PL_001/PL_001_Other/Play_PL_001_Other_Charge_Attack
       maxAttenuation: 0
-      maxDuration: 2.0666778
-      minDuration: 2.0666778
+      maxDuration: 2.1769578
+      minDuration: 1.9619842
     - name: Play_PL_001_Other_Dodge
       guid: 74186450ab90704f89cfe4bfee344fe1
       id: 1864639745
@@ -1774,8 +1811,22 @@ MonoBehaviour:
     ParentPath: Game Parameters/Default Work Unit
     guid: 03e556fac2ab7248878293f905e0b28a
     GuidInternal: 
-    m_lastTime: -8584554171289068362
-    List: []
+    m_lastTime: -8584548005975432583
+    List:
+    - name: SC
+      guid: acf3b202f24942489f306f40229d51a6
+      id: 1584861543
+      PathAndIcons:
+      - ElementName: Game Parameters
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 03e556fac2ab7248878293f905e0b28a
+      - ElementName: SC
+        ObjectType: 13
+        guid: acf3b202f24942489f306f40229d51a6
+      Path: Game Parameters/Default Work Unit/SC
   StateWwu:
   - PhysicalPath: States/Default Work Unit.wwu
     PathAndIcons:
@@ -1788,7 +1839,7 @@ MonoBehaviour:
     ParentPath: States/Default Work Unit
     guid: 1d78bb3dc64d99409aaa28adc5b249f8
     GuidInternal: 
-    m_lastTime: -8584553956723215130
+    m_lastTime: -8584548005972424450
     List:
     - name: ENV_Reverb
       guid: d92eff9b5a74774d9bdec46c6733ce4f
@@ -1852,7 +1903,7 @@ MonoBehaviour:
     ParentPath: Switches/Default Work Unit
     guid: 7e222b0267cce8468585adc42528f274
     GuidInternal: 
-    m_lastTime: -8584553956723236464
+    m_lastTime: -8584548005972423546
     List:
     - name: Footstep_Material
       guid: 7720fb771a8a2149a2ce2ab048ec5816
@@ -1900,11 +1951,11 @@ MonoBehaviour:
     ParentPath: Triggers/Default Work Unit
     guid: 5f47bc2d80cf3641a37780cd82a484fb
     GuidInternal: 
-    m_lastTime: -8584554171288919492
+    m_lastTime: -8584548005972422644
     List: []
   ExpandedFileSystemItemIds: 
-  ExpandedWaapiItemIds: 0500000006000000080000000a0000000b0000000c0000000d0000000e0000000f0000002300000024000000280000002e00000030000000390000003d0000003e00000045000000460000004d000000
+  ExpandedWaapiItemIds: 
   AutoSyncSelection: 0
   autoPopulateEnabled: 1
-  currentDataSource: 0
+  currentDataSource: 1
   CurrentPluginConfig: 
