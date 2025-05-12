@@ -13,7 +13,10 @@ public class Player : Entity
     public int attackLimitation = 0;//Limit the attack combo count.
     public Vector2[] attackMovement;
     public float[] attackForce;
+    [Header("Skill Info")]
     public float chargeAttackMovement;
+    public Transform chargeAttackCheck;
+    public float chargeAttackRadius;
     public bool isBusy { get; private set; }
 
     [Header("Move Info")]
@@ -121,7 +124,9 @@ public class Player : Entity
     protected override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
-        Gizmos.DrawWireSphere(attackCheck[attackCount].position, attackCheckRadius[attackCount]);
+        //Gizmos.DrawWireSphere(attackCheck[attackCount].position, attackCheckRadius[attackCount]);
+
+        Gizmos.DrawWireSphere(chargeAttackCheck.position, chargeAttackRadius);
     }
 
     public IEnumerator BusyFor(float _seconds)//used to control the attack interval

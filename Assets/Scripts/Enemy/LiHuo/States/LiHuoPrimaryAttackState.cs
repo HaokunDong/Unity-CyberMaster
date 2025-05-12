@@ -20,8 +20,6 @@ public class LiHuoPrimaryAttackState : EnemyState
     {
         base.Enter();
 
-        Debug.Log(comboCounter);
-
         if (comboCounter > 2 || Time.time >= lastTimeAttacked + comboWindow)
         {
             comboCounter = 0;
@@ -32,7 +30,7 @@ public class LiHuoPrimaryAttackState : EnemyState
 
         stateTimer = 0.1f;
 
-        liHuo.SetVelocity(liHuo.attackMovement[comboCounter].x * liHuo.facingDir, liHuo.attackMovement[comboCounter].y);
+        liHuo.SetVelocity(liHuo.attackMoveSpeed[comboCounter].x * liHuo.facingDir, liHuo.attackMoveSpeed[comboCounter].y);
 
     }
 

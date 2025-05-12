@@ -14,6 +14,11 @@ public class EnemyAnimationTriggers : MonoBehaviour
         enemy.AnimationFinishTrigger();
     }
 
+    private void AttackMovementTrigger()
+    {
+        enemy.AttackMove();
+    }
+
     private void AttackTrigger()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll
@@ -31,6 +36,8 @@ public class EnemyAnimationTriggers : MonoBehaviour
 
     private void CanBeBouncedAttackTrigger() => enemy.CanBeBouncedAttack();
     private void CanNotBeBouncedAttackTrigger() => enemy.CanNotBeBouncedAttack();
+
+    private void SetVelocityZero() => enemy.SetZeroVelocity();
 
     // ✅ 仅播放传入的音效
     public void PlaySFX(AudioClip clip)
@@ -53,4 +60,15 @@ public class EnemyAnimationTriggers : MonoBehaviour
             }
         }
     }
+
+    #region LiHuoTrigger
+    private void StabAttackTrigger()
+    {
+        EnemyManager.Ins.liHuo.StabAttackTrigger();
+    }
+    private void LeapAttackTrigger()
+    {
+        EnemyManager.Ins.liHuo.LeapAttackTrigger();
+    }
+    #endregion
 }

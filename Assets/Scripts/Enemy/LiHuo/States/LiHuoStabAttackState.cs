@@ -24,6 +24,19 @@ public class LiHuoStabAttackState : EnemyState
     {
         base.Update();
 
+        if (stateTimer < 0)
+        {
+            liHuo.SetZeroVelocity();
+        }
+
+        if (eventsTriggerCalled)
+        {
+            stateTimer = 0.2f;
+            liHuo.SetVelocity(liHuo.facingDir * liHuo.stabAttackMoveSpeed, rb.velocity.y);
+
+            eventsTriggerCalled = false;
+        }
+
         if (triggerCalled)
         {
             stateMachine.ChangeState(liHuo.battleState);

@@ -14,6 +14,7 @@ public class EnemyState
 
     protected float stateTimer;
     protected bool triggerCalled;
+    protected bool eventsTriggerCalled;
 
     protected int bounceAttackCounter;
 
@@ -37,6 +38,7 @@ public class EnemyState
         enemy.animator.SetBool(animBoolName, true);
         rb = enemy.rb;
         triggerCalled = false;
+        eventsTriggerCalled = false;
     }
 
     public virtual void Exit()
@@ -48,6 +50,12 @@ public class EnemyState
     {
         triggerCalled = true;
     }
+
+    public virtual void AnimationEventTrigger()
+    {
+        eventsTriggerCalled = true;
+    }
+
     public virtual void OnHit(Entity from)
     {
 

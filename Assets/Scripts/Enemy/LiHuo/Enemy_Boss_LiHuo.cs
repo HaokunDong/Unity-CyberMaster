@@ -12,10 +12,18 @@ public class Enemy_Boss_LiHuo : Enemy
     [Header("LiHuoSkills Info")]
     private float nextTimeReadyToMove;
     [SerializeField] public float moveCD;
+
     private float nextTimeReadyToLeapAttack;
     [SerializeField] public float leapAttackCD;
+    [SerializeField] public float leapAttackMoveSpeed;
+    [SerializeField] public Transform leapAttackCheck;
+    [SerializeField] public float leapAttackRadius;
+
     private float nextTimeReadyToStabAttack;
     [SerializeField] public float stabAttackCD;
+    [SerializeField] public float stabAttackMoveSpeed;
+    [SerializeField] public Transform stabAttackCheck;
+    [SerializeField] public Vector2 stabAttackSize;
 
     //public bool bossFightBegun;
 
@@ -81,7 +89,23 @@ public class Enemy_Boss_LiHuo : Enemy
     protected override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
-        Gizmos.DrawWireSphere(attackCheck[attackCount].position, attackCheckRadius[attackCount]);
+        //Gizmos.DrawWireSphere(attackCheck[attackCount].position, attackCheckRadius[attackCount]);
+
+        /*        #region DrawStabAttack
+        #if UNITY_EDITOR
+                Collider2D[] hits = Physics2D.OverlapBoxAll(stabAttackCheck.position, stabAttackSize, 0);
+                Gizmos.color = hits.Length > 0 ? Color.green : Color.white;
+        #else
+            Gizmos.color = Color.blue;
+        #endif
+                // 绘制旋转的矩形
+                Matrix4x4 rotationMatrix = Matrix4x4.TRS(stabAttackCheck.position, Quaternion.Euler(0, 0, 0), Vector3.one);
+                Gizmos.matrix = rotationMatrix;
+                Gizmos.DrawWireCube(Vector3.zero, new Vector3(stabAttackSize.x, stabAttackSize.y, 0));
+                Gizmos.matrix = Matrix4x4.identity; // 重置矩阵
+                #endregion*/
+
+        Gizmos.DrawWireSphere(leapAttackCheck.position, leapAttackRadius);
     }
 
     #region DistanceJudge
@@ -122,7 +146,7 @@ public class Enemy_Boss_LiHuo : Enemy
 
     public bool IsPlayerFar()
     {
-        if (RelativeDistance() > 5.0f)
+        if (RelativeDistance() > 7.0f)
         {
             return true;
         }
@@ -131,7 +155,7 @@ public class Enemy_Boss_LiHuo : Enemy
 
     public bool IsPlayerClose()
     {
-        if (RelativeDistance() <= 5.0f)
+        if (RelativeDistance() <= 7.0f)
         {
             return true;
         }
@@ -181,4 +205,32 @@ public class Enemy_Boss_LiHuo : Enemy
     }
 
     #endregion
+
+    //public void StabAttackMove() => stateMachine.currentState.AnimationEventTrigger();
+    public void StabAttackTrigger()
+    {
+        Collider2D[] hits = Physics2D.OverlapBoxAll(stabAttackCheck.position, stabAttackSize, 0);
+        foreach(var hit in hits)
+        {
+            if(hit.GetComponent<Player>() != null)
+            {
+                hit.GetComponent<Player>().OnHitFromTarget(this);
+                HitTarget();
+            }
+        }
+    }
+    public void LeapAttackTrigger()
+    {
+        Debug.Log("11111111");
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(leapAttackCheck.position, leapAttackRadius);
+        foreach (var hit in colliders)
+        {
+            if (hit.GetComponent<Player>() != null)
+            {
+                
+                hit.GetComponent<Player>().OnHitFromTarget(this);
+                HitTarget();
+            }
+        }
+    }
 }

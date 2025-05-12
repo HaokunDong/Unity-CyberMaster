@@ -24,6 +24,19 @@ public class LiHuoLeapAttackState : EnemyState
     {
         base.Update();
 
+        if (stateTimer < 0)
+        {
+            liHuo.SetZeroVelocity();
+        }
+
+        if (eventsTriggerCalled)
+        {
+            stateTimer = liHuo.RelativeDistance() / liHuo.leapAttackMoveSpeed;
+            liHuo.SetVelocity(liHuo.facingDir * liHuo.leapAttackMoveSpeed, rb.velocity.y);
+
+            eventsTriggerCalled = false;
+        }
+
         if (triggerCalled)
         {
             stateMachine.ChangeState(liHuo.battleState);

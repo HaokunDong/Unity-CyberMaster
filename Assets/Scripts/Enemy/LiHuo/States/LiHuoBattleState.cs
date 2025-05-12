@@ -30,8 +30,6 @@ public class LiHuoBattleState : EnemyState
         base.Update();
 
         behaviourTree.Execute();
-
-        Debug.Log("Battle");
     }
 
     public void BuildLihuoBehaviourTree()
@@ -39,6 +37,7 @@ public class LiHuoBattleState : EnemyState
         behaviourTree = new Selector(
             new Sequencer(
                 new ConditionNode(() => liHuo.facingDir != liHuo.RelativePosition()),
+                new ActionNode(() => liHuo.StartCoroutine(liHuo.DelayFlip())),
                 new ActionNode(() => stateMachine.ChangeState(liHuo.cdState))
                 ),
 

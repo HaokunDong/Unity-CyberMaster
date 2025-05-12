@@ -16,6 +16,7 @@ public class LiHuoCDState : EnemyState
         base.Enter();
 
         stateTimer = 0.7f;
+
     }
 
     public override void Exit()
@@ -26,11 +27,6 @@ public class LiHuoCDState : EnemyState
     public override void Update()
     {
         base.Update();
-
-        if (liHuo.facingDir != liHuo.RelativePosition() && stateTimer <= 0)
-        {
-            liHuo.FlipController(liHuo.RelativePosition());
-        }
 
         if (Time.time >= liHuo.nextTimeReadyToComboAttack) {
             stateMachine.ChangeState(liHuo.battleState);
@@ -62,4 +58,5 @@ public class LiHuoCDState : EnemyState
     {
         stateMachine.ChangeState(liHuo.deadState);
     }
+
 }

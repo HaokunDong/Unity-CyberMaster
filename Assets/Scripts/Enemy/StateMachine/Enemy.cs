@@ -15,7 +15,7 @@ public class Enemy : Entity
     public float nextTimeReadyToComboAttack;
     [SerializeField] public float ComboAttackCD;
     public int attackCount;
-    public Vector2[] attackMovement;
+    public Vector2[] attackMoveSpeed;
     public float[] attackForce;
 
     private Transform playerTrans;
@@ -43,6 +43,12 @@ public class Enemy : Entity
         base.Update();
 
         stateMachine.currentState.Update();
+    }
+
+    public IEnumerator DelayFlip()
+    {
+        yield return new WaitForSeconds(0.7f);
+        Flip();
     }
 
     public override void OnHitFromTarget(Entity from)
@@ -102,5 +108,6 @@ public class Enemy : Entity
     }
 
     public void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();
+    public void AttackMove() => stateMachine.currentState.AnimationEventTrigger();
 
 }

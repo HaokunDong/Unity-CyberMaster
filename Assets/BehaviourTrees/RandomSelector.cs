@@ -20,7 +20,6 @@ namespace BehaviourTrees
             if(currentChildIndex == -1)
             {
                 currentChildIndex = Random.Range(0, children.Length);
-                Debug.Log("currentChildIndex: " + currentChildIndex);
             }
 
             var childStatus = children[currentChildIndex].Execute();
