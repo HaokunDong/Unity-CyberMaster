@@ -38,7 +38,10 @@ public class PlayerGroundedState : PlayerState
             }
             else if (player.canExecution)
             {
-                Debug.Log(player.canExecution);
+                //Debug.Log(player.canExecution);
+
+                
+
                 player.canExecution = false;
                 stateMachine.ChangeState(player.executionState);
             }

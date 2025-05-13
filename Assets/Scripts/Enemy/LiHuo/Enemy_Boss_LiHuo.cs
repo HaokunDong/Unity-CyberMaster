@@ -56,7 +56,7 @@ public class Enemy_Boss_LiHuo : Enemy
         leapAttackState = new LiHuoLeapAttackState(stateMachine, this, "LeapAttack", this);
         stabAttackState = new LiHuoStabAttackState(stateMachine, this, "StabAttack", this);
         bounceAttackState = new LiHuoBounceAttackState(stateMachine, this, "BounceAttack", this);
-        deadState = new LiHuoDeadState(stateMachine, this, "Idle", this);
+        deadState = new LiHuoDeadState(stateMachine, this, "Dead", this);
         beExecutedState = new LiHuoBeExecutedState(stateMachine, this, "BeExecuted", this);
 
     }
@@ -70,7 +70,7 @@ public class Enemy_Boss_LiHuo : Enemy
 
         Flip();
 
-        stateMachine.Initialize(idleState);
+        stateMachine.Initialize(deadState);
 
     }
 
@@ -91,7 +91,7 @@ public class Enemy_Boss_LiHuo : Enemy
         base.OnDrawGizmos();
         //Gizmos.DrawWireSphere(attackCheck[attackCount].position, attackCheckRadius[attackCount]);
 
-        #region DrawStabAttack
+/*        #region DrawStabAttack
 #if UNITY_EDITOR
         Collider2D[] hits = Physics2D.OverlapBoxAll(stabAttackCheck.position, stabAttackSize, 0);
         Gizmos.color = hits.Length > 0 ? Color.green : Color.white;
@@ -103,7 +103,7 @@ public class Enemy_Boss_LiHuo : Enemy
         Gizmos.matrix = rotationMatrix;
         Gizmos.DrawWireCube(Vector3.zero, new Vector3(stabAttackSize.x, stabAttackSize.y, 0));
         Gizmos.matrix = Matrix4x4.identity; // 重置矩阵
-        #endregion
+        #endregion*/
 
         //Gizmos.DrawWireSphere(leapAttackCheck.position, leapAttackRadius);
     }

@@ -57,6 +57,12 @@ public class Enemy : Entity
         stateMachine.currentState.OnHit(from);
     }
 
+    public override void BeExecution()
+    {
+        base.BeExecution();
+        stateMachine.currentState.BeExecution();
+    }
+
     public virtual bool IsPlayerExist()
     {
         if (playerTrans != null)

@@ -28,7 +28,7 @@ public class LiHuoDeadState : EnemyState
     {
         base.Update();
 
-        Debug.Log(GameManager.Ins.interactionDistance);
+        /*Debug.Log(GameManager.Ins.interactionDistance);
 
         if (liHuo.RelativeDistance() <= GameManager.Ins.interactionDistance)
         {
@@ -38,6 +38,13 @@ public class LiHuoDeadState : EnemyState
                 Debug.Log("Execution");
                 stateMachine.ChangeState(liHuo.beExecutedState);
             }
-        }
+        }*/
+    }
+
+    public override void BeExecution()
+    {
+        base.BeExecution();
+
+        stateMachine.ChangeState(liHuo.beExecutedState);
     }
 }

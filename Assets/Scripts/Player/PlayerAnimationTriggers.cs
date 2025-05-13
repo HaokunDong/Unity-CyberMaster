@@ -59,6 +59,19 @@ public class PlayerAnimationTriggers : MonoBehaviour
         }
     }
 
+    private void ExecutionEnemyTrigger()
+    {
+
+        RaycastHit2D[] hits = Physics2D.RaycastAll(player.transform.position, player.transform.right, player.executionRange);
+        foreach (var hit in hits)
+        {
+            if (hit.collider.GetComponent<Enemy>() != null)
+            {
+                hit.collider.GetComponent<Enemy>().BeExecution();
+            }
+        }
+    }
+
     private void CanBeBouncedAttackTrigger() => player.CanBeBouncedAttack();
     private void CanNotBeBouncedAttackTrigger() => player.CanNotBeBouncedAttack();
 

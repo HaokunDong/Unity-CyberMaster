@@ -34,8 +34,10 @@ public class Player : Entity
     public BarCom lifeBar;
     public PlayerInfo info = new PlayerInfo();
 
+    [Header("Execution Info")]
     public UnityEvent OnExecution;
     public bool canExecution = false;
+    public float executionRange;
     #region States
     public PlayerStateMachine stateMachine { get; private set; }
 
@@ -92,6 +94,8 @@ public class Player : Entity
         this.RefreshInfoState();
         lifeBar.On(BarComEvent.MAX_ARRIVE, PlayerWin);
         lifeBar.On(BarComEvent.MIN_ARRIVE, PlayerLose);
+
+        PlayerWin();
     }
 
     protected override void Update()
