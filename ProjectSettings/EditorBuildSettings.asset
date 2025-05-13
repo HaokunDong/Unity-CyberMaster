@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Rooftop.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: e1ffcc5ae9d0add49a5a66cee151a9ea
+  - enabled: 1
+    path: Assets/Scenes/Apartment.unity
+    guid: 97d932dffe2640f4aba11214f93b20c9
   m_configObjects: {}
