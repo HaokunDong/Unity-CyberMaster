@@ -14,7 +14,7 @@ public class PlayerBeAttackedState : PlayerState
     {
         base.Enter();
 
-        player.SetMovement(-player.facingDir * 15, rb.velocity.y);
+        player.SetMovement(-player.facingDir * 20, rb.velocity.y);
 
     }
 

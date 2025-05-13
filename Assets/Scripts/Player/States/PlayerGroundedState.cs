@@ -76,7 +76,7 @@ public class PlayerGroundedState : PlayerState
 
         foreach (var hit in colliders)
         {
-            if (hit.GetComponent<Enemy>() != null && player.attackLimitation >= 100)
+            if (hit.GetComponent<Enemy>() != null && player.attackLimitation >= 5)
             {
                 return true;
             }
