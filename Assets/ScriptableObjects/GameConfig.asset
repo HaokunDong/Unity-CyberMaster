@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc01952fd6298ba439374c50e5c7bcdd, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: 
-  playerDecayLife_hitted: 30
-  playerDecayLife_defense: 10
+  playerDecayLife_hitted: 20
+  playerDecayLife_defense: 8
   playerIncreaseLife_bounce: 3
   playerIncreaseLife_attack: 2
