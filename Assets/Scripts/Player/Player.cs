@@ -63,6 +63,7 @@ public class Player : Entity
     protected override void Awake()
     {
         base.Awake();
+        //liHuo = EnemyManager.Ins.liHuo;
         stateMachine = new PlayerStateMachine();
 
         idleState = new PlayerIdleState(stateMachine, this, "Idle");
@@ -95,7 +96,7 @@ public class Player : Entity
         lifeBar.On(BarComEvent.MAX_ARRIVE, PlayerWin);
         lifeBar.On(BarComEvent.MIN_ARRIVE, PlayerLose);
 
-        PlayerWin();
+        //PlayerWin();
     }
 
     protected override void Update()

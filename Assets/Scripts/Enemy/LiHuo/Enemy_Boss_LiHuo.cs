@@ -28,7 +28,7 @@ public class Enemy_Boss_LiHuo : Enemy
     //public bool bossFightBegun;
 
     #region States
-
+    public LiHuoAppearState appearState { get; private set; }
     public LiHuoIdleState idleState { get; private set; }
     public LiHuoMoveState moveState { get; private set; }
     public LiHuoBattleState battleState { get; private set; }
@@ -47,6 +47,9 @@ public class Enemy_Boss_LiHuo : Enemy
     {
         base.Awake();
 
+        //player = PlayerManager.Ins.player;
+
+        appearState = new LiHuoAppearState(stateMachine, this, "Appear", this);
         idleState = new LiHuoIdleState(stateMachine, this, "Idle", this);
         moveState = new LiHuoMoveState(stateMachine, this, "Move", this);
         battleState = new LiHuoBattleState(stateMachine, this, "Idle", this);
@@ -70,13 +73,15 @@ public class Enemy_Boss_LiHuo : Enemy
 
         Flip();
 
-        stateMachine.Initialize(deadState);
+        stateMachine.Initialize(idleState);
 
     }
 
     protected override void Update()
     {
         base.Update();
+
+        Debug.Log(stateMachine.currentState.ToString());
     }
 
     public override void OnHitFromTarget(Entity from)
@@ -89,7 +94,7 @@ public class Enemy_Boss_LiHuo : Enemy
     protected override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
-        //Gizmos.DrawWireSphere(attackCheck[attackCount].position, attackCheckRadius[attackCount]);
+        //Gizmos.DrawWireSphere(attackCheck[5].position, attackCheckRadius[5]);
 
 /*        #region DrawStabAttack
 #if UNITY_EDITOR

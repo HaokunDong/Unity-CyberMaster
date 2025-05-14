@@ -20,7 +20,7 @@ public class LiHuoPrimaryAttackState : EnemyState
     {
         base.Enter();
 
-        if (comboCounter > 2 || Time.time >= lastTimeAttacked + comboWindow)
+        if (comboCounter > 5 || Time.time >= lastTimeAttacked + comboWindow)
         {
             comboCounter = 0;
         }
@@ -54,7 +54,7 @@ public class LiHuoPrimaryAttackState : EnemyState
 
         if (triggerCalled)
         {
-            if (comboCounter == 2 || !liHuo.IsPlayerInAttackRange())
+            if (comboCounter >= 5 || !liHuo.IsPlayerInAttackRange())
             {
                 liHuo.nextTimeReadyToComboAttack = Time.time + liHuo.ComboAttackCD;
                 stateMachine.ChangeState(liHuo.battleState);
