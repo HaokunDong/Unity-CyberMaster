@@ -3,12 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuUI : MonoBehaviour
 {
-    // 场景名必须与 Build Settings 中一致
-    public string bossSceneName = "Bossroom";
-
-    public void StartGame()
+    // 点击按钮时调用，传入场景名
+    public void LoadSceneByName(string sceneName)
     {
-        SceneManager.LoadScene(bossSceneName);
+        SceneManager.LoadScene(sceneName);
     }
 
     public void QuitGame()
