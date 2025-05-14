@@ -1,0 +1,22 @@
+Event	ID	Name			Wwise Object Path	Notes
+	2044747472	Play_UI			\Default Work Unit\Music\Play_UI	
+	2212055860	Play_Battle			\Default Work Unit\Music\Play_Battle	
+	2693679364	Battle_Over			\Default Work Unit\Music\Battle_Over	
+
+State Group	ID	Name			Wwise Object Path	Notes
+	3782024871	Music_Battle			\Default Work Unit\Music_Battle	
+
+State	ID	Name	State Group			Notes
+	748895195	None	Music_Battle			
+	2395677314	Common	Music_Battle			
+	2514411491	Died	Music_Battle			
+	2937832959	Battle	Music_Battle			
+
+Custom State	ID	Name	State Group	Owner		Notes
+	203335925	Died	Music_Battle	\Actor-Mixer Hierarchy\Default Work Unit\Music\Battle		
+	798433927	Battle	Music_Battle	\Actor-Mixer Hierarchy\Default Work Unit\Music\UI		
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	56429050	UI	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Windows\SFX\UI_A224571F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music\UI		32568440
+	179165217	Battle	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Windows\SFX\Battle_A224571F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Music\Battle		42477212
+

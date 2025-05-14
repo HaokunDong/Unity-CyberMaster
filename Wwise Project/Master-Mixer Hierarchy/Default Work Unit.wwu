@@ -21,6 +21,38 @@
 								<Property Name="Color" Type="int16" Value="6"/>
 								<Property Name="OverrideColor" Type="bool" Value="True"/>
 							</PropertyList>
+							<StateInfo>
+								<StateGroupList>
+									<StateGroupInfo>
+										<StateGroupRef Name="Music_Battle" ID="{D0E6C8BB-1A00-40A8-87DB-D516BC34D94C}"/>
+									</StateGroupInfo>
+								</StateGroupList>
+								<CustomStateList>
+									<CustomState>
+										<StateRef Name="Common" ID="{2F93A599-9D50-4843-A5D5-0E29284B9B03}"/>
+										<CustomState Name="" ID="{6FEE79F9-E395-40AC-8C32-9272D4E621EE}" ShortID="115035749"/>
+									</CustomState>
+									<CustomState>
+										<StateRef Name="Died" ID="{78574923-8EC1-4ACB-817F-9FA32A015412}"/>
+										<CustomState Name="" ID="{CE5B6792-1944-49C0-AD3F-213C91F25D32}" ShortID="347479036">
+											<PropertyList>
+												<Property Name="Lowpass" Type="int16" Value="51"/>
+											</PropertyList>
+										</CustomState>
+									</CustomState>
+								</CustomStateList>
+							</StateInfo>
+							<DuckingList>
+								<DuckItem>
+									<BusRef Name="Battle" ID="{23F39F2A-5BC6-48FD-AFC0-2D19331F05B8}"/>
+									<DuckingParam>
+										<Volume>-6</Volume>
+										<FadeInTime>1</FadeInTime>
+										<FadeOutTime>1</FadeOutTime>
+										<FadeCurve>FadeLinear</FadeCurve>
+									</DuckingParam>
+								</DuckItem>
+							</DuckingList>
 						</Bus>
 						<Bus Name="Environment" ID="{09105E4A-EC79-4FC0-86E3-1D6B06F83EFC}">
 							<PropertyList>

@@ -1,0 +1,51 @@
+State Group	ID	Name			Wwise Object Path	Notes
+	1327267853	ENV_Reverb			\Default Work Unit\ENV_Reverb	
+
+State	ID	Name	State Group			Notes
+	748895195	None	ENV_Reverb			
+	3329270527	BossRoom	ENV_Reverb			
+
+Custom State	ID	Name	State Group	Owner		Notes
+	1005699135	BossRoom	ENV_Reverb	\Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus\BossRoom_Reverb		
+
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	504532776	Brick			\Factory Acoustic Textures\Textures\Brick	
+	513139656	Mountain			\Factory Acoustic Textures\Textures\Mountain	
+	841620460	Concrete			\Factory Acoustic Textures\Textures\Concrete	
+	1584861543	SC			\Default Work Unit\SC	
+	1755085759	Wood_Deep			\Factory Acoustic Textures\Textures\Wood_Deep	
+	1873957695	Anechoic			\Factory Acoustic Textures\Textures\Anechoic	
+	1970351858	Fabric			\Factory Acoustic Textures\Textures\Fabric	
+	2058049674	Wood			\Factory Acoustic Textures\Textures\Wood	
+	2412606308	Carpet			\Factory Acoustic Textures\Textures\Carpet	
+	2637588553	Tile			\Factory Acoustic Textures\Textures\Tile	
+	2928161104	Curtains			\Factory Acoustic Textures\Textures\Curtains	
+	3195498748	Cork_Tiles			\Factory Acoustic Textures\Textures\Cork_Tiles	
+	3670307564	Drywall			\Factory Acoustic Textures\Textures\Drywall	
+	4168643977	Acoustic_Banner			\Factory Acoustic Textures\Textures\Acoustic_Banner	
+	4262522749	Wood_Bright			\Factory Acoustic Textures\Textures\Wood_Bright	
+
+Audio Bus	ID	Name			Wwise Object Path	Notes
+	662417162	NPC			\Default Work Unit\Master Audio Bus\Battle\NPC	
+	1069431850	Player			\Default Work Unit\Master Audio Bus\Battle\Player	
+	1229948536	Environment			\Default Work Unit\Master Audio Bus\Environment	
+	1551306167	UI			\Default Work Unit\Master Audio Bus\UI	
+	1560169506	Boss			\Default Work Unit\Master Audio Bus\Battle\Boss	
+	2395677314	Common			\Default Work Unit\Master Audio Bus\Common	
+	2937832959	Battle			\Default Work Unit\Master Audio Bus\Battle	
+	3415664688	CO_Posture_Hit			\Default Work Unit\Master Audio Bus\Common\CO_Posture_Hit	
+	3803692087	Master Audio Bus			\Default Work Unit\Master Audio Bus	
+	3991942870	Music			\Default Work Unit\Master Audio Bus\Music	
+
+Auxiliary Bus	ID	Name			Wwise Object Path	Notes
+	359562144	SC_Aux			\Default Work Unit\Master Audio Bus\SC_Aux	
+	3411721278	BossRoom_Reverb			\Default Work Unit\Master Audio Bus\BossRoom_Reverb	
+
+Effect plug-ins	ID	Name	Type				Notes
+	713892870	Meter (Custom)	Wwise Meter			
+	3442768367	Hall_Large_Dark	Wwise RoomVerb			
+
+Audio Devices	ID	Name	Type				Notes
+	2317455096	No_Output	No Output			
+	3859886410	System	System			
+

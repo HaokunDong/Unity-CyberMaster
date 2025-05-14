@@ -1,0 +1,40 @@
+Event	ID	Name			Wwise Object Path	Notes
+	506545109	Play_BO_001_Be_Parried			\Default Work Unit\Boss\BO_001\BO_001_Other\Play_BO_001_Be_Parried	
+	963150948	Play_BO_001_Far_Attack			\Default Work Unit\Boss\BO_001\BO_001_Other\Play_BO_001_Far_Attack	
+	1040404966	Play_BO_001_Stinging_Attack			\Default Work Unit\Boss\BO_001\BO_001_Other\Play_BO_001_Stinging_Attack	
+	1078702266	Play_BO_001_Back_Defence			\Default Work Unit\Boss\BO_001\BO_001_Other\Play_BO_001_Back_Defence	
+	1229657458	Play_BO_001_Defence			\Default Work Unit\Boss\BO_001\BO_001_Other\Play_BO_001_Defence	
+	1572589711	Play_BO_001_Landing			\Default Work Unit\Boss\BO_001\BO_001_Other\Play_BO_001_Landing	
+	2292720290	Play_BO_001_Back_Attack			\Default Work Unit\Boss\BO_001\BO_001_Other\Play_BO_001_Back_Attack	
+	2384383224	Play_BO_001_ATK02_05			\Default Work Unit\Boss\BO_001\BO_001_ATK_02\Play_BO_001_ATK02_05	
+	2384383225	Play_BO_001_ATK02_04			\Default Work Unit\Boss\BO_001\BO_001_ATK_02\Play_BO_001_ATK02_04	
+	2384383228	Play_BO_001_ATK02_01			\Default Work Unit\Boss\BO_001\BO_001_ATK_02\Play_BO_001_ATK02_01	
+	2384383230	Play_BO_001_ATK02_03			\Default Work Unit\Boss\BO_001\BO_001_ATK_02\Play_BO_001_ATK02_03	
+	2384383231	Play_BO_001_ATK02_02			\Default Work Unit\Boss\BO_001\BO_001_ATK_02\Play_BO_001_ATK02_02	
+	2465717513	Play_BO_001_ATK01_01			\Default Work Unit\Boss\BO_001\BO_001_ATK_01\Play_BO_001_ATK01_01	
+	2465717514	Play_BO_001_ATK01_02			\Default Work Unit\Boss\BO_001\BO_001_ATK_01\Play_BO_001_ATK01_02	
+	2465717515	Play_BO_001_ATK01_03			\Default Work Unit\Boss\BO_001\BO_001_ATK_01\Play_BO_001_ATK01_03	
+	2784198659	Play_BO_001_Footsteps			\Default Work Unit\Boss\BO_001\BO_001_Footsteps\Play_BO_001_Footsteps	
+	3981994236	Play_BO_001_Parry			\Default Work Unit\Boss\BO_001\BO_001_Other\Play_BO_001_Parry	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	307167	BO_Walk_RD_3	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Mac\SFX\BO_Walk_RD_3_659B22DF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\BO_001\BO_001_Footsteps\BO_Walk_RD_3		386452
+	166593287	BO_Walk_RD_2	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Mac\SFX\BO_Walk_RD_2_EE807419.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\BO_001\BO_001_Footsteps\BO_Walk_RD_2		366080
+	189262689	BO_001_ATK01_01	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Mac\SFX\BO_001_ATK01_A_A0DE8973.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\BO_001\BO_001_ATK01\BO_001_ATK01_01		293500
+	234598853	BO_001_Landing	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Mac\SFX\BO_landing_E5FEFA51.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\BO_001\BO_001_Other\BO_001_Landing		604020
+	266244816	BO_001_Stinging_Attack	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Mac\SFX\BO_stinging_attack_DCCF0999.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\BO_001\BO_001_Other\BO_001_Stinging_Attack		637248
+	298699359	BO_Walk_RD_1	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Mac\SFX\BO_Walk_RD_1_23887CC8.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\BO_001\BO_001_Footsteps\BO_Walk_RD_1		331560
+	342732078	BO_001_Back_Defence	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Mac\SFX\BO_back_defence_3333AC2D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\BO_001\BO_001_Other\BO_001_Back_Defence		345916
+	407016686	BO_001_Defence	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Mac\SFX\BO_defence_E713679F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\BO_001\BO_001_Other\BO_001_Defence		403340
+	507167495	BO_001_Be_Parried	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Mac\SFX\BO_be_parried_7F87336F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\BO_001\BO_001_Other\BO_001_Be_Parried		373280
+	510750062	BO_001_ATK02_05	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Mac\SFX\BO_001_ATK02_E_F9B00C70.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\BO_001\BO_001_ATK02\BO_001_ATK02_05		474432
+	529619634	BO_001_ATK02_04	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Mac\SFX\BO_001_ATK02_D_790A3EA1.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\BO_001\BO_001_ATK02\BO_001_ATK02_04		435156
+	538315190	BO_001_ATK01_02	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Mac\SFX\BO_001_ATK01_B_E5FEFA51.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\BO_001\BO_001_ATK01\BO_001_ATK01_02		361940
+	753384372	BO_001_Back_Attack	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Mac\SFX\Player_back_attack_F63461E4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\BO_001\BO_001_Other\BO_001_Back_Attack		553840
+	770193916	BO_001_ATK02_03	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Mac\SFX\BO_001_ATK02_C_2C28C58F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\BO_001\BO_001_ATK02\BO_001_ATK02_03		525460
+	787248915	BO_001_ATK02_01	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Mac\SFX\BO_001_ATK02_A_61279EFE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\BO_001\BO_001_ATK02\BO_001_ATK02_01		464496
+	819569203	BO_001_Far_Attack	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Mac\SFX\BO_far_attack_51308121.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\BO_001\BO_001_Other\BO_001_Far_Attack		780248
+	930206121	BO_001_Parry	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Mac\SFX\BO_parry_CF2972B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\BO_001\BO_001_Other\BO_001_Parry		365924
+	991430761	BO_001_ATK02_02	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Mac\SFX\BO_001_ATK02_B_E5FEFA51.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\BO_001\BO_001_ATK02\BO_001_ATK02_02		449764
+	1012948081	BO_001_ATK01_03	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Mac\SFX\BO_001_ATK01_C_E5FEFA51.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss\BO_001\BO_001_ATK01\BO_001_ATK01_03		331592
+

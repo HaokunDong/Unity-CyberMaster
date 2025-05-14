@@ -1,0 +1,8 @@
+Event	ID	Name			Wwise Object Path	Notes
+	1348258409	Play_UI_Base_Whoosh			\Default Work Unit\UI\Play_UI_Base_Whoosh	
+	4140365446	Play_UI_Menu			\Default Work Unit\UI\Play_UI_Menu	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	140383743	UI_Base_Whoosh	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Mac\SFX\WHSH_ORGANIC-Wind Base Gust Long_B00M_CMCK.M_D04A3F91.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\UI_Base_Whoosh		120552
+	633271454	UI_Menu	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Mac\SFX\Deep Tech_CK_UI_Click_Chain Arc_Mini Pack-1MOD.M_E5FEFA51.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\UI_Menu		27378
+

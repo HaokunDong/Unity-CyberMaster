@@ -123,6 +123,13 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.84615386
+    functionName: Play_BO_Stab_ATK
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.84615386
     functionName: AttackMovementTrigger
     data: 
     objectReferenceParameter: {fileID: 0}

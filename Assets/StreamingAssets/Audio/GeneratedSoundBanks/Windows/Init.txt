@@ -1,11 +1,17 @@
 State Group	ID	Name			Wwise Object Path	Notes
 	1327267853	ENV_Reverb			\Default Work Unit\ENV_Reverb	
+	3782024871	Music_Battle			\Default Work Unit\Music_Battle	
 
 State	ID	Name	State Group			Notes
 	748895195	None	ENV_Reverb			
 	3329270527	BossRoom	ENV_Reverb			
+	748895195	None	Music_Battle			
+	2395677314	Common	Music_Battle			
+	2514411491	Died	Music_Battle			
+	2937832959	Battle	Music_Battle			
 
 Custom State	ID	Name	State Group	Owner		Notes
+	347479036	Died	Music_Battle	\Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus\Music		
 	1005699135	BossRoom	ENV_Reverb	\Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus\BossRoom_Reverb		
 
 Game Parameter	ID	Name			Wwise Object Path	Notes

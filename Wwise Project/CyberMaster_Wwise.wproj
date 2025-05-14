@@ -28,10 +28,9 @@
 						<Value Platform="Android">GeneratedSoundBanks\Android</Value>
 					</ValueList>
 				</Property>
-				<Property Name="MediaAutoBankSubFolders" Type="bool" Value="True"/>
 				<Property Name="SoundBankGenerateEstimatedDuration" Type="bool" Value="True"/>
 				<Property Name="SoundBankGenerateMaxAttenuationInfo" Type="bool" Value="True"/>
-				<Property Name="SoundBankHeaderFilePath" Type="string" Value="..\..\..\Documents\CYBER\Assets\StreamingAssets\Audio\GeneratedSoundBanks"/>
+				<Property Name="SoundBankHeaderFilePath" Type="string" Value="..\Assets\StreamingAssets\Audio\GeneratedSoundBanks"/>
 				<Property Name="SoundBankPaths" Type="string">
 					<ValueList>
 						<Value Platform="Mac">..\Assets\StreamingAssets\Audio\GeneratedSoundBanks\Mac\</Value>

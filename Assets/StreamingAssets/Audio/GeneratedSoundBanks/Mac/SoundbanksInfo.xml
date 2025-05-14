@@ -13,10 +13,14 @@
 			<ShortName>NPC</ShortName>
 			<Path>NPC.bnk</Path>
 		</SoundBank>
-		<SoundBank Id="1069431850" Type="User" Language="SFX" Hash="{7F7C958D-BCBD-70C6-980E-C102B9A2EC76}">
+		<SoundBank Id="1069431850" Type="User" Language="SFX" Hash="{A26DD710-E853-3642-A7C1-89E376E8393C}">
 			<ShortName>Player</ShortName>
 			<Path>Player.bnk</Path>
 			<Media>
+				<File Id="165683091" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>PL_001_Jump.wav</ShortName>
+					<CachePath>SFX/PL_001_Jump_E5FEFA51.wem</CachePath>
+				</File>
 				<File Id="241859539" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Player_Five_Combo_01.wav</ShortName>
 					<CachePath>SFX/Player_Five_Combo_01_1F22AB1D.wem</CachePath>
@@ -29,6 +33,10 @@
 					<ShortName>PL_Common_Footsteps_Concrete-002.wav</ShortName>
 					<CachePath>SFX/PL_Common_Footsteps_Concrete-002_E5FEFA51.wem</CachePath>
 				</File>
+				<File Id="383940764" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>PL_001_Landing.wav</ShortName>
+					<CachePath>SFX/PL_001_Landing_E5FEFA51.wem</CachePath>
+				</File>
 				<File Id="453759118" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Player_Five_Combo_05.wav</ShortName>
 					<CachePath>SFX/Player_Five_Combo_05_19D8BA46.wem</CachePath>
@@ -40,6 +48,10 @@
 				<File Id="479130323" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Player_Wield_Sword.wav</ShortName>
 					<CachePath>SFX/Player_Wield_Sword_2F46A457.wem</CachePath>
+				</File>
+				<File Id="532305602" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>PL_001_WallSlide.wav</ShortName>
+					<CachePath>SFX/PL_001_WallSlide_E5FEFA51.wem</CachePath>
 				</File>
 				<File Id="563467051" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Player_Withstand_Up.wav</ShortName>
@@ -55,7 +67,7 @@
 				</File>
 				<File Id="674171404" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Player_Dodge.wav</ShortName>
-					<CachePath>SFX/Player_Dodge_36A8EE14.wem</CachePath>
+					<CachePath>SFX/Player_Dodge_FA026C43.wem</CachePath>
 				</File>
 				<File Id="678972229" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Player_Five_Combo_05.wav</ShortName>
@@ -73,6 +85,10 @@
 					<ShortName>Player_Charge_Attack.wav</ShortName>
 					<CachePath>SFX/Player_Charge_Attack_8CDDE027.wem</CachePath>
 				</File>
+				<File Id="806305588" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>PL_001_BeAttacked.wav</ShortName>
+					<CachePath>SFX/PL_001_BeAttacked_E5FEFA51.wem</CachePath>
+				</File>
 				<File Id="851371290" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Player_Five_Combo_02.wav</ShortName>
 					<CachePath>SFX/Player_Five_Combo_02_6F54FAA8.wem</CachePath>
@@ -85,74 +101,112 @@
 					<ShortName>Player_Withstand_Down.wav</ShortName>
 					<CachePath>SFX/Player_Withstand_Down_DA904BC9.wem</CachePath>
 				</File>
+				<File Id="996988585" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>PL_001_BeStunned.wav</ShortName>
+					<CachePath>SFX/PL_001_BeStunned_E5FEFA51.wem</CachePath>
+				</File>
+				<File Id="1064227758" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>PL_001_EX.wav</ShortName>
+					<CachePath>SFX/PL_001_EX_E5FEFA51.wem</CachePath>
+				</File>
 			</Media>
 			<Events>
-				<Event Id="1222799782" Name="Play_PL_001_ATK01_01" DurationType="OneShot" DurationMin="0.4480172" DurationMax="0.50288236">
+				<Event Id="1222799782" Name="Play_PL_001_ATK01_01">
 					<MediaRefs>
 						<MediaRef Id="241859539"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1222799781" Name="Play_PL_001_ATK01_02" DurationType="OneShot" DurationMin="0.46734354" DurationMax="0.5245755">
+				<Event Id="1222799781" Name="Play_PL_001_ATK01_02">
 					<MediaRefs>
 						<MediaRef Id="851371290"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1222799780" Name="Play_PL_001_ATK01_03" DurationType="OneShot" DurationMin="0.4953322" DurationMax="0.55599165">
+				<Event Id="1222799780" Name="Play_PL_001_ATK01_03">
 					<MediaRefs>
 						<MediaRef Id="869507503"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1222799779" Name="Play_PL_001_ATK01_04" DurationType="OneShot" DurationMin="0.5373257" DurationMax="0.6031277">
+				<Event Id="1222799779" Name="Play_PL_001_ATK01_04">
 					<MediaRefs>
 						<MediaRef Id="666210131"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1222799778" Name="Play_PL_001_ATK01_05" DurationType="OneShot" DurationMin="0.4591147" DurationMax="0.5153389">
+				<Event Id="1222799778" Name="Play_PL_001_ATK01_05">
 					<MediaRefs>
 						<MediaRef Id="453759118"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1222799777" Name="Play_PL_001_ATK01_06" MaxAttenuation="45" DurationType="OneShot" DurationMin="0.5649254" DurationMax="0.6341074">
+				<Event Id="1222799777" Name="Play_PL_001_ATK01_06">
 					<MediaRefs>
 						<MediaRef Id="678972229"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1917787654" Name="Play_PL_001_Other_Beat_Back" DurationType="OneShot" DurationMin="3.169791" DurationMax="3.169791">
+				<Event Id="3528883401" Name="Play_PL_001_BeAttacked">
+					<MediaRefs>
+						<MediaRef Id="806305588"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2026269643" Name="Play_PL_001_BeStunned">
+					<MediaRefs>
+						<MediaRef Id="996988585"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1178992046" Name="Play_PL_001_EX">
+					<MediaRefs>
+						<MediaRef Id="1064227758"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1756232657" Name="Play_PL_001_Jump">
+					<MediaRefs>
+						<MediaRef Id="165683091"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2082649234" Name="Play_PL_001_Landing">
+					<MediaRefs>
+						<MediaRef Id="383940764"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1917787654" Name="Play_PL_001_Other_Beat_Back">
 					<MediaRefs>
 						<MediaRef Id="478509229"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="3056109859" Name="Play_PL_001_Other_Bounce_Down" DurationType="OneShot" DurationMin="1.6564958" DurationMax="1.6564958">
+				<Event Id="3056109859" Name="Play_PL_001_Other_Bounce_Down">
 					<MediaRefs>
 						<MediaRef Id="955427998"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="2470542020" Name="Play_PL_001_Other_Bounce_Up" DurationType="OneShot" DurationMin="0.33589882" DurationMax="0.33589882">
+				<Event Id="2470542020" Name="Play_PL_001_Other_Bounce_Up">
 					<MediaRefs>
 						<MediaRef Id="563467051"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="2445579831" Name="Play_PL_001_Other_Charge_Attack" DurationType="OneShot" DurationMin="1.9619842" DurationMax="2.1769578">
+				<Event Id="2445579831" Name="Play_PL_001_Other_Charge_Attack">
 					<MediaRefs>
 						<MediaRef Id="778067989"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1864639745" Name="Play_PL_001_Other_Dodge" DurationType="OneShot" DurationMin="2.8686254" DurationMax="3.2236454">
+				<Event Id="1864639745" Name="Play_PL_001_Other_Dodge">
 					<MediaRefs>
 						<MediaRef Id="674171404"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="2050097340" Name="Play_PL_001_Other_Posture" DurationType="OneShot" DurationMin="1.589115" DurationMax="1.865924">
+				<Event Id="2050097340" Name="Play_PL_001_Other_Posture">
 					<MediaRefs>
 						<MediaRef Id="697328383"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1472934619" Name="Play_PL_001_Other_Wield_Sword" DurationType="OneShot" DurationMin="3.116958" DurationMax="3.116958">
+				<Event Id="1472934619" Name="Play_PL_001_Other_Wield_Sword">
 					<MediaRefs>
 						<MediaRef Id="479130323"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1893937474" Name="Play_PL_Common_Footsteps" DurationType="OneShot" DurationMin="0.13271265" DurationMax="0.2051827">
+				<Event Id="957380652" Name="Play_PL_001_WallSlide">
+					<MediaRefs>
+						<MediaRef Id="532305602"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1893937474" Name="Play_PL_Common_Footsteps">
 					<SwitchContainers>
 						<SwitchContainer>
 							<SwitchValue GroupType="Switch" GroupId="684570577" Id="841620460" Default="true"/>
@@ -174,15 +228,10 @@
 				</SwitchGroup>
 			</SwitchGroups>
 		</SoundBank>
-		<SoundBank Id="1229948536" Type="User" Language="SFX" Hash="{E3C75A26-4F45-26CE-1E97-8119B3BDAE4A}">
+		<SoundBank Id="1229948536" Type="User" Language="SFX" Hash="{6368171B-E73D-7137-4801-639F97016DC1}">
 			<ShortName>Environment</ShortName>
 			<Path>Environment.bnk</Path>
 			<Media>
-				<File Id="4483514" Language="SFX" Streaming="true" Location="Loose">
-					<ShortName>ENV_BossRoom_Tone.wav</ShortName>
-					<Path>Media/4483514.wem</Path>
-					<CachePath>SFX/ENV_BossRoom_Tone_A224571F.wem</CachePath>
-				</File>
 				<File Id="75209232" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>ENV_F3_BossRoom_RD-006.wav</ShortName>
 					<CachePath>SFX/ENV_F3_BossRoom_RD-006_8C5F7634.wem</CachePath>
@@ -218,9 +267,8 @@
 				</Custom>
 			</Plugins>
 			<Events>
-				<Event Id="3056533431" Name="ENV_BossRoom" DurationType="Infinite">
+				<Event Id="3056533431" Name="ENV_BossRoom">
 					<MediaRefs>
-						<MediaRef Id="4483514"/>
 						<MediaRef Id="75209232"/>
 						<MediaRef Id="203553021"/>
 						<MediaRef Id="359840091"/>
@@ -237,7 +285,7 @@
 				</Event>
 			</Events>
 		</SoundBank>
-		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{BB3F68B6-4FE6-9D0E-E5F5-70D1CE3B97DA}">
+		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{2D5AC666-A512-9AE8-9B0C-8D9EB3BAD084}">
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 			<Plugins>
@@ -296,6 +344,14 @@
 					<States>
 						<State Id="748895195" Name="None"/>
 						<State Id="3329270527" Name="BossRoom"/>
+					</States>
+				</StateGroup>
+				<StateGroup Id="3782024871" Name="Music_Battle">
+					<States>
+						<State Id="748895195" Name="None"/>
+						<State Id="2395677314" Name="Common"/>
+						<State Id="2514411491" Name="Died"/>
+						<State Id="2937832959" Name="Battle"/>
 					</States>
 				</StateGroup>
 			</StateGroups>
@@ -421,11 +477,33 @@
 				</AcousticTexture>
 			</AcousticTextures>
 		</SoundBank>
-		<SoundBank Id="1551306167" Type="User" Language="SFX" Hash="{35B5385F-5F9C-9D65-775B-45CA20991969}">
+		<SoundBank Id="1551306167" Type="User" Language="SFX" Hash="{F9F51A9E-9980-A28B-9075-A9688C5FA15F}">
 			<ShortName>UI</ShortName>
 			<Path>UI.bnk</Path>
+			<Media>
+				<File Id="140383743" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>WHSH_ORGANIC-Wind Base Gust Long_B00M_CMCK.M.wav</ShortName>
+					<CachePath>SFX/WHSH_ORGANIC-Wind Base Gust Long_B00M_CMCK.M_D04A3F91.wem</CachePath>
+				</File>
+				<File Id="633271454" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Deep Tech_CK_UI_Click_Chain Arc_Mini Pack-1MOD.M.wav</ShortName>
+					<CachePath>SFX/Deep Tech_CK_UI_Click_Chain Arc_Mini Pack-1MOD.M_E5FEFA51.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="1348258409" Name="Play_UI_Base_Whoosh">
+					<MediaRefs>
+						<MediaRef Id="140383743"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="4140365446" Name="Play_UI_Menu">
+					<MediaRefs>
+						<MediaRef Id="633271454"/>
+					</MediaRefs>
+				</Event>
+			</Events>
 		</SoundBank>
-		<SoundBank Id="1560169506" Type="User" Language="SFX" Hash="{1ADE7E91-D873-4328-B389-DB67DD38C6A9}">
+		<SoundBank Id="1560169506" Type="User" Language="SFX" Hash="{C4D10908-CD90-549B-37A9-5636B62D0FDD}">
 			<ShortName>Boss</ShortName>
 			<Path>Boss.bnk</Path>
 			<Media>
@@ -436,6 +514,10 @@
 				<File Id="166593287" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>BO_Walk_RD_2.wav</ShortName>
 					<CachePath>SFX/BO_Walk_RD_2_EE807419.wem</CachePath>
+				</File>
+				<File Id="184673442" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>BO_001_ATK01_Idle_RD-002.wav</ShortName>
+					<CachePath>SFX/BO_001_ATK01_Idle_RD-002_E5FEFA51.wem</CachePath>
 				</File>
 				<File Id="189262689" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>BO_001_ATK01_A.wav</ShortName>
@@ -469,6 +551,10 @@
 					<ShortName>BO_001_ATK02_E.wav</ShortName>
 					<CachePath>SFX/BO_001_ATK02_E_F9B00C70.wem</CachePath>
 				</File>
+				<File Id="517137110" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>BO_001_ATK01_Be_EX.wav</ShortName>
+					<CachePath>SFX/BO_001_ATK01_Be_EX_E5FEFA51.wem</CachePath>
+				</File>
 				<File Id="529619634" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>BO_001_ATK02_D.wav</ShortName>
 					<CachePath>SFX/BO_001_ATK02_D_790A3EA1.wem</CachePath>
@@ -476,6 +562,10 @@
 				<File Id="538315190" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>BO_001_ATK01_B.wav</ShortName>
 					<CachePath>SFX/BO_001_ATK01_B_E5FEFA51.wem</CachePath>
+				</File>
+				<File Id="727645557" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>BO_001_ATK01_End.wav</ShortName>
+					<CachePath>SFX/BO_001_ATK01_End_E5FEFA51.wem</CachePath>
 				</File>
 				<File Id="753384372" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Player_back_attack.wav</ShortName>
@@ -491,7 +581,15 @@
 				</File>
 				<File Id="819569203" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>BO_far_attack.wav</ShortName>
-					<CachePath>SFX/BO_far_attack_51308121.wem</CachePath>
+					<CachePath>SFX/BO_far_attack_04FECBCC.wem</CachePath>
+				</File>
+				<File Id="884924591" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>BO_001_ATK01_Idle.wav</ShortName>
+					<CachePath>SFX/BO_001_ATK01_Idle_E5FEFA51.wem</CachePath>
+				</File>
+				<File Id="911851477" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>BO_001_ATK01_Idle_RD-001.wav</ShortName>
+					<CachePath>SFX/BO_001_ATK01_Idle_RD-001_E5FEFA51.wem</CachePath>
 				</File>
 				<File Id="930206121" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>BO_parry.wav</ShortName>
@@ -507,96 +605,119 @@
 				</File>
 			</Media>
 			<Events>
-				<Event Id="2465717513" Name="Play_BO_001_ATK01_01" MaxAttenuation="45" DurationType="OneShot" DurationMin="1.6632898" DurationMax="1.6632898">
+				<Event Id="2465717513" Name="Play_BO_001_ATK01_01">
 					<MediaRefs>
 						<MediaRef Id="189262689"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="2465717514" Name="Play_BO_001_ATK01_02" MaxAttenuation="45" DurationType="OneShot" DurationMin="2.0512917" DurationMax="2.0512917">
+				<Event Id="2465717514" Name="Play_BO_001_ATK01_02">
 					<MediaRefs>
 						<MediaRef Id="538315190"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="2465717515" Name="Play_BO_001_ATK01_03" MaxAttenuation="45" DurationType="OneShot" DurationMin="1.87925" DurationMax="1.87925">
+				<Event Id="2465717515" Name="Play_BO_001_ATK01_03">
 					<MediaRefs>
 						<MediaRef Id="1012948081"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="2384383228" Name="Play_BO_001_ATK02_01" MaxAttenuation="45" DurationType="OneShot" DurationMin="2.6326642" DurationMax="2.6326642">
+				<Event Id="709816814" Name="Play_BO_001_ATK01_Idle">
+					<MediaRefs>
+						<MediaRef Id="184673442"/>
+						<MediaRef Id="884924591"/>
+						<MediaRef Id="911851477"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2384383228" Name="Play_BO_001_ATK02_01">
 					<MediaRefs>
 						<MediaRef Id="787248915"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="2384383231" Name="Play_BO_001_ATK02_02" MaxAttenuation="45" DurationType="OneShot" DurationMin="2.549146" DurationMax="2.549146">
+				<Event Id="2384383231" Name="Play_BO_001_ATK02_02">
 					<MediaRefs>
 						<MediaRef Id="991430761"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="2384383230" Name="Play_BO_001_ATK02_03" MaxAttenuation="45" DurationType="OneShot" DurationMin="2.9782734" DurationMax="2.9782734">
+				<Event Id="2384383230" Name="Play_BO_001_ATK02_03">
 					<MediaRefs>
 						<MediaRef Id="770193916"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="2384383225" Name="Play_BO_001_ATK02_04" MaxAttenuation="45" DurationType="OneShot" DurationMin="2.466348" DurationMax="2.466348">
+				<Event Id="2384383225" Name="Play_BO_001_ATK02_04">
 					<MediaRefs>
 						<MediaRef Id="529619634"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="2384383224" Name="Play_BO_001_ATK02_05" MaxAttenuation="45" DurationType="OneShot" DurationMin="2.6890025" DurationMax="2.6890025">
+				<Event Id="2384383224" Name="Play_BO_001_ATK02_05">
 					<MediaRefs>
 						<MediaRef Id="510750062"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="2292720290" Name="Play_BO_001_Back_Attack" MaxAttenuation="45" DurationType="OneShot" DurationMin="3.13916" DurationMax="3.13916">
+				<Event Id="2292720290" Name="Play_BO_001_Back_Attack">
 					<MediaRefs>
 						<MediaRef Id="753384372"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1078702266" Name="Play_BO_001_Back_Defence" MaxAttenuation="45" DurationType="OneShot" DurationMin="1.9604331" DurationMax="1.9604331">
+				<Event Id="1078702266" Name="Play_BO_001_Back_Defence">
 					<MediaRefs>
 						<MediaRef Id="342732078"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="506545109" Name="Play_BO_001_Be_Parried" MaxAttenuation="45" DurationType="OneShot" DurationMin="2.1155615" DurationMax="2.1155615">
+				<Event Id="3632551703" Name="Play_BO_001_Be_EX">
+					<MediaRefs>
+						<MediaRef Id="517137110"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="506545109" Name="Play_BO_001_Be_Parried">
 					<MediaRefs>
 						<MediaRef Id="507167495"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1229657458" Name="Play_BO_001_Defence" MaxAttenuation="45" DurationType="OneShot" DurationMin="2.2859676" DurationMax="2.2859676">
+				<Event Id="1229657458" Name="Play_BO_001_Defence">
 					<MediaRefs>
 						<MediaRef Id="407016686"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="963150948" Name="Play_BO_001_Far_Attack" MaxAttenuation="45" DurationType="OneShot" DurationMin="4.422646" DurationMax="4.422646">
+				<Event Id="3852611269" Name="Play_BO_001_End">
+					<MediaRefs>
+						<MediaRef Id="727645557"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="963150948" Name="Play_BO_001_Far_Attack">
 					<MediaRefs>
 						<MediaRef Id="819569203"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="2784198659" Name="Play_BO_001_Footsteps" MaxAttenuation="45" DurationType="OneShot" DurationMin="1.773599" DurationMax="2.320469">
+				<Event Id="2784198659" Name="Play_BO_001_Footsteps">
 					<MediaRefs>
 						<MediaRef Id="307167"/>
 						<MediaRef Id="166593287"/>
 						<MediaRef Id="298699359"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1572589711" Name="Play_BO_001_Landing" MaxAttenuation="45" DurationType="OneShot" DurationMin="3.423625" DurationMax="3.423625">
+				<Event Id="554249132" Name="Play_BO_001_Idle">
+					<MediaRefs>
+						<MediaRef Id="184673442"/>
+						<MediaRef Id="911851477"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1572589711" Name="Play_BO_001_Landing">
 					<MediaRefs>
 						<MediaRef Id="234598853"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="3981994236" Name="Play_BO_001_Parry" MaxAttenuation="45" DurationType="OneShot" DurationMin="2.0738673" DurationMax="2.0738673">
+				<Event Id="3981994236" Name="Play_BO_001_Parry">
 					<MediaRefs>
 						<MediaRef Id="930206121"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1040404966" Name="Play_BO_001_Stinging_Attack" MaxAttenuation="45" DurationType="OneShot" DurationMin="3.6119864" DurationMax="3.6119864">
+				<Event Id="1040404966" Name="Play_BO_001_Stinging_Attack">
 					<MediaRefs>
 						<MediaRef Id="266244816"/>
 					</MediaRefs>
 				</Event>
 			</Events>
 		</SoundBank>
-		<SoundBank Id="2395677314" Type="User" Language="SFX" Hash="{79806E46-C87B-47DB-647F-159167D69F5C}">
+		<SoundBank Id="2395677314" Type="User" Language="SFX" Hash="{C5A982C0-0995-8D12-1D59-D0ECCE62C91B}">
 			<ShortName>Common</ShortName>
 			<Path>Common.bnk</Path>
 			<Media>
@@ -634,15 +755,7 @@
 				</File>
 			</Media>
 			<Events>
-				<Event Id="2454033078" Name="Play_Boss_Posture_Hit" DurationType="OneShot" DurationMin="2.363461" DurationMax="3.6419706">
-					<MediaRefs>
-						<MediaRef Id="161160229"/>
-						<MediaRef Id="170155901"/>
-						<MediaRef Id="647498146"/>
-						<MediaRef Id="682623386"/>
-					</MediaRefs>
-				</Event>
-				<Event Id="2445614350" Name="Play_Player_Posture_Hit" DurationType="OneShot" DurationMin="1.3112773" DurationMax="1.71015">
+				<Event Id="4154896854" Name="Play_Common_Posture_Hit">
 					<MediaRefs>
 						<MediaRef Id="162209582"/>
 						<MediaRef Id="363956178"/>
@@ -650,12 +763,60 @@
 						<MediaRef Id="1060890917"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="1677953748" Name="Play_Special_Posture_Hit">
+					<MediaRefs>
+						<MediaRef Id="161160229"/>
+						<MediaRef Id="170155901"/>
+						<MediaRef Id="647498146"/>
+						<MediaRef Id="682623386"/>
+					</MediaRefs>
+				</Event>
 			</Events>
 		</SoundBank>
-		<SoundBank Id="3991942870" Type="User" Language="SFX" Hash="{0E3E9487-2562-8161-CF73-30D6CFA3E27A}">
+		<SoundBank Id="3991942870" Type="User" Language="SFX" Hash="{ACBD4394-F690-43E8-9AC4-91B861CD81C3}">
 			<ShortName>Music</ShortName>
 			<Path>Music.bnk</Path>
+			<Media>
+				<File Id="56429050" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>UI.wav</ShortName>
+					<CachePath>SFX/UI_A224571F.wem</CachePath>
+				</File>
+				<File Id="179165217" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Battle.wav</ShortName>
+					<CachePath>SFX/Battle_A224571F.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="2693679364" Name="Battle_Over">
+					<ActionSetState>
+						<ActionSetStateEntry GroupId="3782024871" Id="2514411491" Name="Died"/>
+					</ActionSetState>
+				</Event>
+				<Event Id="2212055860" Name="Play_Battle">
+					<MediaRefs>
+						<MediaRef Id="179165217"/>
+					</MediaRefs>
+					<ActionSetState>
+						<ActionSetStateEntry GroupId="3782024871" Id="2937832959" Name="Battle"/>
+					</ActionSetState>
+				</Event>
+				<Event Id="2044747472" Name="Play_UI">
+					<MediaRefs>
+						<MediaRef Id="56429050"/>
+					</MediaRefs>
+				</Event>
+			</Events>
+			<StateGroups>
+				<StateGroup Id="3782024871" Name="Music_Battle">
+					<States>
+						<State Id="748895195" Name="None"/>
+						<State Id="2395677314" Name="Common"/>
+						<State Id="2514411491" Name="Died"/>
+						<State Id="2937832959" Name="Battle"/>
+					</States>
+				</StateGroup>
+			</StateGroups>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{06075187-F7D9-E357-AA0C-9E7492010E8D}</FileHash>
+	<FileHash>{169F073A-2A74-70F8-54B2-81029D13DB93}</FileHash>
 </SoundBanksInfo>

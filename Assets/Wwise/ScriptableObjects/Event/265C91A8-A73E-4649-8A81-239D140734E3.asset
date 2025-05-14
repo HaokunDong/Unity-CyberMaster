@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d19d3ce7595a8480096567c19ed49ea5, type: 3}
   m_Name: 265C91A8-A73E-4649-8A81-239D140734E3
   m_EditorClassIdentifier: 
-  objectName: Play_Player_Posture_Hit
-  id: 2445614350
+  objectName: Play_Common_Posture_Hit
+  id: 4154896854
   guid: 265C91A8-A73E-4649-8A81-239D140734E3

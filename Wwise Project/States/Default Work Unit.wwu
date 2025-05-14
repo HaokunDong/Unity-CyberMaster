@@ -26,6 +26,13 @@
 						</Transition>
 					</TransitionList>
 				</StateGroup>
+				<StateGroup Name="Music_Battle" ID="{D0E6C8BB-1A00-40A8-87DB-D516BC34D94C}">
+					<ChildrenList>
+						<State Name="None" ID="{E96C4B6C-4D6A-47AC-B84F-DD0B6B63461D}"/>
+						<State Name="Died" ID="{78574923-8EC1-4ACB-817F-9FA32A015412}"/>
+						<State Name="Common" ID="{2F93A599-9D50-4843-A5D5-0E29284B9B03}"/>
+					</ChildrenList>
+				</StateGroup>
 			</ChildrenList>
 		</WorkUnit>
 	</States>

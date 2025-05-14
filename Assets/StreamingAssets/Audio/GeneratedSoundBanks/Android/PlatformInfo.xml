@@ -12,7 +12,7 @@
 	<Settings>
 		<AutoSoundBankDefinition>false</AutoSoundBankDefinition>
 		<CopyLooseStreamedMediaFiles>true</CopyLooseStreamedMediaFiles>
-		<SubFoldersForGeneratedFiles>false</SubFoldersForGeneratedFiles>
+		<SubFoldersForGeneratedFiles>true</SubFoldersForGeneratedFiles>
 		<RemoveUnusedGeneratedFiles>true</RemoveUnusedGeneratedFiles>
 		<SourceControlGeneratedFiles>false</SourceControlGeneratedFiles>
 		<GenerateHeaderFile>false</GenerateHeaderFile>
@@ -23,10 +23,10 @@
 		<GeneratePerBankMetadata>false</GeneratePerBankMetadata>
 		<UseSoundBankNames>true</UseSoundBankNames>
 		<AllowExceedingMaxSize>false</AllowExceedingMaxSize>
-		<MaxAttenuationInfo>true</MaxAttenuationInfo>
-		<EstimatedDurationInfo>true</EstimatedDurationInfo>
+		<MaxAttenuationInfo>false</MaxAttenuationInfo>
+		<EstimatedDurationInfo>false</EstimatedDurationInfo>
 		<PrintObjectGuid>false</PrintObjectGuid>
 		<PrintObjectPath>false</PrintObjectPath>
 	</Settings>
-	<FileHash>{21AEFCCC-4870-C484-0058-44FD271DEDDC}</FileHash>
+	<FileHash>{810F8B5C-0A4A-4B2A-C37A-4FE667B3C161}</FileHash>
 </PlatformInfo>

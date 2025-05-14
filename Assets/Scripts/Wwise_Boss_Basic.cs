@@ -13,11 +13,11 @@ public class Wwise_Boss_Basic : MonoBehaviour
     public AK.Wwise.Event BO_ATK02_4;
     public AK.Wwise.Event BO_ATK02_5;
     public AK.Wwise.Event BO_ATK02_6;
-    public AK.Wwise.Event BO_BeAttacked;
-    public AK.Wwise.Event BO_BeStunned;
-    public AK.Wwise.Event BO_BounceAttack1;
-    public AK.Wwise.Event BO_BounceAttack2;
-    public AK.Wwise.Event BO_ChargeAttack;
+    public AK.Wwise.Event BO_Be_Attacked;
+    public AK.Wwise.Event BO_Be_Stunned;
+    public AK.Wwise.Event BO_Bounce_Attack1;
+    public AK.Wwise.Event BO_Bounce_Attack2;
+    public AK.Wwise.Event BO_Charge_Attack;
     public AK.Wwise.Event BO_Dodge;
     public AK.Wwise.Event BO_Fall;
     public AK.Wwise.Event BO_Idle;
@@ -29,6 +29,12 @@ public class Wwise_Boss_Basic : MonoBehaviour
     public AK.Wwise.Event BO_PostureMove;
     public AK.Wwise.Event BO_Run;
     public AK.Wwise.Event BO_WallSlide;
+    public AK.Wwise.Event BO_Stab_ATK;
+    public AK.Wwise.Event BO_Leap_ATK;
+    public AK.Wwise.Event BO_End;
+    public AK.Wwise.Event BO_Ilde;
+    public AK.Wwise.Event BO_Be_EX;
+    public AK.Wwise.Event Music_BO_Be_EX;
 
 
     private void Play_BO_ATK01_1()
@@ -95,35 +101,35 @@ public class Wwise_Boss_Basic : MonoBehaviour
 
     private void Play_BO_BeAttacked()
     {
-        BO_BeAttacked.Post(gameObject);
+        BO_Be_Attacked.Post(gameObject);
     }
 
 
 
     private void Play_BO_BeStunned()
     {
-        BO_BeStunned.Post(gameObject);
+        BO_Be_Stunned.Post(gameObject);
     }
 
 
 
     private void Play_BO_BounceAttack1()
     {
-        BO_BounceAttack1.Post(gameObject);
+        BO_Bounce_Attack1.Post(gameObject);
     }
 
 
 
     private void Play_BO_BounceAttack2()
     {
-        BO_BounceAttack2.Post(gameObject);
+        BO_Bounce_Attack2.Post(gameObject);
     }
 
 
 
     private void Play_BO_ChargeAttack()
     {
-        BO_ChargeAttack.Post(gameObject);
+        BO_Charge_Attack.Post(gameObject);
     }
 
 
@@ -165,7 +171,7 @@ public class Wwise_Boss_Basic : MonoBehaviour
 
     private void Play_BO_Move()
     {
-        BO_BounceAttack2.Post(gameObject);
+        BO_Bounce_Attack2.Post(gameObject);
     }
 
 
@@ -202,8 +208,52 @@ public class Wwise_Boss_Basic : MonoBehaviour
     {
         BO_WallSlide.Post(gameObject);
 
+    }
 
+
+
+
+
+
+
+    private void Play_BO_Stab_ATK()
+    {
+        BO_Stab_ATK.Post(gameObject);
 
     }
+
+
+    private void Play_BO_Leap_ATK()
+    {
+        BO_Leap_ATK.Post(gameObject);
+
+    }
+
+
+    private void Play_BO_Be_EX()
+    {
+        BO_Be_EX.Post(gameObject);
+
+    }
+
+
+    private void Play_BO_End()
+    {
+        BO_End.Post(gameObject);
+
+    }
+
+    private void Play_BO_IDLE()
+    {
+        BO_Idle.Post(gameObject);
+
+    }
+
+    private void Set_Music_BO_Be_EX()
+    {
+        Music_BO_Be_EX.Post(gameObject);
+
+    }
+
 
 }

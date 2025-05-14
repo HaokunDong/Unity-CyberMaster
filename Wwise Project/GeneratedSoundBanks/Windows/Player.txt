@@ -1,0 +1,53 @@
+Event	ID	Name			Wwise Object Path	Notes
+	957380652	Play_PL_001_WallSlide			\Default Work Unit\Player\PL_001\PL_001_Other\Play_PL_001_WallSlide	
+	1178992046	Play_PL_001_EX			\Default Work Unit\Player\PL_001\PL_001_Other\Play_PL_001_EX	
+	1222799777	Play_PL_001_ATK01_06			\Default Work Unit\Player\PL_001\PL_001_ATK_01\Play_PL_001_ATK01_06	
+	1222799778	Play_PL_001_ATK01_05			\Default Work Unit\Player\PL_001\PL_001_ATK_01\Play_PL_001_ATK01_05	
+	1222799779	Play_PL_001_ATK01_04			\Default Work Unit\Player\PL_001\PL_001_ATK_01\Play_PL_001_ATK01_04	
+	1222799780	Play_PL_001_ATK01_03			\Default Work Unit\Player\PL_001\PL_001_ATK_01\Play_PL_001_ATK01_03	
+	1222799781	Play_PL_001_ATK01_02			\Default Work Unit\Player\PL_001\PL_001_ATK_01\Play_PL_001_ATK01_02	
+	1222799782	Play_PL_001_ATK01_01			\Default Work Unit\Player\PL_001\PL_001_ATK_01\Play_PL_001_ATK01_01	
+	1472934619	Play_PL_001_Other_Wield_Sword			\Default Work Unit\Player\PL_001\PL_001_Other\Play_PL_001_Other_Wield_Sword	
+	1756232657	Play_PL_001_Jump			\Default Work Unit\Player\PL_001\PL_001_Other\Play_PL_001_Jump	
+	1864639745	Play_PL_001_Other_Dodge			\Default Work Unit\Player\PL_001\PL_001_Other\Play_PL_001_Other_Dodge	
+	1893937474	Play_PL_Common_Footsteps			\Default Work Unit\Player\PL_Common\Play_PL_Common_Footsteps	
+	1917787654	Play_PL_001_Other_Beat_Back			\Default Work Unit\Player\PL_001\PL_001_Other\Play_PL_001_Other_Beat_Back	
+	2026269643	Play_PL_001_BeStunned			\Default Work Unit\Player\PL_001\PL_001_Other\Play_PL_001_BeStunned	
+	2050097340	Play_PL_001_Other_Posture			\Default Work Unit\Player\PL_001\PL_001_Other\Play_PL_001_Other_Posture	
+	2082649234	Play_PL_001_Landing			\Default Work Unit\Player\PL_001\PL_001_Other\Play_PL_001_Landing	
+	2445579831	Play_PL_001_Other_Charge_Attack			\Default Work Unit\Player\PL_001\PL_001_Other\Play_PL_001_Other_Charge_Attack	
+	2470542020	Play_PL_001_Other_Bounce_Up			\Default Work Unit\Player\PL_001\PL_001_Other\Play_PL_001_Other_Bounce_Up	
+	3056109859	Play_PL_001_Other_Bounce_Down			\Default Work Unit\Player\PL_001\PL_001_Other\Play_PL_001_Other_Bounce_Down	
+	3528883401	Play_PL_001_BeAttacked			\Default Work Unit\Player\PL_001\PL_001_Other\Play_PL_001_BeAttacked	
+
+Switch Group	ID	Name			Wwise Object Path	Notes
+	684570577	Footstep_Material			\Default Work Unit\Footstep_Material	
+
+Switch	ID	Name	Switch Group			Notes
+	841620460	Concrete	Footstep_Material			
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	165683091	PL_001_Jump	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Windows\SFX\PL_001_Jump_E5FEFA51.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\PL_001\PL_001_Other\PL_001_Jump		76532
+	241859539	PL_001_ATK01_01	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Windows\SFX\Player_Five_Combo_01_1F22AB1D.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\PL_001\PL_001_ATK01\PL_001_ATK01_01		83824
+	312834187	PL_Common_Footsteps_Concrete_RD-3	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Windows\SFX\PL_Common_Footsteps_Concrete-003_E5FEFA51.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\PL_Common\PL_Common_Footsteps\PL_Common_Footsteps_Concrete\PL_Common_Footsteps_Concrete_RD-3		34256
+	336748450	PL_Common_Footsteps_Concrete_RD-2	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Windows\SFX\PL_Common_Footsteps_Concrete-002_E5FEFA51.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\PL_Common\PL_Common_Footsteps\PL_Common_Footsteps_Concrete\PL_Common_Footsteps_Concrete_RD-2		26436
+	383940764	PL_001_Landing	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Windows\SFX\PL_001_Landing_E5FEFA51.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\PL_001\PL_001_Other\PL_001_Landing		151488
+	453759118	PL_001_ATK01_05	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Windows\SFX\Player_Five_Combo_05_19D8BA46.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\PL_001\PL_001_ATK01\PL_001_ATK01_05		85896
+	478509229	PL_001_Other_Beat_Back	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Windows\SFX\Player_Beat_Back_8DA233E1.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\PL_001\PL_001_Other\PL_001_Other_Beat_Back		559244
+	479130323	PL_001_Other_Wield_Sword	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Windows\SFX\Player_Wield_Sword_2F46A457.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\PL_001\PL_001_Other\PL_001_Other_Wield_Sword		549924
+	532305602	PL_001_WallSlide	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Windows\SFX\PL_001_WallSlide_E5FEFA51.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\PL_001\PL_001_Other\PL_001_WallSlide		62780
+	563467051	PL_001_Other_Bounce_Up	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Windows\SFX\Player_Withstand_Up_0417C237.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\PL_001\PL_001_Other\PL_001_Other_Bounce_Up		59348
+	650890734	PL_Common_Footsteps_Concrete_RD-1	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Windows\SFX\PL_Common_Footsteps_Concrete-001_E5FEFA51.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\PL_Common\PL_Common_Footsteps\PL_Common_Footsteps_Concrete\PL_Common_Footsteps_Concrete_RD-1		24896
+	666210131	PL_001_ATK01_04	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Windows\SFX\Player_Five_Combo_04_58768608.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\PL_001\PL_001_ATK01\PL_001_ATK01_04		100516
+	674171404	PL_001_Other_Dodge	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Windows\SFX\Player_Dodge_36A8EE14.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\PL_001\PL_001_Other\PL_001_Other_Dodge		536520
+	678972229	PL_001_ATK01_06	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Windows\SFX\Player_Five_Combo_05_1A4CE03B.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\PL_001\PL_001_ATK01\PL_001_ATK01_06		105672
+	697328383	PL_001_Other_Posture	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Windows\SFX\Player_Defense_678FFB4E.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\PL_001\PL_001_Other\PL_001_Other_Posture		306140
+	755088840	PL_Common_Footsteps_Concrete_RD-4	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Windows\SFX\PL_Common_Footsteps_Concrete-004_E5FEFA51.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\PL_Common\PL_Common_Footsteps\PL_Common_Footsteps_Concrete\PL_Common_Footsteps_Concrete_RD-4		26436
+	778067989	PL_001_Other_Charge_Attack	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Windows\SFX\Player_Charge_Attack_8CDDE027.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\PL_001\PL_001_Other\PL_001_Other_Charge_Attack		364656
+	806305588	PL_001_BeAttacked	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Windows\SFX\PL_001_BeAttacked_E5FEFA51.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\PL_001\PL_001_Other\PL_001_BeAttacked		167332
+	851371290	PL_001_ATK01_02	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Windows\SFX\Player_Five_Combo_02_6F54FAA8.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\PL_001\PL_001_ATK01\PL_001_ATK01_02		87436
+	869507503	PL_001_ATK01_03	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Windows\SFX\Player_Five_Combo_03_9DDCEBAF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\PL_001\PL_001_ATK01\PL_001_ATK01_03		92664
+	955427998	PL_001_Other_Bounce_Down	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Windows\SFX\Player_Withstand_Down_DA904BC9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\PL_001\PL_001_Other\PL_001_Other_Bounce_Down		292300
+	996988585	PL_001_BeStunned	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Windows\SFX\PL_001_BeStunned_E5FEFA51.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\PL_001\PL_001_Other\PL_001_BeStunned		77484
+	1064227758	PL_001_EX	Y:\Documents\Unity-CyberMaster\Wwise Project\.cache\Windows\SFX\PL_001_EX_E5FEFA51.wem		\Actor-Mixer Hierarchy\Default Work Unit\Player\PL_001\PL_001_Other\PL_001_EX		857212
+

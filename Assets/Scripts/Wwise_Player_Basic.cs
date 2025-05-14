@@ -27,6 +27,7 @@ public class Wwise_Player_Basic : MonoBehaviour
     public AK.Wwise.Event Run;
     public AK.Wwise.Event WallSlide;
     public AK.Wwise.Event Other_Wield_Sword;
+    public AK.Wwise.Event EX;
 
 
     private void PlayATK_1()
@@ -185,6 +186,12 @@ public class Wwise_Player_Basic : MonoBehaviour
     private void PlayOtherWieldSword()
     {
         Other_Wield_Sword.Post(gameObject);
+
+    }
+
+    private void PlayEX()
+    {
+        EX.Post(gameObject);
 
     }
 

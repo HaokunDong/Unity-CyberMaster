@@ -4,15 +4,20 @@
 		<UserProjectSettings Name="" ID="{2D64DE47-EB63-4F43-BF87-07A00008679E}">
 			<PropertyList>
 				<Property Name="Event Action List\{0537E384-EF73-459C-BACD-562CA55B8007}\x64_Expand States" Type="string" Value=""/>
+				<Property Name="Event Action List\{15D0EFEB-BF3F-43DF-B11F-712AB816CA5B}\x64_Expand States" Type="string" Value=""/>
+				<Property Name="Event Action List\{1A824AAA-A9D7-4604-B68F-BCB07626230D}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{2210B8CA-2B57-444E-A35A-E4FD4E35D16B}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{265C91A8-A73E-4649-8A81-239D140734E3}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{2F322859-E951-4B36-B53A-3CAC3A5B6D35}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{41AB4D8D-78EA-412D-ABF1-8EB154397969}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{4D29C833-3EE4-4F39-BE47-EFB683CBB58B}\x64_Expand States" Type="string" Value=""/>
+				<Property Name="Event Action List\{4EFC2DBB-2EB9-48C9-BA7E-D3A7BE28BCDC}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{4F71C2FC-605A-452B-97AD-B5DB14D53714}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{53D3CD4F-3E55-49AB-B731-16C0602C1EB5}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{606729BC-7921-471F-868A-637D4E111AD4}\x64_Expand States" Type="string" Value=""/>
+				<Property Name="Event Action List\{65287E17-9376-4A7B-BB12-A784A792C8A8}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{69C6656C-6536-4622-A39C-F7F9F3D43854}\x64_Expand States" Type="string" Value=""/>
+				<Property Name="Event Action List\{6E08A51F-9BD6-4E01-BF76-39C56BF569A3}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{70D8D2FE-55D5-4821-BD9D-053A5FAB3C4E}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{711ADD4D-97DC-46A5-A6C7-784FAC492A0B}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{716C2313-3279-4B29-B30B-CC2759984FFE}\x64_Expand States" Type="string" Value=""/>
@@ -28,12 +33,15 @@
 				<Property Name="Event Action List\{A772E7F2-5ACD-4CFC-91F7-21052CEE5672}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{ABEE166F-4EA5-4FF5-8D8B-DFA5F2495981}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{BC77AC04-58F1-4B5B-9552-F17A6005BEC2}\x64_Expand States" Type="string" Value=""/>
+				<Property Name="Event Action List\{C400DD47-57FA-4334-AEE6-DA1C45F324FE}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{CA18B9E4-587C-41CE-9AEE-6C6E4308CC23}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{D5D72786-508A-4A3E-BA94-FFCEF3E9E897}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{DD85F30E-428B-45FB-980A-B83947287C9F}\x64_Expand States" Type="string" Value=""/>
+				<Property Name="Event Action List\{E9C04B2E-C489-46B9-856C-159681E8567B}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{EE09A4DB-A322-4E6E-99B2-9C0817493EB5}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{F2F31868-809E-48D9-A09C-545A39B53D00}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{FC3D07FB-6CC2-41F5-BB18-8EC723E2CB90}\x64_Expand States" Type="string" Value=""/>
+				<Property Name="Event Action List\{FE63506C-DE76-48C1-A59F-99DA69C19ACE}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="EventView\FilterMode1" Type="int32" Value="2"/>
 				<Property Name="EventView\FilterMode2" Type="int32" Value="2"/>
 				<Property Name="ExternalSourcesInputPath" Type="string">
@@ -115,13 +123,13 @@
 				<Property Name="SoundBank Manager\x64_Expand Folders User" Type="string" Value="BwAAAA=="/>
 				<Property Name="SoundBank Manager\x64_Expand States Auto" Type="string" Value=""/>
 				<Property Name="SoundBank Manager\x64_Expand States User" Type="string" Value="Zz2UYv5hJUK1S/aEURqKBA=="/>
-				<Property Name="SoundBankHeaderFilePath" Type="string" Value="..\..\..\Documents\CYBER\Assets\StreamingAssets\Audio\GeneratedSoundBanks"/>
+				<Property Name="SoundBankHeaderFilePath" Type="string" Value="..\Assets\StreamingAssets\Audio\GeneratedSoundBanks"/>
 				<Property Name="SoundBankPathUserOverride" Type="bool" Value="True"/>
 				<Property Name="SoundBankPaths" Type="string">
 					<ValueList>
-						<Value Platform="Mac">GeneratedSoundBanks\Mac\</Value>
-						<Value Platform="Windows">GeneratedSoundBanks\Windows\</Value>
-						<Value Platform="Android">GeneratedSoundBanks\Android\</Value>
+						<Value Platform="Mac">..\Assets\StreamingAssets\Audio\GeneratedSoundBanks\Mac\</Value>
+						<Value Platform="Windows">..\Assets\StreamingAssets\Audio\GeneratedSoundBanks\Windows\</Value>
+						<Value Platform="Android">..\Assets\StreamingAssets\Audio\GeneratedSoundBanks\Android\</Value>
 					</ValueList>
 				</Property>
 				<Property Name="SoundBankPostGenerateCustomCmdDescription" Type="string">
@@ -160,7 +168,7 @@
 							<Property Name="InsertToInsert" Type="string" Value="_"/>
 							<Property Name="RemoveCount" Type="int32" Value="5"/>
 							<Property Name="RemoveFrom" Type="int16" Value="1"/>
-							<Property Name="ReplaceFindWhat" Type="string" Value="_Tone"/>
+							<Property Name="ReplaceFindWhat" Type="string" Value="_ATK01"/>
 						</PropertyList>
 					</PluginInnerObject>
 				</List>

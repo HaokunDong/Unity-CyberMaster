@@ -1,5 +1,8 @@
-using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
 
 public class MainMenuUI : MonoBehaviour
 {
@@ -7,7 +10,9 @@ public class MainMenuUI : MonoBehaviour
     public void LoadSceneByName(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+
     }
+
 
     public void QuitGame()
     {
