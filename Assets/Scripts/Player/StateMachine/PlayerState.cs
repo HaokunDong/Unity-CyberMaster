@@ -46,7 +46,6 @@ public class PlayerState
         player.animator.SetFloat("yVelocity", rb.velocity.y);
         player.animator.SetFloat("PostureFloat", postureTimer);
 
-        
     }
 
     public virtual void Exit()
@@ -72,12 +71,18 @@ public class PlayerState
         {
             player.FlipController(player.RelativePosition());
         }
-        stateMachine.ChangeState(player.beAttackedState);
 
+        player.PlayerDead.AddListener(Dead);
+        stateMachine.ChangeState(player.beAttackedState);
     }
 
     public virtual void Hit()
     {
 
+    }
+
+    public void Dead()
+    {
+        stateMachine.ChangeState(player.deadState);
     }
 }

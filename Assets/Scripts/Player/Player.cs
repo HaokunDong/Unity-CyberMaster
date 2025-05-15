@@ -38,6 +38,9 @@ public class Player : Entity
     public UnityEvent OnExecution;
     public bool canExecution = false;
     public float executionRange;
+
+    [Header("Dead Info")]
+    public UnityEvent PlayerDead;
     #region States
     public PlayerStateMachine stateMachine { get; private set; }
 
@@ -58,6 +61,8 @@ public class Player : Entity
     public PlayerExecutionState executionState { get; private set; }
     public PlayerPrimaryAttackState primaryAttackState { get; private set; }
     public PlayerChargeAttackState chargeAttackState { get; private set; }
+
+    public PlayerDeadState deadState { get; private set; }
     #endregion
 
     protected override void Awake()
@@ -84,6 +89,8 @@ public class Player : Entity
 
         primaryAttackState = new PlayerPrimaryAttackState(stateMachine, this, "Attack");
         chargeAttackState = new PlayerChargeAttackState(stateMachine, this, "ChargeAttack");
+
+        deadState = new PlayerDeadState(stateMachine, this, "Dead");
     }
 
     protected override void Start()
@@ -170,6 +177,7 @@ public class Player : Entity
     public void PlayerLose()
     {
         Debug.Log("Player Lose!");
+        PlayerDead.Invoke();
     }
 
     public void ChangeLayer(GameObject obj, string layerName)
