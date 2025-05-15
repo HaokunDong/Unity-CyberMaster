@@ -30,18 +30,13 @@ public class PlayerGroundedState : PlayerState
 
         if (Input.GetKey(KeyCode.J))
         {
-            //Debug.Log(player.canExecution);
             if (IsStunned())
             {
                 player.attackLimitation = 0;
                 stateMachine.ChangeState(player.beStunnedState);
             }
-            else if (player.canExecution)
+            else if (player.canExecution && player.RaycastDetectEnemy())
             {
-                //Debug.Log(player.canExecution);
-
-                
-
                 player.canExecution = false;
                 stateMachine.ChangeState(player.executionState);
             }

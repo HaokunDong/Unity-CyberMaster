@@ -28,7 +28,12 @@ public class LiHuoCDState : EnemyState
     {
         base.Update();
 
-        if (Time.time >= liHuo.nextTimeReadyToComboAttack) {
+        if(liHuo.facingDir != liHuo.RelativePosition() && stateTimer <= 0)
+        {
+            liHuo.FlipController(liHuo.RelativePosition());
+        }
+
+        if (Time.time >= liHuo.nextTimeReadyToComboAttack && liHuo.facingDir == liHuo.RelativePosition()) {
             stateMachine.ChangeState(liHuo.battleState);
         }
 

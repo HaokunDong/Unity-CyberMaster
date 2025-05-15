@@ -7,8 +7,6 @@ public class Enemy_Boss_LiHuo : Enemy
 {
     public Player player;
 
-    public float stabDistance;
-
     [Header("LiHuoSkills Info")]
     private float nextTimeReadyToMove;
     [SerializeField] public float moveCD;
@@ -20,6 +18,7 @@ public class Enemy_Boss_LiHuo : Enemy
     [SerializeField] public float leapAttackRadius;
 
     private float nextTimeReadyToStabAttack;
+    [SerializeField] public float stabDistance;
     [SerializeField] public float stabAttackCD;
     [SerializeField] public float stabAttackMoveSpeed;
     [SerializeField] public Transform stabAttackCheck;
@@ -38,8 +37,10 @@ public class Enemy_Boss_LiHuo : Enemy
     public LiHuoLeapAttackState leapAttackState { get; private set; }
     public LiHuoStabAttackState stabAttackState { get; private set; }
     public LiHuoBounceAttackState bounceAttackState { get; private set; }
+
     public LiHuoDeadState deadState { get; private set; }
     public LiHuoBeExecutedState beExecutedState { get; private set; }
+    public LiHuoEndState endState { get; private set; }
 
     #endregion
 
@@ -59,8 +60,10 @@ public class Enemy_Boss_LiHuo : Enemy
         leapAttackState = new LiHuoLeapAttackState(stateMachine, this, "LeapAttack", this);
         stabAttackState = new LiHuoStabAttackState(stateMachine, this, "StabAttack", this);
         bounceAttackState = new LiHuoBounceAttackState(stateMachine, this, "BounceAttack", this);
+
         deadState = new LiHuoDeadState(stateMachine, this, "Dead", this);
         beExecutedState = new LiHuoBeExecutedState(stateMachine, this, "BeExecuted", this);
+        endState = new LiHuoEndState(stateMachine, this, "End", this);
 
     }
 
@@ -81,7 +84,7 @@ public class Enemy_Boss_LiHuo : Enemy
     {
         base.Update();
 
-        Debug.Log(stateMachine.currentState.ToString());
+        //Debug.Log(stateMachine.currentState.ToString());
     }
 
     public override void OnHitFromTarget(Entity from)
@@ -114,6 +117,19 @@ public class Enemy_Boss_LiHuo : Enemy
     }
 
     #region DistanceJudge
+    public bool RaycastDetectPlayer(float DetectDistance)
+    {
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.right, DetectDistance);
+        foreach (var hit in hits)
+        {
+            if (hit.collider.GetComponent<Player>() != null)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
     public bool IsPlayerInViewRange()
     {
         if (Vector2.Distance(player.transform.position, transform.position) < 10)
@@ -125,7 +141,7 @@ public class Enemy_Boss_LiHuo : Enemy
 
     public bool IsEnterAttackState()//Enter Attack State
     {
-        if (RelativeDistance() < attackDistance - 1)
+        if (RaycastDetectPlayer(attackDistance - 1))
         {
             return true;
         }
@@ -133,7 +149,7 @@ public class Enemy_Boss_LiHuo : Enemy
     }
     public bool IsPlayerInAttackRange()//After enter attack state
     {
-        if (RelativeDistance() < attackDistance)
+        if (RaycastDetectPlayer(attackDistance))
         {
             return true;
         }
@@ -142,7 +158,7 @@ public class Enemy_Boss_LiHuo : Enemy
 
     public bool IsPlayerInStabRange()
     {
-        if (RelativeDistance() < stabDistance)
+        if (RaycastDetectPlayer(stabDistance))
         {
             return true;
         }
@@ -211,7 +227,7 @@ public class Enemy_Boss_LiHuo : Enemy
 
     #endregion
 
-    //public void StabAttackMove() => stateMachine.currentState.AnimationEventTrigger();
+    #region SkillTrigger
     public void StabAttackTrigger()
     {
         Collider2D[] hits = Physics2D.OverlapBoxAll(stabAttackCheck.position, stabAttackSize, 0);
@@ -237,4 +253,5 @@ public class Enemy_Boss_LiHuo : Enemy
             }
         }
     }
+    #endregion
 }

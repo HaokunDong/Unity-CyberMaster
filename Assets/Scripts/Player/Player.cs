@@ -95,8 +95,6 @@ public class Player : Entity
         this.RefreshInfoState();
         lifeBar.On(BarComEvent.MAX_ARRIVE, PlayerWin);
         lifeBar.On(BarComEvent.MIN_ARRIVE, PlayerLose);
-
-        //PlayerWin();
     }
 
     protected override void Update()
@@ -132,6 +130,20 @@ public class Player : Entity
         //Gizmos.DrawWireSphere(attackCheck[attackCount].position, attackCheckRadius[attackCount]);
 
         Gizmos.DrawWireSphere(chargeAttackCheck.position, chargeAttackRadius);
+    }
+
+    public bool RaycastDetectEnemy()
+    {
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.right, executionRange);
+        foreach (var hit in hits)
+        {
+            if (hit.collider.GetComponent<Enemy>() != null)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public IEnumerator BusyFor(float _seconds)//used to control the attack interval
@@ -203,14 +215,14 @@ public class Player : Entity
         this.lifeBar.t = (info.life - 50) / 50;
     }
     
-        public void TriggerExecutionRetreat()
+    public void TriggerExecutionRetreat()
     {
         float retreatDistance = 3f;
         float retreatDuration = 0.25f;
         StartCoroutine(SlideBack(retreatDistance, retreatDuration));
     }
 
-        private IEnumerator SlideBack(float distance, float duration)
+    private IEnumerator SlideBack(float distance, float duration)
     {
         Vector2 start = rb.position;
         Vector2 end = start + new Vector2(-facingDir * distance, 0); // 角色朝背后移动

@@ -45,12 +45,6 @@ public class Enemy : Entity
         stateMachine.currentState.Update();
     }
 
-    public IEnumerator DelayFlip()
-    {
-        yield return new WaitForSeconds(0.7f);
-        Flip();
-    }
-
     public override void OnHitFromTarget(Entity from)
     {
         base.OnHitFromTarget(from);

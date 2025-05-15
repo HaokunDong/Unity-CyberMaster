@@ -61,15 +61,7 @@ public class PlayerAnimationTriggers : MonoBehaviour
 
     private void ExecutionEnemyTrigger()
     {
-
-        RaycastHit2D[] hits = Physics2D.RaycastAll(player.transform.position, player.transform.right, player.executionRange);
-        foreach (var hit in hits)
-        {
-            if (hit.collider.GetComponent<Enemy>() != null)
-            {
-                hit.collider.GetComponent<Enemy>().BeExecution();
-            }
-        }
+        EnemyManager.Ins.liHuo.BeExecution();
     }
 
     private void CanBeBouncedAttackTrigger() => player.CanBeBouncedAttack();
@@ -90,7 +82,7 @@ public class PlayerAnimationTriggers : MonoBehaviour
 
     }
 
-        private void ExecutionRetreatTrigger()
+    private void ExecutionRetreatTrigger()
     {
         player.TriggerExecutionRetreat();
     }
