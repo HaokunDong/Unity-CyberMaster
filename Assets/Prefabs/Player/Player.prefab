@@ -476,6 +476,10 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: be4c28b0b1c5048f492e3af79ab584f8, type: 2}
+  EX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!1 &2568497917624387223
 GameObject:
   m_ObjectHideFlags: 0

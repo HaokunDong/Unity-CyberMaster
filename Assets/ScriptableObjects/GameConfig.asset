@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GameConfig
   m_EditorClassIdentifier: 
   playerDecayLife_hitted: 20
-  playerDecayLife_defense: 8
+  playerDecayLife_defense: 5
   playerIncreaseLife_bounce: 3
-  playerIncreaseLife_attack: 2
+  playerIncreaseLife_attack: 3

@@ -90,4 +90,9 @@ public class PlayerAnimationTriggers : MonoBehaviour
 
     }
 
+        private void ExecutionRetreatTrigger()
+    {
+        player.TriggerExecutionRetreat();
+    }
+
 }

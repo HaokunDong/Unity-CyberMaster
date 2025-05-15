@@ -202,5 +202,26 @@ public class Player : Entity
     {
         this.lifeBar.t = (info.life - 50) / 50;
     }
+    
+        public void TriggerExecutionRetreat()
+    {
+        float retreatDistance = 3f;
+        float retreatDuration = 0.25f;
+        StartCoroutine(SlideBack(retreatDistance, retreatDuration));
+    }
+
+        private IEnumerator SlideBack(float distance, float duration)
+    {
+        Vector2 start = rb.position;
+        Vector2 end = start + new Vector2(-facingDir * distance, 0); // 角色朝背后移动
+
+        float t = 0f;
+        while (t < 1f)
+        {
+            t += Time.deltaTime / duration;
+            rb.position = Vector2.Lerp(start, end, t);
+            yield return null;
+        }
+    }
 
 }

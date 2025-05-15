@@ -23,7 +23,7 @@ public class PlayerExecutionState : PlayerState
     {
         base.Exit();
 
-        rb.position = originalPosition;
+        // rb.position = originalPosition;
 
         player.ChangeLayer(player.gameObject, "Player");
     }
