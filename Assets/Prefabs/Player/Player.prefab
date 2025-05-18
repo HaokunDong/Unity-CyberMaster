@@ -189,7 +189,7 @@ MonoBehaviour:
   moveSpeed: 2.5
   runSpeed: 9
   jumpForce: 14
-  dodgeSpeed: 10
+  dodgeSpeed: 13
   isInvincible: 0
   barFolder: {fileID: 0}
   lifeBar: {fileID: 0}
@@ -198,6 +198,9 @@ MonoBehaviour:
       m_Calls: []
   canExecution: 0
   executionRange: 10
+  PlayerDead:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1308179999213730303
 MonoBehaviour:
   m_ObjectHideFlags: 0

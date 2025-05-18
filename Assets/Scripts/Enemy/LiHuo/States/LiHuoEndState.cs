@@ -14,6 +14,13 @@ public class LiHuoEndState : EnemyState
     public override void Enter()
     {
         base.Enter();
+
+        if (liHuo.TryGetComponent<Rigidbody2D>(out var rb))
+        {
+            rb.simulated = false;
+        }
+
+        GameOverUIController.Instance.ShowVictory(); 
     }
 
     public override void Exit()

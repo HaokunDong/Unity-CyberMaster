@@ -170,6 +170,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 1
+    functionName: TriggerShake
+    data: 0.2,1.5
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 1.4666667
     functionName: AttackMovementTrigger
     data: 
@@ -180,6 +187,13 @@ AnimationClip:
   - time: 1.6
     functionName: LeapAttackTrigger
     data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.6
+    functionName: TriggerShake
+    data: 0.2,2
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

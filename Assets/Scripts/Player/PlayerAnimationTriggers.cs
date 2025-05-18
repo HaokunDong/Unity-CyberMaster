@@ -87,4 +87,15 @@ public class PlayerAnimationTriggers : MonoBehaviour
         player.TriggerExecutionRetreat();
     }
 
+        private void ExecutionZoomIn()
+    {
+        CameraManager.Instance.SwitchToExecutionCam();
+    }
+
+    private void ExecutionZoomOut()
+    {
+        CameraManager.Instance.SwitchToMainCam();
+    }
+
+
 }

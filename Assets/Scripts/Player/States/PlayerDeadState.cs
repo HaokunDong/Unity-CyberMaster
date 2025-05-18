@@ -13,6 +13,7 @@ public class PlayerDeadState : PlayerState
         base.Enter();
 
         player.SetMovement(-player.facingDir * 20, rb.velocity.y);
+        GameOverUIController.Instance.ShowDefeat();
     }
 
     public override void Exit()

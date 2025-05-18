@@ -225,8 +225,8 @@ public class Player : Entity
     
     public void TriggerExecutionRetreat()
     {
-        float retreatDistance = 3f;
-        float retreatDuration = 0.25f;
+        float retreatDistance = 5f;
+        float retreatDuration = 0.4f;
         StartCoroutine(SlideBack(retreatDistance, retreatDuration));
     }
 

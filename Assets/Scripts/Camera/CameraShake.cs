@@ -5,6 +5,8 @@ using Cinemachine;
 public class CameraShake : MonoBehaviour
 {
     public static CameraShake Instance;
+    public CinemachineVirtualCamera targetCamera;
+
     private CinemachineBasicMultiChannelPerlin perlin;
     private CinemachineVirtualCamera virtualCamera;
 
@@ -29,15 +31,24 @@ public class CameraShake : MonoBehaviour
 
     public void Shake(float duration, float magnitude)
     {
+        if (targetCamera == null)
+        {
+            Debug.LogError("CameraShake targetCamera is not set!");
+            return;
+        }
+
+        perlin = targetCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        
         if (perlin == null)
         {
-            Debug.LogError("Cinemachine Perlin Noise not found!");
+            Debug.LogError("Cinemachine Perlin Noise not found on targetCamera!");
             return;
         }
 
         StopAllCoroutines();
         StartCoroutine(ShakeCoroutine(duration, magnitude));
     }
+
 
     private IEnumerator ShakeCoroutine(float duration, float magnitude)
     {

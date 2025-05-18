@@ -13,7 +13,6 @@ public class HitEffectController : Singleton<HitEffectController>
 
         go.GetComponent<HitEffect>().Init(info);
 
-        // 触发屏幕抖动
         if (CameraShake.Instance != null)
         {
             float magnitude = 0.2f;

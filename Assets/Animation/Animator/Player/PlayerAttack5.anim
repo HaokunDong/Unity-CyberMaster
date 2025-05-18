@@ -114,6 +114,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.44
+    functionName: TriggerShake
+    data: 0.1,0.8
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.48
     functionName: AttackTrigger
     data: 
