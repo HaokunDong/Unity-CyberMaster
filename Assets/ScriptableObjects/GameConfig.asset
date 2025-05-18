@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDecayLife_hitted: 20
   playerDecayLife_defense: 5
-  playerIncreaseLife_bounce: 3
-  playerIncreaseLife_attack: 3
+  playerIncreaseLife_bounce: 2
+  playerIncreaseLife_attack: 2
