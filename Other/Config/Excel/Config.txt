@@ -1,0 +1,17 @@
+@composite
+//合并表格输出，'->'左边为复合表的组成成员，右边为指定的输出名。每行一条配置，区分大小写
+//示例：Item,Item2->Item	将Item表与Item2表的数据合并输出至名为Item的新表中
+Buff,Buff1,Buff2->Buff
+//BuffEffect,BuffEffect1,BuffEffect2->BuffEffect
+//QuestNode_C00_Main,QuestNode_C01_Main,QuestNode_C01_Side,QuestNode_C02_Main,QuestNode_C02_Side,QuestNode_C03_Main,QuestNode_C03_Side->QuestNode
+//QuestChain_C00_Main,QuestChain_C01_Main,QuestChain_C01_Side,QuestChain_C02_Main,QuestChain_C02_Side,QuestChain_C03_Main,QuestChain_C03_Side->QuestChain
+
+@excluded
+//忽略的表，将表名填写在下方，每行一条配置，不区分大小写
+数值平衡表
+LocalizationPrototype
+
+@LocalizationTablePath 多语言Excel表路径文件夹
+Localization
+
+
