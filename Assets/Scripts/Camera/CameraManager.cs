@@ -10,15 +10,15 @@ public class CameraManager : SingletonComp<CameraManager>
     public CinemachineVirtualCamera mainCam;
     public CinemachineVirtualCamera executionCam;
 
-    private void Awake()
-    {
+    //private void Awake()
+    //{
         //Instance = this;
-    }
+    //}
 
-    private void Start()
-    {
+    //private void Start()
+    //{
 
-    }
+    //}
 
     public void CameraFollow(GameObject player)
     {
