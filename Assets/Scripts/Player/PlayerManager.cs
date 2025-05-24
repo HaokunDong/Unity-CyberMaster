@@ -18,8 +18,8 @@ public class PlayerManager : SingletonComp<PlayerManager>
     {
         await TableDataManager.Load();
         var data = EnemyTable.GetTableData(20001);
-        LogUtils.Error(data.Id, LogChannel.Load, Color.red);
+        LogUtils.Warning(data.Id, LogChannel.Load, Color.red);
         LogUtils.Error(data.EnemyName, LogChannel.Load, Color.green);
-        LogUtils.Error(data.EnemyHP, LogChannel.Load, Color.yellow);
+        LogUtils.Trace(data.EnemyHP, LogChannel.Load, Color.yellow);
     }
 }
