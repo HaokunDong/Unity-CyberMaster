@@ -132,7 +132,7 @@ public class Enemy_Boss_LiHuo : Enemy
     }
     public bool IsPlayerInViewRange()
     {
-        if (Vector2.Distance(playerPrefab.gameObject.transform.position, transform.position) < 10)
+        if (Vector2.Distance(player.transform.position, transform.position) < 10)
         {
             return true;
         }

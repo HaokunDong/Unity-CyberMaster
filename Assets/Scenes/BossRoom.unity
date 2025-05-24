@@ -652,7 +652,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 269fb1338b6eefe46bf429e2280e9269, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liHuoPrefab: {fileID: 0}
+  liHuoPrefab: {fileID: 6303348642422170805, guid: 92ef7341a13c7d941aef253b5b7b96ad, type: 3}
   liHuoSpawnPoint: {fileID: 67790322}
   triggerDistance: 10
 --- !u!61 &67790324
@@ -30975,6 +30975,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
   liHuo: {fileID: 0}
+  boss_LiHuoPrefab: {fileID: 6303348642422170805, guid: 92ef7341a13c7d941aef253b5b7b96ad, type: 3}
 --- !u!1 &1201692709
 GameObject:
   m_ObjectHideFlags: 0

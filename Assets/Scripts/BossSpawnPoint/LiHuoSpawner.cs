@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +17,13 @@ public class LiHuoSpawner : SingletonComp<LiHuoSpawner>
 
     private BoxCollider2D collider2D;
 
-    private void Awake()
+    //private void Awake()
+    //{
+    //    collider2D = GetComponent<BoxCollider2D>();
+    //    collider2D.isTrigger = true;
+    //}
+
+    protected override void OnSingletonInit()
     {
         collider2D = GetComponent<BoxCollider2D>();
         collider2D.isTrigger = true;
@@ -24,12 +31,18 @@ public class LiHuoSpawner : SingletonComp<LiHuoSpawner>
 
     private void OnTriggerEnter2D(Collider2D player)
     {
-        if (player.CompareTag("Player"))
+        async UniTask CreateBoss()
         {
-            EnemyManager.Ins.liHuo.gameObject.SetActive(true);
-            EnemyManager.Ins.liHuo.stateMachine.ChangeState(EnemyManager.Ins.liHuo.appearState);
+            var boss = EnemyManager.Ins.CreateEnemy_Boss_LiHuo(this);
+            boss.gameObject.SetActive(true);
+            await UniTask.DelayFrame(1);
+            boss.stateMachine.ChangeState(EnemyManager.Ins.liHuo.appearState);
             hasSpawned = true;
             Destroy(this);
+        }
+        if (player.CompareTag("Player"))
+        {
+            CreateBoss().Forget();
         }
     }
 

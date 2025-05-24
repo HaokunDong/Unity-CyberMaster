@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ public class Entity : MonoBehaviour
     public float[] attackForce;
 
     #region Components
+    [ShowInInspector]
     public Animator animator { get; private set; }
     public Rigidbody2D rb { get; private set; }
     #endregion

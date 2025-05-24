@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -19,10 +20,10 @@ public class Enemy : Entity
     //public float[] attackForce;
 
     //private Transform playerTrans;
-    public GameObject playerPrefab;
 
     public EnemyStateMachine stateMachine { get; private set; }
 
+    protected GameObject player;
 
     protected override void Awake()
     {
@@ -34,7 +35,12 @@ public class Enemy : Entity
     protected override void Start()
     {
         base.Start();
-
+        async UniTask WaitPlayer()
+        {
+            await UniTask.WaitUntil(() => PlayerManager.Ins.player != null);
+            player = PlayerManager.Ins.player.gameObject;
+        }
+        WaitPlayer().Forget();
         //playerTrans = PlayerManager.Ins.player.transform;
     }
 
@@ -75,7 +81,7 @@ public class Enemy : Entity
 
     public virtual bool IsPlayerExist()
     {
-        if (playerPrefab.gameObject != null)
+        if (player != null)
         {
             return true;
         }
@@ -84,11 +90,11 @@ public class Enemy : Entity
 
     public virtual int RelativePosition()//The RelativePosition with Player
     {
-        if (this.transform.position.x - playerPrefab.gameObject.transform.position.x < 0)
+        if (this.transform.position.x - player.transform.position.x < 0)
         {
             return 1;
         }
-        else if (this.transform.position.x - playerPrefab.gameObject.transform.position.x > 0)
+        else if (this.transform.position.x - player.transform.position.x > 0)
         {
             return -1;
         }
@@ -100,13 +106,13 @@ public class Enemy : Entity
 
     public virtual float RelativeDistance()
     {
-        if (this.transform.position.x - playerPrefab.gameObject.transform.position.x < 0)
+        if (this.transform.position.x - player.transform.position.x < 0)
         {
-            return -(this.transform.position.x - playerPrefab.gameObject.transform.position.x);
+            return -(this.transform.position.x - player.transform.position.x);
         }
         else
         {
-            return this.transform.position.x - playerPrefab.gameObject.transform.position.x;
+            return this.transform.position.x - player.transform.position.x;
         }
 
         //return Vector2.Distance(transform.position, playerTrans.position);

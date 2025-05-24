@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class PlayerManager : SingletonComp<PlayerManager>
 {
+    [HideInInspector]
     public Player player;
     public GameObject playerPrefab;
 

@@ -43,25 +43,12 @@ public static class SingletonCompAwakeChecker
                 {
                     LogUtils.Error(
                         $"类 {type.FullName} 继承自 SingletonComp<T>，但自定义了 Awake() 方法。\n" +
-                        $"这可能会绕过 Singleton 的初始化流程",
+                        $"这可能会绕过 Singleton 的初始化流程，推荐改为重写 OnSingletonInit()。",
                         LogChannel.Common,
                         Color.cyan
                     );
                 }
             }
         };
-    }
-
-    private static string GetScriptPath(Type type)
-    {
-        string[] guids = AssetDatabase.FindAssets($"{type.Name} t:script");
-        foreach (string guid in guids)
-        {
-            string path = AssetDatabase.GUIDToAssetPath(guid);
-            var script = AssetDatabase.LoadAssetAtPath<MonoScript>(path);
-            if (script != null && script.GetClass() == type)
-                return path;
-        }
-        return null;
     }
 }
