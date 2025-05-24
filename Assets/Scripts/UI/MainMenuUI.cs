@@ -8,7 +8,7 @@ public class MainMenuUI : MonoBehaviour
     // 加载指定场景
     public void LoadSceneByName(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }
 
     // 退出游戏
@@ -34,8 +34,8 @@ public class MainMenuUI : MonoBehaviour
         DestroyIfExists("EventSystem");
 
         // 重新加载当前场景
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.buildIndex);
+        Scene currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+        UnityEngine.SceneManagement.SceneManager.LoadScene(currentScene.buildIndex);
     }
 
     private void DestroyIfExists(string objName)

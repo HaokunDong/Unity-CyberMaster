@@ -44,7 +44,9 @@ public class LiHuoCDState : EnemyState
     {
         base.OnHit(from);
 
-        if (PlayerManager.Ins.player.canBeBouncedAttack)
+        liHuo.SetMovement(from.attackForce[from.attackCount], rb.velocity.y);
+
+        if (liHuo.canBounceOther)
         {
             stateMachine.ChangeState(liHuo.bounceAttackState);
         }

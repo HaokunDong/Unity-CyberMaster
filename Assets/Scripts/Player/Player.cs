@@ -6,18 +6,16 @@ using UnityEngine.Events;
 
 public class Player : Entity
 {
-    public Enemy_Boss_LiHuo liHuo;
-
     [Header("Attack Details")]
-    public int attackCount;
+    //public int attackCount;
     public int attackLimitation = 0;//Limit the attack combo count.
     public Vector2[] attackMovement;
-    public float[] attackForce;
+    //public float[] attackForce;
+
     [Header("Skill Info")]
     public float chargeAttackMovement;
     public Transform chargeAttackCheck;
     public float chargeAttackRadius;
-    public bool isBusy { get; private set; }
 
     [Header("Move Info")]
     public float moveSpeed = 3f;
@@ -41,6 +39,8 @@ public class Player : Entity
 
     [Header("Dead Info")]
     public UnityEvent PlayerDead;
+
+    public bool isBusy { get; private set; }
     #region States
     public PlayerStateMachine stateMachine { get; private set; }
 
@@ -68,7 +68,6 @@ public class Player : Entity
     protected override void Awake()
     {
         base.Awake();
-        //liHuo = EnemyManager.Ins.liHuo;
         stateMachine = new PlayerStateMachine();
 
         idleState = new PlayerIdleState(stateMachine, this, "Idle");
@@ -99,7 +98,7 @@ public class Player : Entity
 
         stateMachine.Initialize(idleState);
 
-        this.RefreshInfoState();
+        RefreshInfoState();
         lifeBar.On(BarComEvent.MAX_ARRIVE, PlayerWin);
         lifeBar.On(BarComEvent.MIN_ARRIVE, PlayerLose);
     }
@@ -126,7 +125,7 @@ public class Player : Entity
 
         if (isInvincible) return;
 
-        SetMovement(liHuo.attackForce[liHuo.attackCount] * liHuo.facingDir, rb.velocity.y);
+        //SetMovement(liHuo.attackForce[liHuo.attackCount] * liHuo.facingDir, rb.velocity.y);
         stateMachine.currentState.OnHit(from);
         RefreshInfoState();
     }
@@ -189,22 +188,6 @@ public class Player : Entity
         }
     }
 
-    public virtual int RelativePosition()//与Enemy的相对位置
-    {
-        if (this.transform.position.x - liHuo.transform.position.x < 0)
-        {
-            return 1;
-        }
-        else if (this.transform.position.x - liHuo.transform.position.x > 0)
-        {
-            return -1;
-        }
-        else
-        {
-            return 0;
-        }
-    }
-
     public void SetDodgeDirection()
     {
         dodgeDir = facingDir;
@@ -220,7 +203,7 @@ public class Player : Entity
     public void ChargeAttackMove() => stateMachine.currentState.AnimationEventTrigger();
     public void RefreshInfoState()
     {
-        this.lifeBar.t = (info.life - 50) / 50;
+        lifeBar.t = (info.life - 50) / 50;
     }
     
     public void TriggerExecutionRetreat()
@@ -230,7 +213,7 @@ public class Player : Entity
         StartCoroutine(SlideBack(retreatDistance, retreatDuration));
     }
 
-    private IEnumerator SlideBack(float distance, float duration)
+    private IEnumerator SlideBack(float distance, float duration)//控制角色在完成处决后向后空翻
     {
         Vector2 start = rb.position;
         Vector2 end = start + new Vector2(-facingDir * distance, 0); // 角色朝背后移动

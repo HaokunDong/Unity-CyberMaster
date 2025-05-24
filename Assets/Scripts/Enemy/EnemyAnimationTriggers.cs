@@ -34,8 +34,34 @@ public class EnemyAnimationTriggers : MonoBehaviour
         }
     }
 
-    private void CanBeBouncedAttackTrigger() => enemy.CanBeBouncedAttack();
-    private void CanNotBeBouncedAttackTrigger() => enemy.CanNotBeBouncedAttack();
+    private void CanBeBouncedAttackTrigger()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll
+            (enemy.attackCheck[enemy.attackCount].position, enemy.attackCheckRadius[enemy.attackCount]);
+
+        foreach (var hit in colliders)
+        {
+            if (hit.GetComponent<Player>() != null)
+            {
+                hit.GetComponent<Player>().canBounceOther = true;
+            }
+        }
+        enemy.CanBeBouncedAttack();
+    }
+    private void CanNotBeBouncedAttackTrigger()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll
+            (enemy.attackCheck[enemy.attackCount].position, enemy.attackCheckRadius[enemy.attackCount]);
+
+        foreach (var hit in colliders)
+        {
+            if (hit.GetComponent<Player>() != null)
+            {
+                hit.GetComponent<Player>().canBounceOther = false;
+            }
+        }
+        enemy.CanNotBeBouncedAttack();
+    }
 
     private void SetVelocityZero() => enemy.SetZeroVelocity();
 
