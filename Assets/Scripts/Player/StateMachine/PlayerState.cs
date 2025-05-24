@@ -67,9 +67,9 @@ public class PlayerState
     {
         player.info.life = Mathf.Clamp(player.info.life - GlobalRef.Ins.cfg.playerDecayLife_hitted, 0, 100);
 
-        if (player.facingDir != player.RelativePosition())//Flip when player is attecked.
+        if (player.facingDir != -from.facingDir)//Flip when player is attecked.
         {
-            player.FlipController(player.RelativePosition());
+            player.Flip();
         }
 
         player.PlayerDead.AddListener(Dead);

@@ -13,9 +13,15 @@ public class Entity : MonoBehaviour
     [SerializeField] protected Transform wallCheck;
     [SerializeField] protected float wallCheckDistance;
     [SerializeField] protected LayerMask whatIsGround;
+
     [Header("BounceAttack Info")]
+    public bool canBounceOther;
     [SerializeField] public bool canBeBouncedAttack;
     [SerializeField] public GameObject canBeBouncedImage;
+
+    [Header("Attack Info")]
+    public int attackCount;
+    public float[] attackForce;
 
     #region Components
     public Animator animator { get; private set; }
@@ -24,6 +30,7 @@ public class Entity : MonoBehaviour
 
     public int facingDir { get; private set; } = 1;
     protected bool facingRight = true;
+    public int knockbackDir { get; private set; }
 
     protected virtual void Awake()
     {
@@ -51,6 +58,11 @@ public class Entity : MonoBehaviour
     {
         canBeBouncedAttack = false;
         canBeBouncedImage.SetActive(false);
+    }
+
+    public virtual void SetupKnockbackDir()
+    {
+
     }
 
     public virtual void HitTarget()

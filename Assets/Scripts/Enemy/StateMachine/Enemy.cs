@@ -14,11 +14,12 @@ public class Enemy : Entity
     public float attackDistance;
     public float nextTimeReadyToComboAttack;
     [SerializeField] public float ComboAttackCD;
-    public int attackCount;
+    //public int attackCount;
     public Vector2[] attackMoveSpeed;
-    public float[] attackForce;
+    //public float[] attackForce;
 
-    private Transform playerTrans;
+    //private Transform playerTrans;
+    public GameObject playerPrefab;
 
     public EnemyStateMachine stateMachine { get; private set; }
 
@@ -26,7 +27,6 @@ public class Enemy : Entity
     protected override void Awake()
     {
         base.Awake();
-
         stateMachine = new EnemyStateMachine();
 
     }
@@ -35,7 +35,7 @@ public class Enemy : Entity
     {
         base.Start();
 
-        playerTrans = PlayerManager.Ins.player.transform;
+        //playerTrans = PlayerManager.Ins.player.transform;
     }
 
     protected override void Update()
@@ -57,9 +57,25 @@ public class Enemy : Entity
         stateMachine.currentState.BeExecution();
     }
 
+/*    public virtual bool IsInAttackRange()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll
+                (attackCheck[attackCount].position, attackCheckRadius[attackCount]);
+        foreach (var hit in colliders)
+        {
+
+            if (hit.GetComponent<Player>() != null)
+            {
+                return true;
+            }
+        }
+        return false;
+    }*/
+
+
     public virtual bool IsPlayerExist()
     {
-        if (playerTrans != null)
+        if (playerPrefab.gameObject != null)
         {
             return true;
         }
@@ -68,11 +84,11 @@ public class Enemy : Entity
 
     public virtual int RelativePosition()//The RelativePosition with Player
     {
-        if (this.transform.position.x - playerTrans.position.x < 0)
+        if (this.transform.position.x - playerPrefab.gameObject.transform.position.x < 0)
         {
             return 1;
         }
-        else if (this.transform.position.x - playerTrans.position.x > 0)
+        else if (this.transform.position.x - playerPrefab.gameObject.transform.position.x > 0)
         {
             return -1;
         }
@@ -84,13 +100,13 @@ public class Enemy : Entity
 
     public virtual float RelativeDistance()
     {
-        if (this.transform.position.x - playerTrans.position.x < 0)
+        if (this.transform.position.x - playerPrefab.gameObject.transform.position.x < 0)
         {
-            return -(this.transform.position.x - playerTrans.position.x);
+            return -(this.transform.position.x - playerPrefab.gameObject.transform.position.x);
         }
         else
         {
-            return this.transform.position.x - playerTrans.position.x;
+            return this.transform.position.x - playerPrefab.gameObject.transform.position.x;
         }
 
         //return Vector2.Distance(transform.position, playerTrans.position);

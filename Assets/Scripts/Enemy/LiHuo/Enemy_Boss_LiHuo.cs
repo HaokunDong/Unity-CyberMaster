@@ -5,7 +5,7 @@ using BehaviourTrees;
 
 public class Enemy_Boss_LiHuo : Enemy
 {
-    public Player player;
+    //public Player player;
 
     [Header("LiHuoSkills Info")]
     private float nextTimeReadyToMove;
@@ -90,8 +90,6 @@ public class Enemy_Boss_LiHuo : Enemy
     public override void OnHitFromTarget(Entity from)
     {
         base.OnHitFromTarget(from);
-        SetMovement(player.attackForce[player.attackCount] * player.facingDir, rb.velocity.y);
-
     }
 
     protected override void OnDrawGizmos()
@@ -116,6 +114,8 @@ public class Enemy_Boss_LiHuo : Enemy
         //Gizmos.DrawWireSphere(leapAttackCheck.position, leapAttackRadius);
     }
 
+
+
     #region DistanceJudge
     public bool RaycastDetectPlayer(float DetectDistance)
     {
@@ -132,7 +132,7 @@ public class Enemy_Boss_LiHuo : Enemy
     }
     public bool IsPlayerInViewRange()
     {
-        if (Vector2.Distance(player.transform.position, transform.position) < 10)
+        if (Vector2.Distance(playerPrefab.gameObject.transform.position, transform.position) < 10)
         {
             return true;
         }

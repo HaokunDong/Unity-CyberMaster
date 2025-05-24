@@ -9,7 +9,7 @@ public class EnemyManager : SingletonComp<EnemyManager>
 
     private void Start()
     {
-        liHuo.gameObject.SetActive(false);
+        //liHuo.gameObject.SetActive(false);
     }
 
 }

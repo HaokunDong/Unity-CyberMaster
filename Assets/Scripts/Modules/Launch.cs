@@ -10,7 +10,7 @@ public class Launch : MonoBehaviour
     }
     private void Start()
     {
-        GameManager.Ins.Start();
+        //GameManager.Ins.Start();
     }
     private void Update()
     {

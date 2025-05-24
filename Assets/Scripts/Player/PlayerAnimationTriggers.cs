@@ -64,8 +64,34 @@ public class PlayerAnimationTriggers : MonoBehaviour
         EnemyManager.Ins.liHuo.BeExecution();
     }
 
-    private void CanBeBouncedAttackTrigger() => player.CanBeBouncedAttack();
-    private void CanNotBeBouncedAttackTrigger() => player.CanNotBeBouncedAttack();
+    private void CanBeBouncedAttackTrigger()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll
+            (player.attackCheck[player.attackCount].position, player.attackCheckRadius[player.attackCount]);
+
+        foreach (var hit in colliders)
+        {
+            if (hit.GetComponent<Enemy>() != null)
+            {
+                hit.GetComponent<Enemy>().canBounceOther = true;
+            }
+        }
+        player.CanBeBouncedAttack();
+    }
+    private void CanNotBeBouncedAttackTrigger()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll
+            (player.attackCheck[player.attackCount].position, player.attackCheckRadius[player.attackCount]);
+
+        foreach (var hit in colliders)
+        {
+            if (hit.GetComponent<Enemy>() != null)
+            {
+                hit.GetComponent<Enemy>().canBounceOther = false;
+            }
+        }
+        player.CanNotBeBouncedAttack();
+    }
 
     private void InvinciblityTrigger() => StartCoroutine(player.Invincibility());
 
@@ -87,14 +113,14 @@ public class PlayerAnimationTriggers : MonoBehaviour
         player.TriggerExecutionRetreat();
     }
 
-        private void ExecutionZoomIn()
+    private void ExecutionZoomIn()
     {
-        CameraManager.Instance.SwitchToExecutionCam();
+        CameraManager.Ins.SwitchToExecutionCam();
     }
 
     private void ExecutionZoomOut()
     {
-        CameraManager.Instance.SwitchToMainCam();
+        CameraManager.Ins.SwitchToMainCam();
     }
 
 

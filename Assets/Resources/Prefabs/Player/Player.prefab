@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 5923643490102495436}
   - component: {fileID: 1308179999213730303}
   - component: {fileID: 4736215879549223148}
+  - component: {fileID: 4947978821783003200}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -166,10 +167,16 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
+  canBounceOther: 0
   canBeBouncedAttack: 0
   canBeBouncedImage: {fileID: 2568497917624387223}
-  liHuo: {fileID: 0}
   attackCount: 0
+  attackForce:
+  - 5
+  - 5
+  - 5
+  - 5
+  - 5
   attackLimitation: 0
   attackMovement:
   - {x: 2, y: 1}
@@ -177,12 +184,6 @@ MonoBehaviour:
   - {x: 5, y: 1}
   - {x: 2, y: 1}
   - {x: 8, y: 2}
-  attackForce:
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
   chargeAttackMovement: 30
   chargeAttackCheck: {fileID: 5636613339799872342}
   chargeAttackRadius: 2.26
@@ -227,7 +228,7 @@ MonoBehaviour:
   - {x: 0.2206626, y: -0.9899998, z: 0}
   m_ShapePathHash: 136114589
   m_Mesh: {fileID: 0}
-  m_InstanceId: -17756
+  m_InstanceId: -175848
   m_LocalBounds:
     m_Center: {x: 0.0049883127, y: -0.031554222, z: 0}
     m_Extent: {x: 0.21567428, y: 0.95844555, z: 0}
@@ -255,6 +256,18 @@ MonoBehaviour:
   unloadTriggerList: 958ca0ea
   bankNameInternal: 
   valueGuidInternal: 
+--- !u!114 &4947978821783003200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613682682762765996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55dbc2cf1dbb45b408cc2cfd5b1d0bf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1632458685840708588
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,6 +278,7 @@ GameObject:
   m_Component:
   - component: {fileID: 213975141814361618}
   - component: {fileID: 6184492182659863994}
+  - component: {fileID: 4787350447094310897}
   - component: {fileID: 5525440868676629496}
   - component: {fileID: 2605378535257135619}
   - component: {fileID: 7855615409825322099}
@@ -332,7 +346,7 @@ SpriteRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 7455526, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9622642, g: 0.9622642, b: 0.9622642, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -342,6 +356,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4787350447094310897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1632458685840708588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd125ac30bb260f4697204dab97f6c2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &5525440868676629496
 Animator:
   serializedVersion: 5
@@ -414,11 +440,11 @@ MonoBehaviour:
   BeAttacked:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 0c1da2ee3c825483fb990f5f1d1ea16b, type: 2}
   BeStunned:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 37c615331e86b4b0da54ce12e8e41d0c, type: 2}
   BounceAttack1:
     idInternal: 0
     valueGuidInternal: 
@@ -438,7 +464,7 @@ MonoBehaviour:
   Fall:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 50d95b6b8df344032b296806cc92a7f1, type: 2}
   Idle:
     idInternal: 0
     valueGuidInternal: 
@@ -446,11 +472,11 @@ MonoBehaviour:
   Jump:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 50d95b6b8df344032b296806cc92a7f1, type: 2}
   Landing:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: db3b5f89b3d534fb4839c280c7680b78, type: 2}
   Move:
     idInternal: 0
     valueGuidInternal: 
@@ -462,7 +488,7 @@ MonoBehaviour:
   PostureEnter:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: e5c5dc577475c4c569f25032258289c3, type: 2}
   PostureMove:
     idInternal: 0
     valueGuidInternal: 
@@ -474,7 +500,7 @@ MonoBehaviour:
   WallSlide:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 304398e570c514ca48ea1fb4f707b302, type: 2}
   Other_Wield_Sword:
     idInternal: 0
     valueGuidInternal: 
@@ -482,7 +508,7 @@ MonoBehaviour:
   EX:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 820cc1055e3054018841c59d52fa5db1, type: 2}
 --- !u!1 &2568497917624387223
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,7 +583,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
