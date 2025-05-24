@@ -29959,7 +29959,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 236a3c04d02b1d14c95925378022ee6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barCom: {fileID: 3120561683962490546, guid: b92e86f535038724981318b7ce5a60aa, type: 3}
+  barCom: {fileID: 1512205622}
   cfg: {fileID: 11400000, guid: 400d2d72df14ded478252dec2d603fda, type: 2}
   hitEffectFolder: {fileID: 806916396}
   hitEffectPrefab: {fileID: 5908320797415904013, guid: 438fffac7ecadd647a39f4da92873079, type: 3}

@@ -29,7 +29,7 @@ public class Player : Entity
     public float velocityY { get; private set; }
     [Header("Bar Com")]
     public Transform barFolder;
-    public BarCom lifeBar;
+    
     public PlayerInfo info = new PlayerInfo();
 
     [Header("Execution Info")]
@@ -63,6 +63,8 @@ public class Player : Entity
     public PlayerChargeAttackState chargeAttackState { get; private set; }
 
     public PlayerDeadState deadState { get; private set; }
+
+    private BarCom lifeBar;
     #endregion
 
     protected override void Awake()
@@ -90,6 +92,8 @@ public class Player : Entity
         chargeAttackState = new PlayerChargeAttackState(stateMachine, this, "ChargeAttack");
 
         deadState = new PlayerDeadState(stateMachine, this, "Dead");
+
+        lifeBar = GlobalRef.Ins.barCom.GetComponent<BarCom>();
     }
 
     protected override void Start()
