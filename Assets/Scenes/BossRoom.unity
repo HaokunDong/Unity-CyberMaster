@@ -30095,7 +30095,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  playerSpawnPoint: {fileID: 0}
 --- !u!1 &1016437837
 GameObject:
   m_ObjectHideFlags: 0
@@ -32028,8 +32027,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3306b623300af2045ac00f9cc57eb156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 1613682682762765996, guid: a3434d7fb10d4104cbee4c9a9391e5aa, type: 3}
   player: {fileID: 0}
+  playerPrefab: {fileID: 1613682682762765996, guid: a3434d7fb10d4104cbee4c9a9391e5aa, type: 3}
 --- !u!1 &1371958283
 GameObject:
   m_ObjectHideFlags: 0
