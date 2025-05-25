@@ -6,6 +6,9 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.Serialization;
+#if UNITY_EDITOR
+using NodeCanvas.Editor;
+#endif
 using Logger = ParadoxNotion.Services.Logger;
 
 namespace ParadoxNotion
@@ -33,7 +36,7 @@ namespace ParadoxNotion
         private static Dictionary<Type, FieldInfo[]> _typeFields;
         private static Dictionary<Type, PropertyInfo[]> _typeProperties;
         private static Dictionary<Type, EventInfo[]> _typeEvents;
-        // private static Dictionary<Type, object[]> _typeAttributes;
+        private static Dictionary<Type, object[]> _typeAttributes;
         private static Dictionary<MemberInfo, object[]> _memberAttributes;
         private static Dictionary<MemberInfo, bool> _obsoleteCache;
         private static Dictionary<Type, MethodInfo[]> _typeExtensions;
@@ -60,7 +63,7 @@ namespace ParadoxNotion
             _typeFields = new Dictionary<Type, FieldInfo[]>();
             _typeProperties = new Dictionary<Type, PropertyInfo[]>();
             _typeEvents = new Dictionary<Type, EventInfo[]>();
-            // _typeAttributes = new Dictionary<Type, object[]>();
+            _typeAttributes = new Dictionary<Type, object[]>();
             _memberAttributes = new Dictionary<MemberInfo, object[]>();
             _obsoleteCache = new Dictionary<MemberInfo, bool>();
             _typeExtensions = new Dictionary<Type, MethodInfo[]>();
@@ -251,7 +254,11 @@ namespace ParadoxNotion
             var result = new List<Type>();
             for ( var i = 0; i < loadedAssemblies.Length; i++ ) {
                 var asm = loadedAssemblies[i];
+#if UNITY_EDITOR
+                try { result.AddRange(asm.GetExportedTypes().Where(t => includeObsolete == true || (Prefs.ShowObsoleteNode || !t.RTIsDefined<System.ObsoleteAttribute>(false)))); }
+#else
                 try { result.AddRange(asm.GetExportedTypes().Where(t => includeObsolete == true || !t.RTIsDefined<System.ObsoleteAttribute>(false))); }
+#endif
                 catch { continue; }
             }
             return _allTypes = result.OrderBy(t => t.Namespace).ThenBy(t => t.FriendlyName()).ToArray();
@@ -274,6 +281,13 @@ namespace ParadoxNotion
                 }
             }
             return _subTypesMap[baseType] = temp.ToArray();
+        }
+
+        public static void ClearTargetSubTypeMap(Type baseType)
+        {
+            //ShowObsoleteNode相关功能支持
+            _subTypesMap.Remove(baseType);
+            _allTypes = null;
         }
 
         ///----------------------------------------------------------------------------------------------
@@ -597,22 +611,6 @@ namespace ParadoxNotion
             return type.MakeGenericType(typeArgs);
         }
 
-        public static Type[] RTGetEmptyTypes() {
-            return Type.EmptyTypes;
-        }
-
-        public static Type RTGetElementType(this Type type) {
-            if ( type == null ) return null;
-            return type.GetElementType();
-        }
-
-        public static bool RTIsByRef(this Type type) {
-            if ( type == null ) return false;
-            return type.IsByRef;
-        }
-
-        ///----------------------------------------------------------------------------------------------
-
         public static Type[] RTGetGenericArguments(this Type type) {
             Type[] result = null;
             if ( _genericArgsTypeCache.TryGetValue(type, out result) ) {
@@ -627,6 +625,20 @@ namespace ParadoxNotion
                 return result;
             }
             return _genericArgsMathodCache[method] = result = method.GetGenericArguments();
+        }
+
+        public static Type[] RTGetEmptyTypes() {
+            return Type.EmptyTypes;
+        }
+
+        public static Type RTGetElementType(this Type type) {
+            if ( type == null ) return null;
+            return type.GetElementType();
+        }
+
+        public static bool RTIsByRef(this Type type) {
+            if ( type == null ) return false;
+            return type.IsByRef;
         }
 
         ///----------------------------------------------------------------------------------------------
@@ -872,52 +884,55 @@ namespace ParadoxNotion
 
         ///----------------------------------------------------------------------------------------------
 
-        // ///<summary>Get all attributes from type including inherited</summary>
-        // public static object[] RTGetAllAttributes(this Type type) {
-        //     object[] attributes;
-        //     if ( !_typeAttributes.TryGetValue(type, out attributes) ) {
-        //         //put in try catch clause to avoid problems with some unity types
-        //         try { attributes = type.GetCustomAttributes(true); }
-        //         catch { /*...*/ }
-        //         finally { _typeAttributes[type] = attributes; }
-        //     }
-        //     return attributes;
-        // }
+        ///<summary>Get all attributes from type including inherited</summary>
+        public static object[] RTGetAllAttributes(this Type type) {
+            object[] attributes;
+            if ( !_typeAttributes.TryGetValue(type, out attributes) ) {
+                //put in try catch clause to avoid problems with some unity types
+                try { attributes = type.GetCustomAttributes(true); }
+                catch { /*...*/ }
+                finally { _typeAttributes[type] = attributes; }
+            }
+            return attributes;
+        }
 
         ///<summary>Is attribute defined?</summary>
         public static bool RTIsDefined<T>(this Type type, bool inherited) where T : Attribute { return type.RTIsDefined(typeof(T), inherited); }
         public static bool RTIsDefined(this Type type, Type attributeType, bool inherited) {
-            return type.IsDefined(attributeType, inherited);
-            // return inherited ? type.RTGetAttribute(attributeType, inherited) != null : type.IsDefined(attributeType, false);
+            return inherited ? type.RTGetAttribute(attributeType, inherited) != null : type.IsDefined(attributeType, false);
         }
 
         ///<summary>Get attribute from type of type T</summary>
         public static T RTGetAttribute<T>(this Type type, bool inherited) where T : Attribute { return (T)type.RTGetAttribute(typeof(T), inherited); }
         public static Attribute RTGetAttribute(this Type type, Type attributeType, bool inherited) {
-            return type.GetCustomAttribute(attributeType, inherited);
-            // object[] attributes = RTGetAllAttributes(type);
-            // if ( attributes != null ) {
-            //     for ( var i = 0; i < attributes.Length; i++ ) {
-            //         var att = (Attribute)attributes[i];
-            //         var attType = att.GetType();
-            //         if ( attType.RTIsAssignableTo(attributeType) ) {
-            //             if ( inherited || type.IsDefined(attType, false) ) {
-            //                 return att;
-            //             }
-            //         }
-            //     }
-            // }
-            // return null;
+            object[] attributes = RTGetAllAttributes(type);
+            if ( attributes != null ) {
+                for ( var i = 0; i < attributes.Length; i++ ) {
+                    var att = (Attribute)attributes[i];
+                    var attType = att.GetType();
+                    if ( attType.RTIsAssignableTo(attributeType) ) {
+                        if ( inherited || type.IsDefined(attType, false) ) {
+                            return att;
+                        }
+                    }
+                }
+            }
+            return null;
         }
 
         ///------------------------------------------
 
+        private static object _lockObj = new object();
         ///<summary>Get all attributes from member including inherited</summary>
         public static object[] RTGetAllAttributes(this MemberInfo member) {
             object[] attributes;
             if ( !_memberAttributes.TryGetValue(member, out attributes) ) {
                 attributes = member.GetCustomAttributes(true);
-                _memberAttributes[member] = attributes;
+                //fix:多线程安全问题
+                lock (_lockObj)
+                {
+                    _memberAttributes[member] = attributes;
+                }
             }
             return attributes;
         }
@@ -925,25 +940,23 @@ namespace ParadoxNotion
         ///<summary>Is attribute defined?</summary>
         public static bool RTIsDefined<T>(this MemberInfo member, bool inherited) where T : Attribute { return member.RTIsDefined(typeof(T), inherited); }
         public static bool RTIsDefined(this MemberInfo member, Type attributeType, bool inherited) {
-            return member.IsDefined(attributeType, inherited);
-            // return inherited ? member.RTGetAttribute(attributeType, inherited) != null : member.IsDefined(attributeType, false);
+            return inherited ? member.RTGetAttribute(attributeType, inherited) != null : member.IsDefined(attributeType, false);
         }
 
         ///<summary>Get attribute from member of type T</summary>
         public static T RTGetAttribute<T>(this MemberInfo member, bool inherited) where T : Attribute { return (T)member.RTGetAttribute(typeof(T), inherited); }
         public static Attribute RTGetAttribute(this MemberInfo member, Type attributeType, bool inherited) {
-            return member.GetCustomAttribute(attributeType, inherited);
-            // object[] attributes = RTGetAllAttributes(member);
-            // for ( var i = 0; i < attributes.Length; i++ ) {
-            //     var att = (Attribute)attributes[i];
-            //     var attType = att.GetType();
-            //     if ( attType.RTIsAssignableTo(attributeType) ) {
-            //         if ( inherited || member.IsDefined(attType, false) ) {
-            //             return att;
-            //         }
-            //     }
-            // }
-            // return null;
+            object[] attributes = RTGetAllAttributes(member);
+            for ( var i = 0; i < attributes.Length; i++ ) {
+                var att = (Attribute)attributes[i];
+                var attType = att.GetType();
+                if ( attType.RTIsAssignableTo(attributeType) ) {
+                    if ( inherited || member.IsDefined(attType, false) ) {
+                        return att;
+                    }
+                }
+            }
+            return null;
         }
 
         ///<summary>Get all attributes of type T recursively up the type hierarchy</summary>
@@ -1304,7 +1317,8 @@ namespace ParadoxNotion
 
         ///<summary>Creates and returns an open instance setter for field.</summary>
         public static Action<T, TValue> GetFieldSetter<T, TValue>(FieldInfo info) {
-#if !NET_STANDARD_2_0 && (UNITY_EDITOR || (!ENABLE_IL2CPP && (UNITY_STANDALONE || UNITY_ANDROID || UNITY_WSA)))
+// #if !NET_STANDARD_2_0 && (UNITY_EDITOR || (!ENABLE_IL2CPP && (UNITY_STANDALONE || UNITY_ANDROID || UNITY_WSA)))
+#if !NET_STANDARD_2_0 && (false && (!ENABLE_IL2CPP && (UNITY_STANDALONE || UNITY_ANDROID || UNITY_WSA)))
             var name = string.Format("__set_field_{0}_", info.Name);
             DynamicMethod m = new DynamicMethod(name, typeof(void), new Type[] { typeof(T), typeof(TValue) }, typeof(T));
             ILGenerator il = m.GetILGenerator();

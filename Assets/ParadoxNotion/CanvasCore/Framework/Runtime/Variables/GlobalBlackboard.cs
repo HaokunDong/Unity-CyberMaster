@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using Logger = ParadoxNotion.Services.Logger;
 
@@ -76,7 +76,9 @@ namespace NodeCanvas.Framework
             base.OnValidate();
 
 #if UNITY_EDITOR
+            //Griffin 修改NodeCanvas插件和unity版本适配
             if ( UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage() != null ) { return; }
+            //Griffin 修改NodeCanvas插件和unity版本适配
 #endif
 
             if ( Application.isPlaying || IsPrefabAsset() ) { return; }

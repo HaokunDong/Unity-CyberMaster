@@ -2,11 +2,12 @@
 
 using NodeCanvas.Framework;
 using ParadoxNotion.Design;
+using Sirenix.OdinInspector.Editor;
 using UnityEngine;
 
 namespace NodeCanvas.Editor
 {
-
+    [OdinDontRegister]
     ///<summary>A drawer for Tasks</summary>
     public class TaskDrawer : ObjectDrawer<Task>
     {

@@ -88,18 +88,42 @@ namespace NodeCanvas.Editor
             GUILayout.FlexibleSpace();
             GUILayout.Space(10);
 
+            DrawToolbarRight(graph, owner);
+
+            GUILayout.EndHorizontal();
+            GUI.backgroundColor = Color.white;
+            GUI.color = Color.white;
+        }
+
+        public static void ShowToolbarRightOnly()
+        {
+            GUILayout.BeginHorizontal(EditorStyles.toolbar);
+            
+            GUILayout.Space(10);
+            GUILayout.FlexibleSpace();
+
+            GUILayout.FlexibleSpace();
+            GUILayout.Space(10);
+
+            DrawToolbarRight(null, null);
+            
+            GUILayout.EndHorizontal();
+            GUI.backgroundColor = Color.white;
+            GUI.color = Color.white;
+        }
+
+        private static void DrawToolbarRight(Graph graph, GraphOwner owner)
+        {
             //----------------------------------------------------------------------------------------------
             //Right side
             //----------------------------------------------------------------------------------------------
 
             GUI.backgroundColor = Color.clear;
-            GUI.color = new Color(1, 1, 1, 0.4f);
-            if ( GUILayout.Button(string.Format("{0} @ {1} v{2}", graph.GetType().Name, graphInfoAtt != null ? graphInfoAtt.packageName : "NodeCanvas", NodeCanvas.Framework.Internal.GraphSource.FRAMEWORK_VERSION.ToString("0.00")), EditorStyles.toolbarButton) ) { UnityEditor.Help.BrowseURL("https://paradoxnotion.com"); }
-            EditorGUIUtility.AddCursorRect(GUILayoutUtility.GetLastRect(), MouseCursor.Link);
+            GUI.color = new Color(1, 1, 1, 0.3f);
+            GUILayout.Label(string.Format("{0} @NodeCanvas Framework v{1}", graph != null ? graph.GetType().Name : "", NodeCanvas.Framework.Internal.GraphSource.FRAMEWORK_VERSION.ToString("0.00")), EditorStyles.toolbarButton);
+            GUILayout.Space(10);
             GUI.color = Color.white;
             GUI.backgroundColor = Color.white;
-            GUILayout.Space(10);
-
 
             //GRAPHOWNER JUMP SELECTION
             if ( owner != null ) {
@@ -112,17 +136,16 @@ namespace NodeCanvas.Editor
                     menu.ShowAsContext();
                 }
             }
+            
+            //添加历史记录按钮
+            if(GUILayout.Button("历史记录", EditorStyles.toolbarDropDown, GUILayout.Width(120)))
+            {
+                if(current) current.DrawHistoryMenu();
+            }
 
             Prefs.isEditorLocked = GUILayout.Toggle(Prefs.isEditorLocked, "Lock", EditorStyles.toolbarButton);
-            GUI.contentColor = EditorGUIUtility.isProSkin ? Color.white : Colors.Grey(0.5f);
-            if ( GUILayout.Button(Icons.helpIcon, EditorStyles.toolbarButton) ) { WelcomeWindow.ShowWindow(graph.GetType()); }
-            GUI.contentColor = Color.white;
 
             GUILayout.Space(4);
-
-            GUILayout.EndHorizontal();
-            GUI.backgroundColor = Color.white;
-            GUI.color = Color.white;
         }
 
         ///----------------------------------------------------------------------------------------------
@@ -274,6 +297,9 @@ namespace NodeCanvas.Editor
                 menu.AddItem(new GUIContent("Automatic Hierarchical Move"), Prefs.hierarchicalMove, () => { Prefs.hierarchicalMove = !Prefs.hierarchicalMove; });
             }
             menu.AddItem(new GUIContent("Open Preferred Types Editor..."), false, () => { TypePrefsEditorWindow.ShowWindow(); });
+            menu.AddItem(new GUIContent("NodeInspector使用Odin序列化"), Prefs.UseOdinEditor, () => { Prefs.UseOdinEditor = !Prefs.UseOdinEditor; });
+            menu.AddItem(new GUIContent("使用AddNode缓存"), Prefs.UseAddNodeCacheNeedFix, () => { Prefs.UseAddNodeCacheNeedFix = !Prefs.UseAddNodeCacheNeedFix; });
+            menu.AddItem(new GUIContent("AddNode显示过期节点"), Prefs.ShowObsoleteNode, () => { Prefs.ShowObsoleteNode = !Prefs.ShowObsoleteNode; });
             return menu;
         }
     }

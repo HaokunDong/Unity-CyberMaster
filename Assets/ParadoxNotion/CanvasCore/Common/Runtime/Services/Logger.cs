@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
+using NodeCanvas.Framework;
 
 namespace ParadoxNotion.Services
 {
@@ -33,7 +34,6 @@ namespace ParadoxNotion.Services
 
         public delegate bool LogHandler(Message message);
         private static List<LogHandler> subscribers = new List<LogHandler>();
-        public static bool enabled = true;
 
         ///----------------------------------------------------------------------------------------------
 
@@ -71,9 +71,6 @@ namespace ParadoxNotion.Services
 
         //...
         private static void Internal_Log(LogType type, object message, string tag, object context) {
-
-            if ( !enabled ) { return; }
-
             if ( subscribers != null && subscribers.Count > 0 ) {
                 var msg = new Message();
                 msg.type = type;
@@ -114,11 +111,37 @@ namespace ParadoxNotion.Services
 
         //forward the log to unity console
         private static void ForwardToUnity(LogType type, object message, string tag, object context) {
-            if ( message is System.Exception ) {
-                UnityEngine.Debug.unityLogger.LogException((System.Exception)message);
+            if ( message is System.Exception exception) {
+                //gx:添加go路径信息
+                if (context is Node node && node.graphAgent)
+                {
+                    UnityEngine.Debug.unityLogger.LogError(tag, $"蓝图执行报错（具体报错在下一条） Path:{GetPath(node.graphAgent.transform)} Type:{node.GetType().Name}", node.graphAgent);
+                }
+                UnityEngine.Debug.unityLogger.LogException(exception);
             } else {
+                //gx:添加go路径信息
+                if (context is Node node && node.graphAgent)
+                {
+                    message =  $"{message} Path:{GetPath(node.graphAgent.transform)}  Type:{node.GetType().Name}";
+                }
                 UnityEngine.Debug.unityLogger.Log(type, tag, message, context as UnityEngine.Object);
             }
+        }
+        
+        private static List<string> s_tempList = new List<string>();
+        private static string GetPath(Transform self)
+        {
+            s_tempList.Clear();
+            Transform trans = self;
+            do
+            {
+                s_tempList.Add(trans.gameObject.name);
+                trans = trans.parent;
+            } while (trans);
+
+            s_tempList.Reverse();
+
+            return string.Join("/", s_tempList);
         }
     }
 }

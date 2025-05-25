@@ -5,6 +5,8 @@ using System;
 using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
+using NodeCanvas.Framework;
+using Sirenix.OdinInspector.Editor;
 
 namespace ParadoxNotion.Design
 {
@@ -98,7 +100,7 @@ namespace ParadoxNotion.Design
     ///----------------------------------------------------------------------------------------------
 
     ///<summary>Derive this to create custom drawers for T assignable object types.</summary>
-    abstract public class ObjectDrawer<T> : IObjectDrawer
+    abstract public class ObjectDrawer<T> : OdinValueDrawer<T>, IObjectDrawer
     {
         ///<summary>info</summary>
         protected InspectedFieldInfo info { get; private set; }
@@ -118,7 +120,6 @@ namespace ParadoxNotion.Design
         protected object context { get { return info.parentInstanceContext; } }
         ///<summary>The Unity object the instance serialized within</summary>
         protected UnityEngine.Object contextUnityObject { get { return info.unityObjectContext; } }
-
 
         ///<summary>Begin GUI</summary>
         object IObjectDrawer.DrawGUI(GUIContent content, object instance, InspectedFieldInfo info) {
@@ -153,8 +154,41 @@ namespace ParadoxNotion.Design
 
         ///<summary>Override to implement GUI. Return the modified instance at the end.</summary>
         abstract public T OnGUI(GUIContent content, T instance);
+        
+        //gx:添加Odin支持
+        protected override void DrawPropertyLayout(GUIContent label)
+        {
+            var targets = Property.Tree.WeakTargets;
+            for (int i = 0; i < targets.Count; i++)
+            {
+                var target = targets[i];
+                if (target is Node node)
+                {
+                    var field = Property.Info.GetMemberInfo() as FieldInfo;
+                    var attributes = field.RTGetAllAttributes();
+                    var info = new InspectedFieldInfo(node.graph, field, Property.Parent.ValueEntry.WeakSmartValue, attributes){
+                        wrapperInstanceContext = node,
+                    };
+                    ValueEntry.WeakSmartValue = (this as IObjectDrawer).DrawGUI(label, ValueEntry.SmartValue, info);
+                }
+                else if (target is Task task)
+                {
+                    var field = Property.Info.GetMemberInfo() as FieldInfo;
+                    var attributes = field.RTGetAllAttributes();
+                    var info = new InspectedFieldInfo(task.ownerSystem.contextObject, field, Property.Parent.ValueEntry.WeakSmartValue, attributes){
+                        wrapperInstanceContext = task,
+                    };
+                    ValueEntry.WeakSmartValue = (this as IObjectDrawer).DrawGUI(label, ValueEntry.SmartValue, info);
+                }
+                else
+                {
+                    Debug.LogError("NodeCanvas DrawPropertyLayout Odin Support Error！暂不支持Node以外的类型");
+                }
+            }
+        }
     }
 
+    [OdinDontRegister]
     ///<summary>The default object drawer implementation able to inspect most types</summary>
     public class DefaultObjectDrawer : ObjectDrawer<object>
     {
@@ -169,11 +203,10 @@ namespace ParadoxNotion.Design
             return EditorUtils.DrawEditorFieldDirect(content, instance, objectType, info);
         }
     }
-
+    
     ///----------------------------------------------------------------------------------------------
-
     ///<summary>Derive this to create custom drawers for T DrawerAttribute.</summary>
-    abstract public class AttributeDrawer<T> : IAttributeDrawer where T : DrawerAttribute
+    abstract public class AttributeDrawer<T> : OdinAttributeDrawer<T>, IAttributeDrawer where T : DrawerAttribute
     {
 
         ///<summary>info</summary>
@@ -218,10 +251,57 @@ namespace ParadoxNotion.Design
 
         ///<summary>Override to implement GUI. Return the modified instance at the end.</summary>
         abstract public object OnGUI(GUIContent content, object instance);
+
         ///<summary>Show the next attribute drawer in order, or the object drawer itself of no attribute drawer is left to show.</summary>
-        protected object MoveNextDrawer() { return objectDrawer.MoveNextDrawer(); }
+        protected object MoveNextDrawer()
+        {
+            if (m_useOdinDraw)
+            {
+                CallNextDrawer(this.content);
+                return Property.ValueEntry.WeakSmartValue;
+            }
+            return objectDrawer.MoveNextDrawer();
+        }
+        
+        //gx:添加Odin支持
+        private bool m_useOdinDraw = false;
+        
+        protected override void DrawPropertyLayout(GUIContent label)
+        {
+            //进来这边说明走了Odin的流程
+            m_useOdinDraw = true;
+            var targets = Property.Tree.WeakTargets;
+            for (int i = 0; i < targets.Count; i++)
+            {
+                var target = targets[i];
+                if (target is Node node)
+                {
+                    var field = Property.Info.GetMemberInfo() as FieldInfo;
+                    var info = new InspectedFieldInfo(node.graph, field, Property.Parent.ValueEntry.WeakSmartValue, null)
+                    {
+                        wrapperInstanceContext = node,
+                    };
+                    Property.ValueEntry.WeakSmartValue = (this as IAttributeDrawer).DrawGUI(null, label, Property.ValueEntry.WeakSmartValue, Attribute, info);
+                }
+                else if (target is Task task)
+                {
+                    var field = Property.Info.GetMemberInfo() as FieldInfo;
+                    var info = new InspectedFieldInfo(task.ownerSystem.contextObject, field, Property.Parent.ValueEntry.WeakSmartValue, null)
+                    {
+                        wrapperInstanceContext = task,
+                    };
+                    Property.ValueEntry.WeakSmartValue = (this as IAttributeDrawer).DrawGUI(null, label, Property.ValueEntry.WeakSmartValue,Attribute, info);
+                }
+                else
+                {
+                    Debug.LogError("NodeCanvas DrawPropertyLayout Odin Support Error！暂不支持Node以外的类型");
+                }
+            }
+            m_useOdinDraw = false;
+        }
     }
 
+    [OdinDontRegister]
     ///<summary>The default attribute drawer implementation for when an actual implementation is not found</summary>
     public class DefaultAttributeDrawer : AttributeDrawer<DrawerAttribute>
     {

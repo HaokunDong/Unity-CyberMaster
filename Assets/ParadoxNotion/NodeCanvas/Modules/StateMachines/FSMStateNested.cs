@@ -11,7 +11,7 @@ namespace NodeCanvas.StateMachines
     [Color("ffe4e1")]
     abstract public class FSMStateNested<T> : FSMState, IGraphAssignable<T> where T : Graph
     {
-        [SerializeField] private List<BBMappingParameter> _variablesMap;
+        [SerializeField,HideInInspector] private List<BBMappingParameter> _variablesMap;
 
         abstract public T subGraph { get; set; }
         abstract public BBParameter subGraphParameter { get; }

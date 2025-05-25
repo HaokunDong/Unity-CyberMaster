@@ -1,4 +1,4 @@
-using NodeCanvas.Framework;
+﻿using NodeCanvas.Framework;
 using ParadoxNotion.Design;
 using System.Collections;
 
@@ -27,7 +27,9 @@ namespace NodeCanvas.Tasks.Actions
         }
 
         IEnumerator Flip() {
-            yield return null;
+            // yield return null;
+            //修改为自定义的Update
+            yield return ownerSystem.GetWaitForNextGraphUpdate();
             variable.value = false;
         }
     }

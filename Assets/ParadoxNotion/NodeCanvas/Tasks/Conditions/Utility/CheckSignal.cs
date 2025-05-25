@@ -1,3 +1,4 @@
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using NodeCanvas.Framework;
@@ -25,13 +26,16 @@ namespace NodeCanvas.Tasks.Conditions
             return null;
         }
 
+        //GC优化
+        private SignalDefinition.InvokeArguments cacheInvoke;
+        
         protected override void OnEnable() {
-            signalDefinition.value.onInvoke -= OnSignalInvoke;
-            signalDefinition.value.onInvoke += OnSignalInvoke;
+            signalDefinition.value.onInvoke -= cacheInvoke ??= OnSignalInvoke;
+            signalDefinition.value.onInvoke += cacheInvoke ??= OnSignalInvoke;
         }
 
         protected override void OnDisable() {
-            signalDefinition.value.onInvoke -= OnSignalInvoke;
+            signalDefinition.value.onInvoke -= cacheInvoke ??= OnSignalInvoke;
         }
 
         void OnSignalInvoke(Transform sender, Transform receiver, bool isGlobal, params object[] args) {

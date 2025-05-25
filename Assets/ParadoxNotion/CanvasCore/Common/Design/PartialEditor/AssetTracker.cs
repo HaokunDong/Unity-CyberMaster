@@ -55,6 +55,8 @@ namespace ParadoxNotion.Design
         static void AssetsImported(string[] paths) {
             if ( trackedTypes == null ) { return; }
             foreach ( var path in paths ) {
+                //优化下逻辑，目前也就asset要监听，减少导入时间
+                if(!path.EndsWith(".asset")) continue;
                 var asset = AssetDatabase.LoadAssetAtPath(path, typeof(UnityEngine.Object));
                 if ( asset != null && trackedTypes.Any(t => t.IsAssignableFrom(asset.GetType())) ) {
                     trackedAssets[path] = asset;

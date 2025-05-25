@@ -1,7 +1,10 @@
 ﻿#if UNITY_EDITOR
 
+using FlowCanvas;
+using ParadoxNotion.Design;
 using UnityEditor;
 using ParadoxNotion.Serialization;
+using UnityEngine.Serialization;
 
 namespace NodeCanvas.Editor
 {
@@ -47,6 +50,14 @@ namespace NodeCanvas.Editor
             public ConsoleLogOrder consoleLogOrder = ConsoleLogOrder.Ascending;
             public bool explorerShowTypeNames = true;
             public float minimapSizeY = 100f;
+            
+            //gx:添加Odin支持
+            public bool useOdinEditor = true;
+            //AddNodeCache
+            //会偶现的节点添加不了的问题，暂时屏蔽
+            public bool useAddNodeCacheNeedFix = false;
+            //是否要显示过期节点
+            public bool showObsoleteNode = false;
         }
 
         private static SerializedData _data;
@@ -67,8 +78,8 @@ namespace NodeCanvas.Editor
 
         ///----------------------------------------------------------------------------------------------
 
-        public const float MINIMAP_MIN_SIZE = 30;
-        public const float MINIMAP_MAX_SIZE = 300;
+        public readonly static float MINIMAP_MIN_SIZE = 30;
+        public readonly static float MINIMAP_MAX_SIZE = 300;
 
         ///----------------------------------------------------------------------------------------------
 
@@ -237,6 +248,20 @@ namespace NodeCanvas.Editor
         //Save the prefs
         static void Save() {
             EditorPrefs.SetString(PREFS_KEY_NAME, JSONSerializer.Serialize(typeof(SerializedData), data));
+        }
+        
+        //添加Odin支持
+        public static bool UseOdinEditor {
+            get { return data.useOdinEditor; }
+            set { if ( data.useOdinEditor != value ) { data.useOdinEditor = value; Save(); } }
+        }
+        public static bool UseAddNodeCacheNeedFix {
+            get { return data.useAddNodeCacheNeedFix; }
+            set { if ( data.useAddNodeCacheNeedFix != value ) { data.useAddNodeCacheNeedFix = value; Save(); } }
+        }
+        public static bool ShowObsoleteNode {
+            get { return data.showObsoleteNode; }
+            set { if ( data.showObsoleteNode != value ) { data.showObsoleteNode = value; EditorUtils.ClearCachedInfos(typeof(FlowNode)); Save(); } }
         }
     }
 }

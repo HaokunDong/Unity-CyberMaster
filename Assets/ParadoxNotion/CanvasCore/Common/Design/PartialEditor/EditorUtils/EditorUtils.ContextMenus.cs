@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using NodeCanvas.Editor;
 using UnityEditor;
 using UnityEngine;
 
@@ -97,13 +98,6 @@ namespace ParadoxNotion.Design
                 var finalDictType = isGenericDefinition && genericDefinitionType.TryMakeGeneric(dictType, out Type genericDictType) ? genericDictType : dictType;
                 if ( constrainType.IsAssignableFrom(finalDictType) ) {
                     dictTypes[finalDictType] = nsString;
-                }
-
-                //by request extra append dictionary <string, List<T>>
-                var dictListType = typeof(Dictionary<,>).MakeGenericType(typeof(string), typeof(List<>).MakeGenericType(t));
-                var finalDictListType = isGenericDefinition && genericDefinitionType.TryMakeGeneric(dictListType, out Type genericDictListType) ? genericDictListType : dictListType;
-                if ( constrainType.IsAssignableFrom(finalDictListType) ) {
-                    dictTypes[finalDictListType] = nsString;
                 }
             }
 
@@ -206,8 +200,8 @@ namespace ParadoxNotion.Design
                 if ( !propType.IsAssignableFrom(prop.PropertyType) ) {
                     continue;
                 }
-
-                if ( prop.GetCustomAttributes(typeof(System.ObsoleteAttribute), true).FirstOrDefault() != null ) {
+                
+                if (prop.GetCustomAttributes(typeof(System.ObsoleteAttribute), true).FirstOrDefault() != null ) {
                     continue;
                 }
 

@@ -24,6 +24,14 @@ namespace NodeCanvas.Framework
         [SerializeField] private string _id;
         [SerializeField] private bool _isPublic;
         [SerializeField, fsIgnoreInBuild] private bool _debugBoundValue;
+        //gx:黑板参数添加存档支持
+        [SerializeField] private bool _isSaveData;
+
+        public bool IsSaveData
+        {
+            get => _isSaveData;
+            set => _isSaveData = value;
+        }
 
         ///<summary>Raised when name change</summary>
         public event Action<string> onNameChanged;

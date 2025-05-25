@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Plugins.ParadoxNotion.CanvasCore.Extend;
+using UnityEngine;
 
 namespace NodeCanvas.Framework
 {
@@ -13,5 +14,7 @@ namespace NodeCanvas.Framework
         void UpdateTasksOwner();
         void SendEvent(string name, object value, object sender);
         void SendEvent<T>(string name, T value, object sender);
+        WaitForNextGraphUpdate GetWaitForNextGraphUpdate();
+        int UpdateCount { get; }
     }
 }

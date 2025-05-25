@@ -102,7 +102,9 @@ namespace NodeCanvas.Framework
         //...
         IEnumerator Flip() {
             yields++;
-            yield return null;
+            //yield return null;
+            //修改为自定义的Update
+            yield return ownerSystem.GetWaitForNextGraphUpdate();
             yields--;
             if ( yields == 0 ) {
                 yieldReturn = -1;

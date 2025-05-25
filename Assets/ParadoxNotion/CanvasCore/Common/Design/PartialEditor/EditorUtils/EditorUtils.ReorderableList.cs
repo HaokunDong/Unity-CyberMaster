@@ -2,6 +2,7 @@
 
 using System.Collections;
 using System.Linq;
+using NodeCanvas.Framework;
 using UnityEditor;
 using UnityEngine;
 using UnityObject = UnityEngine.Object;
@@ -25,6 +26,8 @@ namespace ParadoxNotion.Design
             public bool allowRemove;
             public UnityObject unityObjectContext;
             public GetItemMenuDelegate customItemMenu;
+            //gx:添加存档支持
+            public bool allowSetSaveData;
         }
 
         ///<summary> A simple reorderable list. Pass the list and a function to call for GUI. The callback comes with the current iterated element index in the list</summary>
@@ -125,6 +128,18 @@ namespace ParadoxNotion.Design
                 GUI.color = new Color(1, 1, 1, 0.5f);
                 GUI.Label(pickRect, options.blockReorder ? EditorUtils.GetTempContent("■", null, "Re-Ordering Is Disabled") : EditorUtils.GetTempContent("☰"), Styles.centerLabel);
                 GUI.color = Color.white;
+                
+                //gx:黑板存档支持
+                if (list[i] is Variable variable && variable.IsSaveData)
+                {
+                    GUILayout.Space(11);
+                    var buttonRect = Rect.MinMaxRect(lastRect.xMax + 2, lastRect.yMin, lastRect.xMax + 11, lastRect.yMax + 1);
+                    lastRect.x += 11;
+                    GUI.color = Color.green;
+                    GUI.Label(buttonRect, "S", EditorStyles.boldLabel);
+                    GUI.color = Color.white;
+                }
+                
                 if ( options.customItemMenu != null ) {
                     GUILayout.Space(18);
                     var buttonRect = Rect.MinMaxRect(lastRect.xMax, lastRect.yMin, lastRect.xMax + 22, lastRect.yMax + 1);
@@ -140,6 +155,7 @@ namespace ParadoxNotion.Design
                     }
                     GUI.color = Color.white;
                 }
+
                 if ( options.allowRemove ) {
                     GUILayout.Space(20);
                     var buttonRect = Rect.MinMaxRect(lastRect.xMax + 2, lastRect.yMin, lastRect.xMax + 20, lastRect.yMax);

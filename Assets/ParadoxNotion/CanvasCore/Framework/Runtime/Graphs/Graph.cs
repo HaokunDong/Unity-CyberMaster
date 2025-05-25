@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using NodeCanvas.Framework.Internal;
@@ -5,8 +6,11 @@ using ParadoxNotion;
 using ParadoxNotion.Serialization;
 using ParadoxNotion.Serialization.FullSerializer;
 using ParadoxNotion.Services;
+using Plugins.ParadoxNotion.CanvasCore.Extend;
 using UnityEngine;
+using UnityEngine.Profiling;
 using Logger = ParadoxNotion.Services.Logger;
+using Object = UnityEngine.Object;
 using UndoUtility = ParadoxNotion.Design.UndoUtility;
 
 namespace NodeCanvas.Framework
@@ -36,10 +40,6 @@ namespace NodeCanvas.Framework
         //used to halt self-serialization when something went wrong in deserialization
         [SerializeField] private bool _haltSerialization;
 
-        [SerializeField, Tooltip("An external text asset file to serialize the graph on top of the internal serialization")]
-        private TextAsset _externalSerializationFile;
-        public TextAsset externalSerializationFile { get { return _externalSerializationFile; } internal set { _externalSerializationFile = value; } }
-
         [System.NonSerialized] private bool haltForUndo;
 
         ///<summary>Invoked after graph serialization.</summary>
@@ -48,15 +48,43 @@ namespace NodeCanvas.Framework
         public static event System.Action<Graph> onGraphDeserialized;
 
         ///----------------------------------------------------------------------------------------------
-        void ISerializationCallbackReceiver.OnBeforeSerialize() { SelfSerialize(); }
-        void ISerializationCallbackReceiver.OnAfterDeserialize() { SelfDeserialize(); }
+        void ISerializationCallbackReceiver.OnBeforeSerialize()
+        {
+            if(IsSelfDeserialized)
+                SelfSerialize();
+        }
+
+        void ISerializationCallbackReceiver.OnAfterDeserialize()
+        {
+            if(!Threader.applicationIsPlaying)
+                SelfDeserialize();
+        }
+
+        //反序列化改为手动进行，减少一次asset本身的反序列化
+        public bool IsSelfDeserialized { get; private set; }
+
+        public void TryDoAfterDeserializeSelf()
+        {
+            if (!IsSelfDeserialized)
+            {
+                SelfDeserialize();
+                Validate(); 
+                OnGraphObjectEnable();
+            }
+        }
+
         ///----------------------------------------------------------------------------------------------
 
         ///----------------------------------------------------------------------------------------------
-        protected void OnEnable() { Validate(); OnGraphObjectEnable(); }
+        protected void OnEnable()
+        {
+            // Debug.LogError($"{GetInstanceID()} OnEnable {isSelfDeserialized} {_serializedGraph}"); 
+            if (!IsSelfDeserialized) return;
+            Validate(); OnGraphObjectEnable();
+        }
         protected void OnDisable() { OnGraphObjectDisable(); }
         protected void OnDestroy() { if ( Threader.applicationIsPlaying ) { Stop(); } OnGraphObjectDestroy(); }
-        protected void OnValidate() { /*we dont need this now*/ }
+        protected void OnValidate() { /*we dont need this now*/  }
         protected void Reset() { OnGraphValidate(); }
         ///----------------------------------------------------------------------------------------------
 
@@ -85,12 +113,6 @@ namespace NodeCanvas.Framework
                 _objectReferences = newReferences;
 
 #if UNITY_EDITOR
-
-                if ( _externalSerializationFile != null ) {
-                    var externalSerializationFilePath = ParadoxNotion.Design.EditorUtils.AssetToSystemPath(UnityEditor.AssetDatabase.GetAssetPath(_externalSerializationFile));
-                    System.IO.File.WriteAllText(externalSerializationFilePath, JSONSerializer.PrettifyJson(newSerialization));
-                }
-
                 //notify owner (this is basically used for bound graphs)
                 var owner = agent as GraphOwner;
                 if ( owner != null ) {
@@ -117,13 +139,17 @@ namespace NodeCanvas.Framework
 
         ///<summary>Deserialize the Graph. Return if that succeed</summary>
         public bool SelfDeserialize() {
+
             if ( Deserialize(_serializedGraph, _objectReferences, false) ) {
+
                 //raise event
                 if ( onGraphDeserialized != null ) {
                     onGraphDeserialized(this);
                 }
+
                 return true;
             }
+
             return false;
         }
 
@@ -131,6 +157,7 @@ namespace NodeCanvas.Framework
 
         ///<summary>Serialize the graph and returns the serialized json string. The provided objectReferences list will be cleared and populated with the found unity object references.</summary>
         public string Serialize(List<UnityEngine.Object> references) {
+            // Debug.LogError($"{Application.isPlaying} {GetInstanceID()} SelfSerialize {_serializedGraph}"); 
             if ( references == null ) { references = new List<Object>(); }
             UpdateNodeIDs(true);
             var result = JSONSerializer.Serialize(typeof(GraphSource), graphSource.Pack(this), references);
@@ -148,6 +175,8 @@ namespace NodeCanvas.Framework
                 return false;
             }
 
+            // Debug.LogError($"{GetInstanceID()} Deserialize {serializedGraph}"); 
+            
             //the list to load the references from. If not provided explicitely we load from the local list
             if ( references == null ) { references = this._objectReferences; }
 
@@ -164,6 +193,7 @@ namespace NodeCanvas.Framework
                 this._serializedGraph = serializedGraph;
                 this._objectReferences = references;
                 this._haltSerialization = false;
+                IsSelfDeserialized = true;
                 if ( validate ) { Validate(); }
                 return true;
             }
@@ -203,14 +233,35 @@ namespace NodeCanvas.Framework
         ///<summary>Clones the graph as child of parentGraph and returns the new one.</summary>
         public static T Clone<T>(T graph, Graph parentGraph) where T : Graph {
             var newGraph = Instantiate<T>(graph);
+            newGraph.TryDoAfterDeserializeSelf();
             newGraph.name = newGraph.name.Replace("(Clone)", string.Empty);
             newGraph.parentGraph = parentGraph;
             return (T)newGraph;
         }
 
+        //更优化的clone操作，根据graph本身的json来反序列化，可以减少一次序列化开销
+        //前提是不能运行时修改graph再clone
+        public static T CloneBySource<T>(T graph, Graph parentGraph) where T : Graph
+        {
+            if (!Application.isPlaying)
+            {
+                return Clone<T>(graph, parentGraph);
+            }
+            Profiler.BeginSample("NodeCanvas DeserializeGraph");
+            var newGraph = (Graph)ScriptableObject.CreateInstance(graph.GetType());
+            var json = graph.GetSerializedJsonData();
+            var references = graph.GetSerializedReferencesData();
+            newGraph.Deserialize(json, references, false);
+            newGraph.name = graph.name;
+            newGraph.parentGraph = parentGraph;
+            newGraph.Validate();
+            Profiler.EndSample();
+            return (T)newGraph;
+        }
+
         ///<summary>Validate the graph, it's nodes and tasks. Also called from OnEnable callback.</summary>
         public void Validate() {
-
+            
             if ( string.IsNullOrEmpty(_serializedGraph) ) {
                 //we dont really have anything to validate in this case
                 return;
@@ -257,8 +308,6 @@ namespace NodeCanvas.Framework
         abstract public bool requiresPrimeNode { get; }
         ///<summary>Is the graph considered to be a tree? (and thus nodes auto sorted on position x)</summary>
         abstract public bool isTree { get; }
-        ///<summary>The (visual) direction of the connections (also affects auto sorting for trees)</summary>
-        abstract public PlanarDirection flowDirection { get; }
         ///<summary>Is overriding local blackboard and parametrizing local blackboard variables allowed?</summary>
         abstract public bool allowBlackboardOverrides { get; }
         ///<summary>Whether the graph can accept variables Drag&Drop</summary>
@@ -376,16 +425,18 @@ namespace NodeCanvas.Framework
             }
             set
             {
-                if ( primeNode != value && value != null && value.allowAsPrime && allNodes.Contains(value) ) {
-                    if ( isRunning ) {
-                        if ( primeNode != null ) { primeNode.Reset(); }
-                        value.Reset();
+                if ( primeNode != value && allNodes.Contains(value) ) {
+                    if ( value != null && value.allowAsPrime ) {
+                        if ( isRunning ) {
+                            if ( primeNode != null ) { primeNode.Reset(); }
+                            value.Reset();
+                        }
+                        UndoUtility.RecordObjectComplete(this, "Set Start");
+                        allNodes.Remove(value);
+                        allNodes.Insert(0, value);
+                        UpdateNodeIDs(true);
+                        UndoUtility.SetDirty(this);
                     }
-                    UndoUtility.RecordObjectComplete(this, "Set Start");
-                    allNodes.Remove(value);
-                    allNodes.Insert(0, value);
-                    UpdateNodeIDs(true);
-                    UndoUtility.SetDirty(this);
                 }
             }
         }
@@ -592,8 +643,9 @@ namespace NodeCanvas.Framework
                 allNodes[i].OnPostGraphStarted();
             }
 
-            if ( isRunning ) {
-                //check isRunning  before adding the update call for in case the graph immediately ended in the same frame that it started
+            //修复对话树在Start那一帧立刻进Finish后会持续出现 "UpdateGraph called in a non-running, non-paused graph. StartGraph() or StartBehaviour() should be called first." warning的问题
+            if (isRunning)
+            {
                 updateMode = newUpdateMode;
                 if ( updateMode != UpdateMode.Manual ) {
                     MonoManager.current.AddUpdateCall((MonoManager.UpdateMode)updateMode, UpdateGraph);
@@ -637,6 +689,7 @@ namespace NodeCanvas.Framework
 
             //reset elapsed time after onFinish callback in case it is needed info
             elapsedTime = 0;
+            UpdateCount = 0;
         }
 
         ///<summary>Pauses the graph from updating as well as notifying all nodes.</summary>
@@ -700,10 +753,19 @@ namespace NodeCanvas.Framework
                 elapsedTime += deltaTime;
                 lastUpdateFrame = Time.frameCount;
                 OnGraphUpdate();
+                UpdateCount++;
             } else {
                 Logger.LogWarning("UpdateGraph called in a non-running, non-paused graph. StartGraph() or StartBehaviour() should be called first.", LogTag.EXECUTION, this);
             }
             // UnityEngine.Profiling.Profiler.EndSample();
+        }
+        
+        //用于内部协程，会等待下次Update结束
+        public int UpdateCount { get; private set; }
+        public WaitForNextGraphUpdate GetWaitForNextGraphUpdate()
+        {
+            //等待到下次Update
+            return WaitForNextGraphUpdate.Get(this);
         }
 
         ///----------------------------------------------------------------------------------------------
@@ -1020,7 +1082,7 @@ namespace NodeCanvas.Framework
         ///<summary>Add a new node to this graph</summary>
         public T AddNode<T>() where T : Node { return (T)AddNode(typeof(T)); }
         public T AddNode<T>(Vector2 pos) where T : Node { return (T)AddNode(typeof(T), pos); }
-        public Node AddNode(System.Type nodeType) { return AddNode(nodeType, new Vector2(0, 0)); }
+        public Node AddNode(System.Type nodeType) { return AddNode(nodeType, new Vector2(-translation.x + 100, -translation.y + 100)); }
         public Node AddNode(System.Type nodeType, Vector2 pos) {
 
             if ( !nodeType.RTIsSubclassOf(baseNodeType) ) {
@@ -1194,6 +1256,9 @@ namespace NodeCanvas.Framework
             //revalidate all new nodes in their new graph
             if ( targetGraph != null ) {
                 for ( var i = 0; i < newNodes.Count; i++ ) {
+#if UNITY_EDITOR
+                    newNodes[i].OnClone();
+#endif
                     newNodes[i].Validate(targetGraph);
                 }
             }

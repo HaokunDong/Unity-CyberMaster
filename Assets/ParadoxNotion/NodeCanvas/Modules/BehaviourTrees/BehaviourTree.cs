@@ -1,5 +1,6 @@
 using NodeCanvas.Framework;
 using ParadoxNotion.Design;
+using Plugins.ParadoxNotion.CanvasCore.Extend;
 using UnityEngine;
 
 
@@ -72,7 +73,6 @@ namespace NodeCanvas.BehaviourTrees
         public override bool isTree => true;
         public override bool allowBlackboardOverrides => true;
         sealed public override bool canAcceptVariableDrops => false;
-        public override ParadoxNotion.PlanarDirection flowDirection => ParadoxNotion.PlanarDirection.Vertical;
         ///----------------------------------------------------------------------------------------------
 
         protected override void OnGraphStarted() {
@@ -99,7 +99,6 @@ namespace NodeCanvas.BehaviourTrees
             if ( rootStatus != Status.Running ) { primeNode.Reset(); }
             return rootStatus = primeNode.Execute(agent, blackboard);
         }
-
 
         ///----------------------------------------------------------------------------------------------
         ///---------------------------------------UNITY EDITOR-------------------------------------------

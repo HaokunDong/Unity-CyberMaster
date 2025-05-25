@@ -1,4 +1,4 @@
-﻿#if UNITY_EDITOR
+#if UNITY_EDITOR
 
 using NodeCanvas.Framework;
 using ParadoxNotion;
@@ -169,7 +169,9 @@ namespace NodeCanvas.Editor
 
             //show lock bound graph prefab overrides
             if ( owner.graphIsBound ) {
+                //Griffin 修改NodeCanvas插件和unity版本适配
                 var case1 = PrefabUtility.IsPartOfPrefabAsset(owner) || UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage()?.prefabContentsRoot == owner.gameObject;
+                //Griffin 修改NodeCanvas插件和unity版本适配
                 var case2 = PrefabUtility.IsPartOfAnyPrefab(owner) && !isBoundGraphPrefabOverridden;
                 if ( case1 || case2 ) { EditorGUILayout.PropertyField(lockPrefabProp, EditorUtils.GetTempContent("Lock Prefab Graph Overrides")); }
             }

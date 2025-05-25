@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using ParadoxNotion;
+using Plugins.ParadoxNotion.CanvasCore.Extend;
+using Sirenix.Utilities;
 
 namespace NodeCanvas.Framework
 {
@@ -17,7 +19,10 @@ namespace NodeCanvas.Framework
 #endif
 
         public delegate void InvokeArguments(Transform sender, Transform receiver, bool isGlobal, params object[] args);
-        public event InvokeArguments onInvoke;
+        
+        // public event InvokeArguments onInvoke;
+        //GC优化
+        public DelegateList<InvokeArguments> onInvoke;
 
         [SerializeField, HideInInspector]
         private List<DynamicParameterDefinition> _parameters = new List<DynamicParameterDefinition>();
@@ -30,8 +35,18 @@ namespace NodeCanvas.Framework
 
         ///<summary>Invoke the Signal</summary>
         public void Invoke(Transform sender, Transform receiver, bool isGlobal, params object[] args) {
-            if ( onInvoke != null ) {
-                onInvoke(sender, receiver, isGlobal, args);
+            if ( onInvoke != null )
+            {
+                var enumerator = onInvoke.GetEnumeratorSupportAddRemoveDuring();
+                while (enumerator.MoveNext())
+                {
+                    enumerator.Current(sender, receiver, isGlobal, args);
+                }
+                // foreach (var action in onInvoke)
+                // {
+                //     action(sender, receiver, isGlobal, args);
+                // }
+                // onInvoke(sender, receiver, isGlobal, args);
             }
         }
 

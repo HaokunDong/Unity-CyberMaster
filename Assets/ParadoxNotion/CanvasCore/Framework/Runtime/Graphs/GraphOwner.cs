@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
 using NodeCanvas.Framework.Internal;
+using ParadoxNotion.Design;
 using UnityEngine;
 using UnityEngine.Serialization;
 using ParadoxNotion.Serialization;
+using Object = UnityEngine.Object;
 
 namespace NodeCanvas.Framework
 {
@@ -95,6 +98,11 @@ namespace NodeCanvas.Framework
 
         private Dictionary<Graph, Graph> instances = new Dictionary<Graph, Graph>();
 
+#if UNITY_EDITOR
+        //gx:支持编辑器runtime修改boundgraph
+        [NonSerialized]
+        public bool isPartOfCurrentPrefabStage = false;
+#endif
         ///----------------------------------------------------------------------------------------------
 
         ///<summary>The graph assigned</summary>
@@ -197,7 +205,8 @@ namespace NodeCanvas.Framework
 
             //if it's not a strored instance create, store and return a new instance.
             if ( !instances.TryGetValue(originalGraph, out instance) ) {
-                instance = Graph.Clone<Graph>(originalGraph, null);
+                // instance = Graph.Clone<Graph>(originalGraph, null);
+                instance = Graph.CloneBySource<Graph>(originalGraph, null);
                 instances[originalGraph] = instance;
             }
 
@@ -246,6 +255,13 @@ namespace NodeCanvas.Framework
         public void UpdateBehaviour() {
             if ( graph != null ) { graph.UpdateGraph(); }
         }
+        
+        //gx:插件修改by weixing
+        public void UpdateBehaviour(float deltaTime) {
+            if (graph != null) {
+                graph.UpdateGraph(deltaTime);
+            }
+        }
 
         ///<summary>The same as calling Stop, Start Behaviour</summary>
         public void RestartBehaviour() {
@@ -268,6 +284,32 @@ namespace NodeCanvas.Framework
         public T GetExposedParameterValue<T>(string name) {
             var param = exposedParameters.Find(x => x.varRefBoxed != null && x.varRefBoxed.name == name);
             return param != null ? ( param as ExposedParameter<T> ).value : default(T);
+        }
+        
+        //添加TryGet接口
+        public bool TryGetExposedParameterValue<T>(string name, out T result) {
+            foreach (var param in exposedParameters)
+            {
+                if (param.varRefBoxed?.name == name)
+                {
+                    result = (param as ExposedParameter<T>).value;
+                    return true;
+                }
+            }
+
+            result = default(T);
+            return false;
+        }
+        
+        public bool HasExposedParameterValue(string name) {
+            foreach (var param in exposedParameters)
+            {
+                if (param.varRefBoxed?.name == name)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         ///<summary>Set an exposed parameter value</summary>
@@ -452,7 +494,7 @@ namespace NodeCanvas.Framework
             //If the graph is bound, we store the serialization data here.
             if ( this.graphIsBound && this.boundGraphInstance == serializedGraph ) {
 
-                //--- This is basically only for showing the log...
+                //---
                 if ( UnityEditor.PrefabUtility.IsPartOfPrefabInstance(this) ) {
                     var boundProp = new UnityEditor.SerializedObject(this).FindProperty(nameof(_boundGraphSerialization));
                     if ( !boundProp.prefabOverride && boundGraphSerialization != serializedGraph.GetSerializedJsonData() ) {
@@ -479,7 +521,7 @@ namespace NodeCanvas.Framework
         ///<summary>Editor. Validate.</summary>
         public void Validate() {
 
-            if ( !UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode ) {
+            if ( !UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode) {
                 //everything here is relevant to bound graphs only.
                 //we only do this for when the object is an instance or is edited in the prefab editor.
                 if ( !UnityEditor.EditorUtility.IsPersistent(this) && graphIsBound ) {
@@ -493,7 +535,7 @@ namespace NodeCanvas.Framework
                     boundGraphInstance.Deserialize(boundGraphSerialization, boundGraphObjectReferences, false);
                     boundGraphInstance.UpdateReferencesFromOwner(this);
                     boundGraphInstance.Validate();
-                } else if ( graph != null ) {
+                } else if ( graph != null && graph.IsSelfDeserialized) {
                     graph.UpdateReferencesFromOwner(this);
                     graph.Validate();
                 }
@@ -563,18 +605,30 @@ namespace NodeCanvas.Framework
     abstract public class GraphOwner<T> : GraphOwner where T : Graph
     {
 
-        [SerializeField]
+        [SerializeField, Tooltip("The graph to use.")]
         private T _graph;
-        [SerializeField]
+        [SerializeField, Tooltip("The GameObject Blackboard to use.")]
         private Object _blackboard;
-
+        
         ///<summary>The current behaviour Graph assigned</summary>
         sealed public override Graph graph {
             get
             {
 #if UNITY_EDITOR
                 //In Editor only and if graph is bound, return the bound graph instance
-                if ( graphIsBound && !ParadoxNotion.Services.Threader.applicationIsPlaying ) {
+                // if ( graphIsBound && !ParadoxNotion.Services.Threader.applicationIsPlaying ) {
+                if ( this && graphIsBound && (!ParadoxNotion.Services.Threader.applicationIsPlaying || 
+                                      isPartOfCurrentPrefabStage || 
+                                      (isPartOfCurrentPrefabStage = gameObject && gameObject.IsPartOfCurrentPrefabStage()))) {
+                    //gx:支持编辑器runtime修改boundgraph
+                    if ( boundGraphInstance == null && isPartOfCurrentPrefabStage && !UnityEditor.EditorUtility.IsPersistent(this)) {
+                        boundGraphInstance = (Graph)ScriptableObject.CreateInstance(graphType);
+                        boundGraphInstance.name = graphType.Name;
+                        boundGraphInstance.SetGraphSourceMetaData(this.boundGraphSource);
+                        boundGraphInstance.Deserialize(boundGraphSerialization, boundGraphObjectReferences, false);
+                        boundGraphInstance.UpdateReferencesFromOwner(this);
+                        boundGraphInstance.Validate();
+                    }
                     return boundGraphInstance;
                 }
 #endif
@@ -583,6 +637,29 @@ namespace NodeCanvas.Framework
             }
             set { _graph = (T)value; }
         }
+
+#if UNITY_EDITOR
+        //仅供编辑器获取prefab上bound蓝图使用
+        public Graph TryForceGetBoundGraph()
+        {
+            if ( this && graphIsBound && (!ParadoxNotion.Services.Threader.applicationIsPlaying || 
+                                          isPartOfCurrentPrefabStage || 
+                                          (isPartOfCurrentPrefabStage = gameObject && gameObject.IsPartOfCurrentPrefabStage()))) {
+                if ( boundGraphInstance == null) {
+                    var graph = (Graph)ScriptableObject.CreateInstance(graphType);
+                    graph.name = graphType.Name;
+                    graph.SetGraphSourceMetaData(this.boundGraphSource);
+                    graph.Deserialize(boundGraphSerialization, boundGraphObjectReferences, false);
+                    graph.UpdateReferencesFromOwner(this);
+                    graph.Validate();
+                    return graph;
+                }
+                return boundGraphInstance;
+            }
+
+            return null;
+        }
+#endif
 
         ///<summary>The current behaviour Graph assigned (same as .graph but of type T)</summary>
         public T behaviour {
@@ -605,8 +682,9 @@ namespace NodeCanvas.Framework
             }
         }
 
+        //插件改动，为兼容对话树细分为DialogueTree的子类
         ///<summary>The Graph type this Owner can be assigned</summary>
-        sealed public override System.Type graphType => typeof(T);
+        sealed public override System.Type graphType => _graph != null ? _graph.GetType() : typeof(T);
 
         ///<summary>Start a new behaviour on this owner</summary>
         public void StartBehaviour(T newGraph) { StartBehaviour(newGraph, updateMode, null); }

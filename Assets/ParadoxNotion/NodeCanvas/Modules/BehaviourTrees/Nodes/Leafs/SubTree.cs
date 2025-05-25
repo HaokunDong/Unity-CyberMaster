@@ -23,7 +23,9 @@ namespace NodeCanvas.BehaviourTrees
 
         protected override Status OnExecute(Component agent, IBlackboard blackboard) {
 
-            if ( subGraph == null || subGraph.primeNode == null ) {
+            //由于去掉了subgraph首次反序列化，去掉primeNode判断
+            // if ( subGraph == null || subGraph.primeNode == null ) {
+            if ( subGraph == null) {
                 return Status.Optional;
             }
 

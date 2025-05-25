@@ -3,6 +3,8 @@
 using System;
 using System.Collections;
 using System.Linq;
+using NodeCanvas.Editor;
+using NodeCanvas.Framework;
 using UnityEditor;
 using UnityEngine;
 using UnityObject = UnityEngine.Object;
@@ -101,7 +103,8 @@ namespace ParadoxNotion.Design
             return value;
         }
 
-
+        private static GUILayoutOption[] s_defaultStringHasSpaceIconLayouts =
+            { GUILayout.Height(18f), GUILayout.Width(18f) };
         ///<summary>Draws an Editor field for object of type directly WITHOUT taking into acount object drawers and drawer attributes unless provided</summary>
         public static object DrawEditorFieldDirect(GUIContent content, object value, Type t, InspectedFieldInfo info) {
 
@@ -140,7 +143,7 @@ namespace ParadoxNotion.Design
                 }
 
             } else {
-
+                
                 EditorGUILayout.LabelField(content, new GUIContent(string.Format("NonInspectable ({0})", t.FriendlyName())));
             }
 
@@ -155,7 +158,7 @@ namespace ParadoxNotion.Design
             //Check scene object type for UnityObjects. Consider Interfaces as scene object type. Assume that user uses interfaces with UnityObjects
             if ( typeof(UnityObject).IsAssignableFrom(t) || t.IsInterface ) {
                 if ( value == null || value is UnityObject ) { //check this to avoid case of interface but no unityobject
-                    var isSceneObjectType = ( typeof(Component).IsAssignableFrom(t) || t == typeof(GameObject) || t == typeof(UnityObject) || t.IsInterface );
+                    var isSceneObjectType = ( typeof(Component).IsAssignableFrom(t) || t == typeof(GameObject) || t.IsInterface );
                     var newValue = EditorGUILayout.ObjectField(content, (UnityObject)value, t, isSceneObjectType, options);
                     if ( unityObjectContext != null && newValue != null ) {
                         if ( !Application.isPlaying && EditorUtility.IsPersistent(unityObjectContext) && !EditorUtility.IsPersistent(newValue as UnityEngine.Object) ) {
@@ -204,7 +207,23 @@ namespace ParadoxNotion.Design
 
 
             if ( t == typeof(string) ) {
-                return EditorGUILayout.TextField(content, (string)value, options);
+                //添加前后为空检查
+                var str = (string)value;
+                bool startOrEndSpace = value != null && (str.StartsWith(" ", StringComparison.Ordinal) || str.EndsWith(" ", StringComparison.Ordinal));
+                if (startOrEndSpace)
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    var result = EditorGUILayout.TextField(content, (string)value, options);
+                    var icon = EditorGUIUtility.IconContent("console.warnicon.sml", "|字符串前后存在空格");
+                    GUILayout.Label(icon, s_defaultStringHasSpaceIconLayouts);
+                    EditorGUILayout.EndHorizontal();
+                    return result;
+                }
+                else
+                {
+                    return EditorGUILayout.TextField(content, (string)value, options);
+                }
+                // return EditorGUILayout.TextField(content, (string)value, options);
             }
 
             if ( t == typeof(char) ) {
@@ -221,6 +240,11 @@ namespace ParadoxNotion.Design
             if ( t == typeof(int) ) {
                 return EditorGUILayout.IntField(content, (int)value, options);
             }
+            
+            //gx:添加uint支持
+            if ( t == typeof(uint) ) {
+                return (uint)EditorGUILayout.IntField(content, (int)(uint)value, options);
+            }
 
             if ( t == typeof(float) ) {
                 return EditorGUILayout.FloatField(content, (float)value, options);
@@ -234,6 +258,11 @@ namespace ParadoxNotion.Design
                 return EditorGUILayout.LongField(content, (long)value, options);
             }
 
+            //gx:添加ulong支持
+            if ( t == typeof(ulong) ) {
+                return (ulong)EditorGUILayout.LongField(content, (long)(ulong)value, options);
+            }
+            
             if ( t == typeof(double) ) {
                 return EditorGUILayout.DoubleField(content, (double)value, options);
             }

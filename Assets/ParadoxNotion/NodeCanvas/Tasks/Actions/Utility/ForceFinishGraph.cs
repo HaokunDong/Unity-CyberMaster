@@ -1,4 +1,4 @@
-using ParadoxNotion;
+﻿using ParadoxNotion;
 using ParadoxNotion.Design;
 using NodeCanvas.Framework;
 

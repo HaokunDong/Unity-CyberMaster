@@ -81,6 +81,13 @@ namespace ParadoxNotion.Design
                 AssetDatabase.OpenAsset(mono);
                 return true;
             }
+            else
+            {
+                //改进双击逻辑
+                ParadoxNotion.Services.Logger.Log(string.Format("找不到对应代码文件，已复制类名到剪贴板'{0}'", type.FriendlyName()));
+                UnityEngine.GUIUtility.systemCopyBuffer = type.FriendlyName();
+                return false;
+            }
             ParadoxNotion.Services.Logger.Log(string.Format("Can't open script of type '{0}', because a script with the same name does not exist.", type.FriendlyName()));
             return false;
         }

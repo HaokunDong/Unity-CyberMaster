@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NodeCanvas.Editor;
 using UnityEditor;
 
 namespace ParadoxNotion.Design
@@ -50,6 +51,16 @@ namespace ParadoxNotion.Design
             }
         }
 
+        public static void ClearCachedInfos(Type baseType)
+        {
+            //ShowObsoleteNode相关功能支持
+            if (cachedInfos != null)
+            {
+                cachedInfos.Remove(baseType);
+                ReflectionTools.ClearTargetSubTypeMap(baseType);
+            }
+        }
+        
         ///<summary>Get a list of ScriptInfos of the baseType excluding: the base type, abstract classes, Obsolete classes and those with the DoNotList attribute, categorized as a list of ScriptInfo</summary>
         private static Dictionary<Type, List<ScriptInfo>> cachedInfos;
         public static List<ScriptInfo> GetScriptInfosOfType(Type baseType) {
@@ -66,7 +77,7 @@ namespace ParadoxNotion.Design
             var subTypes = baseType.IsGenericTypeDefinition ? new Type[] { baseType } : ReflectionTools.GetImplementationsOf(baseType);
             foreach ( var subType in subTypes ) {
 
-                if ( subType.IsAbstract || subType.RTIsDefined(typeof(DoNotListAttribute), true) || subType.RTIsDefined(typeof(ObsoleteAttribute), true) ) {
+                if ( subType.IsAbstract || subType.RTIsDefined(typeof(DoNotListAttribute), true) || (!Prefs.ShowObsoleteNode && subType.RTIsDefined(typeof(ObsoleteAttribute), true))) {
                     continue;
                 }
 
@@ -100,9 +111,6 @@ namespace ParadoxNotion.Design
                             infosResult.Add(info.MakeGenericInfo(t, string.Format("/{0}/{1}", info.name, t.NamespaceToPath())));
                             infosResult.Add(info.MakeGenericInfo(typeof(List<>).MakeGenericType(t), string.Format("/{0}/{1}{2}", info.name, TypePrefs.LIST_MENU_STRING, t.NamespaceToPath()), -1));
                             infosResult.Add(info.MakeGenericInfo(typeof(Dictionary<,>).MakeGenericType(typeof(string), t), string.Format("/{0}/{1}{2}", info.name, TypePrefs.DICT_MENU_STRING, t.NamespaceToPath()), -2));
-
-                            //by request extra append dictionary <string, List<T>>
-                            infosResult.Add(info.MakeGenericInfo(typeof(Dictionary<,>).MakeGenericType(typeof(string), typeof(List<>).MakeGenericType (t) ), string.Format("/{0}/{1}{2}", info.name, TypePrefs.DICT_MENU_STRING, t.NamespaceToPath()), -2));
                         }
                         continue;
                     }

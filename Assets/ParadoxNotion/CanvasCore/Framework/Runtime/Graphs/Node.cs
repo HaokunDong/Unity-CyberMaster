@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,12 +31,12 @@ namespace NodeCanvas.Framework
         protected class AutoSortWithChildrenConnections : System.Attribute { }
         ///----------------------------------------------------------------------------------------------
 
-        [SerializeField] private string _UID;
-        [SerializeField] private string _name;
-        [SerializeField] private string _tag;
-        [SerializeField, fsIgnoreInBuild] private Vector2 _position;
-        [SerializeField, fsIgnoreInBuild] private string _comment;
-        [SerializeField, fsIgnoreInBuild] private bool _isBreakpoint;
+        [SerializeField, HideInInspector] private string _UID;
+        [SerializeField, HideInInspector] private string _name;
+        [SerializeField, HideInInspector] private string _tag;
+        [SerializeField, fsIgnoreInBuild, HideInInspector] private Vector2 _position;
+        [SerializeField, fsIgnoreInBuild, HideInInspector] private string _comment;
+        [SerializeField, fsIgnoreInBuild, HideInInspector] private bool _isBreakpoint;
 
         //reconstructed OnDeserialization
         private Graph _graph;
@@ -133,6 +134,11 @@ namespace NodeCanvas.Framework
                 if ( string.IsNullOrEmpty(_descriptionCache) ) {
                     var descAtt = this.GetType().RTGetAttribute<DescriptionAttribute>(true);
                     _descriptionCache = descAtt != null ? descAtt.description : "No Description";
+                    var obAtt = this.GetType().RTGetAttribute<ObsoleteAttribute>(true);
+                    if (obAtt != null)
+                    {
+                        _descriptionCache = string.Concat("<color=red>该节点已过时</color> ", obAtt.Message, _descriptionCache);
+                    }
                 }
                 return _descriptionCache;
             }
@@ -158,11 +164,11 @@ namespace NodeCanvas.Framework
         abstract public System.Type outConnectionType { get; }
         ///<summary>Can this node be set as prime (Start)?</summary>
         abstract public bool allowAsPrime { get; }
-        ///<summary>Can this node connect to itself?</summary>
+        // /Can this node connect to itself?
         abstract public bool canSelfConnect { get; }
-        ///<summary>Alignment of the comments when shown (editor).</summary>
+        ///<summary>Alignment of the comments when shown.</summary>
         abstract public Alignment2x2 commentsAlignment { get; }
-        ///<summary>Alignment of the icons (editor).</summary>
+        ///<summary>Alignment of the icons.</summary>
         abstract public Alignment2x2 iconAlignment { get; }
 
         ///<summary>The current status of the node</summary>
@@ -423,6 +429,15 @@ namespace NodeCanvas.Framework
             if ( MonoManager.current != null ) { MonoManager.current.StopCoroutine(routine); }
         }
 
+        public void StartParallelTask(System.Action action) {
+
+        }
+
+        public void StopParallelTask(System.Action action) {
+
+        }
+
+
         ///<summary>Returns all *direct* parent nodes (first depth level)</summary>
         public IEnumerable<Node> GetParentNodes() {
             if ( inConnections.Count != 0 ) {
@@ -452,7 +467,7 @@ namespace NodeCanvas.Framework
         ///----------------------------------------------------------------------------------------------
 
         ///<summary>Returns a warning string or null if none</summary>
-        virtual protected string GetWarningOrError() {
+        virtual internal string GetWarningOrError() {
             var hardError = GetHardError();
             if ( hardError != null ) { return "* " + hardError; }
 

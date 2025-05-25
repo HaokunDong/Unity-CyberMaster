@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace ParadoxNotion.Serialization.FullSerializer.Internal
 {
@@ -63,6 +64,7 @@ namespace ParadoxNotion.Serialization.FullSerializer.Internal
             return result;
         }
 
+        public static int tempDebug = 0;
         public override fsResult TryDeserialize(fsData data, ref object instance, Type storageType) {
             var result = fsResult.Success;
 
@@ -99,6 +101,11 @@ namespace ParadoxNotion.Serialization.FullSerializer.Internal
                     result.AddMessages(itemResult);
                     if ( itemResult.Failed ) continue;
 
+                    if (instance == null)
+                    {
+                        Debug.LogError($"反序列化错误，可能是AOT生成缺少对应类，需要添加type后重新生成AOTClass.cs以及link.xml {property.Field.Name} {storageType}");
+                    }
+                    
                     property.Write(instance, deserializedValue);
                 }
             }

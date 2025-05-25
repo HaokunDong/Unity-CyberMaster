@@ -14,6 +14,9 @@ namespace NodeCanvas.Editor
         private Vector2 scrollPos;
         private bool willRepaint;
 
+        //gx:添加Odin支持，释放时Dispose对应PropertyTree
+        private Node m_lastSelectNode;
+        
         public static void ShowWindow() {
             var window = GetWindow<ExternalInspectorWindow>();
             window.Show();
@@ -29,6 +32,11 @@ namespace NodeCanvas.Editor
         void OnDisable() {
             Prefs.useExternalInspector = false;
             GraphEditorUtility.onActiveElementChanged -= OnActiveElementChange;
+            if (m_lastSelectNode != null)
+            {
+                m_lastSelectNode.TryDisposePropertyTree();
+                m_lastSelectNode = null;
+            }
         }
 
         void OnActiveElementChange(IGraphElement element) {
@@ -55,6 +63,12 @@ namespace NodeCanvas.Editor
             }
 
             var currentSelection = GraphEditorUtility.activeElement;
+            if (m_lastSelectNode != null && m_lastSelectNode != currentSelection)
+            {
+                m_lastSelectNode.TryDisposePropertyTree();
+                m_lastSelectNode = null;
+            }
+            
             if ( currentSelection == null ) {
                 GUILayout.Label("No selection in Graph Editor");
                 return;
@@ -63,15 +77,15 @@ namespace NodeCanvas.Editor
             UndoUtility.CheckUndo(currentSelection.graph, "Inspector Change");
             scrollPos = GUILayout.BeginScrollView(scrollPos);
             {
-                if ( currentSelection is Node ) {
-                    var node = (Node)currentSelection;
+                if ( currentSelection is Node node) {
+                    m_lastSelectNode = node;
                     Title(node.name);
                     Node.ShowNodeInspectorGUI(node);
                 }
 
-                if ( currentSelection is Connection ) {
+                if ( currentSelection is Connection connection) {
                     Title("Connection");
-                    Connection.ShowConnectionInspectorGUI(currentSelection as Connection);
+                    Connection.ShowConnectionInspectorGUI(connection);
                 }
             }
             EditorUtils.EndOfInspector();

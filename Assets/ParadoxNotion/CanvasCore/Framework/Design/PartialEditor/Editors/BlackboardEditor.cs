@@ -1,5 +1,6 @@
 ﻿#if UNITY_EDITOR
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,6 +59,8 @@ namespace NodeCanvas.Editor
             EditorWrapperFactory.GetEditor<BlackboardEditor>(bb).InspectorGUI(bb, overrideContextObject);
         }
 
+        public static Func<UnityEngine.Object, bool> isContextObjectGPGraph;
+        
         ///<summary>Show variables inspector for target bb. Optionally provide override serialization context object</summary>
         void InspectorGUI(IBlackboard bb, UnityEngine.Object overrideContextObject = null) {
 
@@ -104,6 +107,15 @@ namespace NodeCanvas.Editor
             options.blockReorder = contextObject != null ? PrefabUtility.IsPartOfRegularPrefab(contextObject) : false;
             options.unityObjectContext = contextObject;
             options.customItemMenu = (i) => { return GetVariableMenu(tempVariablesList[i], i); };
+            //gx:关卡蓝图和交互物蓝图存档支持
+            bool supportSaveData = isContextObjectGPGraph?.Invoke(contextObject) ?? false;
+            if (supportSaveData)
+            {
+                options.allowSetSaveData = true;
+                // var gpGraph = overrideContextObject as GamePlayFlowGraph;
+                // Debug.LogError(bb.unityContextObject.GetType());
+            }
+
             EditorUtils.ReorderableList(tempVariablesList, options, (i, isPicked) =>
             {
                 var data = tempVariablesList[i] as Variable;
@@ -127,7 +139,6 @@ namespace NodeCanvas.Editor
 
         //...
         void DoVariableGUI(Variable data, int index, bool isPicked) {
-
             if ( data is MissingVariableType ) {
                 var missingVariableType = (MissingVariableType)data;
                 GUILayout.Label(data.name, Styles.leftLabel, layoutOptions);
@@ -143,6 +154,11 @@ namespace NodeCanvas.Editor
                     GUI.color = Color.yellow;
                     GUILayout.Label(string.Format("<b>{0}</b>", data.name.ToUpper()), Styles.leftLabel, layoutOptions);
                     GUI.color = Color.white;
+                }
+                //gx:运行时热更黑板修改支持
+                if ( isPicked && data.varType != typeof(VariableSeperator) ) {
+                    pickedVariable = data;
+                    pickedVariableBlackboard = bb;
                 }
                 ShowDataFieldGUI(data, index);
                 return;
@@ -222,6 +238,7 @@ namespace NodeCanvas.Editor
 
         //show variable data
         void ShowDataFieldGUI(Variable data, int index) {
+            
             //Prop Bind info
             if ( data.isPropertyBound ) {
                 var idx = data.propertyPath.LastIndexOf('.');
@@ -367,6 +384,22 @@ namespace NodeCanvas.Editor
                         UndoUtility.SetDirty(contextObject);
                     });
                 } else { menu.AddDisabledItem(new GUIContent("Bound Variables Can't Be Exposed")); }
+            }
+            
+            //gx:添加黑板存档支持
+            if (isContextObjectGPGraph(bb.unityContextObject))
+            {
+                menu.AddItem(new GUIContent("是否存档"), data.IsSaveData, () =>
+                {
+                    if (!data.IsSaveData && typeof(UnityEngine.Object).RTIsAssignableFrom(data.varType))
+                    {
+                        EditorUtility.DisplayDialog("警告","UnityObject不支持存档", "确定");
+                        return;
+                    }
+                    UndoUtility.RecordObject(contextObject, "Modify Variable");
+                    data.IsSaveData = !data.IsSaveData;
+                    UndoUtility.SetDirty(contextObject);
+                });
             }
 
             menu.AddSeparator("/");

@@ -2,10 +2,15 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using FlowCanvas;
+using NodeCanvas.BehaviourTrees;
+using NodeCanvas.DialogueTrees;
 using NodeCanvas.Editor;
 using ParadoxNotion;
 using ParadoxNotion.Design;
+using ParadoxNotion.LayoutCache;
 using ParadoxNotion.Serialization.FullSerializer;
+using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;
 
@@ -39,11 +44,11 @@ namespace NodeCanvas.Framework
 
         ///----------------------------------------------------------------------------------------------
 
-        [SerializeField, fsIgnoreInBuild]
+        [SerializeField, fsIgnoreInBuild, HideInInspector]
         private bool _collapsed;
-        [SerializeField, fsIgnoreInBuild]
+        [SerializeField, fsIgnoreInBuild, HideInInspector]
         private Color _color;
-        [SerializeField, fsIgnoreInBuild]
+        [SerializeField, fsIgnoreInBuild, HideInInspector]
         private VerboseLevel _verboseLevel = VerboseLevel.Full;
 
         ///----------------------------------------------------------------------------------------------
@@ -264,6 +269,23 @@ namespace NodeCanvas.Framework
             node.DrawNodeConnections(drawCanvas, fullDrawPass, canvasMousePos, zoomFactor);
         }
 
+        #region GX:GC优化相关
+        private void WindowCb(int ID)
+        {
+            NodeWindowGUI(this, ID);
+        }
+
+        private GUI.WindowFunction WindowCallbackFunction => s_sindowCB ??= WindowCb;
+        private GUI.WindowFunction s_sindowCB;
+
+        private static readonly GUILayoutOption[] s_windowOption = new[]
+            { GUILayout.MaxHeight(MIN_SIZE.y), GUILayout.MaxWidth(MIN_SIZE.x) };
+
+        private LayoutedWindowCache m_windowCache = new LayoutedWindowCache();
+        
+        
+        #endregion
+        
         //Draw the window
         static void DrawNodeWindow(Node node, Vector2 canvasMousePos, float zoomFactor) {
 
@@ -278,8 +300,11 @@ namespace NodeCanvas.Framework
 
             GUI.color = node.isActive ? Color.white : new Color(0.9f, 0.9f, 0.9f, 0.8f);
             GUI.color = GraphEditorUtility.activeElement == node ? new Color(0.9f, 0.9f, 1) : GUI.color;
-            //Remark: using MaxWidth and MaxHeight makes GUILayout window contract width and height \o/
-            node.rect = GUILayout.Window(node.ID, node.rect, (ID) => { NodeWindowGUI(node, ID); }, string.Empty, StyleSheet.window, GUILayout.MaxHeight(MIN_SIZE.y), GUILayout.MaxWidth(MIN_SIZE.x));
+            //Remark: using MaxWidth and MaxHeight makes GUILayout window contract width and height
+            node.m_windowCache.Reset(node.WindowCallbackFunction, node.rect, GUIContent.none, s_windowOption, StyleSheet.window);
+            node.rect = GUI.Window(node.ID, node.rect, node.m_windowCache.windowCB, GUIContent.none, StyleSheet.window);
+            // node.rect = GUILayout.Window(node.ID, node.rect, node.WindowCallbackFunction, string.Empty,
+            //     StyleSheet.window, s_windowOption);
 
             GUI.color = Color.white;
             Styles.Draw(node.rect, StyleSheet.windowShadow);
@@ -428,7 +453,7 @@ namespace NodeCanvas.Framework
             //Mouse up
             if ( e.type == EventType.MouseUp ) {
                 if ( node.nodeIsPressed ) {
-                    node.TrySortConnectionsByRelativePosition();
+                    node.TrySortConnectionsByPositionX();
                 }
                 if ( adjustingBoundCanvasGroups != null ) {
                     foreach ( var group in adjustingBoundCanvasGroups ) { group.FlushContainedNodes(); }
@@ -747,7 +772,11 @@ namespace NodeCanvas.Framework
             UndoUtility.CheckUndo(node.graph, "Node Inspector");
 
             GUI.backgroundColor = Colors.lightBlue;
+            //添加富文本支持
+            var preRichText = EditorStyles.helpBox.richText;
+            EditorStyles.helpBox.richText = true;
             EditorGUILayout.HelpBox(node.description, MessageType.None);
+            EditorStyles.helpBox.richText = preRichText;
             GUI.backgroundColor = Color.white;
 
             GUILayout.BeginHorizontal();
@@ -855,18 +884,14 @@ namespace NodeCanvas.Framework
         }
 
 
-        //Editor. Sorts the parent node connections based on all child nodes position according to flow direction. Possible only when not in play mode.
-        public void TrySortConnectionsByRelativePosition() {
-            if ( !Application.isPlaying && graph != null && graph.isTree && graph.flowDirection != PlanarDirection.Auto ) {
+        //Editor. Sorts the parent node connections based on all child nodes X position. Possible only when not in play mode.
+        //Removed condition "!Application.isPlaying" in first "if" so that when node position is changed in play mode, the order of nodes will also change. by ZhangYuntao
+        public void TrySortConnectionsByPositionX() {
+            if ( graph != null && graph.isTree ) {
                 foreach ( var connection in inConnections.ToArray() ) {
                     var node = connection.sourceNode;
                     var original = node.outConnections.ToList();
-                    if ( graph.flowDirection == PlanarDirection.Horizontal ) {
-                        node.outConnections = node.outConnections.OrderBy(c => c.targetNode.rect.center.y).ToList();
-                    }
-                    if ( graph.flowDirection == PlanarDirection.Vertical ) {
-                        node.outConnections = node.outConnections.OrderBy(c => c.targetNode.rect.center.x).ToList();
-                    }
+                    node.outConnections = node.outConnections.OrderBy(c => c.targetNode.rect.center.x).ToList();
                     var oldIndeces = node.outConnections.Select(x => original.IndexOf(x)).ToArray();
                     foreach ( var field in node.GetType().RTGetFields() ) {
                         if ( field.RTIsDefined<AutoSortWithChildrenConnections>(true) ) {
@@ -903,9 +928,40 @@ namespace NodeCanvas.Framework
             }
         }
 
+        //gx:添加Odin序列化支持
+        private PropertyTree odinPropertyTree;
+
+        public void TryDisposePropertyTree()
+        {
+            if (this is ITaskAssignable taskAssignable)
+            {
+                taskAssignable.task?.TryDisposePropertyTree();
+            }
+            odinPropertyTree?.Dispose();
+            odinPropertyTree = null;
+        }
+        
         ///<summary>Draw an automatic editor inspector for this node.</summary>
         protected void DrawDefaultInspector() {
-            EditorUtils.ReflectedObjectInspector(this, graph);
+            //gx:保险起见行为树和对话树那边还是先用老逻辑
+            //BTnode会有个taskdrawer循环调用的问题，目前只把Task改成Odin序列化
+            if (Prefs.UseOdinEditor && this is FlowNode)
+            {
+                if (odinPropertyTree == null)
+                {
+                    odinPropertyTree = PropertyTree.Create(this);
+                    odinPropertyTree.RootProperty.AnimateVisibility = false;
+                    odinPropertyTree.OnPropertyValueChanged += (property, index) =>
+                    {
+                        UndoUtility.SetDirty(graph);
+                    };
+                }
+                odinPropertyTree.Draw(false);
+            }
+            else
+            {
+                EditorUtils.ReflectedObjectInspector(this, graph);
+            }
         }
 
         ///<summary>Editor. Draw the connections line from this node, to all of its children. This is the default hierarchical tree style. Override in each system's base node class.</summary>
@@ -954,27 +1010,16 @@ namespace NodeCanvas.Framework
                 return;
             }
 
-            var portOffset = 6;
+            var yOffset = 6;
 
             if ( fullDrawPass || drawCanvas.Overlaps(rect) ) {
                 var canHaveMoreOutConnection = outConnections.Count < maxOutConnections || maxOutConnections == -1;
-                Rect nodeOutputBox = default(Rect);
-                if ( graph.flowDirection == PlanarDirection.Vertical ) {
-                    nodeOutputBox = new Rect(rect.x, rect.yMax - 2, rect.width, canHaveMoreOutConnection ? 12 : 10);
-                }
-                if ( graph.flowDirection == PlanarDirection.Horizontal ) {
-                    nodeOutputBox = new Rect(rect.xMax, rect.yMin, canHaveMoreOutConnection ? 12 : 10, rect.height);
-                }
+                var nodeOutputBox = new Rect(rect.x, rect.yMax - 2, rect.width, canHaveMoreOutConnection ? 12 : 10);
                 Styles.Draw(nodeOutputBox, StyleSheet.nodePortContainer);
 
                 if ( !collapsed ) {
                     var portRect = new Rect(0, 0, 12, 12);
-                    if ( graph.flowDirection == PlanarDirection.Vertical ) {
-                        portRect.center = new Vector2(rect.center.x, rect.yMax + portOffset);
-                    }
-                    if ( graph.flowDirection == PlanarDirection.Horizontal ) {
-                        portRect.center = new Vector2(rect.xMax + portOffset, rect.center.y);
-                    }
+                    portRect.center = new Vector2(rect.center.x, rect.yMax + yOffset);
                     Styles.Draw(portRect, outConnections.Count > 0 ? StyleSheet.nodePortConnected : StyleSheet.nodePortEmpty);
 
                     if ( GraphEditorUtility.allowClick && canHaveMoreOutConnection ) {
@@ -982,7 +1027,7 @@ namespace NodeCanvas.Framework
                         if ( e.type == EventType.MouseDown && e.button == 0 ) {
                             if ( portRect.Contains(e.mousePosition) || nodeOutputBox.Contains(e.mousePosition) ) {
                                 dragDropMisses = 0;
-                                clickedPort = new GUIPort(-1, this, portRect.center);
+                                clickedPort = new GUIPort(0, this, portRect.center);
                                 e.Use();
                             }
                         }
@@ -994,7 +1039,7 @@ namespace NodeCanvas.Framework
             if ( clickedPort != null && clickedPort.parent == this ) {
                 var tangA = default(Vector2);
                 var tangB = default(Vector2);
-                ParadoxNotion.CurveUtils.ResolveTangents(clickedPort.pos, e.mousePosition, Prefs.connectionsMLT, graph.flowDirection, out tangA, out tangB);
+                ParadoxNotion.CurveUtils.ResolveTangents(clickedPort.pos, e.mousePosition, Prefs.connectionsMLT, PlanarDirection.Vertical, out tangA, out tangB);
                 Handles.DrawBezier(clickedPort.pos, e.mousePosition, clickedPort.pos + tangA, e.mousePosition + tangB, StyleSheet.GetStatusColor(Status.Resting).WithAlpha(0.8f), StyleSheet.bezierTexture, 3);
             }
 
@@ -1006,16 +1051,8 @@ namespace NodeCanvas.Framework
                     continue;
                 }
 
-                Vector2 sourcePos = rect.center;
-                Vector2 targetPos = rect.center;
-                if ( graph.flowDirection == PlanarDirection.Vertical ) {
-                    sourcePos = new Vector2(rect.center.x, rect.yMax + portOffset);
-                    targetPos = new Vector2(connection.targetNode.rect.center.x, connection.targetNode.rect.y);
-                }
-                if ( graph.flowDirection == PlanarDirection.Horizontal ) {
-                    sourcePos = new Vector2(rect.xMax + portOffset, rect.center.y);
-                    targetPos = new Vector2(connection.targetNode.rect.xMin, connection.targetNode.rect.center.y);
-                }
+                var sourcePos = new Vector2(rect.center.x, rect.yMax + yOffset);
+                var targetPos = new Vector2(connection.targetNode.rect.center.x, connection.targetNode.rect.y);
 
                 var sourcePortRect = new Rect(0, 0, 12, 12);
                 sourcePortRect.center = sourcePos;
@@ -1076,6 +1113,8 @@ namespace NodeCanvas.Framework
 
         ///----------------------------------------------------------------------------------------------
 
+        //编辑器下被ctrlv复制时
+        virtual public void OnClone(){}
     }
 }
 

@@ -8,6 +8,10 @@ using ParadoxNotion.Serialization;
 using ParadoxNotion.Serialization.FullSerializer;
 using ParadoxNotion.Services;
 using NodeCanvas.Framework.Internal;
+#if UNITY_EDITOR
+using NodeCanvas.Editor;
+using Sirenix.OdinInspector.Editor;
+#endif
 using UnityEngine;
 using Logger = ParadoxNotion.Services.Logger;
 
@@ -437,8 +441,33 @@ namespace NodeCanvas.Framework
             }
         }
 
+        //gx:添加Odin序列化支持
+        private PropertyTree odinPropertyTree;
+        
+        public void TryDisposePropertyTree()
+        {
+            odinPropertyTree?.Dispose();
+            odinPropertyTree = null;
+        }
+
         ///<summary>Draw an automatic editor inspector for this task.</summary>
-        protected void DrawDefaultInspector() { EditorUtils.ReflectedObjectInspector(this, ownerSystem.contextObject); }
+        protected void DrawDefaultInspector()
+        {
+            //gx:添加Odin序列化支持
+            if (Prefs.UseOdinEditor)
+            {
+                if (odinPropertyTree == null)
+                {
+                    odinPropertyTree = PropertyTree.Create(this);
+                    odinPropertyTree.RootProperty.AnimateVisibility = false;
+                }
+                odinPropertyTree.Draw(false);
+            }
+            else
+            {
+                EditorUtils.ReflectedObjectInspector(this, ownerSystem.contextObject);
+            }
+        }
         ///<summary>Optional override to show custom controls whenever the ShowTaskInspectorGUI is called. By default controls will automaticaly show for most types.</summary>
         virtual protected void OnTaskInspectorGUI() { DrawDefaultInspector(); }
 

@@ -200,5 +200,11 @@ namespace NodeCanvas.Framework
         }
 
         public override string ToString() { return _identifier; }
+        
+        //gx:增加接口
+        public void SetBlackParent(IBlackboard bb)
+        {
+            _blackboard.parent = bb;
+        }
     }
 }

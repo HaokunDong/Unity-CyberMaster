@@ -1,11 +1,14 @@
 ﻿#if UNITY_EDITOR
 
+using System;
 using UnityEngine;
 using UnityEditor;
 using System.Linq;
+using Sirenix.OdinInspector.Editor;
 
 namespace ParadoxNotion.Design
 {
+    [DrawerPriority(0, 0, 1)]
     ///<summary>Used to create header / separators similar to Unity's Header attribute</summary>
     public class HeaderDrawer : AttributeDrawer<HeaderAttribute>
     {
@@ -16,6 +19,7 @@ namespace ParadoxNotion.Design
         }
     }
 
+    [DrawerPriority(0, 0, 1000 - 0)]
     ///<summary>Will dim control for bool, int, float, string if its default value (or empty for string)</summary>
     public class DimIfDefaultDrawer : AttributeDrawer<DimIfDefaultAttribute>
     {
@@ -49,6 +53,7 @@ namespace ParadoxNotion.Design
         }
     }
 
+    [DrawerPriority(0, 0, 1000 - 1)]
     ///<summary>Will show value only if another field or prop is equal to target</summary>
 	public class ShowIfDrawer : AttributeDrawer<ShowIfAttribute>
     {
@@ -71,6 +76,7 @@ namespace ParadoxNotion.Design
         }
     }
 
+    [DrawerPriority(0, 0, 1000 - 2)]
     ///<summary>Will show in red if value is null or empty</summary>
 	public class RequiredFieldDrawer : AttributeDrawer<RequiredFieldAttribute>
     {
@@ -82,6 +88,7 @@ namespace ParadoxNotion.Design
         }
     }
 
+    [DrawerPriority(0, 0, 1000 - 3)]
     ///<summary>Will show a button above field</summary>
     public class ShowButtonDrawer : AttributeDrawer<ShowButtonAttribute>
     {
@@ -100,6 +107,7 @@ namespace ParadoxNotion.Design
         }
     }
 
+    [DrawerPriority(0, 0, 1000 - 4)]
     ///<summary>Will invoke a callback method when value change</summary>
 	public class CallbackDrawer : AttributeDrawer<CallbackAttribute>
     {
@@ -120,6 +128,7 @@ namespace ParadoxNotion.Design
 
     ///----------------------------------------------------------------------------------------------
 
+    [DrawerPriority(0, 0, 1000 - 5)]
     ///<summary>Will clamp float or int value to min</summary>
     public class MinValueDrawer : AttributeDrawer<MinValueAttribute>
     {
@@ -136,6 +145,7 @@ namespace ParadoxNotion.Design
 
     ///----------------------------------------------------------------------------------------------
 
+    [DrawerPriority(0, 0, 1)]
     ///<summary>Will make float, int or string field show in a delayed control</summary>
     public class DelayedFieldDrawer : AttributeDrawer<DelayedFieldAttribute>
     {
@@ -153,6 +163,7 @@ namespace ParadoxNotion.Design
         }
     }
 
+    [DrawerPriority(0, 0, 1)]
     ///<summary>Will force to use ObjectField editor, usefull for interfaces</summary>
 	public class ForceObjectFieldDrawer : AttributeDrawer<ForceObjectFieldAttribute>
     {
@@ -178,6 +189,7 @@ namespace ParadoxNotion.Design
         }
     }
 
+    [DrawerPriority(0, 0, 1)]
     ///<summary>Will show a slider for int and float values</summary>
     public class SliderFieldDrawer : AttributeDrawer<SliderFieldAttribute>
     {
@@ -192,6 +204,7 @@ namespace ParadoxNotion.Design
         }
     }
 
+    [DrawerPriority(0, 0, 1)]
     ///<summary>Will show a layer selection for int values</summary>
 	public class LayerFieldDrawer : AttributeDrawer<LayerFieldAttribute>
     {
@@ -203,6 +216,7 @@ namespace ParadoxNotion.Design
         }
     }
 
+    [DrawerPriority(0, 0, 1)]
     ///<summary>Will show a Tag selection for string values</summary>
 	public class TagFieldDrawer : AttributeDrawer<TagFieldAttribute>
     {
@@ -214,6 +228,7 @@ namespace ParadoxNotion.Design
         }
     }
 
+    [DrawerPriority(0, 0, 1)]
     ///<summary>Will show a text area for string values</summary>
 	public class TextAreaDrawer : AttributeDrawer<TextAreaFieldAttribute>
     {
@@ -228,27 +243,6 @@ namespace ParadoxNotion.Design
                 return EditorGUILayout.TextArea((string)instance, areaStyle, GUILayout.Height(attribute.numberOfLines * areaStyle.lineHeight));
             }
             return MoveNextDrawer();
-        }
-    }
-
-    ///<summary>Can be used on an interface to popup select a concrete implementation.<summary>
-    public class ReferenceFieldDrawer : AttributeDrawer<ReferenceFieldAttribute>
-    {
-        public override object OnGUI(GUIContent content, object instance)
-        {
-            var options = ReflectionTools.GetImplementationsOf(fieldInfo.FieldType);
-            var selection = EditorUtils.Popup<System.Type>(content, instance != null? instance.GetType() : fieldInfo.FieldType, options);
-            if (selection == null){ return instance = null; }
-
-            if (instance == null || instance.GetType() != selection ) {
-                if (!typeof(UnityEngine.Object).IsAssignableFrom(selection)){
-                    return System.Activator.CreateInstance(selection);
-                }
-            }
-            EditorGUI.indentLevel++;
-            EditorUtils.ReflectedObjectInspector(instance, contextUnityObject);
-            EditorGUI.indentLevel--;
-            return instance;
         }
     }
 }
