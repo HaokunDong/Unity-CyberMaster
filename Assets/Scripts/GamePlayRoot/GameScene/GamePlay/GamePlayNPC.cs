@@ -8,7 +8,7 @@ public class GamePlayNPC : GamePlayAIEntity
 #if UNITY_EDITOR
     public override bool GetHierarchyComment(out string name, out Color color)
     {
-        name = ZString.Concat("npc: ", GamePlayId, isGen ? " (¶¯Ì¬Éú³É)" : "");
+        name = ZString.Concat(GamePlayId, isGen ? " G " : " ", TableId);
         color = GamePlayId <= 0 ? Color.red : Color.cyan;
         return true;
     }

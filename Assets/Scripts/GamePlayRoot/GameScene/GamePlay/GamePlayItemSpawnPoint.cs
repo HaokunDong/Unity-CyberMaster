@@ -1,11 +1,12 @@
 using Cysharp.Text;
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GamePlayItemSpawnPoint : GamePlaySpawnPoint<GamePlayItem>
 {
-    public override GamePlayItem Spawn<GamePlayItem>(uint id)
+    public override async UniTask<GamePlayItem> Spawn<GamePlayItem>()
     {
         return null;
     }

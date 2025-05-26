@@ -13,13 +13,15 @@ namespace Everlasting.Config
 	{
 		public readonly uint Id;
 		public readonly string EnemyName;
-		public readonly int EnemyHP;
+		public readonly string Prefab;
+		public readonly string Graph;
 		
-		public EnemyTable(uint Id, string EnemyName, int EnemyHP)
+		public EnemyTable(uint Id, string EnemyName, string Prefab, string Graph)
 		{
 			this.Id = Id;
 			this.EnemyName = EnemyName;
-			this.EnemyHP = EnemyHP;
+			this.Prefab = Prefab;
+			this.Graph = Graph;
 		}
 		public static int Count => EnemyTableLoader.ConfigCount;
 		public static EnemyTable GetTableData(uint id) => EnemyTableLoader.ConfigDic.TryGetValue(id, out var cfg) ? cfg : null;
@@ -56,8 +58,9 @@ namespace Everlasting.Config
 					{
 						var Id = binary.ReadUInt();
 						var EnemyName = poolString[binary.ReadInt()];
-						var EnemyHP = binary.ReadInt();
-						var cfg = new EnemyTable(Id, EnemyName, EnemyHP);
+						var Prefab = poolString[binary.ReadInt()];
+						var Graph = poolString[binary.ReadInt()];
+						var cfg = new EnemyTable(Id, EnemyName, Prefab, Graph);
 						ConfigList[i] = cfg;
 						ConfigDic.Add(Id, cfg);
 					}

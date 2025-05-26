@@ -6,9 +6,8 @@ using GameBase.Log;
 using Cysharp.Text;
 using UnityEngine;
 
-public class GamePlayEntityCheck : MonoBehaviour, ICustomHierarchyComment
+public class GamePlayEntityParent : MonoBehaviour, ICustomHierarchyComment
 {
-#if UNITY_EDITOR
     [SerializeField]
     private string label;
     [SerializeField] 
@@ -22,6 +21,7 @@ public class GamePlayEntityCheck : MonoBehaviour, ICustomHierarchyComment
         set => typeName = value?.AssemblyQualifiedName;
     }
 
+#if UNITY_EDITOR
     public void Check()
     {
         if (type != null)

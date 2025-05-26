@@ -1,11 +1,12 @@
 using Cysharp.Text;
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GamePlayNPCSpawnPoint : GamePlaySpawnPoint<GamePlayNPC>
 {
-    public override GamePlayNPC Spawn<GamePlayNPC>(uint id)
+    public override async UniTask<GamePlayNPC> Spawn<GamePlayNPC>()
     {
         return null;
     }

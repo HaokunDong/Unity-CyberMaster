@@ -54,7 +54,7 @@ public class GameFacade : MonoBehaviour
     #region 初始化结束后
     private async Task OnInitEnd()
     {
-        var gpObj = await ResourceManager.LoadAssetAsync<GameObject>(GamePlayTable.GetTableData(10000).Prefab, ResType.Prefab);
+        var gpObj = await ResourceManager.LoadAssetAsync<GameObject>(GamePlayTable.GetTableData(10001).Prefab, ResType.Prefab);
         var gp = gpObj.GetComponent<GamePlayRoot>();
         gp.Init();
     }

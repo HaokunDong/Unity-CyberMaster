@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System;
 using Tools;
 using UnityEngine;
 
@@ -6,8 +7,13 @@ public abstract class GamePlayEntity : MonoBehaviour, ICustomHierarchyComment
 {
     [ReadOnly]
     public uint GamePlayId;
-    [ReadOnly]
+    [NonSerialized, ReadOnly, ShowInInspector]
     public bool isGen;
+    [NonSerialized, ReadOnly, ShowInInspector]
+    public uint TableId;
+
+    [NonSerialized, ReadOnly, ShowInInspector]
+    public GamePlaySpawnPoint spawnPoint; 
 
     public virtual void Init() { }
 
