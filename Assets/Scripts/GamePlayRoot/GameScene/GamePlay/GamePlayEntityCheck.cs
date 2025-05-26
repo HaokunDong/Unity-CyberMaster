@@ -4,12 +4,6 @@ using System.Collections.Generic;
 using Tools;
 using GameBase.Log;
 using Cysharp.Text;
-
-
-#if UNITY_EDITOR
-using UnityEditor.SceneManagement;
-using UnityEditor;
-#endif
 using UnityEngine;
 
 public class GamePlayEntityCheck : MonoBehaviour, ICustomHierarchyComment
@@ -32,15 +26,38 @@ public class GamePlayEntityCheck : MonoBehaviour, ICustomHierarchyComment
     {
         if (type != null)
         {
+            var openType = typeof(GamePlaySpawnPoint<>);
             var childrenItem = transform.GetComponentsInChildren<GamePlayEntity>();
             foreach(var child in childrenItem)
             {
-                if (!child.GetType().IsAssignableFrom(type))
+                var childType = child.GetType();
+                bool isValid = type.IsAssignableFrom(childType);
+                if(typeName == typeof(GamePlaySpawnPoint).Name) 
                 {
-                    LogUtils.Error(ZString.Concat(label, "下挂有非", typeName, "类型的子节点", child.name, "，请检查!!!"), LogChannel.Common, Color.red);
+                    if (!isValid && type.IsGenericTypeDefinition)
+                    {
+                        isValid = IsSubclassOfOpenGeneric(childType, type);
+                    }
+                }
+
+                if (!isValid)
+                {
+                    LogUtils.Error(ZString.Concat(label, "下挂有非", typeName, "类且非其子类的节点", child.name, "(", child.GamePlayId, ")","，请检查!!!"), LogChannel.Common, c);
                 }
             }
         }
+    }
+
+    private bool IsSubclassOfOpenGeneric(Type candidate, Type openGeneric)
+    {
+        while (candidate != null && candidate != typeof(object))
+        {
+            var cur = candidate.IsGenericType ? candidate.GetGenericTypeDefinition() : candidate;
+            if (cur == openGeneric)
+                return true;
+            candidate = candidate.BaseType;
+        }
+        return false;
     }
 
     public bool GetHierarchyComment(out string name, out Color color)

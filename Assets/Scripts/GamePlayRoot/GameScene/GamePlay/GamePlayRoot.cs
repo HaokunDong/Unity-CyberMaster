@@ -1,5 +1,7 @@
 using Cysharp.Text;
+using Cysharp.Threading.Tasks;
 using Everlasting.Config;
+using GameBase.Log;
 using GameScene.FlowNode;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
@@ -22,19 +24,87 @@ public enum GamePlayIdBegin
     NPC_Gen = 31000,
     Enemy = 40000,
     Enemy_Gen = 41000,
+    Item = 50000,
+    Item_Gen = 51000,
 }
 
 public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
 {
+    public static GamePlayRoot Current = null;
+
     [ReadOnly]
     public uint GamePlayId;
 
     private const uint GAP_L = 100000;
     private const uint GAP = 1000;
 
+    private Dictionary<uint, GamePlayEnemy> enemyDict = null;
+    private Dictionary<uint, GamePlayNPC> NPCDict = null;
+    private Dictionary<uint, GamePlayItem> itemDict = null;
+    private Dictionary<uint, GamePlayTrigger> triggerDict = null;
+    private Dictionary<uint, GamePlaySpawnPoint> spawnPointDict = null;
+
     public void Init()
     {
+        if (Current != this)
+        {
+            Current = this;
+        }
+        CollectDict(enemyDict);
+        CollectDict(NPCDict);
+        CollectDict(itemDict);
+        CollectDict(triggerDict);
+        CollectDict(spawnPointDict);
         FlowCtl?.Init();
+    }
+
+    public T GetAGamePlayEntity<T>(uint GamePlayId) where T : GamePlayEntity
+    {
+        if (GamePlayId <= 0)
+        {
+            return null;
+        }
+        if (typeof(T) == typeof(GamePlayEnemy) && enemyDict != null && enemyDict.TryGetValue(GamePlayId, out var enemy))
+        {
+            return enemy as T;
+        }
+        else if (typeof(T) == typeof(GamePlayNPC) && NPCDict != null && NPCDict.TryGetValue(GamePlayId, out var npc))
+        {
+            return npc as T;
+        }
+        else if (typeof(T) == typeof(GamePlayItem) && itemDict != null && itemDict.TryGetValue(GamePlayId, out var item))
+        {
+            return item as T;
+        }
+        else if (typeof(T) == typeof(GamePlayTrigger) && triggerDict != null && triggerDict.TryGetValue(GamePlayId, out var trigger))
+        {
+            return trigger as T;
+        }
+        else if (typeof(T) == typeof(GamePlaySpawnPoint) && spawnPointDict != null && spawnPointDict.TryGetValue(GamePlayId, out var spawnPoint))
+        {
+            return spawnPoint as T;
+        }
+        return null;
+    }
+
+    private void CollectDict<T>(Dictionary<uint, T> dict) where T : GamePlayEntity
+    {
+        if (dict == null)
+        {
+            dict = new Dictionary<uint, T>();
+        }
+        else
+        {
+            dict.Clear();
+        }
+        var entities = transform.GetComponentsInChildren<T>(true);
+        foreach (var entity in entities)
+        {
+            if (entity.GamePlayId > 0)
+            {
+                dict[entity.GamePlayId] = entity;
+            }
+        }
     }
 
     private GamePlayFlowController flowCtl = null;
@@ -48,6 +118,16 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
             }
             return flowCtl;
         }
+    }
+
+    public async UniTask Dispose()
+    {
+        if(Current == this)
+        {
+            Current = null;
+        }
+
+        await UniTask.DelayFrame(1);
     }
 
 #if UNITY_EDITOR
@@ -97,11 +177,16 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
             {
                 if (s_needParseGamePlayRoot)
                 {
-                    var gpes = instance.transform.GetComponentsInChildren<GamePlayEnemy>();
-                    GenId(gpes, GamePlayId, GamePlayIdBegin.Enemy);
-                    var gpns = instance.transform.GetComponentsInChildren<GamePlayNPC>();
-                    GenId(gpns, GamePlayId, GamePlayIdBegin.NPC);
-
+                    var gamePlayEnemies = instance.transform.GetComponentsInChildren<GamePlayEnemy>();
+                    GenId(gamePlayEnemies, GamePlayId, GamePlayIdBegin.Enemy);
+                    var gamePlayNPCs = instance.transform.GetComponentsInChildren<GamePlayNPC>();
+                    GenId(gamePlayNPCs, GamePlayId, GamePlayIdBegin.NPC);
+                    var gamePlayItems = instance.transform.GetComponentsInChildren<GamePlayItem>();
+                    GenId(gamePlayItems, GamePlayId, GamePlayIdBegin.Item);
+                    var gamePlayTriggers = instance.transform.GetComponentsInChildren<GamePlayTrigger>();
+                    GenId(gamePlayTriggers, GamePlayId, GamePlayIdBegin.Trigger);
+                    var gamePlaySpawnPoints = instance.transform.GetComponentsInChildren<GamePlaySpawnPoint>();
+                    GenId(gamePlaySpawnPoints, GamePlayId, GamePlayIdBegin.SpawnPoint);
                 }
 
                 s_needParseGamePlayRoot = false;
