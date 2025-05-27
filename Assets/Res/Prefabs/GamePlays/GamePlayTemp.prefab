@@ -369,6 +369,51 @@ MonoBehaviour:
   label: "Item\u8282\u70B9"
   typeName: GamePlayItem
   c: {r: 1, g: 0, b: 0.65080976, a: 1}
+--- !u!1 &1094602618366038836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1379991737333596595}
+  - component: {fileID: 1275503521954232091}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1379991737333596595
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094602618366038836}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 864822437631277770}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1275503521954232091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094602618366038836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f877a3d606a33cf43a21f7bdfcc3ddae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GamePlayId: 0
 --- !u!1 &1652797427154289640
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,6 +459,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GamePlayId: 1000102001
+  animator: {fileID: 0}
+  graphOwner: {fileID: 0}
+  blackboard: {fileID: 0}
+  graphPath: 
 --- !u!1 &2182532311284683382
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,6 +493,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1379991737333596595}
   - {fileID: 5221122484232391303}
   - {fileID: 5686230606301534708}
   - {fileID: 270524199275290854}
@@ -20326,6 +20376,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GamePlayId: 1000140001
+  animator: {fileID: 0}
+  graphOwner: {fileID: 0}
+  blackboard: {fileID: 0}
+  graphPath: 
 --- !u!1 &3610386179825102036
 GameObject:
   m_ObjectHideFlags: 0
@@ -21171,6 +21225,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GamePlayId: 1000130001
+  animator: {fileID: 0}
+  graphOwner: {fileID: 0}
+  blackboard: {fileID: 0}
+  graphPath: 
 --- !u!1 &6946416938679579141
 GameObject:
   m_ObjectHideFlags: 0
@@ -21293,7 +21351,7 @@ Transform:
   m_GameObject: {fileID: 7948826200348268522}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12, y: -3, z: 0}
+  m_LocalPosition: {x: 10, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21359,3 +21417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GamePlayId: 1000140002
+  animator: {fileID: 0}
+  graphOwner: {fileID: 0}
+  blackboard: {fileID: 0}
+  graphPath: 

@@ -12,16 +12,25 @@ public abstract class GamePlayAIEntity : GamePlayEntity
     public GraphOwner graphOwner;
     public Blackboard blackboard;
 
-    public async UniTask InitAI(string path)
+    public string graphPath;
+
+    public override void Init()
     {
-        if(graphOwner != null && !path.IsNullOrEmpty())
+        base.Init();
+        InitAI().Forget();
+    }
+
+    public async UniTask InitAI()
+    {
+        if(graphOwner != null && !graphPath.IsNullOrEmpty())
         {
-            var graph = await ResourceManager.LoadAssetAsync<Graph>(path, ResType.AIGraph);
+            var graph = await ResourceManager.LoadAssetAsync<Graph>(graphPath, ResType.AIGraph);
             if(graph != null)
             {
-                graphOwner.graph = graph;
+                graphOwner.graph = graph; 
                 if (blackboard != null && animator != null)
                 {
+                    blackboard.SetVariableValue("gamePlayEntity", this);
                     blackboard.SetVariableValue("animator", animator);
                 }
                 graphOwner.StartBehaviour();

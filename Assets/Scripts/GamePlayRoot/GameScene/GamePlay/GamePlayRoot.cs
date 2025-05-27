@@ -4,7 +4,6 @@ using Everlasting.Config;
 using Everlasting.Extend;
 using GameBase.Log;
 using GameScene.FlowNode;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using System;
@@ -37,6 +36,9 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
     [ReadOnly]
     public uint GamePlayId;
 
+    [NonSerialized, ReadOnly, ShowInInspector]
+    public GamePlayPlayer player = null;
+
     private const uint GAP_L = 100000;
     private const uint GAP = 1000;
 
@@ -60,6 +62,9 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         {
             Current = this;
         }
+
+        player = transform.GetComponentInChildren<GamePlayPlayer>(true);
+
         entityParents = new Dictionary<Type, GamePlayEntityParent>();
         var ps = transform.GetComponentsInChildren<GamePlayEntityParent>(true);
         foreach(var p in ps)
@@ -71,7 +76,6 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         CollectDict(ref itemDict);
         CollectDict(ref triggerDict);
         CollectDict(ref spawnPointDict);
-        FlowCtl?.Init();
 
         foreach(var kv in spawnPointDict)
         {
@@ -81,6 +85,9 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
                 sp.Spawn().Forget();
             }
         }
+
+        player?.Init();
+        FlowCtl?.Init();
     }
 
     public T GetAGamePlayEntity<T>(uint GamePlayId) where T : GamePlayEntity
@@ -139,6 +146,7 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
             item.GamePlayId = id;
             item.transform.SetParent(entityParents[typeof(GamePlayItem)].transform);
         }
+        spawnedEntity.Init();
     }
 
     private void CollectDict<T>(ref Dictionary<uint, T> dict) where T : GamePlayEntity
@@ -158,6 +166,7 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
             {
                 dict[entity.GamePlayId] = entity;
             }
+            entity.Init();
         }
     }
 

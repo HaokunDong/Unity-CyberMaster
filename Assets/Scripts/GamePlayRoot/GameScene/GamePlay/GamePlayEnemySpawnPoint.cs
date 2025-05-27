@@ -13,8 +13,11 @@ public class GamePlayEnemySpawnPoint : GamePlaySpawnPoint<GamePlayEnemy>
         {
             var obj = await Managers.ResourceManager.LoadAssetAsync<GameObject>(data.Prefab, ResType.Prefab);
             GamePlayEnemy e = obj.GetComponent<GamePlayEnemy>();
-            var enemy = e as GamePlayAIEntity;
-            await enemy.InitAI(data.Graph);
+            var aie = e as GamePlayAIEntity;
+            if (aie != null)
+            {
+                aie.graphPath = data.Graph;
+            }
             return e;
         }
         return null;
