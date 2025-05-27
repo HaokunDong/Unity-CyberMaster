@@ -50,7 +50,7 @@ public class PlayerPostureState : PlayerState
             player.Flip();
         }
 
-        player.SetMovement(from.attackForce[from.attackCount], rb.velocity.y);
+        player.SetMovement(from.attackForce[from.attackCount] * from.facingDir, rb.velocity.y);
 
         stateMachine.ChangeState(player.postureMoveState);
     }

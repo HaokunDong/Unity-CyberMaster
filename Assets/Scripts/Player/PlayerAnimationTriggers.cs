@@ -115,12 +115,12 @@ public class PlayerAnimationTriggers : MonoBehaviour
 
     private void ExecutionZoomIn()
     {
-        CameraManager.Ins.SwitchToExecutionCam();
+        CameraManager.Ins.SmoothZoomCamera(10f, 7.0f, 0.5f);
     }
 
     private void ExecutionZoomOut()
     {
-        CameraManager.Ins.SwitchToMainCam();
+        CameraManager.Ins.ZoomCameraToDefault();
     }
 
 

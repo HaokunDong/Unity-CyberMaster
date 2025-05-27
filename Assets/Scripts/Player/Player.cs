@@ -99,7 +99,7 @@ public class Player : Entity
     protected override void Start()
     {
         base.Start();
-
+        
         stateMachine.Initialize(idleState);
 
         RefreshInfoState();

@@ -13,7 +13,7 @@ public class HitEffectController : Singleton<HitEffectController>
 
         go.GetComponent<HitEffect>().Init(info);
 
-        if (CameraShake.Instance != null)
+        /*if (CameraShake.Instance != null)
         {
             float magnitude = 0.2f;
             float duration = 0.1f;
@@ -40,6 +40,6 @@ public class HitEffectController : Singleton<HitEffectController>
         else
         {
             Debug.LogError("CameraShake.Instance is NULL!");
-        }
+        }*/
     }
 }

@@ -12,7 +12,6 @@ public class GameManager : SingletonComp<GameManager>
 
         if (playerSpawnPoint != null && GameObject.FindGameObjectWithTag("Player") == null)
         {
-            Debug.Log("生成！");
             player = PlayerManager.Ins.CreatePlayer(playerSpawnPoint);
 
             //DontDestroyOnLoad(player.gameObject);
@@ -34,7 +33,7 @@ public class GameManager : SingletonComp<GameManager>
 
     public void OnUpdate()
     {
-
+        
     }
 
 }

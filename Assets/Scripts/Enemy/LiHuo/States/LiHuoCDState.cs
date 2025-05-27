@@ -44,7 +44,7 @@ public class LiHuoCDState : EnemyState
     {
         base.OnHit(from);
 
-        liHuo.SetMovement(from.attackForce[from.attackCount], rb.velocity.y);
+        liHuo.SetMovement(from.attackForce[from.attackCount] * from.facingDir, rb.velocity.y);
 
         if (liHuo.canBounceOther)
         {
