@@ -32,9 +32,12 @@ public abstract class GamePlayAIEntity : GamePlayEntity
                 {
                     blackboard.SetVariableValue("gamePlayEntity", this);
                     blackboard.SetVariableValue("animator", animator);
+                    CustomAIBlackboardWriteIn(blackboard);
                 }
                 graphOwner.StartBehaviour();
             }
         }
     }
+
+    public virtual void CustomAIBlackboardWriteIn(Blackboard blackboard) { }
 }

@@ -10,7 +10,7 @@ public class GamePlayEntityIsPlayerInRangeConditionTask : ConditionTask<GamePlay
 
     public BBParameter<float> range;
 
-    protected override string info => $" Is Player in Range {range.value}";
+    protected override string info => $" Is Player in {agentInfo} Range {range.value}";
     protected override bool OnCheck()
     {
         if(GamePlayRoot.Current != null)
