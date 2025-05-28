@@ -7,19 +7,41 @@ using UnityEngine;
 
 public class GamePlayEnemy : GamePlayAIEntity
 {
+    private Cooldown MoveCD;
+    private Cooldown CheckFaceFlipCD;
+    private Cooldown ComboAttackCD;
+    private Cooldown LeapAttackCD;
+    private Cooldown StabAttackCD;
+
     public override void CustomAIBlackboardWriteIn(Blackboard blackboard)
     {
         base.CustomAIBlackboardWriteIn(blackboard);
-        var data = EnemyTable.GetTableData(TableId);
+        var data = EnemyTable.GetTableData(TableId);  
+
         if(data != null)
         {
-            blackboard.SetVariableValue("CheckFaceFlipTime", data.CheckFaceFlipTime);
-            blackboard.SetVariableValue("MoveCD", data.MoveCD);
-            blackboard.SetVariableValue("ComboAttackCD", data.ComboAttackCD);
-            blackboard.SetVariableValue("LeapAttackCD", data.LeapAttackCD);
-            blackboard.SetVariableValue("StabAttackCD", data.StabAttackCD);
+            var gp = ManagerCenter.Ins.CooldownManager.GetOrCreateGroup(GamePlayId, UpdateMode.FixedUpdate);
+            MoveCD = gp.Set("MoveCD", data.MoveCD);
+            CheckFaceFlipCD = gp.Set("CheckFaceFlipCD", data.CheckFaceFlipTime);
+            ComboAttackCD = gp.Set("ComboAttackCD", data.ComboAttackCD);
+            LeapAttackCD = gp.Set("LeapAttackCD", data.LeapAttackCD);
+            StabAttackCD = gp.Set("StabAttackCD", data.StabAttackCD);
+
+            blackboard.SetVariableValue("CheckFaceFlipCD", CheckFaceFlipCD);
+            blackboard.SetVariableValue("MoveCD", MoveCD);
+            blackboard.SetVariableValue("ComboAttackCD", ComboAttackCD);
+            blackboard.SetVariableValue("LeapAttackCD", LeapAttackCD);
+            blackboard.SetVariableValue("StabAttackCD", StabAttackCD);
             blackboard.SetVariableValue("PlayerTooFarRange", data.PlayerTooFarRange);
+            blackboard.SetVariableValue("AttackDistance", data.AttackDistance);
+            blackboard.SetVariableValue("StabDistance", data.StabDistance);
         }
+    }
+
+    public override void OnDispose()
+    {
+        base.OnDispose();
+        ManagerCenter.Ins.CooldownManager.RemoveOwner(GamePlayId);
     }
 
 #if UNITY_EDITOR

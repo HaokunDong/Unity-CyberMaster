@@ -23,6 +23,7 @@ public class GameFacade : MonoBehaviour
     private void Update()
     {
         ManagerCenter.Ins.TickersMgr.Update(Time.deltaTime);
+        ManagerCenter.Ins.CooldownManager.TickByMode(UpdateMode.Update, Time.deltaTime, Time.unscaledDeltaTime);
     }
     #region 初始化
     private async UniTask Init()
@@ -35,9 +36,15 @@ public class GameFacade : MonoBehaviour
         await OnInitEnd();
     }
 
+    private void FixedUpdate()
+    {
+        ManagerCenter.Ins.CooldownManager.TickByMode(UpdateMode.FixedUpdate, Time.deltaTime, Time.unscaledDeltaTime);
+    }
+
     private void LateUpdate()
     {
         ManagerCenter.Ins.TickersMgr.LateUpdate(Time.deltaTime);
+        ManagerCenter.Ins.CooldownManager.TickByMode(UpdateMode.LateUpdate, Time.deltaTime, Time.unscaledDeltaTime);
     }
 
     private async UniTask InitTableData()

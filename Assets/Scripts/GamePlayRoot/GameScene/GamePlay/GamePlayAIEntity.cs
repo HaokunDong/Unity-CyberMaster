@@ -11,6 +11,7 @@ public abstract class GamePlayAIEntity : GamePlayEntity
     public Animator animator;
     public GraphOwner graphOwner;
     public Blackboard blackboard;
+    public Rigidbody2D rb;
 
     public string graphPath;
 
@@ -30,8 +31,9 @@ public abstract class GamePlayAIEntity : GamePlayEntity
                 graphOwner.graph = graph; 
                 if (blackboard != null && animator != null)
                 {
-                    blackboard.SetVariableValue("gamePlayEntity", this);
+                    blackboard.SetVariableValue("self", this);
                     blackboard.SetVariableValue("animator", animator);
+                    blackboard.SetVariableValue("rb", rb);
                     CustomAIBlackboardWriteIn(blackboard);
                 }
                 graphOwner.StartBehaviour();
@@ -40,4 +42,18 @@ public abstract class GamePlayAIEntity : GamePlayEntity
     }
 
     public virtual void CustomAIBlackboardWriteIn(Blackboard blackboard) { }
+
+    public virtual void RenewBlackboard<T>(Blackboard blackboard, string key, T t) 
+    {
+        if (blackboard != null)
+        {
+            blackboard.SetVariableValue(key, t);
+        }
+    }
+
+    public virtual void SetVelocity(Vector2 v)
+    {
+        Flip(v.x);
+        rb.velocity = v;
+    }
 }

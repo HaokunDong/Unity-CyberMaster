@@ -69,6 +69,27 @@ namespace ParadoxNotion.Design
             }
         }
 
+        //Griffin 拓展绘制兼容变量和属性
+        public static object EditValue(string label, object value, System.Type type)
+        {
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField(label, GUILayout.Width(150));
+            object result = value;
+
+            if (type == typeof(int) || type == typeof(uint)) result = EditorGUILayout.IntField((int)value);
+            else if (type == typeof(float)) result = EditorGUILayout.FloatField((float)value);
+            else if (type == typeof(bool)) result = EditorGUILayout.Toggle((bool)value);
+            else if (type == typeof(string)) result = EditorGUILayout.TextField((string)value);
+            else if (type == typeof(Vector2) || type == typeof(Vector2Int)) result = EditorGUILayout.Vector2Field("", (Vector2)value);
+            else if (type == typeof(Vector3) || type == typeof(Vector3Int)) result = EditorGUILayout.Vector3Field("", (Vector3)value);
+            // 可扩展其他类型...
+
+            EditorGUILayout.EndHorizontal();
+            return result;
+        }
+        //Griffin 拓展绘制兼容变量和属性
+
+
 
         ///<summary>Draws an Editor field for object of type directly WITH taking into acount object drawers and drawer attributes</summary>
         public static object ReflectedFieldInspector(string name, object value, Type t, InspectedFieldInfo info) {

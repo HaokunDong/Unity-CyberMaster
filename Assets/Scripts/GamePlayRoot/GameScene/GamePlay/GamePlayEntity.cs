@@ -40,11 +40,28 @@ public abstract class GamePlayEntity : MonoBehaviour, ICustomHierarchyComment
         return false;
     }
 
+    public virtual void Flip(float x)
+    {
+        if (x > 0 && !facingRight)
+        {
+            Flip();
+        }
+        else if (x < 0 && facingRight)
+        {
+            Flip();
+        }
+    }
+
     public virtual void Flip()
     {
         facingDir = facingDir * -1;
         facingRight = !facingRight;
         transform.Rotate(0, 180, 0);
+    }
+
+    public virtual void OnDispose()
+    {
+        
     }
 
 #if UNITY_EDITOR

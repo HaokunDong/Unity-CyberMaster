@@ -156,6 +156,8 @@ namespace GameBase.Tickers
                 m_tickerUnitOrderedList_LateUpdate.Add(new List<TickerUnit>());
                 m_tickOrderIdxDict.Add(tickOrders[i], i);
             }
+
+            //m_battleGroup?.Start();
         }
 
         public void Update(float deltaTime)

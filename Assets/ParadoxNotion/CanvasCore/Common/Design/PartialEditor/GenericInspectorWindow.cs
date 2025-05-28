@@ -1,5 +1,6 @@
 ﻿#if UNITY_EDITOR
 
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
@@ -88,12 +89,37 @@ namespace ParadoxNotion.Design
             EditorUtils.Separator();
             GUILayout.Space(10);
             scrollPos = GUILayout.BeginScrollView(scrollPos);
-            var serializationInfo = new InspectedFieldInfo(unityObjectContext, null, null, null);
-            var oldValue = read();
-            var newValue = EditorUtils.ReflectedFieldInspector(friendlyTitle, oldValue, targetType, serializationInfo);
-            if ( !Equals(oldValue, newValue) || GUI.changed ) {
-                write(newValue);
+
+            var obj = read();
+            var type = obj.GetType();
+            var serializedInfo = new InspectedFieldInfo(unityObjectContext, null, null, null);
+
+            // 绘制字段
+            var newObj = EditorUtils.ReflectedFieldInspector(friendlyTitle, obj, type, serializedInfo);
+
+            //Griffin 拓展绘制兼容变量和属性
+            // 绘制值类型属性
+            var props = type.GetProperties(BindingFlags.Instance | BindingFlags.Public);
+            foreach (var prop in props)
+            {
+                //if (!prop.CanRead || !prop.CanWrite || prop.GetIndexParameters().Length > 0) continue;
+                //if (!prop.PropertyType.IsValueType && prop.PropertyType != typeof(string)) continue;
+
+                try
+                {
+                    object val = prop.GetValue(obj, null);
+                    object newVal = EditorUtils.EditValue(prop.Name, val, prop.PropertyType);
+
+                    if (!Equals(val, newVal))
+                    {
+                        prop.SetValue(obj, newVal, null);
+                        write(obj); // 写回
+                    }
+                }
+                catch { /* 安全失败容错 */ }
             }
+            //Griffin 拓展绘制兼容变量和属性
+
             GUILayout.EndScrollView();
 
             willRepaint = true;

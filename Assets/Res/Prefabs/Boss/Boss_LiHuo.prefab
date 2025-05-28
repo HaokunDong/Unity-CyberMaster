@@ -729,6 +729,8 @@ MonoBehaviour:
   animator: {fileID: 3074165365471245077}
   graphOwner: {fileID: 1813073841807737428}
   blackboard: {fileID: 3912602083482627716}
+  rb: {fileID: 7917418698072165531}
+  graphPath: 
 --- !u!114 &1813073841807737428
 MonoBehaviour:
   m_ObjectHideFlags: 0
