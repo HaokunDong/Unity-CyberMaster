@@ -123,5 +123,9 @@ public class PlayerAnimationTriggers : MonoBehaviour
         CameraManager.Ins.ZoomCameraToDefault();
     }
 
+    private void CameraShake()
+    {
+        CameraManager.Ins.ShakeCameraWithForce(0.5f);
+    }
 
 }
