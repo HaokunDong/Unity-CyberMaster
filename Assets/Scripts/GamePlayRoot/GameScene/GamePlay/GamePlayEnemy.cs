@@ -35,6 +35,7 @@ public class GamePlayEnemy : GamePlayAIEntity
             blackboard.SetVariableValue("PlayerTooFarRange", data.PlayerTooFarRange);
             blackboard.SetVariableValue("AttackDistance", data.AttackDistance);
             blackboard.SetVariableValue("StabDistance", data.StabDistance);
+            blackboard.SetVariableValue("MoveSpeed", data.MoveSpeed);
         }
     }
 
