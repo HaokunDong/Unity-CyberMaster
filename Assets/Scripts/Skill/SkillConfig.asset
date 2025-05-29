@@ -1,0 +1,220 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87e7ff321ae55a84893e116b6aa0a84a, type: 3}
+  m_Name: SkillConfig
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 7400000, guid: ec113f7d63e94b64ba2b9c30e4f19adb, type: 2}
+    - {fileID: 7400000, guid: fc1940cb6e95ac6409fddb54d9aa5b1e, type: 2}
+    - {fileID: 7400000, guid: 1922aca4dceff464d83d1e3a48097e79, type: 2}
+    - {fileID: 7400000, guid: 13408a387b04f6c4a864eb1367815c98, type: 2}
+    - {fileID: 7400000, guid: edb5861274431764397089945869e04c, type: 2}
+    - {fileID: 7400000, guid: 86665d57c8b0d1c48914ed23acf6ac32, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: SkillAnimationData
+      Entry: 7
+      Data: 0|SkillAnimationData, Assembly-CSharp
+    - Name: FrameDataDic
+      Entry: 7
+      Data: 1|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillAnimationEvent,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 2|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 6
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 7
+      Data: 3|SkillAnimationEvent, Assembly-CSharp
+    - Name: AnimationClip
+      Entry: 10
+      Data: 0
+    - Name: TransitionTime
+      Entry: 4
+      Data: 0.25
+    - Name: ApplyRootMotion
+      Entry: 5
+      Data: false
+    - Name: DurationFrame
+      Entry: 3
+      Data: 12
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 12
+    - Name: $v
+      Entry: 7
+      Data: 4|SkillAnimationEvent, Assembly-CSharp
+    - Name: AnimationClip
+      Entry: 10
+      Data: 1
+    - Name: TransitionTime
+      Entry: 4
+      Data: 0.25
+    - Name: ApplyRootMotion
+      Entry: 5
+      Data: false
+    - Name: DurationFrame
+      Entry: 3
+      Data: 7
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 19
+    - Name: $v
+      Entry: 7
+      Data: 5|SkillAnimationEvent, Assembly-CSharp
+    - Name: AnimationClip
+      Entry: 10
+      Data: 2
+    - Name: TransitionTime
+      Entry: 4
+      Data: 0.25
+    - Name: ApplyRootMotion
+      Entry: 5
+      Data: false
+    - Name: DurationFrame
+      Entry: 3
+      Data: 17
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 36
+    - Name: $v
+      Entry: 7
+      Data: 6|SkillAnimationEvent, Assembly-CSharp
+    - Name: AnimationClip
+      Entry: 10
+      Data: 3
+    - Name: TransitionTime
+      Entry: 4
+      Data: 0.25
+    - Name: ApplyRootMotion
+      Entry: 5
+      Data: false
+    - Name: DurationFrame
+      Entry: 3
+      Data: 15
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 51
+    - Name: $v
+      Entry: 7
+      Data: 7|SkillAnimationEvent, Assembly-CSharp
+    - Name: AnimationClip
+      Entry: 10
+      Data: 4
+    - Name: TransitionTime
+      Entry: 4
+      Data: 0.25
+    - Name: ApplyRootMotion
+      Entry: 5
+      Data: false
+    - Name: DurationFrame
+      Entry: 3
+      Data: 17
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 68
+    - Name: $v
+      Entry: 7
+      Data: 8|SkillAnimationEvent, Assembly-CSharp
+    - Name: AnimationClip
+      Entry: 10
+      Data: 5
+    - Name: TransitionTime
+      Entry: 4
+      Data: 0.25
+    - Name: ApplyRootMotion
+      Entry: 5
+      Data: false
+    - Name: DurationFrame
+      Entry: 3
+      Data: 12
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  SkillName: 
+  FrameCount: 80
+  FrameRate: 30
