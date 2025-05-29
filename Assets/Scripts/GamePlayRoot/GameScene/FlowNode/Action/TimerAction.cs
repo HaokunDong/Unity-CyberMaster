@@ -6,10 +6,11 @@ using UnityEngine;
 public class TimerAction : ActionTask
 {
     public BBParameter<float> time;
+    public BBParameter<bool> isAdd = true;
 
     protected override void OnUpdate()
     {
         base.OnUpdate();
-        time.value += Time.deltaTime;
+        time.value += isAdd.value ? 1 : -1 * Time.deltaTime;
     }
 }

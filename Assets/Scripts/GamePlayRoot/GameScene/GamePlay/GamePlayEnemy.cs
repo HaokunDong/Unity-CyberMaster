@@ -29,6 +29,7 @@ public class GamePlayEnemy : GamePlayAIEntity
 
             blackboard.SetVariableValue("CheckFaceFlipCD", CheckFaceFlipCD);
             blackboard.SetVariableValue("MoveCD", MoveCD);
+            blackboard.SetVariableValue("MoveCDTime", data.MoveCD);
             blackboard.SetVariableValue("ComboAttackCD", ComboAttackCD);
             blackboard.SetVariableValue("LeapAttackCD", LeapAttackCD);
             blackboard.SetVariableValue("StabAttackCD", StabAttackCD);
