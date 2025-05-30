@@ -6,7 +6,8 @@ using UnityEngine.UIElements;
 public abstract class TrackItemBase
 {
     protected float frameUnitWidth;
-
+    protected int frameIndex;
+    public int FrameIndex { get => frameIndex; }
     public abstract void Select();
 
     public abstract void OnSelect();
@@ -29,10 +30,6 @@ public abstract class TrackItemBase<T> : TrackItemBase where T : SkillTrackBase
     protected Color selectColor = new Color(0.388f, 0.850f, 0.905f, 1f);
 
     public SkillTrackItemStyleBase itemStyle { get; protected set; }
-
-
-    protected int frameIndex;
-    public int FrameIndex { get => frameIndex; }
 
     public override void Select()
     {

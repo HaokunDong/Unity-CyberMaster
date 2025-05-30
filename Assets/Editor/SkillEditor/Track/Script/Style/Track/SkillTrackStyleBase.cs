@@ -25,13 +25,9 @@ public abstract class SkillTrackStyleBase
         contentRoot.Remove(ve);
     }
 
-    public virtual void Destory()
+    public virtual void Destroy()
     {
         if (menuRoot != null) menuParent.Remove(menuRoot);
         if (contentRoot != null) contentParent.Remove(contentRoot);
     }
-
-
-
-
 }

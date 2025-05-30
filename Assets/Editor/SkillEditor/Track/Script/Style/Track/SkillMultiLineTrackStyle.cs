@@ -8,8 +8,8 @@ using UnityEngine.UIElements;
 public class SkillMultiLineTrackStyle : SkillTrackStyleBase
 {
     #region 常量
-    private const string menuAssetPath = "Assets/Editor/SkillEditor/Track/Assets/MultiLineTrackStyle/MultiLineTrackMenu.uxml";
-    private const string trackAssetPath = "Assets/Editor/SkillEditor/Track/Assets/MultiLineTrackStyle/MultiLineTrackContent.uxml";
+    private const string menuAssetPath = "Assets/Editor/SkillEditor/Track/UXMLs/MultiLineTrackStyle/MultiLineTrackMenu.uxml";
+    private const string trackAssetPath = "Assets/Editor/SkillEditor/Track/UXMLs/MultiLineTrackStyle/MultiLineTrackContent.uxml";
     private const float headHeight = 35;//5是间距
     private const float itemHeight = 32;//2是底部外边距
 
@@ -99,8 +99,8 @@ public class SkillMultiLineTrackStyle : SkillTrackStyleBase
     /// </summary>
     public class ChildTrack
     {
-        private const string childTrackMenuAssetPath = "Assets/Editor/SkillEditor/Track/Assets/MultiLineTrackStyle/MultiLineTrackMenuItem.uxml";
-        private const string childTrackContentAssetPath = "Assets/Editor/SkillEditor/Track/Assets/MultiLineTrackStyle/MultiLineTrackContentItem.uxml";
+        private const string childTrackMenuAssetPath = "Assets/Editor/SkillEditor/Track/UXMLs/MultiLineTrackStyle/MultiLineTrackMenuItem.uxml";
+        private const string childTrackContentAssetPath = "Assets/Editor/SkillEditor/Track/UXMLs/MultiLineTrackStyle/MultiLineTrackContentItem.uxml";
 
         public Label titleLabel;
         #region 自身根节点（我自己）

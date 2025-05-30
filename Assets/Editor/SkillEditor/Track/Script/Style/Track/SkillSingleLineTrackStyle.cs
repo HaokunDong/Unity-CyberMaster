@@ -6,8 +6,8 @@ using UnityEngine.UIElements;
 
 public class SkillSingleLineTrackStyle : SkillTrackStyleBase
 {
-    private const string menuAssetPath = "Assets/Editor/SkillEditor/Track/Assets/SingleLineTrackStyle/SingleLineTrackMenu.uxml";
-    private const string trackAssetPath = "Assets/Editor/SkillEditor/Track/Assets/SingleLineTrackStyle/SingleLineTrackContent.uxml";
+    private const string menuAssetPath = "Assets/Editor/SkillEditor/Track/UXMLs/SingleLineTrackStyle/SingleLineTrackMenu.uxml";
+    private const string trackAssetPath = "Assets/Editor/SkillEditor/Track/UXMLs/SingleLineTrackStyle/SingleLineTrackContent.uxml";
 
     public void Init(VisualElement menuParent, VisualElement contentParent, string title)
     {

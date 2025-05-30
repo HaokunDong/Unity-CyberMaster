@@ -232,7 +232,7 @@ public class SkillEditorWindows : EditorWindow
     /// <summary>
     /// 鼠标位置+下方容器的位置
     /// </summary>
-    private int CurrentSelectFrameIndex
+    public int CurrentSelectFrameIndex
     {
         get => currentSelectFrameIndex;
         set
@@ -535,24 +535,16 @@ public class SkillEditorWindows : EditorWindow
     private void InitTrack()
     {
         if (skillConfig == null) return;
-        InitAnimationTrack();
-
-        //音效、特效轨道....
-        InitAudioTrack();
+        InitTrack<AnimationTrack>();
+        InitTrack<HitBoxTrack>();
+        InitTrack<AudioTrack>();
     }
 
-    private void InitAnimationTrack()
+    private void InitTrack<T>() where T : SkillTrackBase
     {
-        AnimationTrack animationTrack = new AnimationTrack();
-        animationTrack.Init(trackMenuParent, ContentListView, skillEditorConfig.FrameUnitWidth);
-        trackList.Add(animationTrack);
-    }
-
-    private void InitAudioTrack()
-    {
-        AudioTrack audioTrack = new AudioTrack();
-        audioTrack.Init(trackMenuParent, ContentListView, skillEditorConfig.FrameUnitWidth);
-        trackList.Add(audioTrack);
+        T track = Activator.CreateInstance<T>();
+        track.Init(trackMenuParent, ContentListView, skillEditorConfig.FrameUnitWidth);
+        trackList.Add(track);
     }
 
     private void ResetTrack()
@@ -560,7 +552,7 @@ public class SkillEditorWindows : EditorWindow
         if (skillConfig == null)
         {
             //清理掉所有轨道
-            DestoryTracks();
+            DestroyTracks();
         }
         else
         {
@@ -578,11 +570,11 @@ public class SkillEditorWindows : EditorWindow
         }
     }
 
-    private void DestoryTracks()
+    private void DestroyTracks()
     {
         for (int i = 0; i < trackList.Count; i++)
         {
-            trackList[i].Destory();
+            trackList[i].Destroy();
         }
         trackList.Clear();
     }
@@ -594,9 +586,6 @@ public class SkillEditorWindows : EditorWindow
     {
         ContentListView.style.width = skillEditorConfig.FrameUnitWidth * CurrentFrameCount;
     }
-
-
-
 
     public void ShowTrackItemOnInspector(TrackItemBase trackItem, SkillTrackBase track)
     {
@@ -660,8 +649,6 @@ public class SkillEditorWindows : EditorWindow
     }
 
     #endregion
-
-
 }
 
 public class SkillEditorConfig

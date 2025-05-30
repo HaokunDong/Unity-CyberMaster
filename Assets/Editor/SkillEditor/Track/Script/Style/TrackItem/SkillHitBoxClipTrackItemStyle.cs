@@ -1,21 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
-using UnityEngine;
 using UnityEngine.UIElements;
 
-public class SkillAnimationTrackItemStyle : SkillTrackItemStyleBase
+public class SkillHitBoxClipTrackItemStyle : SkillTrackItemStyleBase
 {
-    private const string trackItemAssetPath = "Assets/Editor/SkillEditor/Track/UXMLs/AnimationTrack/AnimationTrackItem.uxml";
+    private const string trackItemAssetPath = "Assets/Editor/SkillEditor/Track/UXMLs/HitBoxTrack/HitBoxTrackItem.uxml";
     private Label titleLabel;
+
     public VisualElement mainDragArea { get; private set; }
-    public VisualElement animationOverLine { get; private set; }
+    public VisualElement overLine { get; private set; }
 
     public void Init(SkillTrackStyleBase TrackStyle, int startFrameIndex, float frameUnitWidth)
     {
         root = titleLabel = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(trackItemAssetPath).Instantiate().Query<Label>();//不要容器，直接持有目标物体
         mainDragArea = root.Q<VisualElement>("Main");
-        animationOverLine = root.Q<VisualElement>("OverLine");
+        overLine = root.Q<VisualElement>("OverLine");
         TrackStyle.AddItem(root);
     }
 

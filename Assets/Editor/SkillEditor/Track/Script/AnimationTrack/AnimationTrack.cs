@@ -11,13 +11,13 @@ public class AnimationTrack : SkillTrackBase
     private SkillSingleLineTrackStyle trackStyle;
 
     private Dictionary<int, AnimationTrackItem> trackItemDic = new Dictionary<int, AnimationTrackItem>();
-    public SkillAnimationData AnimationData { get => SkillEditorWindows.Instance.SkillConfig.SkillAnimationData; }
+    public SkillAnimationTrack AnimationData { get => SkillEditorWindows.Instance.SkillConfig.SkillAnimationData; }
 
     public override void Init(VisualElement menuParent, VisualElement trackParent, float frameWidth)
     {
         base.Init(menuParent, trackParent, frameWidth);
         trackStyle = new SkillSingleLineTrackStyle();
-        trackStyle.Init(menuParent, trackParent, "动画配置");
+        trackStyle.Init(menuParent, trackParent, "动画");
         trackStyle.contentRoot.RegisterCallback<DragUpdatedEvent>(OnDragUpdatedEvent);
         trackStyle.contentRoot.RegisterCallback<DragExitedEvent>(OnDragExitedEvent);
 
@@ -37,16 +37,16 @@ public class AnimationTrack : SkillTrackBase
         if (SkillEditorWindows.Instance.SkillConfig == null) return;
 
         //根据数据绘制 TrackItem
-        foreach (var item in AnimationData.FrameDataDic)
+        foreach (var item in AnimationData.skillAnimationClipDict)
         {
             CreateItem(item.Key, item.Value);
         }
     }
 
-    private void CreateItem(int frameIndex, SkillAnimationEvent skillAnimationEvent)
+    private void CreateItem(int frameIndex, SkillAnimationClip clip)
     {
         AnimationTrackItem trackItem = new AnimationTrackItem();
-        trackItem.Init(this, trackStyle, frameIndex, frameWidth, skillAnimationEvent);
+        trackItem.Init(this, trackStyle, frameIndex, frameWidth, clip);
         trackItemDic.Add(frameIndex, trackItem);
     }
 
@@ -78,7 +78,7 @@ public class AnimationTrack : SkillTrackBase
             int nextTrackItem = -1;
             int currentOffset = int.MaxValue;
 
-            foreach (var item in AnimationData.FrameDataDic)
+            foreach (var item in AnimationData.skillAnimationClipDict)
             {
                 //不允许选中帧在 TrackItem 中间（动画事件的起点到他的终点之间）
                 if (selectFrameIndex > item.Key && selectFrameIndex < item.Key + item.Value.DurationFrame)
@@ -116,7 +116,7 @@ public class AnimationTrack : SkillTrackBase
                 }
 
                 //构建动画数据
-                SkillAnimationEvent animationEvent = new SkillAnimationEvent()
+                SkillAnimationClip skillAnimationClip = new SkillAnimationClip()
                 {
                     AnimationClip = clip,
                     DurationFrame = durationFrame,
@@ -124,47 +124,24 @@ public class AnimationTrack : SkillTrackBase
                 };
 
                 //保存新增的动画数据
-                AnimationData.FrameDataDic.Add(selectFrameIndex, animationEvent);
+                AnimationData.skillAnimationClipDict.Add(selectFrameIndex, skillAnimationClip);
                 SkillEditorWindows.Instance.SaveConfig();
 
                 //绘制一个Item
-                CreateItem(selectFrameIndex, animationEvent);
+                CreateItem(selectFrameIndex, skillAnimationClip);
             }
         }
     }
 
     #endregion
-
-    public bool CheckFrameIndexOnDrag(int targetindex, int selfIndex, bool isLeft)
-    {
-        foreach (var item in AnimationData.FrameDataDic)
-        {
-            //拖拽时，规避自身
-            if (item.Key == selfIndex) continue;
-
-            //向左移动&&原先在右边&&目标没有重叠
-            if (isLeft && selfIndex > item.Key && targetindex < item.Key + item.Value.DurationFrame)
-            {
-                return false;
-            }
-            //向右移动&&原先在左边&&目标没有重叠
-            else if (!isLeft && selfIndex < item.Key && targetindex > item.Key)
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
     /// <summary>
     /// 将 oldIndex 的数据变为 newIndex
     /// </summary>
     public void SetFrameIndex(int oldIndex, int newIndex)
     {
-        if (AnimationData.FrameDataDic.Remove(oldIndex, out SkillAnimationEvent animationEvent))
+        if (AnimationData.skillAnimationClipDict.Remove(oldIndex, out SkillAnimationClip clip))
         {
-            AnimationData.FrameDataDic.Add(newIndex, animationEvent);
+            AnimationData.skillAnimationClipDict.Add(newIndex, clip);
             trackItemDic.Remove(oldIndex, out AnimationTrackItem animationTrackItem);
             trackItemDic.Add(newIndex, animationTrackItem);
 
@@ -175,7 +152,7 @@ public class AnimationTrack : SkillTrackBase
     public override void DeleteTrackItem(int frameIndex)
     {
         //移除数据
-        AnimationData.FrameDataDic.Remove(frameIndex);
+        AnimationData.skillAnimationClipDict.Remove(frameIndex);
         if (trackItemDic.Remove(frameIndex, out AnimationTrackItem item))
         {
             //移除视图
@@ -200,10 +177,10 @@ public class AnimationTrack : SkillTrackBase
         Animator animator = previewGameObject.GetComponent<Animator>();
 
         //根据帧找到目前是哪个动画
-        Dictionary<int, SkillAnimationEvent> frameDateDic = AnimationData.FrameDataDic;
+        Dictionary<int, SkillAnimationClip> skillAnimationClipDict = AnimationData.skillAnimationClipDict;
 
         #region 关于根运动计算
-        SortedDictionary<int, SkillAnimationEvent> frameDataSortedDic = new SortedDictionary<int, SkillAnimationEvent>(frameDateDic);
+        SortedDictionary<int, SkillAnimationClip> frameDataSortedDic = new SortedDictionary<int, SkillAnimationClip>(skillAnimationClipDict);
         int[] keys = frameDataSortedDic.Keys.ToArray();
         Vector3 rootMotionTotalPos = Vector3.zero;
 
@@ -211,7 +188,7 @@ public class AnimationTrack : SkillTrackBase
         for (int i = 0; i < keys.Length; i++)
         {
             int key = keys[i]; //当前动画的起始帧数
-            SkillAnimationEvent animationEvent = frameDataSortedDic[key];
+            SkillAnimationClip animationEvent = frameDataSortedDic[key];
 
             //只考虑根运动配置的动画
             if (animationEvent.ApplyRootMotion == false) continue;
@@ -287,33 +264,33 @@ public class AnimationTrack : SkillTrackBase
         #region 关于当前帧的姿态
         //找到距离这一帧左边最近的一个动画，也就是当前要播放的动画
         int currentOffset = int.MaxValue;  //最近的索引距离当前选中帧的差距
-        int animtionEventIndex = -1;
-        foreach (var item in frameDateDic)
+        int skillAnimationClipIndex = -1;
+        foreach (var item in skillAnimationClipDict)
         {
             int tempOffset = frameIndex - item.Key;
             if (tempOffset > 0 && tempOffset < currentOffset)
             {
                 currentOffset = tempOffset;
-                animtionEventIndex = item.Key;
+                skillAnimationClipIndex = item.Key;
             }
         }
 
-        if (animtionEventIndex != -1)
+        if (skillAnimationClipIndex != -1)
         {
-            SkillAnimationEvent animationEvent = frameDateDic[animtionEventIndex];
+            SkillAnimationClip skillAnimationClip = skillAnimationClipDict[skillAnimationClipIndex];
             //动画资源总帧数
-            float clipFrameCount = animationEvent.AnimationClip.length * animationEvent.AnimationClip.frameRate;
+            float clipFrameCount = skillAnimationClip.AnimationClip.length * skillAnimationClip.AnimationClip.frameRate;
             //计算当前的播放进度
             float progress = currentOffset / clipFrameCount;
             //循环动画的处理
-            if (progress > 1 && animationEvent.AnimationClip.isLooping)
+            if (progress > 1 && skillAnimationClip.AnimationClip.isLooping)
             {
                 progress -= (int)progress;//只保留小数点部分
             }
 
             //（此处会修改角色位置）
-            animator.applyRootMotion = animationEvent.ApplyRootMotion;
-            animationEvent.AnimationClip.SampleAnimation(previewGameObject, progress * animationEvent.AnimationClip.length);
+            animator.applyRootMotion = skillAnimationClip.ApplyRootMotion;
+            skillAnimationClip.AnimationClip.SampleAnimation(previewGameObject, progress * skillAnimationClip.AnimationClip.length);
         }
         #endregion
 
@@ -321,9 +298,9 @@ public class AnimationTrack : SkillTrackBase
         previewGameObject.transform.position = rootMotionTotalPos;
     }
 
-    public override void Destory()
+    public override void Destroy()
     {
-        trackStyle.Destory();
+        trackStyle.Destroy();
     }
 
 }

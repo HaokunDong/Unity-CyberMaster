@@ -1,28 +1,26 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+using Cysharp.Text;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class AnimationTrackItem : TrackItemBase<AnimationTrack>
+public class HitBoxTrackItem : TrackItemBase<HitBoxTrack>
 {
-    private SkillAnimationClip skillAnimationClip;
-    public SkillAnimationClip SkillAnimationClip { get => skillAnimationClip; }
-    private SkillAnimationTrackItemStyle trackItemStyle;
+    private SkillHitBoxClip skillHitBoxClip;
 
-    public void Init(AnimationTrack animationTrack, SkillTrackStyleBase parentTrackStyle, int startFrameIndex, float frameUnitWidth, SkillAnimationClip clip)
+    public SkillHitBoxClip SkillHitBoxClip { get => skillHitBoxClip; }
+    private SkillHitBoxClipTrackItemStyle trackItemStyle;
+
+    public void Init(HitBoxTrack hitBoxTrack, SkillTrackStyleBase parentTrackStyle, int startFrameIndex, float frameUnitWidth, SkillHitBoxClip clip)
     {
-        track = animationTrack;
+        track = hitBoxTrack;
         this.frameIndex = startFrameIndex;
         this.frameUnitWidth = frameUnitWidth;
-        this.skillAnimationClip = clip;
+        this.skillHitBoxClip = clip;
 
-        itemStyle = trackItemStyle = new SkillAnimationTrackItemStyle();
+        itemStyle = trackItemStyle = new SkillHitBoxClipTrackItemStyle();
         trackItemStyle.Init(parentTrackStyle, startFrameIndex, frameUnitWidth);
 
-        normalColor = new Color(0.388f, 0.850f, 0.905f, 0.5f);
-        selectColor = new Color(0.388f, 0.850f, 0.905f, 1f);
+        normalColor = new Color(0.850f, 0.388f, 0.388f, 0.5f);
+        selectColor = new Color(0.850f, 0.388f, 0.388f, 1f);
         OnUnSelect();
 
         //绑定事件
@@ -39,29 +37,20 @@ public class AnimationTrackItem : TrackItemBase<AnimationTrack>
         base.ResetView(frameUnitWidth);
 
         this.frameUnitWidth = frameUnitWidth;
-        trackItemStyle.SetTitle(skillAnimationClip.AnimationClip.name);
+        trackItemStyle.SetTitle(ZString.Concat(skillHitBoxClip.DurationFrame, ",", skillHitBoxClip.HitBoxs.Count));
 
         //位置计算
         trackItemStyle.SetPosition(frameIndex * frameUnitWidth);
-        trackItemStyle.SetWidth(skillAnimationClip.DurationFrame * frameUnitWidth);
+        trackItemStyle.SetWidth(skillHitBoxClip.DurationFrame * frameUnitWidth);
 
         //计算动画结束线的位置
-        int animationClipFrameCount = (int)(skillAnimationClip.AnimationClip.length * skillAnimationClip.AnimationClip.frameRate);
-        if (animationClipFrameCount > skillAnimationClip.DurationFrame)
-        {
-            trackItemStyle.animationOverLine.style.display = DisplayStyle.None;
-        }
-        else
-        {
-            trackItemStyle.animationOverLine.style.display = DisplayStyle.Flex;
-            Vector3 overLinePos = trackItemStyle.animationOverLine.transform.position;
-            //overLinePos.x = animationClipFrameCount * frameUnitWidth - animationOverLine.style.width.value.value / 2;
-            overLinePos.x = animationClipFrameCount * frameUnitWidth - 1; //线条宽度为2，取一半
-            trackItemStyle.animationOverLine.transform.position = overLinePos;
-        }
-
+        int clipFrameCount = skillHitBoxClip.DurationFrame;
+        trackItemStyle.overLine.style.display = DisplayStyle.Flex;
+        Vector3 overLinePos = trackItemStyle.overLine.transform.position;
+        //overLinePos.x = animationClipFrameCount * frameUnitWidth - animationOverLine.style.width.value.value / 2;
+        overLinePos.x = clipFrameCount * frameUnitWidth - 1; //线条宽度为2，取一半
+        trackItemStyle.overLine.transform.position = overLinePos;
     }
-
 
     #region  鼠标交互
     private bool mouseDrag = false;
@@ -102,11 +91,11 @@ public class AnimationTrackItem : TrackItemBase<AnimationTrack>
 
             if (offsetFrame < 0)
             {
-                checkDrag = track.CheckFrameIndexOnDrag(track.AnimationData.skillAnimationClipDict, targetFrameIndex, startDragFrameIndex, true);
+                checkDrag = track.CheckFrameIndexOnDrag(track.HitBoxData.skillHitBoxClipDict, targetFrameIndex, startDragFrameIndex, true);
             }
             else if (offsetFrame > 0)
             {
-                checkDrag = track.CheckFrameIndexOnDrag(track.AnimationData.skillAnimationClipDict, targetFrameIndex + skillAnimationClip.DurationFrame, startDragFrameIndex, false);
+                checkDrag = track.CheckFrameIndexOnDrag(track.HitBoxData.skillHitBoxClipDict, targetFrameIndex + skillHitBoxClip.DurationFrame, startDragFrameIndex, false);
             }
             else return;
 
@@ -129,10 +118,10 @@ public class AnimationTrackItem : TrackItemBase<AnimationTrack>
     /// </summary>
     public void CheckFrameCount()
     {
-        if (frameIndex + skillAnimationClip.DurationFrame > SkillEditorWindows.Instance.SkillConfig.FrameCount)
+        if (frameIndex + skillHitBoxClip.DurationFrame > SkillEditorWindows.Instance.SkillConfig.FrameCount)
         {
             //保存配置导致对象无效，重新引用
-            SkillEditorWindows.Instance.CurrentFrameCount = frameIndex + skillAnimationClip.DurationFrame;
+            SkillEditorWindows.Instance.CurrentFrameCount = frameIndex + skillHitBoxClip.DurationFrame;
         }
     }
 
@@ -149,6 +138,6 @@ public class AnimationTrackItem : TrackItemBase<AnimationTrack>
 
     public override void OnConfigChanged()
     {
-        skillAnimationClip = track.AnimationData.skillAnimationClipDict[frameIndex];
+        skillHitBoxClip = track.HitBoxData.skillHitBoxClipDict[frameIndex];
     }
 }
