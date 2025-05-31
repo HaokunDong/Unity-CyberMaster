@@ -43,7 +43,7 @@ public class  SkillHitBoxTrack
         BuildFrameToClipMap();
     }
 
-    private void BuildFrameToClipMap()
+    public void BuildFrameToClipMap()
     {
         frameToClipMap ??= new Dictionary<int, SkillHitBoxClip>();
         frameToClipMap.Clear();

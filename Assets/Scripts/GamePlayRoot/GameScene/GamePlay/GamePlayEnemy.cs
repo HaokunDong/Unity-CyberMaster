@@ -1,12 +1,16 @@
 using Cysharp.Text;
+using Cysharp.Threading.Tasks;
 using Everlasting.Config;
 using NodeCanvas.Framework;
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GamePlayEnemy : GamePlayAIEntity
 {
+    public SkillDriver skillDriver;
+    
     private Cooldown MoveCD;
     private Cooldown CheckFaceFlipCD;
     private Cooldown ComboAttackCD;
@@ -37,7 +41,20 @@ public class GamePlayEnemy : GamePlayAIEntity
             blackboard.SetVariableValue("AttackDistance", data.AttackDistance);
             blackboard.SetVariableValue("StabDistance", data.StabDistance);
             blackboard.SetVariableValue("MoveSpeed", data.MoveSpeed);
+            blackboard.SetVariableValue("PrimaryAttackSkillPath", data.PrimaryAttackSkillPath);
         }
+
+        skillDriver = new SkillDriver(
+            animator,
+            () => Time.deltaTime * Time.timeScale
+        );
+    }
+
+    [Button]
+    private void TestSkill(SkillConfig config)
+    {
+        skillDriver.SetSkill(config);
+        skillDriver.PlayAsync().Forget();
     }
 
     public override void OnDispose()

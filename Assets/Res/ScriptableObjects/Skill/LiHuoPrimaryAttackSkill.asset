@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87e7ff321ae55a84893e116b6aa0a84a, type: 3}
-  m_Name: SkillConfig
+  m_Name: LiHuoPrimaryAttackSkill
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2

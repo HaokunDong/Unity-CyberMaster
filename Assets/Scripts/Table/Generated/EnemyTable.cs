@@ -30,8 +30,9 @@ namespace Everlasting.Config
 		public readonly float StabAttackMoveSpeed;
 		public readonly Vector2 StabAttackSize;
 		public readonly float PlayerTooFarRange;
+		public readonly string PrimaryAttackSkillPath;
 		
-		public EnemyTable(uint Id, string EnemyName, string Prefab, string Graph, float CheckFaceFlipTime, float MoveSpeed, float JumpForce, float AttackDistance, float ComboAttackCD, Vector2[] AttackMoveSpeed, float MoveCD, float LeapAttackCD, float LeapAttackMoveSpeed, float LeapAttackRadius, float StabDistance, float StabAttackCD, float StabAttackMoveSpeed, Vector2 StabAttackSize, float PlayerTooFarRange)
+		public EnemyTable(uint Id, string EnemyName, string Prefab, string Graph, float CheckFaceFlipTime, float MoveSpeed, float JumpForce, float AttackDistance, float ComboAttackCD, Vector2[] AttackMoveSpeed, float MoveCD, float LeapAttackCD, float LeapAttackMoveSpeed, float LeapAttackRadius, float StabDistance, float StabAttackCD, float StabAttackMoveSpeed, Vector2 StabAttackSize, float PlayerTooFarRange, string PrimaryAttackSkillPath)
 		{
 			this.Id = Id;
 			this.EnemyName = EnemyName;
@@ -52,6 +53,7 @@ namespace Everlasting.Config
 			this.StabAttackMoveSpeed = StabAttackMoveSpeed;
 			this.StabAttackSize = StabAttackSize;
 			this.PlayerTooFarRange = PlayerTooFarRange;
+			this.PrimaryAttackSkillPath = PrimaryAttackSkillPath;
 		}
 		public static int Count => EnemyTableLoader.ConfigCount;
 		public static EnemyTable GetTableData(uint id) => EnemyTableLoader.ConfigDic.TryGetValue(id, out var cfg) ? cfg : null;
@@ -125,7 +127,8 @@ namespace Everlasting.Config
 						var StabAttackMoveSpeed = binary.ReadFloat();
 						var StabAttackSize = new Vector2(binary.ReadFloat(),binary.ReadFloat());
 						var PlayerTooFarRange = binary.ReadFloat();
-						var cfg = new EnemyTable(Id, EnemyName, Prefab, Graph, CheckFaceFlipTime, MoveSpeed, JumpForce, AttackDistance, ComboAttackCD, AttackMoveSpeed, MoveCD, LeapAttackCD, LeapAttackMoveSpeed, LeapAttackRadius, StabDistance, StabAttackCD, StabAttackMoveSpeed, StabAttackSize, PlayerTooFarRange);
+						var PrimaryAttackSkillPath = poolString[binary.ReadInt()];
+						var cfg = new EnemyTable(Id, EnemyName, Prefab, Graph, CheckFaceFlipTime, MoveSpeed, JumpForce, AttackDistance, ComboAttackCD, AttackMoveSpeed, MoveCD, LeapAttackCD, LeapAttackMoveSpeed, LeapAttackRadius, StabDistance, StabAttackCD, StabAttackMoveSpeed, StabAttackSize, PlayerTooFarRange, PrimaryAttackSkillPath);
 						ConfigList[i] = cfg;
 						ConfigDic.Add(Id, cfg);
 					}
