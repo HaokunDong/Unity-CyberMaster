@@ -55,7 +55,6 @@ public partial class SkillEditorInspector : Editor
         Clean();
         if (currentTrackItem == null) return;
         SkillEditorWindows.Instance.CurrentSelectFrameIndex = currentTrackItem.FrameIndex;
-        SkillEditorWindows.Instance.SetDrawHitBoxes(null);
         if (currentTrackItem is AnimationTrackItem at)
         {
             DrawAnimationTrackItem(at);

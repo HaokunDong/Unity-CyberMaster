@@ -35,4 +35,41 @@ public class  SkillHitBoxTrack
     [NonSerialized, OdinSerialize]
     [DictionaryDrawerSettings(KeyLabel = "帧数", ValueLabel = "打击数据")]
     public Dictionary<int, SkillHitBoxClip> skillHitBoxClipDict = new Dictionary<int, SkillHitBoxClip>();
+
+    private Dictionary<int, SkillHitBoxClip> frameToClipMap;
+
+    public void OnSave()
+    {
+        BuildFrameToClipMap();
+    }
+
+    private void BuildFrameToClipMap()
+    {
+        frameToClipMap ??= new Dictionary<int, SkillHitBoxClip>();
+        frameToClipMap.Clear();
+        foreach (var kvp in skillHitBoxClipDict)
+        {
+            int start = kvp.Key;
+            SkillHitBoxClip clip = kvp.Value;
+            for (int i = 0; i < clip.DurationFrame; i++)
+            {
+                int frame = start + i;
+                if (!frameToClipMap.ContainsKey(frame))
+                    frameToClipMap[frame] = clip;
+            }
+        }
+    }
+
+    public SkillHitBoxClip TryGetHitBoxClipAtFrameBinary(int frame)
+    {
+        if(frameToClipMap == null)
+        {
+            BuildFrameToClipMap();
+        }
+        if(frameToClipMap.TryGetValue(frame, out var clip))
+        {
+            return clip;
+        }
+        return null;
+    }
 }

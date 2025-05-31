@@ -15,7 +15,6 @@ partial class SkillEditorInspector
 
     private void DrawHitBoxTrackItem(HitBoxTrackItem item)
     {
-        SkillEditorWindows.Instance.SetDrawHitBoxes(item.SkillHitBoxClip.HitBoxs);
         root.Clear();
         currentItem = item;
         trackItemFrameIndex = item.FrameIndex;

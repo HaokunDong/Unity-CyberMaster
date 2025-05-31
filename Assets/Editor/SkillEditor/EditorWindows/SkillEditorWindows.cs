@@ -15,7 +15,7 @@ public class SkillEditorWindows : EditorWindow
     private List<Box> DrawHitBoxes = null;
     private int selectDrawHitBox = -1;
 
-    [MenuItem("Tools/技能编辑器")]
+    [MenuItem("Tools/技能编辑器 %&s")]
     public static void ShowExample()
     {
         SkillEditorWindows wnd = GetWindow<SkillEditorWindows>();
@@ -38,6 +38,8 @@ public class SkillEditorWindows : EditorWindow
         InitTimeShaft();
         InitConsole();
         InitContent();
+
+        skillConfig = LastConfig;
 
         if (skillConfig != null)
         {
@@ -86,6 +88,7 @@ public class SkillEditorWindows : EditorWindow
     private Button LoadEditorSceneButton;
     private Button LoadOldSceneButton;
     private Button SkillBasicButton;
+    private Slider PlaySpeed;
 
     private ObjectField PreviewCharacterPrefabObjectField;
     private ObjectField PreviewCharacterObjectField;
@@ -99,6 +102,8 @@ public class SkillEditorWindows : EditorWindow
         LoadEditorSceneButton = root.Q<Button>(nameof(LoadEditorSceneButton));
         LoadOldSceneButton = root.Q<Button>(nameof(LoadOldSceneButton));
         SkillBasicButton = root.Q<Button>(nameof(SkillBasicButton));
+        PlaySpeed = root.Q<Slider>(nameof(PlaySpeed));
+        PlaySpeed.value = 1f;
 
         PreviewCharacterPrefabObjectField = root.Q<ObjectField>(nameof(PreviewCharacterPrefabObjectField));
         PreviewCharacterObjectField = root.Q<ObjectField>(nameof(PreviewCharacterObjectField));
@@ -222,7 +227,7 @@ public class SkillEditorWindows : EditorWindow
 
         //刷新轨道
         ResetTrack();
-
+        LastConfig = skillConfig;
     }
 
     #endregion Config
@@ -247,7 +252,7 @@ public class SkillEditorWindows : EditorWindow
             currentSelectFrameIndex = Mathf.Clamp(value, 0, CurrentFrameCount);
             CurrentFrameTextField.value = currentSelectFrameIndex;
             UpdateTimerShaftView();
-
+            SetDrawHitBoxes(skillConfig?.SkillHitBoxData?.TryGetHitBoxClipAtFrameBinary(currentSelectFrameIndex)?.HitBoxs);
             TickSkill();
         }
     }
@@ -434,6 +439,7 @@ public class SkillEditorWindows : EditorWindow
     #endregion
 
     #region Console
+    private Button ZeroFrameButton;
     private Button PreviouFrameButton;
     private Button PlayButton;
     private Button NextFrameButton;
@@ -442,6 +448,7 @@ public class SkillEditorWindows : EditorWindow
 
     private void InitConsole()
     {
+        ZeroFrameButton = root.Q<Button>(nameof(ZeroFrameButton));
         PreviouFrameButton = root.Q<Button>(nameof(PreviouFrameButton));
         PlayButton = root.Q<Button>(nameof(PlayButton));
         NextFrameButton = root.Q<Button>(nameof(NextFrameButton));
@@ -449,6 +456,7 @@ public class SkillEditorWindows : EditorWindow
         CurrentFrameTextField = root.Q<IntegerField>(nameof(CurrentFrameTextField));
         FrameCountTextField = root.Q<IntegerField>(nameof(FrameCountTextField));
 
+        ZeroFrameButton.clicked += ZeroFrameButtonClicked;
         PreviouFrameButton.clicked += PreviouFrameButtonClicked;
         PlayButton.clicked += PlayButtonClicked;
         NextFrameButton.clicked += NextFrameButtonClicked;
@@ -456,6 +464,12 @@ public class SkillEditorWindows : EditorWindow
         CurrentFrameTextField.RegisterValueChangedCallback(CurrentFrameTextFieldValueChanged);
         FrameCountTextField.RegisterValueChangedCallback(FrameCountTextFieldValueChanged);
 
+    }
+
+    private void ZeroFrameButtonClicked()
+    {
+        IsPlaying = false;
+        CurrentSelectFrameIndex = 0;
     }
 
     private void PreviouFrameButtonClicked()
@@ -488,6 +502,8 @@ public class SkillEditorWindows : EditorWindow
     #endregion
 
     #region config
+    private static SkillConfig LastConfig;
+
     private SkillConfig skillConfig;
     public SkillConfig SkillConfig { get => skillConfig; }
     private SkillEditorConfig skillEditorConfig = new SkillEditorConfig();
@@ -498,6 +514,7 @@ public class SkillEditorWindows : EditorWindow
         {
             EditorUtility.SetDirty(skillConfig);
             AssetDatabase.SaveAssetIfDirty(skillConfig);
+            skillConfig.SkillHitBoxData.OnSave();
             ResetTrackData();
         }
     }
@@ -548,6 +565,20 @@ public class SkillEditorWindows : EditorWindow
     private void OnEnable()
     {
         SetDrawHitBoxes(null);
+        if(PrefabStageUtility.GetCurrentPrefabStage() != null)
+        {
+            var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
+            if(prefabStage != null)
+            {
+                var root = prefabStage.prefabContentsRoot;
+                if(root != null)
+                {
+                    var animator = root.GetComponentInChildren<Animator>(true);
+                    currentPreviewCharacterObj = animator?.gameObject;
+                }
+            }
+        }
+
         // 注册到 SceneView 的绘制事件
         SceneView.duringSceneGui += OnSceneGUI;
     }
@@ -638,7 +669,7 @@ public class SkillEditorWindows : EditorWindow
         if (IsPlaying)
         {
             //得到时间差
-            float time = (float)DateTime.Now.Subtract(startTime).TotalSeconds;
+            float time = (float)DateTime.Now.Subtract(startTime).TotalSeconds * PlaySpeed.value;
 
             //确定时间轴的帧率
             float frameRate = skillConfig != null ? skillConfig.FrameRate : skillEditorConfig.DefaultFrameRate;
@@ -667,7 +698,7 @@ public class SkillEditorWindows : EditorWindow
         }
     }
 
-    public void SetDrawHitBoxes(List<Box> list)
+    private void SetDrawHitBoxes(List<Box> list)
     {
         if(DrawHitBoxes != list)
         {
@@ -691,10 +722,10 @@ public class SkillEditorWindows : EditorWindow
                 var vs = MathEx.GetRotatedRectVertices(box.center, box.size, box.rotation);
                 Vector3[] array = new Vector3[4]
                 {
-                new Vector3(vs[0].x, vs[0].y, 0f),
-                new Vector3(vs[1].x, vs[1].y, 0f),
-                new Vector3(vs[2].x, vs[2].y, 0f),
-                new Vector3(vs[3].x, vs[3].y, 0f)
+                    new Vector3(vs[0].x, vs[0].y, 0f),
+                    new Vector3(vs[1].x, vs[1].y, 0f),
+                    new Vector3(vs[2].x, vs[2].y, 0f),
+                    new Vector3(vs[3].x, vs[3].y, 0f)
                 };
                 Handles.DrawSolidRectangleWithOutline(array, selectDrawHitBox == index ? new Color(1, 1, 0, 0.2f) : new Color(1, 0, 0, 0.2f), Color.yellow);
                 index++;
