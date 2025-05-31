@@ -9,12 +9,12 @@ using Sirenix.Serialization;
 public class SkillConfig : SerializedScriptableObject
 {
     [LabelText("技能名称")] public string SkillName;
-    [LabelText("帧数上限")] public int FrameCount = 100;
-    [LabelText("帧率")] public int FrameRate = 30;
+    [LabelText("帧数上限") ,ReadOnly] public int FrameCount = 100;
+    [LabelText("帧率"), ReadOnly] public int FrameRate = 30;
 
-    [NonSerialized, OdinSerialize]
+    [NonSerialized, OdinSerialize, ReadOnly]
     public SkillAnimationTrack SkillAnimationData = new SkillAnimationTrack();
-    [NonSerialized, OdinSerialize]
+    [NonSerialized, OdinSerialize, ReadOnly]
     public SkillHitBoxTrack SkillHitBoxData = new SkillHitBoxTrack();
 
 #if UNITY_EDITOR

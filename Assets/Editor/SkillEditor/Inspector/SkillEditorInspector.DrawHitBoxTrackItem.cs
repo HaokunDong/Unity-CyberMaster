@@ -1,16 +1,21 @@
 using Cysharp.Text;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 partial class SkillEditorInspector
 {
+    private static Box CopyBox = new Box();
+    private static bool AddFromCopy = false;
+
     private HitBoxTrackItem currentItem;
     private int boxIndex;
 
     private void DrawHitBoxTrackItem(HitBoxTrackItem item)
     {
+        SkillEditorWindows.Instance.SetDrawHitBoxes(item.SkillHitBoxClip.HitBoxs);
         root.Clear();
         currentItem = item;
         trackItemFrameIndex = item.FrameIndex;
@@ -45,6 +50,7 @@ partial class SkillEditorInspector
                 currentItem.SkillHitBoxClip.HitBoxs[changeIndex] = b;
                 SkillEditorWindows.Instance.SaveConfig();
                 currentTrack.ResetView();
+                SceneReDrawHitBoxes();
             });
             root.Add(centerField);
 
@@ -63,6 +69,7 @@ partial class SkillEditorInspector
                 currentItem.SkillHitBoxClip.HitBoxs[changeIndex] = b;
                 SkillEditorWindows.Instance.SaveConfig();
                 currentTrack.ResetView();
+                SceneReDrawHitBoxes();
             });
             root.Add(sizeField);
 
@@ -81,8 +88,27 @@ partial class SkillEditorInspector
                 currentItem.SkillHitBoxClip.HitBoxs[changeIndex] = b;
                 SkillEditorWindows.Instance.SaveConfig();
                 currentTrack.ResetView();
+                SceneReDrawHitBoxes();
             });
             root.Add(rotationField);
+
+            var selectBtn = new Button(() => 
+            {
+                SkillEditorWindows.Instance.SelectAHitBox(box.boxIndex);
+            });
+            selectBtn.text = "选中此Box";
+            selectBtn.style.backgroundColor = new Color(1, 1, 0, 0.5f);
+            root.Add(selectBtn);
+
+            var copyBtn = new Button(() =>
+            {
+                CopyBox.center = box.center;
+                CopyBox.size = box.size;
+                CopyBox.rotation = box.rotation;
+            });
+            copyBtn.text = "复制此Box";
+            copyBtn.style.backgroundColor = new Color(0, 1, 1, 0.5f);
+            root.Add(copyBtn);
 
             var delButton = new Button(() => 
             {
@@ -90,6 +116,7 @@ partial class SkillEditorInspector
                 currentItem.SkillHitBoxClip.HitBoxs.RemoveAt(delIndex);
                 currentTrack.ResetView();
                 DrawHitBoxTrackItem(currentItem);
+                SceneReDrawHitBoxes();
             });
             delButton.text = "删除此Box";
             delButton.style.backgroundColor = new Color(1, 0, 1, 0.5f);
@@ -97,6 +124,15 @@ partial class SkillEditorInspector
             root.Add(new Label());
             boxIndex++;
         }
+
+        var pasteBtn = new Button(() =>
+        {
+            AddFromCopy = true;
+            AddABox();
+        });
+        pasteBtn.text = "黏贴之前复制的Box";
+        pasteBtn.style.backgroundColor = new Color(0, 1, 1, 0.5f);
+        root.Add(pasteBtn);
 
         Button deleteButton = new Button(DeleteButtonClick);
         deleteButton.text = "删除整个片段";
@@ -107,11 +143,28 @@ partial class SkillEditorInspector
     private void AddABox()
     {
         var boxes = currentItem.SkillHitBoxClip.HitBoxs;
-        boxes.Add(new());
+        var box = new Box();
+        if(AddFromCopy)
+        {
+            box.center = CopyBox.center;
+            box.size = CopyBox.size;
+            box.rotation = CopyBox.rotation;
+        }
+        boxes.Add(box);
+        AddFromCopy = false;
 
         SkillEditorWindows.Instance.SaveConfig();
         currentTrack.ResetView();
         DrawHitBoxTrackItem(currentItem);
+        SceneReDrawHitBoxes();
+    }
+
+    private void SceneReDrawHitBoxes()
+    {
+        EditorApplication.delayCall += () =>
+        {
+            DrawHitBoxTrackItem(currentItem);
+        };
     }
 
     private void HitBoxTrackDurationFieldValueChangedCallback(ChangeEvent<int> evt)

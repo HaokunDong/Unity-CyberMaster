@@ -5,10 +5,15 @@ using UnityEditor.UIElements;
 using UnityEditor.SceneManagement;
 using System;
 using System.Collections.Generic;
+using Tools;
+using Color = UnityEngine.Color;
 
 public class SkillEditorWindows : EditorWindow
 {
     public static SkillEditorWindows Instance;
+
+    private List<Box> DrawHitBoxes = null;
+    private int selectDrawHitBox = -1;
 
     [MenuItem("Tools/技能编辑器")]
     public static void ShowExample()
@@ -540,6 +545,20 @@ public class SkillEditorWindows : EditorWindow
         InitTrack<AudioTrack>();
     }
 
+    private void OnEnable()
+    {
+        SetDrawHitBoxes(null);
+        // 注册到 SceneView 的绘制事件
+        SceneView.duringSceneGui += OnSceneGUI;
+    }
+
+    private void OnDisable()
+    {
+        SetDrawHitBoxes(null);
+        // 注销事件
+        SceneView.duringSceneGui -= OnSceneGUI;
+    }
+
     private void InitTrack<T>() where T : SkillTrackBase
     {
         T track = Activator.CreateInstance<T>();
@@ -648,6 +667,42 @@ public class SkillEditorWindows : EditorWindow
         }
     }
 
+    public void SetDrawHitBoxes(List<Box> list)
+    {
+        if(DrawHitBoxes != list)
+        {
+            selectDrawHitBox = -1;
+        }
+        DrawHitBoxes = list;
+    }
+
+    public void SelectAHitBox(int index)
+    {
+        selectDrawHitBox = index;
+    }
+
+    private void OnSceneGUI(SceneView sceneView)
+    {
+        if(DrawHitBoxes != null && DrawHitBoxes.Count > 0)
+        {
+            var index = 0;
+            foreach (var box in DrawHitBoxes)
+            {
+                var vs = MathEx.GetRotatedRectVertices(box.center, box.size, box.rotation);
+                Vector3[] array = new Vector3[4]
+                {
+                new Vector3(vs[0].x, vs[0].y, 0f),
+                new Vector3(vs[1].x, vs[1].y, 0f),
+                new Vector3(vs[2].x, vs[2].y, 0f),
+                new Vector3(vs[3].x, vs[3].y, 0f)
+                };
+                Handles.DrawSolidRectangleWithOutline(array, selectDrawHitBox == index ? new Color(1, 1, 0, 0.2f) : new Color(1, 0, 0, 0.2f), Color.yellow);
+                index++;
+            }
+
+            HandleUtility.Repaint(); // 保证 SceneView 刷新
+        }
+    }
     #endregion
 }
 
