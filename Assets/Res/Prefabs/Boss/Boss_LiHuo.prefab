@@ -577,6 +577,7 @@ MonoBehaviour:
   - {fileID: 3659693619285852736}
   - {fileID: 4341738861320908727}
   - {fileID: 3073911423817109458}
+  - {fileID: 0}
   attackCheckRadius:
   - 4.5
   - 2
