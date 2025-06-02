@@ -9,7 +9,7 @@ public class AnimationTrackItem : TrackItemBase<AnimationTrack>
 {
     private SkillAnimationClip skillAnimationClip;
     public SkillAnimationClip SkillAnimationClip { get => skillAnimationClip; }
-    private SkillAnimationTrackItemStyle trackItemStyle;
+    private SingleLineTrackItemStyle trackItemStyle;
 
     public void Init(AnimationTrack animationTrack, SkillTrackStyleBase parentTrackStyle, int startFrameIndex, float frameUnitWidth, SkillAnimationClip clip)
     {
@@ -18,7 +18,7 @@ public class AnimationTrackItem : TrackItemBase<AnimationTrack>
         this.frameUnitWidth = frameUnitWidth;
         this.skillAnimationClip = clip;
 
-        itemStyle = trackItemStyle = new SkillAnimationTrackItemStyle();
+        itemStyle = trackItemStyle = new SingleLineTrackItemStyle();
         trackItemStyle.Init(parentTrackStyle, startFrameIndex, frameUnitWidth);
 
         normalColor = new Color(0.388f, 0.850f, 0.905f, 0.5f);
@@ -49,15 +49,15 @@ public class AnimationTrackItem : TrackItemBase<AnimationTrack>
         int animationClipFrameCount = (int)(skillAnimationClip.AnimationClip.length * skillAnimationClip.AnimationClip.frameRate);
         if (animationClipFrameCount > skillAnimationClip.DurationFrame)
         {
-            trackItemStyle.animationOverLine.style.display = DisplayStyle.None;
+            trackItemStyle.overLine.style.display = DisplayStyle.None;
         }
         else
         {
-            trackItemStyle.animationOverLine.style.display = DisplayStyle.Flex;
-            Vector3 overLinePos = trackItemStyle.animationOverLine.transform.position;
+            trackItemStyle.overLine.style.display = DisplayStyle.Flex;
+            Vector3 overLinePos = trackItemStyle.overLine.transform.position;
             //overLinePos.x = animationClipFrameCount * frameUnitWidth - animationOverLine.style.width.value.value / 2;
             overLinePos.x = animationClipFrameCount * frameUnitWidth - 1; //线条宽度为2，取一半
-            trackItemStyle.animationOverLine.transform.position = overLinePos;
+            trackItemStyle.overLine.transform.position = overLinePos;
         }
 
     }

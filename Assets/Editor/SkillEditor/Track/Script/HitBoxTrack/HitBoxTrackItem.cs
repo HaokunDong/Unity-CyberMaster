@@ -7,7 +7,7 @@ public class HitBoxTrackItem : TrackItemBase<HitBoxTrack>
     private SkillHitBoxClip skillHitBoxClip;
 
     public SkillHitBoxClip SkillHitBoxClip { get => skillHitBoxClip; }
-    private SkillHitBoxClipTrackItemStyle trackItemStyle;
+    private SingleLineTrackItemStyle trackItemStyle;
 
     public void Init(HitBoxTrack hitBoxTrack, SkillTrackStyleBase parentTrackStyle, int startFrameIndex, float frameUnitWidth, SkillHitBoxClip clip)
     {
@@ -16,7 +16,7 @@ public class HitBoxTrackItem : TrackItemBase<HitBoxTrack>
         this.frameUnitWidth = frameUnitWidth;
         this.skillHitBoxClip = clip;
 
-        itemStyle = trackItemStyle = new SkillHitBoxClipTrackItemStyle();
+        itemStyle = trackItemStyle = new SingleLineTrackItemStyle();
         trackItemStyle.Init(parentTrackStyle, startFrameIndex, frameUnitWidth);
 
         normalColor = new Color(0.850f, 0.388f, 0.388f, 0.5f);

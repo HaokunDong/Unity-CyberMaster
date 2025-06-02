@@ -120,7 +120,7 @@ public class AnimationTrack : SkillTrackBase
                 {
                     AnimationClip = clip,
                     DurationFrame = durationFrame,
-                    TransitionTime = 0.25f
+                    TransitionTime = 0f
                 };
 
                 //保存新增的动画数据

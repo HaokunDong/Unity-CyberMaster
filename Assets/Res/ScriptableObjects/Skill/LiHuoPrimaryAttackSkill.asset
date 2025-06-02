@@ -61,7 +61,7 @@ MonoBehaviour:
       Data: 0
     - Name: TransitionTime
       Entry: 4
-      Data: 0.25
+      Data: 0
     - Name: ApplyRootMotion
       Entry: 5
       Data: false
@@ -88,7 +88,7 @@ MonoBehaviour:
       Data: 1
     - Name: TransitionTime
       Entry: 4
-      Data: 0.25
+      Data: 0
     - Name: ApplyRootMotion
       Entry: 5
       Data: false
@@ -115,7 +115,7 @@ MonoBehaviour:
       Data: 2
     - Name: TransitionTime
       Entry: 4
-      Data: 0.25
+      Data: 0
     - Name: ApplyRootMotion
       Entry: 5
       Data: false
@@ -142,7 +142,7 @@ MonoBehaviour:
       Data: 3
     - Name: TransitionTime
       Entry: 4
-      Data: 0.25
+      Data: 0
     - Name: ApplyRootMotion
       Entry: 5
       Data: false
@@ -169,7 +169,7 @@ MonoBehaviour:
       Data: 4
     - Name: TransitionTime
       Entry: 4
-      Data: 0.25
+      Data: 0
     - Name: ApplyRootMotion
       Entry: 5
       Data: false
@@ -196,7 +196,7 @@ MonoBehaviour:
       Data: 5
     - Name: TransitionTime
       Entry: 4
-      Data: 0.25
+      Data: 0
     - Name: ApplyRootMotion
       Entry: 5
       Data: false

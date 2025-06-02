@@ -1,9 +1,9 @@
 using UnityEditor;
 using UnityEngine.UIElements;
 
-public class SkillHitBoxClipTrackItemStyle : SkillTrackItemStyleBase
+public class SingleLineTrackItemStyle : SkillTrackItemStyleBase
 {
-    private const string trackItemAssetPath = "Assets/Editor/SkillEditor/Track/UXMLs/HitBoxTrack/HitBoxTrackItem.uxml";
+    private const string trackItemAssetPath = "Assets/Editor/SkillEditor/Track/UXMLs/SingleLineTrackStyle/SingleLineTrackStyle.uxml";
     private Label titleLabel;
 
     public VisualElement mainDragArea { get; private set; }
