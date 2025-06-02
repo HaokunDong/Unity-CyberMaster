@@ -21,14 +21,17 @@ public class SkillDriver
     public bool IsPlaying => isPlaying;
     public bool IsPaused => isPaused;
     public bool IsCompleted { get; private set; } = false;
+    public SkillHitBoxClip currentHitBoxClip { get; private set; } = null;
 
+    public event Func<int> OnGetFaceDir;
     public event Action<SkillHitBoxClip> OnHitBoxTriggered;
     public event Action OnSkillFinished;
 
-    public SkillDriver(Animator animator, Func<float> getDeltaTime)
+    public SkillDriver(Animator animator, Func<float> getDeltaTime, Func<int> getDir)
     {
         this.animator = animator;
         this.getDeltaTime = getDeltaTime;
+        this.OnGetFaceDir = getDir;
     }
 
     public void SetSkill(SkillConfig config)
@@ -46,6 +49,7 @@ public class SkillDriver
 
     public async UniTask PlayFromFrame(int startFrame)
     {
+        currentHitBoxClip = null;
         currentFrame = Mathf.Clamp(startFrame, 0, skillConfig.FrameCount);
         frameElapsed = 0f;
         isPlaying = true;
@@ -79,12 +83,18 @@ public class SkillDriver
                 var hitClip = hitBoxTrack.TryGetHitBoxClipAtFrameBinary(currentFrame);
                 if (hitClip != null)
                 {
-                    OnHitBoxTriggered?.Invoke(hitClip);
+                    currentHitBoxClip = hitClip;
+                    hitBoxTrack.DetectOverlaps(hitClip, animator.gameObject.transform.position, (OnGetFaceDir?.Invoke() ?? 1), LayerMask.GetMask());
+                    if(hitBoxTrack.hits.Count > 0)
+                    {
+                        OnHitBoxTriggered?.Invoke(hitClip);
+                    }
                 }
 
                 currentFrame++;
                 if (currentFrame > maxFrame)
                 {
+                    currentHitBoxClip = null;
                     isPlaying = false;
                     IsCompleted = true;
                     OnSkillFinished?.Invoke();
@@ -108,6 +118,7 @@ public class SkillDriver
 
     public void Stop()
     {
+        currentHitBoxClip = null;
         isPlaying = false;
         IsCompleted = true;
     }

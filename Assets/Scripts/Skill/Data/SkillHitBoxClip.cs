@@ -32,12 +32,13 @@ public class Box
 
 public class  SkillHitBoxTrack
 {
+    [NonSerialized, ShowInInspector]
+    public List<Collider2D> hits;
     [NonSerialized, OdinSerialize]
     [DictionaryDrawerSettings(KeyLabel = "帧数", ValueLabel = "打击数据")]
     public Dictionary<int, SkillHitBoxClip> skillHitBoxClipDict = new Dictionary<int, SkillHitBoxClip>();
 
     private Dictionary<int, SkillHitBoxClip> frameToClipMap;
-
     public void OnSave()
     {
         BuildFrameToClipMap();
@@ -71,5 +72,23 @@ public class  SkillHitBoxTrack
             return clip;
         }
         return null;
+    }
+
+    public void DetectOverlaps(SkillHitBoxClip clip, Vector2 origin, int faceDir, LayerMask layerMask)
+    {
+        hits ??= new List<Collider2D>();
+        hits.Clear();
+
+        foreach (var box in clip.HitBoxs)
+        {
+            // 计算世界空间中的实际位置
+            Vector2 worldCenter = origin + new Vector2(box.center.x * faceDir, box.center.y);
+
+            // 使用 Physics2D.OverlapBox 检测是否与其他 Collider2D 有重叠
+            Collider2D[] results = Physics2D.OverlapBoxAll(worldCenter, box.size, box.rotation, layerMask);
+
+            if (results != null && results.Length > 0)
+                hits.AddRange(results);
+        }
     }
 }

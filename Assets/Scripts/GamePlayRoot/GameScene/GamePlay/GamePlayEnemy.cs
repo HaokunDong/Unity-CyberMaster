@@ -46,7 +46,8 @@ public class GamePlayEnemy : GamePlayAIEntity
 
         skillDriver = new SkillDriver(
             animator,
-            () => Time.deltaTime * Time.timeScale
+            () => Time.deltaTime * Time.timeScale,
+            () => facingDir
         );
     }
 
@@ -69,6 +70,23 @@ public class GamePlayEnemy : GamePlayAIEntity
         name = ZString.Concat(GamePlayId, isGen ? " G " : " ", TableId);
         color = GamePlayId <= 0 ? Color.red : Color.yellow;
         return true;
+    }
+
+    void OnDrawGizmos()
+    {
+        if (skillDriver?.currentHitBoxClip == null) return;
+
+        Gizmos.color = Color.red;
+
+        foreach (var box in skillDriver.currentHitBoxClip.HitBoxs)
+        {
+            Vector3 center = transform.position + new Vector3(box.center.x * facingDir, box.center.y);
+            Vector3 size = (Vector3)box.size;
+
+            Matrix4x4 rotationMatrix = Matrix4x4.TRS(center, Quaternion.Euler(0, 0, box.rotation), Vector3.one);
+            Gizmos.matrix = rotationMatrix;
+            Gizmos.DrawWireCube(Vector3.zero, size);
+        }
     }
 #endif
 }
