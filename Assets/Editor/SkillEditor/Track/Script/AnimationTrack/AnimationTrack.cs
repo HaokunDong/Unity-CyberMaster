@@ -37,7 +37,7 @@ public class AnimationTrack : SkillTrackBase
         if (SkillEditorWindows.Instance.SkillConfig == null) return;
 
         //根据数据绘制 TrackItem
-        foreach (var item in AnimationData.skillAnimationClipDict)
+        foreach (var item in AnimationData.skillClipDict)
         {
             CreateItem(item.Key, item.Value);
         }
@@ -78,7 +78,7 @@ public class AnimationTrack : SkillTrackBase
             int nextTrackItem = -1;
             int currentOffset = int.MaxValue;
 
-            foreach (var item in AnimationData.skillAnimationClipDict)
+            foreach (var item in AnimationData.skillClipDict)
             {
                 //不允许选中帧在 TrackItem 中间（动画事件的起点到他的终点之间）
                 if (selectFrameIndex > item.Key && selectFrameIndex < item.Key + item.Value.DurationFrame)
@@ -124,7 +124,7 @@ public class AnimationTrack : SkillTrackBase
                 };
 
                 //保存新增的动画数据
-                AnimationData.skillAnimationClipDict.Add(selectFrameIndex, skillAnimationClip);
+                AnimationData.skillClipDict.Add(selectFrameIndex, skillAnimationClip);
                 SkillEditorWindows.Instance.SaveConfig();
 
                 //绘制一个Item
@@ -139,9 +139,9 @@ public class AnimationTrack : SkillTrackBase
     /// </summary>
     public void SetFrameIndex(int oldIndex, int newIndex)
     {
-        if (AnimationData.skillAnimationClipDict.Remove(oldIndex, out SkillAnimationClip clip))
+        if (AnimationData.skillClipDict.Remove(oldIndex, out SkillAnimationClip clip))
         {
-            AnimationData.skillAnimationClipDict.Add(newIndex, clip);
+            AnimationData.skillClipDict.Add(newIndex, clip);
             trackItemDic.Remove(oldIndex, out AnimationTrackItem animationTrackItem);
             trackItemDic.Add(newIndex, animationTrackItem);
 
@@ -152,7 +152,7 @@ public class AnimationTrack : SkillTrackBase
     public override void DeleteTrackItem(int frameIndex)
     {
         //移除数据
-        AnimationData.skillAnimationClipDict.Remove(frameIndex);
+        AnimationData.skillClipDict.Remove(frameIndex);
         if (trackItemDic.Remove(frameIndex, out AnimationTrackItem item))
         {
             //移除视图
@@ -177,7 +177,7 @@ public class AnimationTrack : SkillTrackBase
         Animator animator = previewGameObject.GetComponent<Animator>();
 
         //根据帧找到目前是哪个动画
-        Dictionary<int, SkillAnimationClip> skillAnimationClipDict = AnimationData.skillAnimationClipDict;
+        Dictionary<int, SkillAnimationClip> skillAnimationClipDict = AnimationData.skillClipDict;
 
         #region 关于根运动计算
         SortedDictionary<int, SkillAnimationClip> frameDataSortedDic = new SortedDictionary<int, SkillAnimationClip>(skillAnimationClipDict);

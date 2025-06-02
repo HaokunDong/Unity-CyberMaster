@@ -84,7 +84,7 @@ partial class SkillEditorInspector
 
         var at = currentTrack as AnimationTrack;
         //安全校验
-        if (at.CheckFrameIndexOnDrag(at.AnimationData.skillAnimationClipDict, trackItemFrameIndex + value, trackItemFrameIndex, false))
+        if (at.CheckFrameIndexOnDrag(at.AnimationData.skillClipDict, trackItemFrameIndex + value, trackItemFrameIndex, false))
         {
             //修改数据，刷新视图
             (currentTrackItem as AnimationTrackItem).SkillAnimationClip.DurationFrame = value;

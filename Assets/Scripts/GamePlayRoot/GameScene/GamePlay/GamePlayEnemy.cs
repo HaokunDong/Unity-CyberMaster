@@ -74,7 +74,7 @@ public class GamePlayEnemy : GamePlayAIEntity
 
     void OnDrawGizmos()
     {
-        if (skillDriver?.currentHitBoxClip == null) return;
+        if (skillDriver?.currentHitBoxClip == null || skillDriver.currentHitBoxClip.HitBoxs.Count <= 0) return;
 
         Gizmos.color = Color.red;
 

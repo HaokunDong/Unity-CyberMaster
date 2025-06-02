@@ -40,7 +40,7 @@ public class HitBoxTrack : SkillTrackBase
             };
 
             //保存新增的动画数据
-            HitBoxData.skillHitBoxClipDict.Add(selectFrameIndex, clip);
+            HitBoxData.skillClipDict.Add(selectFrameIndex, clip);
             SkillEditorWindows.Instance.SaveConfig();
 
             //绘制一个Item
@@ -60,7 +60,7 @@ public class HitBoxTrack : SkillTrackBase
         if (SkillEditorWindows.Instance.SkillConfig == null) return;
 
         //根据数据绘制 TrackItem
-        foreach (var item in HitBoxData.skillHitBoxClipDict)
+        foreach (var item in HitBoxData.skillClipDict)
         {
             CreateItem(item.Key, item.Value);
         }
@@ -68,9 +68,9 @@ public class HitBoxTrack : SkillTrackBase
 
     public void SetFrameIndex(int oldIndex, int newIndex)
     {
-        if (HitBoxData.skillHitBoxClipDict.Remove(oldIndex, out SkillHitBoxClip clip))
+        if (HitBoxData.skillClipDict.Remove(oldIndex, out SkillHitBoxClip clip))
         {
-            HitBoxData.skillHitBoxClipDict.Add(newIndex, clip);
+            HitBoxData.skillClipDict.Add(newIndex, clip);
             trackItemDic.Remove(oldIndex, out HitBoxTrackItem item);
             trackItemDic.Add(newIndex, item);
 
@@ -81,7 +81,7 @@ public class HitBoxTrack : SkillTrackBase
     public override void DeleteTrackItem(int frameIndex)
     {
         //移除数据
-        HitBoxData.skillHitBoxClipDict.Remove(frameIndex);
+        HitBoxData.skillClipDict.Remove(frameIndex);
         if (trackItemDic.Remove(frameIndex, out HitBoxTrackItem item))
         {
             //移除视图
@@ -96,7 +96,7 @@ public class HitBoxTrack : SkillTrackBase
 
         int currentOffset = int.MaxValue;  //最近的索引距离当前选中帧的差距
         int clipIndex = -1;
-        foreach (var item in HitBoxData.skillHitBoxClipDict)
+        foreach (var item in HitBoxData.skillClipDict)
         {
             int tempOffset = frameIndex - item.Key;
             if (tempOffset > 0 && tempOffset < currentOffset)
@@ -108,7 +108,7 @@ public class HitBoxTrack : SkillTrackBase
 
         if(clipIndex >= 0)
         {
-            SkillHitBoxClip clip = HitBoxData.skillHitBoxClipDict[clipIndex];
+            SkillHitBoxClip clip = HitBoxData.skillClipDict[clipIndex];
         }
     }
 }

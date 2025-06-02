@@ -73,7 +73,7 @@ public class SkillDriver
                 frameElapsed -= frameInterval;
 
                 // ²¥·Å¶¯»­
-                if (animationTrack.skillAnimationClipDict.TryGetValue(currentFrame, out var animClip))
+                if (animationTrack.skillClipDict.TryGetValue(currentFrame, out var animClip))
                 {
                     animator.applyRootMotion = animClip.ApplyRootMotion;
                     animator.CrossFade(animClip.AnimationClip.name, animClip.TransitionTime);

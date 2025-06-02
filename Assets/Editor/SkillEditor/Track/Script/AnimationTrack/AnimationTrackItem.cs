@@ -102,11 +102,11 @@ public class AnimationTrackItem : TrackItemBase<AnimationTrack>
 
             if (offsetFrame < 0)
             {
-                checkDrag = track.CheckFrameIndexOnDrag(track.AnimationData.skillAnimationClipDict, targetFrameIndex, startDragFrameIndex, true);
+                checkDrag = track.CheckFrameIndexOnDrag(track.AnimationData.skillClipDict, targetFrameIndex, startDragFrameIndex, true);
             }
             else if (offsetFrame > 0)
             {
-                checkDrag = track.CheckFrameIndexOnDrag(track.AnimationData.skillAnimationClipDict, targetFrameIndex + skillAnimationClip.DurationFrame, startDragFrameIndex, false);
+                checkDrag = track.CheckFrameIndexOnDrag(track.AnimationData.skillClipDict, targetFrameIndex + skillAnimationClip.DurationFrame, startDragFrameIndex, false);
             }
             else return;
 
@@ -149,6 +149,6 @@ public class AnimationTrackItem : TrackItemBase<AnimationTrack>
 
     public override void OnConfigChanged()
     {
-        skillAnimationClip = track.AnimationData.skillAnimationClipDict[frameIndex];
+        skillAnimationClip = track.AnimationData.skillClipDict[frameIndex];
     }
 }

@@ -91,11 +91,11 @@ public class HitBoxTrackItem : TrackItemBase<HitBoxTrack>
 
             if (offsetFrame < 0)
             {
-                checkDrag = track.CheckFrameIndexOnDrag(track.HitBoxData.skillHitBoxClipDict, targetFrameIndex, startDragFrameIndex, true);
+                checkDrag = track.CheckFrameIndexOnDrag(track.HitBoxData.skillClipDict, targetFrameIndex, startDragFrameIndex, true);
             }
             else if (offsetFrame > 0)
             {
-                checkDrag = track.CheckFrameIndexOnDrag(track.HitBoxData.skillHitBoxClipDict, targetFrameIndex + skillHitBoxClip.DurationFrame, startDragFrameIndex, false);
+                checkDrag = track.CheckFrameIndexOnDrag(track.HitBoxData.skillClipDict, targetFrameIndex + skillHitBoxClip.DurationFrame, startDragFrameIndex, false);
             }
             else return;
 
@@ -138,6 +138,6 @@ public class HitBoxTrackItem : TrackItemBase<HitBoxTrack>
 
     public override void OnConfigChanged()
     {
-        skillHitBoxClip = track.HitBoxData.skillHitBoxClipDict[frameIndex];
+        skillHitBoxClip = track.HitBoxData.skillClipDict[frameIndex];
     }
 }

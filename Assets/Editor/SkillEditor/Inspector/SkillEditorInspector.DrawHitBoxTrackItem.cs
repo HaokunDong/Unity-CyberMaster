@@ -172,7 +172,7 @@ partial class SkillEditorInspector
 
         //安全校验
         var ht = currentTrack as HitBoxTrack;
-        if (ht.CheckFrameIndexOnDrag(ht.HitBoxData.skillHitBoxClipDict, trackItemFrameIndex + value, trackItemFrameIndex, false))
+        if (ht.CheckFrameIndexOnDrag(ht.HitBoxData.skillClipDict, trackItemFrameIndex + value, trackItemFrameIndex, false))
         {
             var hi = currentTrackItem as HitBoxTrackItem;
             hi.SkillHitBoxClip.DurationFrame = value;

@@ -12,9 +12,6 @@ public class SkillAnimationClip : SkillClipBase
 }
 
 [Serializable]
-public class SkillAnimationTrack
+public class SkillAnimationTrack : BaseSkillTrack<SkillAnimationClip>
 {
-    [NonSerialized, OdinSerialize]
-    [DictionaryDrawerSettings(KeyLabel = "帧数", ValueLabel = "动画数据")]
-    public Dictionary<int, SkillAnimationClip> skillAnimationClipDict = new Dictionary<int, SkillAnimationClip>();
 }
