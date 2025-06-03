@@ -1,58 +1,21 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class AnimationTrack : SkillTrackBase
+public class AnimationTrack : EditorSkillTrackBase<SkillAnimationClip>
 {
-    private SkillSingleLineTrackStyle trackStyle;
-
-    private Dictionary<int, AnimationTrackItem> trackItemDic = new Dictionary<int, AnimationTrackItem>();
-    public SkillAnimationTrack AnimationData { get => SkillEditorWindows.Instance.SkillConfig.SkillAnimationData; }
-
-    public override void Init(VisualElement menuParent, VisualElement trackParent, float frameWidth)
-    {
-        base.Init(menuParent, trackParent, frameWidth);
-        trackStyle = new SkillSingleLineTrackStyle();
-        trackStyle.Init(menuParent, trackParent, "动画");
-        trackStyle.contentRoot.RegisterCallback<DragUpdatedEvent>(OnDragUpdatedEvent);
-        trackStyle.contentRoot.RegisterCallback<DragExitedEvent>(OnDragExitedEvent);
-
-        ResetView();
-    }
-
-    public override void ResetView(float frameWidth)
-    {
-        base.ResetView(frameWidth);
-        //销毁当前已有
-        foreach (var item in trackItemDic)
-        {
-            trackStyle.DeleteItem(item.Value.itemStyle.root);
-        }
-
-        trackItemDic.Clear();
-        if (SkillEditorWindows.Instance.SkillConfig == null) return;
-
-        //根据数据绘制 TrackItem
-        foreach (var item in AnimationData.skillClipDict)
-        {
-            CreateItem(item.Key, item.Value);
-        }
-    }
-
-    private void CreateItem(int frameIndex, SkillAnimationClip clip)
+    protected override void CreateItem(int frameIndex, SkillAnimationClip clip)
     {
         AnimationTrackItem trackItem = new AnimationTrackItem();
-        trackItem.Init(this, trackStyle, frameIndex, frameWidth, clip);
-        trackItemDic.Add(frameIndex, trackItem);
+        trackItem.Init(this, trackStyle, frameIndex, frameWidth, clip, new Color(0.388f, 0.388f, 0.850f, 0.5f), new Color(0.388f, 0.388f, 0.850f, 1f));
+        trackItemDic.Add(frameIndex, trackItem.itemStyle);
     }
 
 
     #region  拖拽资源
-    private void OnDragUpdatedEvent(DragUpdatedEvent evt)
+    protected override void OnDragUpdatedEvent(DragUpdatedEvent evt)
     {
         UnityEngine.Object[] objs = DragAndDrop.objectReferences;
         AnimationClip clip = objs[0] as AnimationClip;
@@ -62,7 +25,12 @@ public class AnimationTrack : SkillTrackBase
         }
     }
 
-    private void OnDragExitedEvent(DragExitedEvent evt)
+    protected override void OnPointerDownEvent(MouseDownEvent evt)
+    {
+
+    }
+
+    protected override void OnDragExitedEvent(DragExitedEvent evt)
     {
         UnityEngine.Object[] objs = DragAndDrop.objectReferences;
         AnimationClip clip = objs[0] as AnimationClip;
@@ -78,7 +46,7 @@ public class AnimationTrack : SkillTrackBase
             int nextTrackItem = -1;
             int currentOffset = int.MaxValue;
 
-            foreach (var item in AnimationData.skillClipDict)
+            foreach (var item in skillClipDict)
             {
                 //不允许选中帧在 TrackItem 中间（动画事件的起点到他的终点之间）
                 if (selectFrameIndex > item.Key && selectFrameIndex < item.Key + item.Value.DurationFrame)
@@ -124,7 +92,7 @@ public class AnimationTrack : SkillTrackBase
                 };
 
                 //保存新增的动画数据
-                AnimationData.skillClipDict.Add(selectFrameIndex, skillAnimationClip);
+                skillClipDict.Add(selectFrameIndex, skillAnimationClip);
                 SkillEditorWindows.Instance.SaveConfig();
 
                 //绘制一个Item
@@ -134,50 +102,14 @@ public class AnimationTrack : SkillTrackBase
     }
 
     #endregion
-    /// <summary>
-    /// 将 oldIndex 的数据变为 newIndex
-    /// </summary>
-    public void SetFrameIndex(int oldIndex, int newIndex)
-    {
-        if (AnimationData.skillClipDict.Remove(oldIndex, out SkillAnimationClip clip))
-        {
-            AnimationData.skillClipDict.Add(newIndex, clip);
-            trackItemDic.Remove(oldIndex, out AnimationTrackItem animationTrackItem);
-            trackItemDic.Add(newIndex, animationTrackItem);
-
-            SkillEditorWindows.Instance.SaveConfig();
-        }
-    }
-
-    public override void DeleteTrackItem(int frameIndex)
-    {
-        //移除数据
-        AnimationData.skillClipDict.Remove(frameIndex);
-        if (trackItemDic.Remove(frameIndex, out AnimationTrackItem item))
-        {
-            //移除视图
-            trackStyle.DeleteItem(item.itemStyle.root);
-        }
-        SkillEditorWindows.Instance.SaveConfig();
-    }
-
-    public override void OnConfigChanged()
-    {
-        foreach (var item in trackItemDic.Values)
-        {
-            item.OnConfigChanged();
-        }
-    }
 
     public override void TickView(int frameIndex)
     {
-        base.TickView(frameIndex);
-
         GameObject previewGameObject = SkillEditorWindows.Instance.PreviewCharacterObj;
         Animator animator = previewGameObject.GetComponent<Animator>();
 
         //根据帧找到目前是哪个动画
-        Dictionary<int, SkillAnimationClip> skillAnimationClipDict = AnimationData.skillClipDict;
+        Dictionary<int, SkillAnimationClip> skillAnimationClipDict = skillClipDict;
 
         #region 关于根运动计算
         SortedDictionary<int, SkillAnimationClip> frameDataSortedDic = new SortedDictionary<int, SkillAnimationClip>(skillAnimationClipDict);
@@ -297,10 +229,4 @@ public class AnimationTrack : SkillTrackBase
         //将角色拉回实际位置
         previewGameObject.transform.position = rootMotionTotalPos;
     }
-
-    public override void Destroy()
-    {
-        trackStyle.Destroy();
-    }
-
 }

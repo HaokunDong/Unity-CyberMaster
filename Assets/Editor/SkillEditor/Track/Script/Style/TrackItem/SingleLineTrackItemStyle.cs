@@ -4,12 +4,8 @@ using UnityEngine.UIElements;
 public class SingleLineTrackItemStyle : SkillTrackItemStyleBase
 {
     private const string trackItemAssetPath = "Assets/Editor/SkillEditor/Track/UXMLs/SingleLineTrackStyle/SingleLineTrackStyle.uxml";
-    private Label titleLabel;
-
-    public VisualElement mainDragArea { get; private set; }
-    public VisualElement overLine { get; private set; }
-
-    public void Init(SkillTrackStyleBase TrackStyle, int startFrameIndex, float frameUnitWidth)
+    
+    public override void Init(SkillTrackStyleBase TrackStyle, int startFrameIndex, float frameUnitWidth)
     {
         root = titleLabel = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(trackItemAssetPath).Instantiate().Query<Label>();//不要容器，直接持有目标物体
         mainDragArea = root.Q<VisualElement>("Main");

@@ -20,7 +20,7 @@ partial class SkillEditorInspector
         trackItemFrameIndex = item.FrameIndex;
 
         var frameCountField = new IntegerField("片段帧数");
-        frameCountField.value = item.SkillHitBoxClip.DurationFrame;
+        frameCountField.value = item.Clip.DurationFrame;
         frameCountField.RegisterValueChangedCallback(HitBoxTrackDurationFieldValueChangedCallback);
         root.Add(frameCountField);
 
@@ -30,7 +30,7 @@ partial class SkillEditorInspector
         root.Add(addButton);
 
         boxIndex = 0;
-        foreach (var box in item.SkillHitBoxClip.HitBoxs)
+        foreach (var box in item.Clip.HitBoxs)
         {
             box.boxIndex = boxIndex;
             root.Add(new Label(ZString.Concat("Box ", boxIndex + 1)));
@@ -46,7 +46,7 @@ partial class SkillEditorInspector
                     rotation = box.rotation,
                     boxIndex = changeIndex
                 };
-                currentItem.SkillHitBoxClip.HitBoxs[changeIndex] = b;
+                currentItem.Clip.HitBoxs[changeIndex] = b;
                 SkillEditorWindows.Instance.SaveConfig();
                 currentTrack.ResetView();
                 SceneReDrawHitBoxes();
@@ -65,7 +65,7 @@ partial class SkillEditorInspector
                     rotation = box.rotation,
                     boxIndex = changeIndex
                 };
-                currentItem.SkillHitBoxClip.HitBoxs[changeIndex] = b;
+                currentItem.Clip.HitBoxs[changeIndex] = b;
                 SkillEditorWindows.Instance.SaveConfig();
                 currentTrack.ResetView();
                 SceneReDrawHitBoxes();
@@ -84,7 +84,7 @@ partial class SkillEditorInspector
                     rotation = evt.newValue,
                     boxIndex = changeIndex
                 };
-                currentItem.SkillHitBoxClip.HitBoxs[changeIndex] = b;
+                currentItem.Clip.HitBoxs[changeIndex] = b;
                 SkillEditorWindows.Instance.SaveConfig();
                 currentTrack.ResetView();
                 SceneReDrawHitBoxes();
@@ -112,7 +112,7 @@ partial class SkillEditorInspector
             var delButton = new Button(() => 
             {
                 var delIndex = box.boxIndex;
-                currentItem.SkillHitBoxClip.HitBoxs.RemoveAt(delIndex);
+                currentItem.Clip.HitBoxs.RemoveAt(delIndex);
                 currentTrack.ResetView();
                 DrawHitBoxTrackItem(currentItem);
                 SceneReDrawHitBoxes();
@@ -141,7 +141,7 @@ partial class SkillEditorInspector
 
     private void AddABox()
     {
-        var boxes = currentItem.SkillHitBoxClip.HitBoxs;
+        var boxes = currentItem.Clip.HitBoxs;
         var box = new Box();
         if(AddFromCopy)
         {
@@ -172,10 +172,10 @@ partial class SkillEditorInspector
 
         //安全校验
         var ht = currentTrack as HitBoxTrack;
-        if (ht.CheckFrameIndexOnDrag(ht.HitBoxData.skillClipDict, trackItemFrameIndex + value, trackItemFrameIndex, false))
+        if (ht.CheckFrameIndexOnDrag(trackItemFrameIndex + value, trackItemFrameIndex, false))
         {
             var hi = currentTrackItem as HitBoxTrackItem;
-            hi.SkillHitBoxClip.DurationFrame = value;
+            hi.Clip.DurationFrame = value;
             hi.CheckFrameCount();
             SkillEditorWindows.Instance.SaveConfig();//注意要最后保存，不然新旧数据会对不上
             currentTrackItem.ResetView();

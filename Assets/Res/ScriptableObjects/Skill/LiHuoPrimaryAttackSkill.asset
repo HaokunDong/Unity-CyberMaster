@@ -227,7 +227,7 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 12
-      Data: 12
+      Data: 11
     - Name: 
       Entry: 7
       Data: 
@@ -743,7 +743,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 48
+      Data: 55
     - Name: $v
       Entry: 7
       Data: 33|SkillHitBoxClip, Assembly-CSharp
@@ -759,69 +759,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 35|Box, Assembly-CSharp
-    - Name: center
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 2.4
-    - Name: 
-      Entry: 4
-      Data: 0.5
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: size
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 5
-    - Name: 
-      Entry: 4
-      Data: 2
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: rotation
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 55
-    - Name: $v
-      Entry: 7
-      Data: 36|SkillHitBoxClip, Assembly-CSharp
-    - Name: DurationFrame
-      Entry: 3
-      Data: 1
-    - Name: HitBoxs
-      Entry: 7
-      Data: 37|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 38|Box, Assembly-CSharp
     - Name: center
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -872,19 +809,19 @@ MonoBehaviour:
       Data: 56
     - Name: $v
       Entry: 7
-      Data: 39|SkillHitBoxClip, Assembly-CSharp
+      Data: 36|SkillHitBoxClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
       Data: 1
     - Name: HitBoxs
       Entry: 7
-      Data: 40|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
+      Data: 37|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 41|Box, Assembly-CSharp
+      Data: 38|Box, Assembly-CSharp
     - Name: center
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -935,19 +872,19 @@ MonoBehaviour:
       Data: 63
     - Name: $v
       Entry: 7
-      Data: 42|SkillHitBoxClip, Assembly-CSharp
+      Data: 39|SkillHitBoxClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
       Data: 1
     - Name: HitBoxs
       Entry: 7
-      Data: 43|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
+      Data: 40|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 44|Box, Assembly-CSharp
+      Data: 41|Box, Assembly-CSharp
     - Name: center
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -998,19 +935,19 @@ MonoBehaviour:
       Data: 70
     - Name: $v
       Entry: 7
-      Data: 45|SkillHitBoxClip, Assembly-CSharp
+      Data: 42|SkillHitBoxClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
       Data: 1
     - Name: HitBoxs
       Entry: 7
-      Data: 46|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
+      Data: 43|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 47|Box, Assembly-CSharp
+      Data: 44|Box, Assembly-CSharp
     - Name: center
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -1061,19 +998,19 @@ MonoBehaviour:
       Data: 71
     - Name: $v
       Entry: 7
-      Data: 48|SkillHitBoxClip, Assembly-CSharp
+      Data: 45|SkillHitBoxClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
       Data: 1
     - Name: HitBoxs
       Entry: 7
-      Data: 49|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
+      Data: 46|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 50|Box, Assembly-CSharp
+      Data: 47|Box, Assembly-CSharp
     - Name: center
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -1107,6 +1044,140 @@ MonoBehaviour:
     - Name: 
       Entry: 13
       Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: SkillVelocityData
+      Entry: 7
+      Data: 48|SkillVelocityTrack, Assembly-CSharp
+    - Name: skillClipDict
+      Entry: 7
+      Data: 49|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillVelocityClip,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 50|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 5
+    - Name: $v
+      Entry: 7
+      Data: 51|SkillVelocityClip, Assembly-CSharp
+    - Name: DurationFrame
+      Entry: 3
+      Data: 5
+    - Name: FacePlayerFirst
+      Entry: 5
+      Data: true
+    - Name: UseCurrentFacing
+      Entry: 5
+      Data: true
+    - Name: velocity
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 14
+    - Name: $v
+      Entry: 7
+      Data: 52|SkillVelocityClip, Assembly-CSharp
+    - Name: DurationFrame
+      Entry: 3
+      Data: 5
+    - Name: FacePlayerFirst
+      Entry: 5
+      Data: true
+    - Name: UseCurrentFacing
+      Entry: 5
+      Data: true
+    - Name: velocity
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 34
+    - Name: $v
+      Entry: 7
+      Data: 53|SkillVelocityClip, Assembly-CSharp
+    - Name: DurationFrame
+      Entry: 3
+      Data: 5
+    - Name: FacePlayerFirst
+      Entry: 5
+      Data: true
+    - Name: UseCurrentFacing
+      Entry: 5
+      Data: true
+    - Name: velocity
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
     - Name: 
       Entry: 8
       Data: 

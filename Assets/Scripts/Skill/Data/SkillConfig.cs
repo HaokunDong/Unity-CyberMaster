@@ -16,6 +16,8 @@ public class SkillConfig : SerializedScriptableObject
     public SkillAnimationTrack SkillAnimationData = new SkillAnimationTrack();
     [NonSerialized, OdinSerialize, ReadOnly]
     public SkillHitBoxTrack SkillHitBoxData = new SkillHitBoxTrack();
+    [NonSerialized, OdinSerialize, ReadOnly]
+    public SkillVelocityTrack SkillVelocityData = new SkillVelocityTrack();
 
 #if UNITY_EDITOR
     private static Action onSkillConfigValidate;

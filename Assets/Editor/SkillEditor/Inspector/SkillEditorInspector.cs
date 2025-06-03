@@ -9,12 +9,12 @@ public partial class SkillEditorInspector : Editor
 {
     public static SkillEditorInspector Instance;
     private static TrackItemBase currentTrackItem;
-    private static SkillTrackBase currentTrack;
+    private static EditorSkillTrackBase currentTrack;
 
     private VisualElement root;
 
 
-    public static void SetTrackItem(TrackItemBase trackItem, SkillTrackBase track)
+    public static void SetTrackItem(TrackItemBase trackItem, EditorSkillTrackBase track)
     {
         if (currentTrackItem != null)
         {

@@ -22,15 +22,4 @@ public class SkillSingleLineTrackStyle : SkillTrackStyleBase
         titleLabel = (Label)menuRoot;
         titleLabel.text = title;
     }
-
-
-
-
-
-
-
-
-
-
-
 }

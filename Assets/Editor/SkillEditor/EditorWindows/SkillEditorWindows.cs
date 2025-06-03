@@ -515,16 +515,6 @@ public class SkillEditorWindows : EditorWindow
             EditorUtility.SetDirty(skillConfig);
             AssetDatabase.SaveAssetIfDirty(skillConfig);
             skillConfig.SkillHitBoxData.OnSave();
-            ResetTrackData();
-        }
-    }
-
-    private void ResetTrackData()
-    {
-        //重新引用一下数据
-        for (int i = 0; i < trackList.Count; i++)
-        {
-            trackList[i].OnConfigChanged();
         }
     }
 
@@ -534,7 +524,7 @@ public class SkillEditorWindows : EditorWindow
     private VisualElement trackMenuParent;
     private VisualElement ContentListView;
     private ScrollView MainContentView;
-    private List<SkillTrackBase> trackList = new List<SkillTrackBase>();
+    private List<EditorSkillTrackBase> trackList = new List<EditorSkillTrackBase>();
 
     private void InitContent()
     {
@@ -557,9 +547,9 @@ public class SkillEditorWindows : EditorWindow
     private void InitTrack()
     {
         if (skillConfig == null) return;
-        InitTrack<AnimationTrack>();
-        InitTrack<HitBoxTrack>();
-        InitTrack<AudioTrack>();
+        InitTrack<AnimationTrack, SkillAnimationClip>(skillConfig.SkillAnimationData.skillClipDict, "动画");
+        InitTrack<HitBoxTrack, SkillHitBoxClip>(skillConfig.SkillHitBoxData.skillClipDict, "打击");
+        InitTrack<VelocityTrack, SkillVelocityClip>(skillConfig.SkillVelocityData.skillClipDict, "速度");
     }
 
     private void OnEnable()
@@ -590,10 +580,10 @@ public class SkillEditorWindows : EditorWindow
         SceneView.duringSceneGui -= OnSceneGUI;
     }
 
-    private void InitTrack<T>() where T : SkillTrackBase
+    private void InitTrack<T, C>(Dictionary<int, C> dict, string title) where T : EditorSkillTrackBase<C> where C : SkillClipBase
     {
         T track = Activator.CreateInstance<T>();
-        track.Init(trackMenuParent, ContentListView, skillEditorConfig.FrameUnitWidth);
+        track.Init(trackMenuParent, ContentListView, skillEditorConfig.FrameUnitWidth, dict, title);
         trackList.Add(track);
     }
 
@@ -637,7 +627,7 @@ public class SkillEditorWindows : EditorWindow
         ContentListView.style.width = skillEditorConfig.FrameUnitWidth * CurrentFrameCount;
     }
 
-    public void ShowTrackItemOnInspector(TrackItemBase trackItem, SkillTrackBase track)
+    public void ShowTrackItemOnInspector(TrackItemBase trackItem, EditorSkillTrackBase track)
     {
         SkillEditorInspector.SetTrackItem(trackItem, track);
         Selection.activeObject = this;
