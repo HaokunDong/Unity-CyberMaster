@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -34,7 +31,7 @@ partial class SkillEditorInspector
         //轨道长度
         durationField = new IntegerField("片段帧数");
         durationField.value = item.Clip.DurationFrame;
-        durationField.RegisterValueChangedCallback(DurtionFieldValueChangedCallback);
+        durationField.RegisterValueChangedCallback(TrackDurationFieldValueChangedCallback<AnimationTrack, AnimationTrackItem, SkillAnimationClip>);
         root.Add(durationField);
 
         //过渡时间
@@ -78,39 +75,11 @@ partial class SkillEditorInspector
         SkillEditorWindows.Instance.SaveConfig();
     }
 
-    private void DurtionFieldValueChangedCallback(ChangeEvent<int> evt)
-    {
-        int value = evt.newValue;
-
-        var at = currentTrack as AnimationTrack;
-        //安全校验
-        if (at.CheckFrameIndexOnDrag(trackItemFrameIndex + value, trackItemFrameIndex, false))
-        {
-            //修改数据，刷新视图
-            (currentTrackItem as AnimationTrackItem).Clip.DurationFrame = value;
-            (currentTrackItem as AnimationTrackItem).CheckFrameCount();
-            SkillEditorWindows.Instance.SaveConfig();//注意要最后保存，不然新旧数据会对不上
-            currentTrackItem.ResetView();
-        }
-        else
-        {
-            durationField.value = evt.previousValue;
-        }
-    }
-
     private void TransitionTimeFieldValueChangedCallback(ChangeEvent<float> evt)
     {
         (currentTrackItem as AnimationTrackItem).Clip.TransitionTime = evt.newValue;
         SkillEditorWindows.Instance.SaveConfig();
         currentTrack.ResetView();
     }
-
-    private void DeleteButtonClick()
-    {
-        currentTrack.DeleteTrackItem(trackItemFrameIndex); //此函数提供数据保存和刷新视图的逻辑
-        Selection.activeObject = null;
-        currentTrack.ResetView();
-    }
-
     #endregion
 }

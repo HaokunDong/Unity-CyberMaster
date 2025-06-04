@@ -9,6 +9,17 @@ public class SkillHitBoxClip : SkillClipBase
 {
     [NonSerialized, OdinSerialize]
     public List<Box> HitBoxs = new List<Box>();
+    [NonSerialized, OdinSerialize]
+    public LayerMask layer = LayerMask.GetMask("Player");
+
+    [NonSerialized]
+    public SkillHitBoxTrack parentTrack;
+
+    public override void OnClipUpdate(int frame)
+    {
+        base.OnClipUpdate(frame);
+        parentTrack.DetectOverlaps(this, layer);
+    }
 }
 
 public class Box
@@ -36,11 +47,26 @@ public class  SkillHitBoxTrack : BaseSkillTrack<SkillHitBoxClip>
     [NonSerialized, ShowInInspector]
     public List<Collider2D> hits;
 
-    public void DetectOverlaps(SkillHitBoxClip clip, Vector2 origin, int faceDir, LayerMask layerMask)
+    public event Action<SkillHitBoxClip> OnHitBoxTriggered;
+
+    public override void Init(SkillConfig config, object o)
+    {
+        base.Init(config, o);
+        OnHitBoxTriggered = o as Action<SkillHitBoxClip> ?? throw new ArgumentException("OnHitBoxTriggered action is required for SkillHitBoxTrack initialization.");
+
+        foreach (var clip in skillClipDict.Values)
+        {
+            clip.parentTrack = this;
+        }
+    }
+
+    public void DetectOverlaps(SkillHitBoxClip clip, LayerMask layerMask)
     {
         hits ??= new List<Collider2D>();
         hits.Clear();
 
+        Vector2 origin = skillConfig.owner.transform.position;
+        var faceDir = skillConfig.GetOwnFaceDir();
         foreach (var box in clip.HitBoxs)
         {
             // 计算世界空间中的实际位置
@@ -50,7 +76,15 @@ public class  SkillHitBoxTrack : BaseSkillTrack<SkillHitBoxClip>
             Collider2D[] results = Physics2D.OverlapBoxAll(worldCenter, box.size, box.rotation, layerMask);
 
             if (results != null && results.Length > 0)
+            {
                 hits.AddRange(results);
+                break;
+            }
+        }
+
+        if (hits.Count > 0)
+        {
+            OnHitBoxTriggered?.Invoke(clip);
         }
     }
 }

@@ -1,15 +1,16 @@
 using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using GameBase.Log;
 using UnityEngine;
 
 public class SkillDriver
 {
     private readonly Animator animator;
+    private readonly Rigidbody2D rb;
     private readonly Func<float> getDeltaTime;
 
-    private SkillConfig skillConfig;
-    private SkillAnimationTrack animationTrack;
-    private SkillHitBoxTrack hitBoxTrack;
+    public SkillConfig skillConfig { get; private set; } = null;
 
     private int currentFrame;
     private float frameElapsed;
@@ -21,25 +22,48 @@ public class SkillDriver
     public bool IsPlaying => isPlaying;
     public bool IsPaused => isPaused;
     public bool IsCompleted { get; private set; } = false;
-    public SkillHitBoxClip currentHitBoxClip { get; private set; } = null;
 
-    public event Func<int> OnGetFaceDir;
-    public event Action<SkillHitBoxClip> OnHitBoxTriggered;
     public event Action OnSkillFinished;
+    private event Func<int> OnGetFaceDir;
+    private event Action<SkillHitBoxClip> OnHitBoxTriggered;
+    private event Action OnFacePlayer;
+    private List<ISkillTrack> tracks;
 
-    public SkillDriver(Animator animator, Func<float> getDeltaTime, Func<int> getDir)
+    public SkillDriver(Animator animator, Rigidbody2D rb, Action<SkillHitBoxClip> OnHitBoxTriggered, Func<float> getDeltaTime, Func<int> getDir, Action facePlayer)
     {
         this.animator = animator;
+        this.rb = rb;
         this.getDeltaTime = getDeltaTime;
         this.OnGetFaceDir = getDir;
+        this.OnFacePlayer = facePlayer;
+        this.OnHitBoxTriggered = OnHitBoxTriggered;
     }
 
     public void SetSkill(SkillConfig config)
     {
         skillConfig = config;
-        animationTrack = config.SkillAnimationData;
-        hitBoxTrack = config.SkillHitBoxData;
-        hitBoxTrack.BuildFrameToClipMap();
+        skillConfig.owner = animator? animator.gameObject : rb.gameObject;
+        skillConfig.OnGetFaceDir -= this.OnGetFaceDir;
+        skillConfig.OnGetFaceDir += this.OnGetFaceDir;
+        skillConfig.OwnFacePlayer -= this.OnFacePlayer;
+        skillConfig.OwnFacePlayer += this.OnFacePlayer;
+
+        tracks = skillConfig.GetTracks();
+        foreach(var t in tracks)
+        {
+            if(t is SkillAnimationTrack)
+            {
+                t.Init(skillConfig, animator);
+            }
+            else if(t is SkillHitBoxTrack)
+            {
+                t.Init(skillConfig, OnHitBoxTriggered);
+            }
+            else if (t is SkillVelocityTrack)
+            {
+                t.Init(skillConfig, rb);
+            }
+        }
     }
 
     public async UniTask PlayAsync()
@@ -49,7 +73,6 @@ public class SkillDriver
 
     public async UniTask PlayFromFrame(int startFrame)
     {
-        currentHitBoxClip = null;
         currentFrame = Mathf.Clamp(startFrame, 0, skillConfig.FrameCount);
         frameElapsed = 0f;
         isPlaying = true;
@@ -71,30 +94,14 @@ public class SkillDriver
             while (frameElapsed >= frameInterval)
             {
                 frameElapsed -= frameInterval;
-
-                // 播放动画
-                if (animationTrack.skillClipDict.TryGetValue(currentFrame, out var animClip))
+                foreach(var t in tracks)
                 {
-                    animator.applyRootMotion = animClip.ApplyRootMotion;
-                    animator.CrossFade(animClip.AnimationClip.name, animClip.TransitionTime);
-                }
-
-                // 打击触发
-                var hitClip = hitBoxTrack.TryGetHitBoxClipAtFrameBinary(currentFrame);
-                if (hitClip != null)
-                {
-                    currentHitBoxClip = hitClip;
-                    hitBoxTrack.DetectOverlaps(hitClip, animator.gameObject.transform.position, (OnGetFaceDir?.Invoke() ?? 1), LayerMask.GetMask());
-                    if(hitBoxTrack.hits.Count > 0)
-                    {
-                        OnHitBoxTriggered?.Invoke(hitClip);
-                    }
+                    t.Update(currentFrame);
                 }
 
                 currentFrame++;
                 if (currentFrame > maxFrame)
                 {
-                    currentHitBoxClip = null;
                     isPlaying = false;
                     IsCompleted = true;
                     OnSkillFinished?.Invoke();
@@ -118,7 +125,6 @@ public class SkillDriver
 
     public void Stop()
     {
-        currentHitBoxClip = null;
         isPlaying = false;
         IsCompleted = true;
     }

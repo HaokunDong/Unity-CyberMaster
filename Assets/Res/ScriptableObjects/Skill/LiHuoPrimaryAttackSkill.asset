@@ -351,6 +351,15 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: layer
+      Entry: 7
+      Data: UnityEngine.LayerMask, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 64
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -480,6 +489,15 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: layer
+      Entry: 7
+      Data: UnityEngine.LayerMask, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 64
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -540,6 +558,15 @@ MonoBehaviour:
     - Name: 
       Entry: 13
       Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: layer
+      Entry: 7
+      Data: UnityEngine.LayerMask, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 64
     - Name: 
       Entry: 8
       Data: 
@@ -606,6 +633,15 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: layer
+      Entry: 7
+      Data: UnityEngine.LayerMask, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 64
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -666,6 +702,15 @@ MonoBehaviour:
     - Name: 
       Entry: 13
       Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: layer
+      Entry: 7
+      Data: UnityEngine.LayerMask, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 64
     - Name: 
       Entry: 8
       Data: 
@@ -732,6 +777,15 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: layer
+      Entry: 7
+      Data: UnityEngine.LayerMask, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 64
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -792,6 +846,15 @@ MonoBehaviour:
     - Name: 
       Entry: 13
       Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: layer
+      Entry: 7
+      Data: UnityEngine.LayerMask, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 64
     - Name: 
       Entry: 8
       Data: 
@@ -858,6 +921,15 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: layer
+      Entry: 7
+      Data: UnityEngine.LayerMask, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 64
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -918,6 +990,15 @@ MonoBehaviour:
     - Name: 
       Entry: 13
       Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: layer
+      Entry: 7
+      Data: UnityEngine.LayerMask, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 64
     - Name: 
       Entry: 8
       Data: 
@@ -984,6 +1065,15 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: layer
+      Entry: 7
+      Data: UnityEngine.LayerMask, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 64
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -1047,6 +1137,15 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: layer
+      Entry: 7
+      Data: UnityEngine.LayerMask, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 64
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -1078,22 +1177,25 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
       Data: 
     - Name: $k
       Entry: 3
-      Data: 5
+      Data: 3
     - Name: $v
       Entry: 7
       Data: 51|SkillVelocityClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
       Data: 5
-    - Name: FacePlayerFirst
+    - Name: FacePlayerFirstFrame
       Entry: 5
       Data: true
+    - Name: FacePlayerEveryFrame
+      Entry: 5
+      Data: false
     - Name: UseCurrentFacing
       Entry: 5
       Data: true
@@ -1102,7 +1204,7 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0
+      Data: 5
     - Name: 
       Entry: 4
       Data: 0
@@ -1120,14 +1222,17 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 14
+      Data: 13
     - Name: $v
       Entry: 7
       Data: 52|SkillVelocityClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
-      Data: 5
-    - Name: FacePlayerFirst
+      Data: 11
+    - Name: FacePlayerFirstFrame
+      Entry: 5
+      Data: true
+    - Name: FacePlayerEveryFrame
       Entry: 5
       Data: true
     - Name: UseCurrentFacing
@@ -1138,7 +1243,7 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0
+      Data: 2
     - Name: 
       Entry: 4
       Data: 0
@@ -1156,16 +1261,19 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 34
+      Data: 47
     - Name: $v
       Entry: 7
       Data: 53|SkillVelocityClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
-      Data: 5
-    - Name: FacePlayerFirst
+      Data: 3
+    - Name: FacePlayerFirstFrame
       Entry: 5
       Data: true
+    - Name: FacePlayerEveryFrame
+      Entry: 5
+      Data: false
     - Name: UseCurrentFacing
       Entry: 5
       Data: true
@@ -1174,7 +1282,46 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
+      Data: -15
+    - Name: 
+      Entry: 4
       Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 54
+    - Name: $v
+      Entry: 7
+      Data: 54|SkillVelocityClip, Assembly-CSharp
+    - Name: DurationFrame
+      Entry: 3
+      Data: 20
+    - Name: FacePlayerFirstFrame
+      Entry: 5
+      Data: true
+    - Name: FacePlayerEveryFrame
+      Entry: 5
+      Data: false
+    - Name: UseCurrentFacing
+      Entry: 5
+      Data: true
+    - Name: velocity
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 3
     - Name: 
       Entry: 4
       Data: 0
@@ -1196,6 +1343,28 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: Tracks
+      Entry: 7
+      Data: 55|System.Collections.Generic.List`1[[ISkillTrack, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 9
+      Data: 0
+    - Name: 
+      Entry: 9
+      Data: 9
+    - Name: 
+      Entry: 9
+      Data: 48
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   SkillName: 
   FrameCount: 80
-  FrameRate: 30
+  FrameRate: 13

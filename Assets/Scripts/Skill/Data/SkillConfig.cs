@@ -10,7 +10,7 @@ public class SkillConfig : SerializedScriptableObject
 {
     [LabelText("技能名称")] public string SkillName;
     [LabelText("帧数上限") ,ReadOnly] public int FrameCount = 100;
-    [LabelText("帧率"), ReadOnly] public int FrameRate = 30;
+    [LabelText("帧率")] public int FrameRate = 13;
 
     [NonSerialized, OdinSerialize, ReadOnly]
     public SkillAnimationTrack SkillAnimationData = new SkillAnimationTrack();
@@ -18,6 +18,32 @@ public class SkillConfig : SerializedScriptableObject
     public SkillHitBoxTrack SkillHitBoxData = new SkillHitBoxTrack();
     [NonSerialized, OdinSerialize, ReadOnly]
     public SkillVelocityTrack SkillVelocityData = new SkillVelocityTrack();
+
+    [NonSerialized, OdinSerialize]
+    public List<ISkillTrack> Tracks = new List<ISkillTrack>();
+
+    [NonSerialized, ShowInInspector, ReadOnly]
+    public GameObject owner;
+    public event Func<int> OnGetFaceDir;
+    public event Action OwnFacePlayer;
+
+    public List<ISkillTrack> GetTracks()
+    {
+        if (!Tracks.Contains(SkillAnimationData)) Tracks.Add(SkillAnimationData);
+        if (!Tracks.Contains(SkillHitBoxData)) Tracks.Add(SkillHitBoxData);
+        if (!Tracks.Contains(SkillVelocityData)) Tracks.Add(SkillVelocityData);
+        return Tracks;
+    }
+
+    public int GetOwnFaceDir()
+    {
+        return OnGetFaceDir?.Invoke() ?? 1;
+    }
+
+    public void FacePlayer()
+    {
+        OwnFacePlayer?.Invoke();
+    }
 
 #if UNITY_EDITOR
     private static Action onSkillConfigValidate;
@@ -39,4 +65,8 @@ public class SkillConfig : SerializedScriptableObject
 public abstract class SkillClipBase
 {
     public int DurationFrame;
+
+    public virtual void OnClipFirstFrame() { }
+    public virtual void OnClipLastFrame() { }
+    public virtual void OnClipUpdate(int frame) { }
 }

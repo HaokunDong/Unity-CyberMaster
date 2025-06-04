@@ -1,7 +1,6 @@
 using Cysharp.Text;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -21,8 +20,17 @@ partial class SkillEditorInspector
 
         var frameCountField = new IntegerField("片段帧数");
         frameCountField.value = item.Clip.DurationFrame;
-        frameCountField.RegisterValueChangedCallback(HitBoxTrackDurationFieldValueChangedCallback);
+        frameCountField.RegisterValueChangedCallback(TrackDurationFieldValueChangedCallback<HitBoxTrack, HitBoxTrackItem, SkillHitBoxClip>);
         root.Add(frameCountField);
+
+        var layer = new LayerMaskField("碰撞层");
+        layer.value = item.Clip.layer;
+        layer.RegisterValueChangedCallback(evt =>
+        {
+            item.Clip.layer = evt.newValue;
+            SkillEditorWindows.Instance.SaveConfig();
+        });
+        root.Add(layer);
 
         Button addButton = new Button(AddABox);
         addButton.text = "新增一个Box";
@@ -164,25 +172,5 @@ partial class SkillEditorInspector
         {
             DrawHitBoxTrackItem(currentItem);
         };
-    }
-
-    private void HitBoxTrackDurationFieldValueChangedCallback(ChangeEvent<int> evt)
-    {
-        int value = evt.newValue;
-
-        //安全校验
-        var ht = currentTrack as HitBoxTrack;
-        if (ht.CheckFrameIndexOnDrag(trackItemFrameIndex + value, trackItemFrameIndex, false))
-        {
-            var hi = currentTrackItem as HitBoxTrackItem;
-            hi.Clip.DurationFrame = value;
-            hi.CheckFrameCount();
-            SkillEditorWindows.Instance.SaveConfig();//注意要最后保存，不然新旧数据会对不上
-            currentTrackItem.ResetView();
-        }
-        else
-        {
-            durationField.value = evt.previousValue;
-        }
     }
 }

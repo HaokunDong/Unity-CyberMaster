@@ -13,6 +13,7 @@ public class TimeScaleToolbarOverlay : ToolbarOverlay
         TimeScaleButtonHalf.ID,
         TimeScaleButtonNormal.ID,
         TimeScaleButtonDouble.ID,
+        TimeScaleButtonFive.ID,
         TimeScaleInput.ID)
     { }
 }
@@ -61,6 +62,17 @@ public class TimeScaleButtonDouble : EditorToolbarButton
     {
         text = "2x";
         clicked += () => { if (EditorApplication.isPlaying) Time.timeScale = 2f; };
+    }
+}
+
+[EditorToolbarElement(TimeScaleButtonFive.ID)]
+public class TimeScaleButtonFive : EditorToolbarButton
+{
+    public const string ID = "TimeScale/5x";
+    public TimeScaleButtonFive()
+    {
+        text = "5x";
+        clicked += () => { if (EditorApplication.isPlaying) Time.timeScale = 5f; };
     }
 }
 

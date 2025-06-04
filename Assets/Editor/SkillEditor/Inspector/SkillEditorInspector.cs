@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor;
 
@@ -10,9 +7,7 @@ public partial class SkillEditorInspector : Editor
     public static SkillEditorInspector Instance;
     private static TrackItemBase currentTrackItem;
     private static EditorSkillTrackBase currentTrack;
-
     private VisualElement root;
-
 
     public static void SetTrackItem(TrackItemBase trackItem, EditorSkillTrackBase track)
     {
@@ -63,6 +58,10 @@ public partial class SkillEditorInspector : Editor
         {
             DrawHitBoxTrackItem(ht);
         }
+        else if(currentTrackItem is VelocityTrackItem vt)
+        {
+            DrawVelocityTrackItem(vt);
+        }
     }
 
     private void Clean()
@@ -80,5 +79,32 @@ public partial class SkillEditorInspector : Editor
     public void SetTrackItemFrameIndex(int trackItemFrameIndex)
     {
         this.trackItemFrameIndex = trackItemFrameIndex;
+    }
+
+    private void TrackDurationFieldValueChangedCallback<T, I, S>(ChangeEvent<int> evt) where T : EditorSkillTrackBase where I : TrackItemBase<T, S> where S : SkillClipBase
+    {
+        int value = evt.newValue;
+
+        //安全校验
+        var track = currentTrack as T;
+        if (track.CheckFrameIndexOnDrag(trackItemFrameIndex + value, trackItemFrameIndex, false))
+        {
+            var item = currentTrackItem as I;
+            item.Clip.DurationFrame = value;
+            item.CheckFrameCount();
+            SkillEditorWindows.Instance.SaveConfig();//注意要最后保存，不然新旧数据会对不上
+            currentTrackItem.ResetView();
+        }
+        else
+        {
+            durationField.value = evt.previousValue;
+        }
+    }
+
+    private void DeleteButtonClick()
+    {
+        currentTrack.DeleteTrackItem(trackItemFrameIndex); //此函数提供数据保存和刷新视图的逻辑
+        Selection.activeObject = null;
+        currentTrack.ResetView();
     }
 }

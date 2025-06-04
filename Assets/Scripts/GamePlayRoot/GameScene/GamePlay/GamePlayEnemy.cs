@@ -1,6 +1,7 @@
 using Cysharp.Text;
 using Cysharp.Threading.Tasks;
 using Everlasting.Config;
+using GameBase.Log;
 using NodeCanvas.Framework;
 using Sirenix.OdinInspector;
 using System.Collections;
@@ -46,8 +47,11 @@ public class GamePlayEnemy : GamePlayAIEntity
 
         skillDriver = new SkillDriver(
             animator,
+            rb,
+            (SkillHitBoxClip clip) => LogUtils.Warning($"HitBox Triggered: {clip}"),
             () => Time.deltaTime * Time.timeScale,
-            () => facingDir
+            () => facingDir,
+            () => { FacePlayer(); }
         );
     }
 
@@ -74,11 +78,11 @@ public class GamePlayEnemy : GamePlayAIEntity
 
     void OnDrawGizmos()
     {
-        if (skillDriver?.currentHitBoxClip == null || skillDriver.currentHitBoxClip.HitBoxs.Count <= 0) return;
+        if (skillDriver?.skillConfig?.SkillHitBoxData.currentClip == null || skillDriver?.skillConfig?.SkillHitBoxData.currentClip.HitBoxs.Count <= 0) return;
 
         Gizmos.color = Color.red;
 
-        foreach (var box in skillDriver.currentHitBoxClip.HitBoxs)
+        foreach (var box in skillDriver.skillConfig.SkillHitBoxData.currentClip.HitBoxs)
         {
             Vector3 center = transform.position + new Vector3(box.center.x * facingDir, box.center.y);
             Vector3 size = (Vector3)box.size;
