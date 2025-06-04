@@ -1,5 +1,6 @@
 using UnityEngine.UIElements;
 using UnityEditor;
+using UnityEngine;
 
 [CustomEditor(typeof(SkillEditorWindows))]
 public partial class SkillEditorInspector : Editor
@@ -52,16 +53,26 @@ public partial class SkillEditorInspector : Editor
         SkillEditorWindows.Instance.CurrentSelectFrameIndex = currentTrackItem.FrameIndex;
         if (currentTrackItem is AnimationTrackItem at)
         {
-            DrawAnimationTrackItem(at);
+            DrawTrackItem(at);
         }
         else if(currentTrackItem is HitBoxTrackItem ht)
         {
-            DrawHitBoxTrackItem(ht);
+            DrawTrackItem(ht);
         }
         else if(currentTrackItem is VelocityTrackItem vt)
         {
-            DrawVelocityTrackItem(vt);
+            DrawTrackItem(vt);
         }
+        else if (currentTrackItem is AttackTimeWindowTrackItem atwt)
+        {
+            DrawTrackItem(atwt);
+        }
+
+        //É¾³ý
+        Button deleteButton = new Button(DeleteButtonClick);
+        deleteButton.text = "É¾³ý";
+        deleteButton.style.backgroundColor = new Color(1, 0, 0, 0.5f);
+        root.Add(deleteButton);
     }
 
     private void Clean()

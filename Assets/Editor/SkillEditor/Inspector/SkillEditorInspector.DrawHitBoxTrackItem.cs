@@ -12,7 +12,7 @@ partial class SkillEditorInspector
     private HitBoxTrackItem currentItem;
     private int boxIndex;
 
-    private void DrawHitBoxTrackItem(HitBoxTrackItem item)
+    private void DrawTrackItem(HitBoxTrackItem item)
     {
         root.Clear();
         currentItem = item;
@@ -122,7 +122,7 @@ partial class SkillEditorInspector
                 var delIndex = box.boxIndex;
                 currentItem.Clip.HitBoxs.RemoveAt(delIndex);
                 currentTrack.ResetView();
-                DrawHitBoxTrackItem(currentItem);
+                DrawTrackItem(currentItem);
                 SceneReDrawHitBoxes();
             });
             delButton.text = "删除此Box";
@@ -140,11 +140,6 @@ partial class SkillEditorInspector
         pasteBtn.text = "黏贴之前复制的Box";
         pasteBtn.style.backgroundColor = new Color(0, 1, 1, 0.5f);
         root.Add(pasteBtn);
-
-        Button deleteButton = new Button(DeleteButtonClick);
-        deleteButton.text = "删除整个片段";
-        deleteButton.style.backgroundColor = new Color(1, 0, 0, 0.5f);
-        root.Add(deleteButton);
     }
 
     private void AddABox()
@@ -162,7 +157,7 @@ partial class SkillEditorInspector
 
         SkillEditorWindows.Instance.SaveConfig();
         currentTrack.ResetView();
-        DrawHitBoxTrackItem(currentItem);
+        DrawTrackItem(currentItem);
         SceneReDrawHitBoxes();
     }
 
@@ -170,7 +165,7 @@ partial class SkillEditorInspector
     {
         EditorApplication.delayCall += () =>
         {
-            DrawHitBoxTrackItem(currentItem);
+            DrawTrackItem(currentItem);
         };
     }
 }

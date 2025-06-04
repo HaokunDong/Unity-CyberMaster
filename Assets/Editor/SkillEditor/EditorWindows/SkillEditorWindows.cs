@@ -548,6 +548,7 @@ public class SkillEditorWindows : EditorWindow
     {
         if (skillConfig == null) return;
         InitTrack<AnimationTrack, SkillAnimationClip>(skillConfig.SkillAnimationData.skillClipDict, "动画");
+        InitTrack<AttackTimeWindowTrack, SkillAttackTimeWindowClip>(skillConfig.SkillAttackTimeWindowData.skillClipDict, "攻击时间段");
         InitTrack<HitBoxTrack, SkillHitBoxClip>(skillConfig.SkillHitBoxData.skillClipDict, "打击");
         InitTrack<VelocityTrack, SkillVelocityClip>(skillConfig.SkillVelocityData.skillClipDict, "速度");
     }

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using System;
@@ -14,6 +13,8 @@ public class SkillConfig : SerializedScriptableObject
 
     [NonSerialized, OdinSerialize, ReadOnly]
     public SkillAnimationTrack SkillAnimationData = new SkillAnimationTrack();
+    [NonSerialized, OdinSerialize, ReadOnly]
+    public SkillAttackTimeWindowTrack SkillAttackTimeWindowData = new SkillAttackTimeWindowTrack();
     [NonSerialized, OdinSerialize, ReadOnly]
     public SkillHitBoxTrack SkillHitBoxData = new SkillHitBoxTrack();
     [NonSerialized, OdinSerialize, ReadOnly]
@@ -30,6 +31,7 @@ public class SkillConfig : SerializedScriptableObject
     public List<ISkillTrack> GetTracks()
     {
         if (!Tracks.Contains(SkillAnimationData)) Tracks.Add(SkillAnimationData);
+        if (!Tracks.Contains(SkillAttackTimeWindowData)) Tracks.Add(SkillAttackTimeWindowData);
         if (!Tracks.Contains(SkillHitBoxData)) Tracks.Add(SkillHitBoxData);
         if (!Tracks.Contains(SkillVelocityData)) Tracks.Add(SkillVelocityData);
         return Tracks;

@@ -55,6 +55,10 @@ public class SkillDriver
             {
                 t.Init(skillConfig, animator);
             }
+            else if (t is SkillAttackTimeWindowTrack)
+            {
+                t.Init(skillConfig, null);
+            }
             else if(t is SkillHitBoxTrack)
             {
                 t.Init(skillConfig, OnHitBoxTriggered);

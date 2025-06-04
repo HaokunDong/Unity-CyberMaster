@@ -18,7 +18,11 @@ public class SkillHitBoxClip : SkillClipBase
     public override void OnClipUpdate(int frame)
     {
         base.OnClipUpdate(frame);
-        parentTrack.DetectOverlaps(this, layer);
+        var hasHit = parentTrack.skillConfig.SkillAttackTimeWindowData.HasHit(frame);
+        if(!hasHit)
+        {
+            parentTrack.DetectOverlaps(this, layer, frame);
+        }
     }
 }
 
@@ -60,7 +64,7 @@ public class  SkillHitBoxTrack : BaseSkillTrack<SkillHitBoxClip>
         }
     }
 
-    public void DetectOverlaps(SkillHitBoxClip clip, LayerMask layerMask)
+    public void DetectOverlaps(SkillHitBoxClip clip, LayerMask layerMask, int frame)
     {
         hits ??= new List<Collider2D>();
         hits.Clear();
@@ -85,6 +89,7 @@ public class  SkillHitBoxTrack : BaseSkillTrack<SkillHitBoxClip>
         if (hits.Count > 0)
         {
             OnHitBoxTriggered?.Invoke(clip);
+            skillConfig.SkillAttackTimeWindowData.Hit(frame);
         }
     }
 }

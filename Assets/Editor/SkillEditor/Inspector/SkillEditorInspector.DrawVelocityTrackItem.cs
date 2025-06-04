@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 partial class SkillEditorInspector
 {
-    private void DrawVelocityTrackItem(VelocityTrackItem item)
+    private void DrawTrackItem(VelocityTrackItem item)
     {
         trackItemFrameIndex = item.FrameIndex;
         root.Clear();
@@ -55,11 +53,5 @@ partial class SkillEditorInspector
             currentTrack.ResetView();
         });
         root.Add(velocity);
-
-        //É¾³ý
-        Button deleteButton = new Button(DeleteButtonClick);
-        deleteButton.text = "É¾³ý";
-        deleteButton.style.backgroundColor = new Color(1, 0, 0, 0.5f);
-        root.Add(deleteButton);
     }
 }

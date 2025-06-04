@@ -11,7 +11,7 @@ partial class SkillEditorInspector
     private IntegerField durationField;
     private FloatField transitionTimeField;
 
-    private void DrawAnimationTrackItem(AnimationTrackItem item)
+    private void DrawTrackItem(AnimationTrackItem item)
     {
         trackItemFrameIndex = item.FrameIndex;
 
@@ -47,12 +47,6 @@ partial class SkillEditorInspector
 
         isLoopLable = new Label("Ñ­»·¶¯»­£º" + item.Clip.AnimationClip.isLooping);
         root.Add(isLoopLable);
-
-        //É¾³ý
-        Button deleteButton = new Button(DeleteButtonClick);
-        deleteButton.text = "É¾³ý";
-        deleteButton.style.backgroundColor = new Color(1, 0, 0, 0.5f);
-        root.Add(deleteButton);
     }
 
     private void AnimationClipValueChangedCallback(ChangeEvent<UnityEngine.Object> evt)
