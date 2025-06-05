@@ -11,9 +11,9 @@ public class SkillVelocityClip : SkillClipBase
     [NonSerialized]
     public SkillVelocityTrack parentTrack;
 
-    public override void OnClipFirstFrame()
+    public override void OnClipFirstFrame(int frame)
     {
-        base.OnClipFirstFrame();
+        base.OnClipFirstFrame(frame);
         if(FacePlayerFirstFrame)
         {
             parentTrack.skillConfig.FacePlayer();

@@ -88,7 +88,7 @@ public class SkillDriver
         {
             if (isPaused)
             {
-                await UniTask.Yield();
+                await UniTask.WaitForFixedUpdate();
                 continue;
             }
 
@@ -113,7 +113,7 @@ public class SkillDriver
                 }
             }
 
-            await UniTask.Yield();
+            await UniTask.WaitForFixedUpdate();
         }
     }
 

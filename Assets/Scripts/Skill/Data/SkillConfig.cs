@@ -68,7 +68,7 @@ public abstract class SkillClipBase
 {
     public int DurationFrame;
 
-    public virtual void OnClipFirstFrame() { }
-    public virtual void OnClipLastFrame() { }
+    public virtual void OnClipFirstFrame(int frame) { }
+    public virtual void OnClipLastFrame(int frame) { }
     public virtual void OnClipUpdate(int frame) { }
 }

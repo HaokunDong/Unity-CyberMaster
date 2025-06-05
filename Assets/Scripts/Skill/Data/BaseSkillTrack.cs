@@ -36,13 +36,13 @@ public abstract class BaseSkillTrack<T> : ISkillTrack where T : SkillClipBase
             if(clip != currentClip)
             {
                 currentClip = clip;
-                currentClip.OnClipFirstFrame();
+                currentClip.OnClipFirstFrame(frame);
             }
             currentClip.OnClipUpdate(frame);
             var next = TryGetHitBoxClipAtFrameBinary(frame + 1);
             if(next != currentClip)
             {
-                currentClip.OnClipLastFrame();
+                currentClip.OnClipLastFrame(frame);
             }
         }
     }

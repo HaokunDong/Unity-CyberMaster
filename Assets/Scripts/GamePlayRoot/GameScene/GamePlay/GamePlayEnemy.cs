@@ -49,7 +49,7 @@ public class GamePlayEnemy : GamePlayAIEntity
             animator,
             rb,
             (SkillHitBoxClip clip) => LogUtils.Warning($"HitBox Triggered: {clip}"),
-            () => Time.deltaTime * Time.timeScale,
+            () => Time.fixedDeltaTime,
             () => facingDir,
             () => { FacePlayer(); }
         );
