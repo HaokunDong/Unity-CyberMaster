@@ -55,11 +55,17 @@ public class GamePlayEnemy : GamePlayAIEntity
         );
     }
 
-    [Button]
-    private void TestSkill(SkillConfig config)
+    [Button("ººƒ‹‘›Õ£≤‚ ‘")]
+    private void TestPause()
     {
-        skillDriver.SetSkill(config);
-        skillDriver.PlayAsync().Forget();
+        if(skillDriver.IsPaused)
+        {
+            skillDriver.Resume();
+        }
+        else
+        {
+            skillDriver.Pause();
+        }
     }
 
     public override void OnDispose()

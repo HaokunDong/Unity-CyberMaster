@@ -106,8 +106,7 @@ public class SkillDriver
                 currentFrame++;
                 if (currentFrame > maxFrame)
                 {
-                    isPlaying = false;
-                    IsCompleted = true;
+                    Stop();
                     OnSkillFinished?.Invoke();
                     break;
                 }
@@ -129,6 +128,11 @@ public class SkillDriver
 
     public void Stop()
     {
+        foreach (var t in tracks)
+        {
+            t.OnSkillEnd();
+        }
+
         isPlaying = false;
         IsCompleted = true;
     }

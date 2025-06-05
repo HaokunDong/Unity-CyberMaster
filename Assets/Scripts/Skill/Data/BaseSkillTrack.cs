@@ -8,6 +8,8 @@ public interface ISkillTrack
 {
     void Init(SkillConfig config, Object o);
     void Update(int frame);
+
+    void OnSkillEnd();
 }
 
 public abstract class BaseSkillTrack<T> : ISkillTrack where T : SkillClipBase
@@ -18,13 +20,14 @@ public abstract class BaseSkillTrack<T> : ISkillTrack where T : SkillClipBase
 
     public SkillConfig skillConfig { get; private set; } = null;
     public T currentClip { get; private set; } = null;
-    private Dictionary<int, T> frameToClipMap;
+
+    private SortedList<int, T> sortedClips;
 
     public virtual void Init(SkillConfig config, Object o)
     {
         skillConfig = config;
         currentClip = null;
-        BuildFrameToClipMap();
+        BuildSortedClips();
     }
 
     public virtual void Update(int frame)
@@ -47,38 +50,71 @@ public abstract class BaseSkillTrack<T> : ISkillTrack where T : SkillClipBase
         }
     }
 
-    public virtual void OnSave()
+    public virtual void OnSkillEnd()
     {
-        BuildFrameToClipMap();
     }
 
-    public virtual void BuildFrameToClipMap()
+#if UNITY_EDITOR
+    public virtual void OnSave()
     {
-        frameToClipMap ??= new Dictionary<int, T>();
-        frameToClipMap.Clear();
+        BuildSortedClips();
+    }
+#endif
+
+    private void BuildSortedClips()
+    {
+        sortedClips ??= new ();
+        sortedClips.Clear();
         foreach (var kvp in skillClipDict)
         {
-            int start = kvp.Key;
-            T clip = kvp.Value;
-            for (int i = 0; i < clip.DurationFrame; i++)
+            if (!sortedClips.ContainsKey(kvp.Key))
             {
-                int frame = start + i;
-                if (!frameToClipMap.ContainsKey(frame))
-                    frameToClipMap[frame] = clip;
+                sortedClips.Add(kvp.Key, kvp.Value);
             }
         }
     }
 
     public virtual T TryGetHitBoxClipAtFrameBinary(int frame)
     {
-        if (frameToClipMap == null)
+        if(sortedClips == null)
         {
-            BuildFrameToClipMap();
+            BuildSortedClips();
         }
-        if (frameToClipMap.TryGetValue(frame, out var clip))
+        // frame 比所有片段都小，返回 null
+        if (frame < sortedClips.Keys[0])
+            return null;
+
+        int left = 0;
+        int right = sortedClips.Count - 1;
+        int index = -1;
+
+        // 二分找最大起始帧 <= frame
+        while (left <= right)
         {
-            return clip;
+            int mid = (left + right) / 2;
+            if (sortedClips.Keys[mid] <= frame)
+            {
+                index = mid;
+                left = mid + 1;
+            }
+            else
+            {
+                right = mid - 1;
+            }
         }
+
+        if (index == -1)
+            return null;
+
+        var candidate = sortedClips.Values[index];
+        int startFrame = sortedClips.Keys[index];
+        int endFrame = startFrame + candidate.DurationFrame - 1;
+
+        if (frame >= startFrame && frame <= endFrame)
+        {
+            return candidate;
+        }
+
         return null;
     }
 }
