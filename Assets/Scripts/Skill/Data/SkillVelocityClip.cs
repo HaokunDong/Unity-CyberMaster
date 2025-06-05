@@ -14,7 +14,7 @@ public class SkillVelocityClip : SkillClipBase
     public override void OnClipFirstFrame(int frame)
     {
         base.OnClipFirstFrame(frame);
-        if(FacePlayerFirstFrame)
+        if (FacePlayerFirstFrame)
         {
             parentTrack.skillConfig.FacePlayer();
         }
@@ -27,8 +27,13 @@ public class SkillVelocityClip : SkillClipBase
         {
             parentTrack.skillConfig.FacePlayer();
         }
-        var face = parentTrack.skillConfig.GetOwnFaceDir();
-        parentTrack.rb.velocity = new Vector2(UseCurrentFacing ? velocity.x * face : velocity.x, velocity.y);
+        int face = parentTrack.skillConfig.GetOwnFaceDir();
+        float vx = UseCurrentFacing ? velocity.x * face : velocity.x;
+        float vy = velocity.y;
+
+        Vector2 offset = new Vector2(vx, vy) * (1f / DurationFrame);
+        Vector2 newPos = parentTrack.rb.position + offset;
+        parentTrack.rb.MovePosition(newPos);
     }
 }
 

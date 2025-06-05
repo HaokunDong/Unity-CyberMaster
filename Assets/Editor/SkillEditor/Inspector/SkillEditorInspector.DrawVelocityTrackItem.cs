@@ -5,9 +5,6 @@ partial class SkillEditorInspector
 {
     private void DrawTrackItem(VelocityTrackItem item)
     {
-        trackItemFrameIndex = item.FrameIndex;
-        root.Clear();
-
         //轨道长度
         durationField = new IntegerField("片段帧数");
         durationField.value = item.Clip.DurationFrame;

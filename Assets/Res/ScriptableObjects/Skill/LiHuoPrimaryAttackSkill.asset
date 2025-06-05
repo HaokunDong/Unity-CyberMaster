@@ -1239,19 +1239,19 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 2
     - Name: 
       Entry: 7
       Data: 
     - Name: $k
       Entry: 3
-      Data: 3
+      Data: 9
     - Name: $v
       Entry: 7
       Data: 56|SkillVelocityClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
-      Data: 5
+      Data: 13
     - Name: FacePlayerFirstFrame
       Entry: 5
       Data: true
@@ -1266,7 +1266,7 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 5
+      Data: -20
     - Name: 
       Entry: 4
       Data: 0
@@ -1284,52 +1284,13 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 13
+      Data: 56
     - Name: $v
       Entry: 7
       Data: 57|SkillVelocityClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
-      Data: 11
-    - Name: FacePlayerFirstFrame
-      Entry: 5
-      Data: true
-    - Name: FacePlayerEveryFrame
-      Entry: 5
-      Data: true
-    - Name: UseCurrentFacing
-      Entry: 5
-      Data: true
-    - Name: velocity
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 2
-    - Name: 
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 47
-    - Name: $v
-      Entry: 7
-      Data: 58|SkillVelocityClip, Assembly-CSharp
-    - Name: DurationFrame
-      Entry: 3
-      Data: 3
+      Data: 13
     - Name: FacePlayerFirstFrame
       Entry: 5
       Data: true
@@ -1344,46 +1305,7 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: -15
-    - Name: 
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 54
-    - Name: $v
-      Entry: 7
-      Data: 59|SkillVelocityClip, Assembly-CSharp
-    - Name: DurationFrame
-      Entry: 3
-      Data: 20
-    - Name: FacePlayerFirstFrame
-      Entry: 5
-      Data: true
-    - Name: FacePlayerEveryFrame
-      Entry: 5
-      Data: false
-    - Name: UseCurrentFacing
-      Entry: 5
-      Data: true
-    - Name: velocity
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 3
+      Data: 1
     - Name: 
       Entry: 4
       Data: 0
@@ -1407,7 +1329,7 @@ MonoBehaviour:
       Data: 
     - Name: Tracks
       Entry: 7
-      Data: 60|System.Collections.Generic.List`1[[ISkillTrack, Assembly-CSharp]],
+      Data: 58|System.Collections.Generic.List`1[[ISkillTrack, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12

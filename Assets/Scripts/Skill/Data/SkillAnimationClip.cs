@@ -19,7 +19,7 @@ public class SkillAnimationClip : SkillClipBase
     {
         if (AnimationClip != null)
         {
-            LogUtils.Warning(ZString.Concat("技能驱动动画 ", AnimationClip.name, " 时间 ", Time.time));
+            LogUtils.Trace(ZString.Concat("技能驱动动画 ", AnimationClip.name, " 时间 ", Time.time), LogChannel.Battle, new Color(0.388f, 0.388f, 0.850f, 1f));
             parentTrack.animator.applyRootMotion = ApplyRootMotion;
             startFrame = frame;
             durationFrames = Mathf.RoundToInt(AnimationClip.length * parentTrack.skillConfig.FrameRate);

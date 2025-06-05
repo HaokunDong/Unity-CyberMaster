@@ -1,3 +1,4 @@
+using Cysharp.Text;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -13,8 +14,6 @@ partial class SkillEditorInspector
 
     private void DrawTrackItem(AnimationTrackItem item)
     {
-        trackItemFrameIndex = item.FrameIndex;
-
         //动画资源
         ObjectField animationClipAssetField = new ObjectField("动画资源");
         animationClipAssetField.objectType = typeof(AnimationClip);
@@ -28,12 +27,6 @@ partial class SkillEditorInspector
         rootMotionToggle.RegisterValueChangedCallback(rootMotionToggleValueChanged);
         root.Add(rootMotionToggle);
 
-        //轨道长度
-        durationField = new IntegerField("片段帧数");
-        durationField.value = item.Clip.DurationFrame;
-        durationField.RegisterValueChangedCallback(TrackDurationFieldValueChangedCallback<AnimationTrack, AnimationTrackItem, SkillAnimationClip>);
-        root.Add(durationField);
-
         //过渡时间
         transitionTimeField = new FloatField("过渡时间");
         transitionTimeField.value = item.Clip.TransitionTime;
@@ -42,7 +35,7 @@ partial class SkillEditorInspector
 
         //动画相关的信息
         int clipFrameCount = (int)(item.Clip.AnimationClip.length * item.Clip.AnimationClip.frameRate);
-        clipFrameLabel = new Label("动画资源长度：" + clipFrameCount);
+        clipFrameLabel = new Label(ZString.Concat("片段帧数 ", clipFrameCount));
         root.Add(clipFrameLabel);
 
         isLoopLable = new Label("循环动画：" + item.Clip.AnimationClip.isLooping);

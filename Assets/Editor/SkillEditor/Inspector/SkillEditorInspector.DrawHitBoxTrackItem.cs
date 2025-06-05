@@ -14,10 +14,7 @@ partial class SkillEditorInspector
 
     private void DrawTrackItem(HitBoxTrackItem item)
     {
-        root.Clear();
         currentItem = item;
-        trackItemFrameIndex = item.FrameIndex;
-
         var frameCountField = new IntegerField("Æ¬¶ÎÖ¡Êý");
         frameCountField.value = item.Clip.DurationFrame;
         frameCountField.RegisterValueChangedCallback(TrackDurationFieldValueChangedCallback<HitBoxTrack, HitBoxTrackItem, SkillHitBoxClip>);

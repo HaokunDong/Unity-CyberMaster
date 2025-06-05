@@ -80,6 +80,9 @@ public abstract class BaseSkillTrack<T> : ISkillTrack where T : SkillClipBase
         {
             BuildSortedClips();
         }
+
+        if(sortedClips == null || sortedClips.Count <= 0)
+            return null;
         // frame 比所有片段都小，返回 null
         if (frame < sortedClips.Keys[0])
             return null;
