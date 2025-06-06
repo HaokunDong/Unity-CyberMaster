@@ -19,6 +19,10 @@ public class HitBoxTrack : EditorSkillTrackBase<SkillHitBoxClip>
     {
         if (evt.button == 1)//右键
         {
+            if (!IsClipEmpty(evt))
+            {
+                return;
+            }
             mouseLocalPos = evt.localMousePosition;
             ShowContextMenu(evt);
         }
@@ -48,7 +52,7 @@ public class HitBoxTrack : EditorSkillTrackBase<SkillHitBoxClip>
 
     protected override void Lerp(SkillHitBoxClip leftC, SkillHitBoxClip rightC, int leftStartFrame, int rightEndFrame)
     {
-        if (leftC.HitBoxs == null || rightC.HitBoxs == null || leftC.HitBoxs.Count != rightC.HitBoxs.Count)
+        if (leftC.HitBoxs == null || leftC.HitBoxs.Count <= 0 || rightC.HitBoxs == null || rightC.HitBoxs.Count <= 0 || leftC.HitBoxs.Count != rightC.HitBoxs.Count)
         {
             LogUtils.Error(ZString.Concat("第", leftStartFrame - 1, "帧和第", rightEndFrame + 1, "帧的HitBox数量不一致或者至少一方为0个，无法自动补间"));
             return;

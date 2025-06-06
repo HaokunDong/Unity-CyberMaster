@@ -6,6 +6,8 @@ using UnityEngine.UIElements;
 
 public class AnimationTrack : EditorSkillTrackBase<SkillAnimationClip>
 {
+    private Vector2 mouseLocalPos;
+
     protected override void CreateItem(int frameIndex, SkillAnimationClip clip)
     {
         AnimationTrackItem trackItem = new AnimationTrackItem();
@@ -27,7 +29,106 @@ public class AnimationTrack : EditorSkillTrackBase<SkillAnimationClip>
 
     protected override void OnPointerDownEvent(MouseDownEvent evt)
     {
+        if (evt.button == 1)//右键
+        {
+            if (!IsClipEmpty(evt))
+            {
+                return;
+            }
+            mouseLocalPos = evt.localMousePosition;
+            if (SkillEditorWindows.Instance.PreviewCharacterObj != null)
+            {
+                var animator = SkillEditorWindows.Instance.PreviewCharacterObj.GetComponent<Animator>();
+                if (animator != null)
+                {
+                    RuntimeAnimatorController controller = animator.runtimeAnimatorController;
+                    if (controller != null)
+                    {
+                        HashSet<AnimationClip> clips = new HashSet<AnimationClip>(controller.animationClips);
+                        if (clips != null && clips.Count > 0)
+                        {
+                            ShowContextMenu(evt, clips);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
+    private void ShowContextMenu(MouseDownEvent evt, HashSet<AnimationClip> set)
+    {
+        GenericMenu menu = new GenericMenu();
+
+        foreach(var ac in set)
+        {
+            menu.AddItem(new GUIContent(ac.name), false, () =>
+            {
+                AddAnAnimationClip(ac, SkillEditorWindows.Instance.GetFrameIndexByPos(mouseLocalPos.x));
+            });
+        }
+        menu.DropDown(new Rect(evt.mousePosition, Vector2.zero));
+    }
+
+    private void AddAnAnimationClip(AnimationClip clip, int selectFrameIndex)
+    {
+        bool canPlace = true;
+        int durationFrame = -1;//-1 代表可以用原本 AnimationClip 的持续时间
+        int clipFrameCount = (int)(clip.length * clip.frameRate);
+        int nextTrackItem = -1;
+        int currentOffset = int.MaxValue;
+
+        foreach (var item in skillClipDict)
+        {
+            //不允许选中帧在 TrackItem 中间（动画事件的起点到他的终点之间）
+            if (selectFrameIndex > item.Key && selectFrameIndex < item.Key + item.Value.DurationFrame)
+            {
+                //不能放置
+                canPlace = false;
+                break;
+            }
+
+            //找到右侧的最近 TrackItem
+            if (item.Key > selectFrameIndex)
+            {
+                int tempOffset = item.Key - selectFrameIndex;
+                if (tempOffset < currentOffset)
+                {
+                    currentOffset = tempOffset;
+                    nextTrackItem = item.Key;
+                }
+            }
+        }
+
+        //实际的放置
+        if (canPlace)
+        {
+            // 右边有其他 TrackItem ，要考虑 Track 不能重叠的问题
+            if (nextTrackItem != -1)
+            {
+                int offset = clipFrameCount - currentOffset;
+                durationFrame = offset < 0 ? clipFrameCount : currentOffset; //计算这个空间能不能完整将动画片段放进去
+            }
+            else
+            {
+                //右侧啥都没有
+                durationFrame = clipFrameCount;
+            }
+
+            //构建动画数据
+            SkillAnimationClip skillAnimationClip = new SkillAnimationClip()
+            {
+                AnimationClip = clip,
+                DurationFrame = durationFrame,
+                TransitionTime = 0f
+            };
+
+            //保存新增的动画数据
+            skillClipDict.Add(selectFrameIndex, skillAnimationClip);
+            SkillEditorWindows.Instance.SaveConfig();
+
+            //绘制一个Item
+            CreateItem(selectFrameIndex, skillAnimationClip);
+        }
     }
 
     protected override void OnDragExitedEvent(DragExitedEvent evt)
@@ -40,64 +141,7 @@ public class AnimationTrack : EditorSkillTrackBase<SkillAnimationClip>
 
             //当前选中的帧数位置 检测是否能放置动画
             int selectFrameIndex = SkillEditorWindows.Instance.GetFrameIndexByPos(evt.localMousePosition.x);
-            bool canPlace = true;
-            int durationFrame = -1;//-1 代表可以用原本 AnimationClip 的持续时间
-            int clipFrameCount = (int)(clip.length * clip.frameRate);
-            int nextTrackItem = -1;
-            int currentOffset = int.MaxValue;
-
-            foreach (var item in skillClipDict)
-            {
-                //不允许选中帧在 TrackItem 中间（动画事件的起点到他的终点之间）
-                if (selectFrameIndex > item.Key && selectFrameIndex < item.Key + item.Value.DurationFrame)
-                {
-                    //不能放置
-                    canPlace = false;
-                    break;
-                }
-
-                //找到右侧的最近 TrackItem
-                if (item.Key > selectFrameIndex)
-                {
-                    int tempOffset = item.Key - selectFrameIndex;
-                    if (tempOffset < currentOffset)
-                    {
-                        currentOffset = tempOffset;
-                        nextTrackItem = item.Key;
-                    }
-                }
-            }
-
-            //实际的放置
-            if (canPlace)
-            {
-                // 右边有其他 TrackItem ，要考虑 Track 不能重叠的问题
-                if (nextTrackItem != -1)
-                {
-                    int offset = clipFrameCount - currentOffset;
-                    durationFrame = offset < 0 ? clipFrameCount : currentOffset; //计算这个空间能不能完整将动画片段放进去
-                }
-                else
-                {
-                    //右侧啥都没有
-                    durationFrame = clipFrameCount;
-                }
-
-                //构建动画数据
-                SkillAnimationClip skillAnimationClip = new SkillAnimationClip()
-                {
-                    AnimationClip = clip,
-                    DurationFrame = durationFrame,
-                    TransitionTime = 0f
-                };
-
-                //保存新增的动画数据
-                skillClipDict.Add(selectFrameIndex, skillAnimationClip);
-                SkillEditorWindows.Instance.SaveConfig();
-
-                //绘制一个Item
-                CreateItem(selectFrameIndex, skillAnimationClip);
-            }
+            AddAnAnimationClip(clip, selectFrameIndex);
         }
     }
 

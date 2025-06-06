@@ -605,6 +605,14 @@ public class SkillEditorWindows : EditorWindow
                     selectedTrackItem = null;
                 }
             }
+            else if(e.keyCode == KeyCode.LeftArrow)
+            {
+                CurrentSelectFrameIndex--;
+            }
+            else if(e.keyCode == KeyCode.RightArrow)
+            {
+                CurrentSelectFrameIndex++;
+            }
         }
     }
 

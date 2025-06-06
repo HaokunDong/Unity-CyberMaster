@@ -3,6 +3,7 @@ using GameBase.Log;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.UIElements;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public abstract class EditorSkillTrackBase
 {
@@ -121,10 +122,22 @@ public abstract class EditorSkillTrackBase<SCB> : EditorSkillTrackBase where SCB
     {
     }
 
+    protected bool IsClipEmpty(MouseDownEvent evt)
+    {
+        int selectFrameIndex = SkillEditorWindows.Instance.GetFrameIndexByPos(evt.localMousePosition.x);
+        ClearSortedClips();
+        var clip = TryGetHitBoxClipAtFrameBinary(selectFrameIndex);
+        return clip == null;
+    }
+
     protected virtual void OnPointerDownEvent(MouseDownEvent evt)
     {
         if (evt.button == 1)//ср╪Э
         {
+            if(!IsClipEmpty(evt))
+            {
+                return;
+            }
             int selectFrameIndex = SkillEditorWindows.Instance.GetFrameIndexByPos(evt.localMousePosition.x);
 
             SCB clip = System.Activator.CreateInstance<SCB>();
