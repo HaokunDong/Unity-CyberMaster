@@ -14,6 +14,7 @@ public class SkillEditorWindows : EditorWindow
 
     private List<Box> DrawHitBoxes = null;
     private int selectDrawHitBox = -1;
+    public static TrackItemBase selectedTrackItem = null;
 
     [MenuItem("Tools/¼¼ÄÜ±à¼­Æ÷ %&s")]
     public static void ShowExample()
@@ -29,6 +30,7 @@ public class SkillEditorWindows : EditorWindow
 
         Instance = this;
         root = rootVisualElement;
+        selectedTrackItem = null;
 
         var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor/SkillEditor/EditorWindows/SkillEditorWindows.uxml");
         VisualElement labelFromUXML = visualTree.Instantiate();
@@ -586,6 +588,24 @@ public class SkillEditorWindows : EditorWindow
         T track = Activator.CreateInstance<T>();
         track.Init(trackMenuParent, ContentListView, skillEditorConfig.FrameUnitWidth, dict, title);
         trackList.Add(track);
+    }
+
+    private void OnGUI()
+    {
+        Event e = Event.current;
+        if (e.type == EventType.KeyDown)
+        {
+            if (e.keyCode == KeyCode.Delete)
+            {
+                if(selectedTrackItem != null)
+                {
+                    SkillEditorInspector.currentTrack.DeleteTrackItem(selectedTrackItem.FrameIndex);
+                    Selection.activeObject = null;
+                    SkillEditorInspector.currentTrack.ResetView();
+                    selectedTrackItem = null;
+                }
+            }
+        }
     }
 
     private void ResetTrack()

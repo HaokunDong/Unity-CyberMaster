@@ -1,4 +1,7 @@
+using Cysharp.Text;
+using GameBase.Log;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.UIElements;
 
 public abstract class EditorSkillTrackBase
@@ -50,6 +53,8 @@ public abstract class EditorSkillTrackBase
 public abstract class EditorSkillTrackBase<SCB> : EditorSkillTrackBase where SCB : SkillClipBase
 {
     public Dictionary<int, SCB> skillClipDict;
+
+    protected SortedList<int, SCB> sortedClips;
 
     public virtual void Init(VisualElement menuParent, VisualElement trackParent, float frameWidth, Dictionary<int, SCB> dict, string title)
     {
@@ -178,5 +183,109 @@ public abstract class EditorSkillTrackBase<SCB> : EditorSkillTrackBase where SCB
     public override SkillClipBase GetClip(int frameIndex)
     {
         return skillClipDict[frameIndex];
+    }
+
+    private void BuildSortedClips()
+    {
+        sortedClips ??= new();
+        sortedClips.Clear();
+        foreach (var kvp in skillClipDict)
+        {
+            if (!sortedClips.ContainsKey(kvp.Key))
+            {
+                sortedClips.Add(kvp.Key, kvp.Value);
+            }
+        }
+    }
+
+    public void ClearSortedClips()
+    {
+        sortedClips?.Clear();
+        sortedClips = null;
+    }
+
+    public virtual SCB TryGetHitBoxClipAtFrameBinary(int frame)
+    {
+        if (sortedClips == null)
+        {
+            BuildSortedClips();
+        }
+
+        if (sortedClips == null || sortedClips.Count <= 0)
+            return null;
+        // frame 比所有片段都小，返回 null
+        if (frame < sortedClips.Keys[0])
+            return null;
+
+        int left = 0;
+        int right = sortedClips.Count - 1;
+        int index = -1;
+
+        // 二分找最大起始帧 <= frame
+        while (left <= right)
+        {
+            int mid = (left + right) / 2;
+            if (sortedClips.Keys[mid] <= frame)
+            {
+                index = mid;
+                left = mid + 1;
+            }
+            else
+            {
+                right = mid - 1;
+            }
+        }
+
+        if (index == -1)
+            return null;
+
+        var candidate = sortedClips.Values[index];
+        int startFrame = sortedClips.Keys[index];
+        int endFrame = startFrame + candidate.DurationFrame - 1;
+
+        if (frame >= startFrame && frame <= endFrame)
+        {
+            return candidate;
+        }
+
+        return null;
+    }
+
+    protected void TryLerp(int frame)
+    {
+        ClearSortedClips();
+        var currentClip = TryGetHitBoxClipAtFrameBinary(frame);
+        if (currentClip != null)
+        {
+            LogUtils.Error("当前帧数已经有数据，无法自动补间");
+        }
+        else
+        {
+            SCB leftC = null, rightC = null;
+            int left = frame - 1, right = frame + 1;
+            while (leftC == null && left >= 0)
+            {
+                leftC = TryGetHitBoxClipAtFrameBinary(left--);
+            }
+            while (rightC == null && right < sortedClips.Last().Key)
+            {
+                rightC = TryGetHitBoxClipAtFrameBinary(right++);
+            }
+            if (leftC != null && rightC != null)
+            {
+                var leftStartFrame = left + 2;
+                var rightEndFrame = right - 2;
+                Lerp(leftC, rightC, leftStartFrame, rightEndFrame);
+            }
+            else
+            {
+                LogUtils.Error("补间的左右两边没有有效的clip");
+            }
+        }
+    }
+
+    protected virtual void Lerp(SCB leftC, SCB rightC, int leftStartFrame, int rightEndFrame)
+    {
+
     }
 }

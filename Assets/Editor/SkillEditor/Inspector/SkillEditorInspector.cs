@@ -6,8 +6,8 @@ using UnityEngine;
 public partial class SkillEditorInspector : Editor
 {
     public static SkillEditorInspector Instance;
+    public static EditorSkillTrackBase currentTrack;
     private static TrackItemBase currentTrackItem;
-    private static EditorSkillTrackBase currentTrack;
     private VisualElement root;
 
     public static void SetTrackItem(TrackItemBase trackItem, EditorSkillTrackBase track)
@@ -117,8 +117,11 @@ public partial class SkillEditorInspector : Editor
 
     private void DeleteButtonClick()
     {
-        currentTrack.DeleteTrackItem(trackItemFrameIndex); //此函数提供数据保存和刷新视图的逻辑
-        Selection.activeObject = null;
-        currentTrack.ResetView();
+        if (currentTrack != null)
+        { 
+            currentTrack.DeleteTrackItem(trackItemFrameIndex); //此函数提供数据保存和刷新视图的逻辑
+            Selection.activeObject = null;
+            currentTrack.ResetView();
+        }
     }
 }

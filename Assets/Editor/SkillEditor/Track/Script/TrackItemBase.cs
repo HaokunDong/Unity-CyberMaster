@@ -83,11 +83,13 @@ public abstract class TrackItemBase<T, SCB> : TrackItemBase where T : EditorSkil
 
     public override void OnSelect()
     {
+        SkillEditorWindows.selectedTrackItem = this;
         itemStyle.SetBGColor(selectColor);
     }
 
     public override void OnUnSelect()
     {
+        SkillEditorWindows.selectedTrackItem = null;
         itemStyle.SetBGColor(normalColor);
     }
 

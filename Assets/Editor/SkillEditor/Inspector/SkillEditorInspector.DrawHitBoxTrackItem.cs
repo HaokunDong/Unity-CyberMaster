@@ -1,5 +1,4 @@
 using Cysharp.Text;
-using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -44,17 +43,9 @@ partial class SkillEditorInspector
             centerField.RegisterValueChangedCallback((ChangeEvent<Vector2> evt) =>
             {
                 var changeIndex = box.boxIndex;
-                Box b = new Box
-                {
-                    center = evt.newValue,
-                    size = box.size,
-                    rotation = box.rotation,
-                    boxIndex = changeIndex
-                };
-                currentItem.Clip.HitBoxs[changeIndex] = b;
+                currentItem.Clip.HitBoxs[changeIndex].center = evt.newValue;
                 SkillEditorWindows.Instance.SaveConfig();
                 currentTrack.ResetView();
-                SceneReDrawHitBoxes();
             });
             root.Add(centerField);
 
@@ -63,17 +54,9 @@ partial class SkillEditorInspector
             sizeField.RegisterValueChangedCallback((ChangeEvent<Vector2> evt) => 
             {
                 var changeIndex = box.boxIndex;
-                Box b = new Box
-                {
-                    center = box.center,
-                    size = evt.newValue,
-                    rotation = box.rotation,
-                    boxIndex = changeIndex
-                };
-                currentItem.Clip.HitBoxs[changeIndex] = b;
+                currentItem.Clip.HitBoxs[changeIndex].size = evt.newValue;
                 SkillEditorWindows.Instance.SaveConfig();
                 currentTrack.ResetView();
-                SceneReDrawHitBoxes();
             });
             root.Add(sizeField);
 
@@ -82,17 +65,9 @@ partial class SkillEditorInspector
             rotationField.RegisterValueChangedCallback((ChangeEvent<float> evt) =>
             {
                 var changeIndex = box.boxIndex;
-                Box b = new Box
-                {
-                    center = box.center,
-                    size = box.size,
-                    rotation = evt.newValue,
-                    boxIndex = changeIndex
-                };
-                currentItem.Clip.HitBoxs[changeIndex] = b;
+                currentItem.Clip.HitBoxs[changeIndex].rotation = evt.newValue;
                 SkillEditorWindows.Instance.SaveConfig();
                 currentTrack.ResetView();
-                SceneReDrawHitBoxes();
             });
             root.Add(rotationField);
 
@@ -119,13 +94,13 @@ partial class SkillEditorInspector
                 var delIndex = box.boxIndex;
                 currentItem.Clip.HitBoxs.RemoveAt(delIndex);
                 currentTrack.ResetView();
-                DrawTrackItem(currentItem);
-                SceneReDrawHitBoxes();
+                Show();
             });
             delButton.text = "É¾³ý´ËBox";
             delButton.style.backgroundColor = new Color(1, 0, 1, 0.5f);
             root.Add(delButton);
-            root.Add(new Label());
+            var space = new Label();
+            root.Add(space);
             boxIndex++;
         }
 
@@ -154,15 +129,6 @@ partial class SkillEditorInspector
 
         SkillEditorWindows.Instance.SaveConfig();
         currentTrack.ResetView();
-        DrawTrackItem(currentItem);
-        SceneReDrawHitBoxes();
-    }
-
-    private void SceneReDrawHitBoxes()
-    {
-        EditorApplication.delayCall += () =>
-        {
-            DrawTrackItem(currentItem);
-        };
+        Show();
     }
 }
