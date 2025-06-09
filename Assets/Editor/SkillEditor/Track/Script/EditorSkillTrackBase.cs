@@ -2,9 +2,7 @@ using Cysharp.Text;
 using GameBase.Log;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using UnityEngine.UIElements;
-using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public abstract class EditorSkillTrackBase
 {
