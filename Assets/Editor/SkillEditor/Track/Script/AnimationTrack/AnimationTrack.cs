@@ -31,7 +31,7 @@ public class AnimationTrack : EditorSkillTrackBase<SkillAnimationClip>
     {
         if (evt.button == 1)//ср╪Э
         {
-            if (!IsClipEmpty(evt))
+            if (!IsClipEmptyAndNotOverLength(evt))
             {
                 return;
             }

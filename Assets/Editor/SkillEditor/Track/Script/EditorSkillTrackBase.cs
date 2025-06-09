@@ -2,6 +2,7 @@ using Cysharp.Text;
 using GameBase.Log;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using UnityEngine.UIElements;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
@@ -122,9 +123,13 @@ public abstract class EditorSkillTrackBase<SCB> : EditorSkillTrackBase where SCB
     {
     }
 
-    protected bool IsClipEmpty(MouseDownEvent evt)
+    protected bool IsClipEmptyAndNotOverLength(MouseDownEvent evt)
     {
         int selectFrameIndex = SkillEditorWindows.Instance.GetFrameIndexByPos(evt.localMousePosition.x);
+        if (selectFrameIndex >= SkillEditorWindows.Instance.SkillConfig.FrameCount)
+        {
+            return false;
+        }
         ClearSortedClips();
         var clip = TryGetHitBoxClipAtFrameBinary(selectFrameIndex);
         return clip == null;
@@ -134,14 +139,14 @@ public abstract class EditorSkillTrackBase<SCB> : EditorSkillTrackBase where SCB
     {
         if (evt.button == 1)//右键
         {
-            if(!IsClipEmpty(evt))
+            if(!IsClipEmptyAndNotOverLength(evt))
             {
                 return;
             }
             int selectFrameIndex = SkillEditorWindows.Instance.GetFrameIndexByPos(evt.localMousePosition.x);
 
             SCB clip = System.Activator.CreateInstance<SCB>();
-            clip.DurationFrame = 5; //默认持续时间为5帧
+            clip.DurationFrame = GetCanAddFrameCount(selectFrameIndex, 5);
             //保存新增的动画数据
             skillClipDict.Add(selectFrameIndex, clip);
             SkillEditorWindows.Instance.SaveConfig();
@@ -262,6 +267,27 @@ public abstract class EditorSkillTrackBase<SCB> : EditorSkillTrackBase where SCB
         }
 
         return null;
+    }
+
+    protected int GetCanAddFrameCount(int frame, int maxFrameCount)
+    {
+        ClearSortedClips();
+        var res = maxFrameCount;
+        for(int i = 1; i < maxFrameCount; i++)
+        {
+            if(i >= SkillEditorWindows.Instance.SkillConfig.FrameCount - frame)
+            {
+                res = SkillEditorWindows.Instance.SkillConfig.FrameCount - frame;
+                break;
+            }
+            var clip = TryGetHitBoxClipAtFrameBinary(frame + i);
+            if(clip != null)
+            {
+                res = i;
+                break;
+            }
+        }
+        return res;
     }
 
     protected void TryLerp(int frame)
