@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,8 +28,14 @@ public class GameManager : SingletonComp<GameManager>
         }
         else
         {
-            CameraManager.Ins.CameraFollow(player.gameObject);
+            CameraFollow(player).Forget();
         }
+    }
+
+    private async UniTask CameraFollow(Player p)
+    {
+        await UniTask.WaitUntil(() => CameraManager.Ins != null && p != null && CameraManager.Ins.mainCam != null);
+        CameraManager.Ins.CameraFollow(p.gameObject);
     }
 
     public void OnUpdate()
