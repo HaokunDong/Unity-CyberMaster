@@ -29,7 +29,7 @@ public class Enemy_ShieldSoldier : Enemy
 
     }
 
-    public bool IsPlayerInViewRange()
+    public virtual bool IsPlayerInViewRange()
     {
         if (Vector2.Distance(player.transform.position, transform.position) < 10)
         {
