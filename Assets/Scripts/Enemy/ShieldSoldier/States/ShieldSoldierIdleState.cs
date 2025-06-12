@@ -25,5 +25,10 @@ public class ShieldSoldierIdleState : EnemyState
     public override void Update()
     {
         base.Update();
+
+        if (shieldSoldier.IsPlayerInViewRange())
+        {
+            stateMachine.ChangeState(shieldSoldier.runState);
+        }
     }
 }

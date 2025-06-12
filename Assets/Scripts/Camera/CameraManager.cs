@@ -21,13 +21,11 @@ public class CameraManager : SingletonComp<CameraManager>
     public void SmoothZoomCamera(float startSize, float targetSize, float duration)
     {
         StartCoroutine(SmoothZoom(startSize, targetSize, duration));
-        //CameraShake.Instance.targetCamera = executionCam;
     }
 
     public void ZoomCameraToDefault()
     {
         mainCam.m_Lens.OrthographicSize = 10f;
-        //CameraShake.Instance.targetCamera = mainCam;
     }
 
     IEnumerator SmoothZoom(float startSize, float targetSize, float duration)
