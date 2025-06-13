@@ -6,7 +6,7 @@ public class ParallaxBackground : MonoBehaviour
     [Tooltip("要跟踪的摄像机。如果为空，将自动使用主摄像机")]
     public Transform cameraTransform;
 
-    [Tooltip("视差因子，越小表示越远（0 = 固定不动，1 = 随相机完全移动）")]
+    [Tooltip("视差因子，越远处的值应当越大")]
     [Range(0f, 1f)] public float parallaxFactorX = 0.5f;
     [Range(0f, 1f)] public float parallaxFactorY = 0.5f;
 

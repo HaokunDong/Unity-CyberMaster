@@ -11153,7 +11153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 439406550}
-  parallaxFactorX: 0.35
+  parallaxFactorX: 0.95
   parallaxFactorY: 0.95
   enableInfiniteScroll: 0
   scrollHorizontally: 1
@@ -11774,7 +11774,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 439406550}
-  parallaxFactorX: 0.2
+  parallaxFactorX: 0.5
   parallaxFactorY: 0.8
   enableInfiniteScroll: 0
   scrollHorizontally: 1
@@ -16959,8 +16959,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 439406550}
-  parallaxFactorX: 1
-  parallaxFactorY: 1
+  parallaxFactorX: 0.99
+  parallaxFactorY: 0.99
   enableInfiniteScroll: 0
   scrollHorizontally: 1
   scrollVertically: 0
@@ -17172,7 +17172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 439406550}
-  parallaxFactorX: 0.3
+  parallaxFactorX: 0.9
   parallaxFactorY: 0.9
   enableInfiniteScroll: 0
   scrollHorizontally: 1
@@ -22305,8 +22305,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 439406550}
-  parallaxFactorX: 1
-  parallaxFactorY: 1
+  parallaxFactorX: 0.99
+  parallaxFactorY: 0.99
   enableInfiniteScroll: 0
   scrollHorizontally: 1
   scrollVertically: 0
