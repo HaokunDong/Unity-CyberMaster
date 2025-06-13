@@ -31,6 +31,10 @@ public class Enemy_ShieldSoldier : Enemy
 
     public virtual bool IsPlayerInViewRange()
     {
+        if(!player)
+        {
+            return false;
+        }
         if (Vector2.Distance(player.transform.position, transform.position) < 10)
         {
             return true;

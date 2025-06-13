@@ -147,7 +147,7 @@ Transform:
   m_GameObject: {fileID: 17922716}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.15957771, y: -2.0290961, z: 0.06605932}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11152,8 +11152,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22655806e1a49124691dc36f9319f565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxEffectX: 1
-  parallaxEffectY: 1
+  cameraTransform: {fileID: 439406550}
+  parallaxFactorX: 0.35
+  parallaxFactorY: 0.95
+  enableInfiniteScroll: 0
+  scrollHorizontally: 1
+  scrollVertically: 0
 --- !u!1 &253519938
 GameObject:
   m_ObjectHideFlags: 0
@@ -11499,8 +11503,8 @@ Transform:
   m_GameObject: {fileID: 439406549}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.15957771, y: 2.0290961, z: -10.066059}
-  m_LocalScale: {x: 3.75, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 17922717}
@@ -11769,8 +11773,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22655806e1a49124691dc36f9319f565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxEffectX: 1
-  parallaxEffectY: 1
+  cameraTransform: {fileID: 439406550}
+  parallaxFactorX: 0.2
+  parallaxFactorY: 0.8
+  enableInfiniteScroll: 0
+  scrollHorizontally: 1
+  scrollVertically: 0
 --- !u!1 &463942702
 GameObject:
   m_ObjectHideFlags: 0
@@ -16878,7 +16886,7 @@ Transform:
   m_GameObject: {fileID: 590134624}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.088, z: 0}
+  m_LocalPosition: {x: 0, y: 4.242109, z: 0}
   m_LocalScale: {x: 1, y: 2.260177, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -16950,8 +16958,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22655806e1a49124691dc36f9319f565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxEffectX: 1
-  parallaxEffectY: 1
+  cameraTransform: {fileID: 439406550}
+  parallaxFactorX: 1
+  parallaxFactorY: 1
+  enableInfiniteScroll: 0
+  scrollHorizontally: 1
+  scrollVertically: 0
 --- !u!1 &613843909
 GameObject:
   m_ObjectHideFlags: 3
@@ -17159,8 +17171,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22655806e1a49124691dc36f9319f565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxEffectX: 1
-  parallaxEffectY: 1
+  cameraTransform: {fileID: 439406550}
+  parallaxFactorX: 0.3
+  parallaxFactorY: 0.9
+  enableInfiniteScroll: 0
+  scrollHorizontally: 1
+  scrollVertically: 0
 --- !u!1 &726229836
 GameObject:
   m_ObjectHideFlags: 0
@@ -22288,8 +22304,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22655806e1a49124691dc36f9319f565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxEffectX: 1
-  parallaxEffectY: 1
+  cameraTransform: {fileID: 439406550}
+  parallaxFactorX: 1
+  parallaxFactorY: 1
+  enableInfiniteScroll: 0
+  scrollHorizontally: 1
+  scrollVertically: 0
 --- !u!1 &821897938
 GameObject:
   m_ObjectHideFlags: 0
@@ -27466,9 +27486,9 @@ Transform:
   m_GameObject: {fileID: 1305327534}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 12.38, z: 0}
-  m_LocalScale: {x: 1.0174359, y: 1.0174359, z: 1.0174359}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.6999999, y: 1.6999999, z: 1.6999999}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1469813107}
   - {fileID: 463336890}
@@ -27930,7 +27950,7 @@ Transform:
   m_GameObject: {fileID: 1469813106}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -19.2, y: 0, z: 0}
+  m_LocalPosition: {x: -11.491042, y: 0, z: 0}
   m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -28002,8 +28022,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22655806e1a49124691dc36f9319f565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxEffectX: 1
-  parallaxEffectY: 1
+  cameraTransform: {fileID: 439406550}
+  parallaxFactorX: 0.1
+  parallaxFactorY: 0.7
+  enableInfiniteScroll: 0
+  scrollHorizontally: 1
+  scrollVertically: 0
 --- !u!1 &1510653448
 GameObject:
   m_ObjectHideFlags: 0
@@ -49811,7 +49835,7 @@ Transform:
   m_GameObject: {fileID: 2118089617}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.15957771, y: 2.0290961, z: -10.066059}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
