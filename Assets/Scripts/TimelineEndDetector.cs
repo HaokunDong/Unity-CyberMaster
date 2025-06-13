@@ -5,7 +5,7 @@ using UnityEngine.Playables;
 public class TimelineEndDetector : MonoBehaviour
 {
     public PlayableDirector director;
-    public GameObject openGameObject;
+    public GameObject[] openGameObjects;
 
     void OnEnable()
     {
@@ -30,8 +30,11 @@ public class TimelineEndDetector : MonoBehaviour
 
     private async UniTask Run()
     {
-        openGameObject.SetActive(true);
+        foreach(var obj in openGameObjects)
+        {
+            obj?.SetActive(true);
+        }
         await UniTask.DelayFrame(1);
-        director.gameObject.SetActive(false);
+        director?.gameObject.SetActive(false);
     }
 }
