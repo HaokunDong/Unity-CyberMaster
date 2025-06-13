@@ -28,6 +28,8 @@ namespace GameScene.FlowNode.Base
         }
         
         private FlowOutput m_eventOut;
+        private T msg;
+
 
         public override void OnGraphStarted()
         {
@@ -44,6 +46,7 @@ namespace GameScene.FlowNode.Base
         protected virtual UniTask OnMessageReceive(in T msg)
         {
             AutoResetUniTaskCompletionSource taskSource = AutoResetUniTaskCompletionSource.Create();
+            this.msg = msg;
             var flow = CreateFlow(in msg);
             flow.SetReturnData(value =>
             {
@@ -63,6 +66,7 @@ namespace GameScene.FlowNode.Base
         protected override void RegisterPorts()
         {
             m_eventOut = AddFlowOutput("OnEvent");
+            AddValueOutput<T>("Message", () => { return msg; });
         }
         
 #if UNITY_EDITOR

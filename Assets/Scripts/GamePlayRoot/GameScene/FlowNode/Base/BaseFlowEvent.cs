@@ -52,6 +52,14 @@ namespace GameScene.FlowNode.Base
     [Category("事件Event")]
     public abstract class BaseFlowEvent<T> : BaseFlowEvent where T : IFlowMessage
     {
+        private T msg;
+
+        protected override void RegisterPorts()
+        {
+            base.RegisterPorts();
+            AddValueOutput<T>("Message", () => { return msg; });
+        }
+
         public override void OnCreate(Graph assignedGraph)
         {
             if (assignedGraph.isRunning)
@@ -66,6 +74,7 @@ namespace GameScene.FlowNode.Base
 
         protected virtual void OnMessageReceive(in T msg)
         {
+            this.msg = msg;
             m_eventOut.Call(new Flow());
         }
         
