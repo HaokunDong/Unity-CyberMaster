@@ -93,7 +93,7 @@ public class Player : Entity
 
         deadState = new PlayerDeadState(stateMachine, this, "Dead");
 
-        lifeBar = GlobalRef.Ins.barCom.GetComponent<BarCom>();
+        lifeBar = GlobalRef.Ins.barCom?.GetComponent<BarCom>();
     }
 
     protected override void Start()
