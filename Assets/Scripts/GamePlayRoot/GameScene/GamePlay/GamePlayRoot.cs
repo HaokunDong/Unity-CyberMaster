@@ -16,6 +16,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 #endif
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public enum GamePlayIdBegin
 {
@@ -63,8 +64,6 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
             Current = this;
         }
 
-        player = transform.GetComponentInChildren<GamePlayPlayer>(true);
-
         entityParents = new Dictionary<Type, GamePlayEntityParent>();
         var ps = transform.GetComponentsInChildren<GamePlayEntityParent>(true);
         foreach(var p in ps)
@@ -80,13 +79,12 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         foreach(var kv in spawnPointDict)
         {
             var sp = kv.Value;
-            if(sp.SpawnInInit)
+            if(sp.timing == SpawnTiming.AfterInit)
             {
                 sp.Spawn().Forget();
             }
         }
 
-        player?.Init();
         FlowCtl?.Init();
     }
 
@@ -122,10 +120,20 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
     public void AfterAnEntitySpawned<T>(T spawnedEntity, GamePlaySpawnPoint gamePlaySpawnPoint) where T : GamePlayEntity
     {
         spawnedEntity.transform.SetPositionAndRotation(gamePlaySpawnPoint.transform.position, gamePlaySpawnPoint.transform.rotation);
+        if (Quaternion.Angle(gamePlaySpawnPoint.transform.rotation, Quaternion.identity) > 90)
+        {
+            spawnedEntity.FlipData();
+        }
         spawnedEntity.isGen = true;
         spawnedEntity.spawnPoint = gamePlaySpawnPoint;
         var index = gamePlaySpawnPoint.GamePlayId % GAP;
-        if (spawnedEntity is GamePlayEnemy enemy)
+        if(spawnedEntity is GamePlayPlayer player)
+        {
+            this.player = player;
+            player.transform.SetParent(entityParents[typeof(GamePlayPlayer)].transform);
+            player.Init();
+        }
+        else if (spawnedEntity is GamePlayEnemy enemy)
         {
             var id = GamePlayId * GAP_L + (uint)GamePlayIdBegin.Enemy_Gen + index;
             enemyDict[id] = enemy;

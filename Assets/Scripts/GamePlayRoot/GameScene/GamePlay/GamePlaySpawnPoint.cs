@@ -1,14 +1,18 @@
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+
+public enum SpawnTiming
+{
+    None = 0,
+    AfterInit = 1,
+    DistanceCloseEnough = 2,
+}
 
 public abstract class GamePlaySpawnPoint : GamePlayEntity
 {
     public uint spawnEntityTableId;
-    public bool SpawnInInit = true;
+    public SpawnTiming timing;
 
     protected bool spawned = false;
     protected bool canSpawn = true;
@@ -17,7 +21,7 @@ public abstract class GamePlaySpawnPoint : GamePlayEntity
 
     public abstract UniTask<T> Spawn<T>() where T : GamePlayEntity;
 
-    public bool CheckCanSpawn()
+    public virtual bool CheckCanSpawn()
     {
         canSpawn = spawnEntityTableId > 0 && !spawned && CustomCheck();
         return canSpawn;

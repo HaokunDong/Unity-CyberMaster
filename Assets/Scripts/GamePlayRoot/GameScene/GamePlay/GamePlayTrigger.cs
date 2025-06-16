@@ -1,9 +1,7 @@
 using Cysharp.Text;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class GamePlayTrigger : GamePlayAIEntity
+public class GamePlayTrigger : GamePlayEntity
 {
 #if UNITY_EDITOR
     public override bool GetHierarchyComment(out string name, out Color color)

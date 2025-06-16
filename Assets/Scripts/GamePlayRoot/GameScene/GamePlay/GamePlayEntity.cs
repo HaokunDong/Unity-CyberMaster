@@ -59,6 +59,12 @@ public abstract class GamePlayEntity : MonoBehaviour, ICustomHierarchyComment
         transform.Rotate(0, 180, 0);
     }
 
+    public void FlipData()
+    {
+        facingDir = facingDir * -1;
+        facingRight = !facingRight;
+    }
+
     public virtual void OnDispose()
     {
         
