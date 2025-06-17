@@ -13,6 +13,11 @@ namespace GameScene.FlowNode.Base
     {
         
     }
+
+    public struct OnTriggerEventMsg : IFlowMessage
+    {
+        public uint TriggerGamePlayId;
+    }
     
     [Name("OnInit")]
     [Category("事件Event/Common")]
@@ -34,5 +39,12 @@ namespace GameScene.FlowNode.Base
     public class Handler_OnEnter_End : BaseFlowEventAsyncEnd<OnInitEventAsyncMsg>
     {
         
+    }
+
+    [Name("Trigger触发")]
+    [Category("事件Event/Common")]
+    public class OnTriggerEvent : BaseFlowEvent<OnTriggerEventMsg>
+    {
+
     }
 }

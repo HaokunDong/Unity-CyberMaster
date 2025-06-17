@@ -4,19 +4,20 @@ using Everlasting.Config;
 using Everlasting.Extend;
 using GameBase.Log;
 using GameScene.FlowNode;
+using GameScene.FlowNode.Base;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Tools;
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.SceneManagement;
 #endif
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public enum GamePlayIdBegin
 {
@@ -56,14 +57,11 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
     [ShowInInspector]
     private Dictionary<uint, GamePlaySpawnPoint> spawnPointDict = null;
 
+    private RepeatingTask task;
+    private CancellationTokenSource cts;
 
     public void Init()
     {
-        if (Current != this)
-        {
-            Current = this;
-        }
-
         entityParents = new Dictionary<Type, GamePlayEntityParent>();
         var ps = transform.GetComponentsInChildren<GamePlayEntityParent>(true);
         foreach(var p in ps)
@@ -86,6 +84,71 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         }
 
         FlowCtl?.Init();
+
+        if (Current != this)
+        {
+            Current?.task?.Stop();
+            Current = this;
+        }
+
+        cts = new CancellationTokenSource();
+
+        task = new RepeatingTask(
+            intervalInSeconds: 0.2f,
+            action: async () =>
+            {
+                CheckAllTriggerAndDistanceSpawn();
+            },
+            externalToken: cts.Token,
+            initialDelayInSeconds: 1.0f,
+            continueCondition: () => this.isActiveAndEnabled,
+            onCompleted: () => LogUtils.Warning("任务完成或中断")
+        );
+
+        task.Start();
+    }
+
+    private void CheckAllTriggerAndDistanceSpawn()
+    {
+        if(triggerDict != null)
+        {
+            foreach (var trigger in triggerDict.Values)
+            {
+                trigger.Check();
+            }
+        }
+
+        if(player != null && spawnPointDict != null)
+        {
+            foreach (var sp in spawnPointDict.Values)
+            {
+                if(sp.timing == SpawnTiming.DistanceCloseEnough && sp.CheckCanSpawn())
+                {
+                    if(sp.needRaycastDetect)
+                    {
+                        Vector2 direction = (player.transform.position - sp.transform.position).normalized;
+                        var hit = Physics2D.Raycast(sp.transform.position, direction, sp.spawnDistance, LayerMask.GetMask("Player"));
+                        if(hit.collider != null)
+                        {
+                            sp.Spawn().Forget();
+                        }
+                    }
+                    else
+                    {
+                        float distance = Vector3.Distance(sp.transform.position, player.transform.position);
+                        if(distance <= sp.spawnDistance)
+                        {
+                            sp.Spawn().Forget();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void SendGamePlayMsg<M>(M msg) where M : IFlowMessage
+    {
+        flowCtl?.SendFlowMessage(msg);
     }
 
     public T GetAGamePlayEntity<T>(uint GamePlayId) where T : GamePlayEntity
@@ -113,6 +176,16 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         else if (typeof(T) == typeof(GamePlaySpawnPoint) && spawnPointDict != null && spawnPointDict.TryGetValue(GamePlayId, out var spawnPoint))
         {
             return spawnPoint as T;
+        }
+        return null;
+    }
+
+    public async UniTask<GamePlayEntity> DoGamePlaySpawn(uint SpawnPointGamePlayId)
+    {
+        if(spawnPointDict != null && spawnPointDict.TryGetValue(SpawnPointGamePlayId, out var spawnPoint))
+        {
+            var entity = await spawnPoint.Spawn();
+            return entity;
         }
         return null;
     }

@@ -1,4 +1,5 @@
-﻿using Tools;
+﻿using GameBase.Log;
+using Tools;
 using UnityEditor;
 using UnityEngine;
 
@@ -21,7 +22,20 @@ namespace GamePlayTool.Editor
                 var node = go.GetComponent<ICustomHierarchyComment>();
                 if (node != null && node.GetHierarchyComment(out string name, out Color color))
                 {
-                    GUI.Label(selectionrect, name, LabelStyleRight(color));
+                    var gpe = go.GetComponent<GamePlayEntity>();
+                    if (gpe != null)
+                    {
+                        if(GUI.Button(new Rect(selectionrect.xMin + 0.8f * selectionrect.width, selectionrect.yMin, 0.2f * selectionrect.width, selectionrect.height), "复制GamePlayId"))
+                        {
+                            LogUtils.Trace($"复制GamePlayId: {gpe.GamePlayId} ({gpe.name})", LogChannel.Message);
+                            EditorGUIUtility.systemCopyBuffer = gpe.GamePlayId.ToString();
+                        }
+                        GUI.Label(new Rect(selectionrect.xMin, selectionrect.yMin, 0.8f * selectionrect.width, selectionrect.height), name, LabelStyleRight(color));
+                    }
+                    else
+                    {
+                        GUI.Label(selectionrect, name, LabelStyleRight(color));
+                    }
                 }
             }
 

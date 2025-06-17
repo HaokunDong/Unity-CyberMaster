@@ -1,3 +1,4 @@
+using GameBase.Log;
 using Sirenix.OdinInspector;
 using System;
 using Tools;
@@ -7,6 +8,15 @@ public abstract class GamePlayEntity : MonoBehaviour, ICustomHierarchyComment
 {
     [ReadOnly]
     public uint GamePlayId;
+#if UNITY_EDITOR
+    [Button("¸´ÖÆGamePlayId")]
+    private void CopyGamePlayId()
+    {
+        LogUtils.Trace($"¸´ÖÆGamePlayId: {GamePlayId} ({name})", LogChannel.Message);
+        GUIUtility.systemCopyBuffer = GamePlayId.ToString();
+    }
+#endif
+
     [NonSerialized, ReadOnly, ShowInInspector]
     public bool isGen;
     [NonSerialized, ReadOnly, ShowInInspector]

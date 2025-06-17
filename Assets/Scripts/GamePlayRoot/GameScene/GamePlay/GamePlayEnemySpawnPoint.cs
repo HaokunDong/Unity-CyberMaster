@@ -11,7 +11,7 @@ public class GamePlayEnemySpawnPoint : GamePlaySpawnPoint<GamePlayEnemy>
         var data = EnemyTable.GetTableData(spawnEntityTableId);
         if(data != null)
         {
-            var obj = await Managers.ResourceManager.LoadAssetAsync<GameObject>(data.Prefab, ResType.Prefab);
+            var obj = await ResourceManager.LoadAssetAsync<GameObject>(data.Prefab, ResType.Prefab);
             GamePlayEnemy e = obj.GetComponent<GamePlayEnemy>();
             var aie = e as GamePlayAIEntity;
             if (aie != null)
