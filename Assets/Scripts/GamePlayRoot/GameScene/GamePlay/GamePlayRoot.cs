@@ -59,6 +59,8 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
 
     private RepeatingTask task;
     private CancellationTokenSource cts;
+    private IInteractable currentInteractTarget;
+    private IInteractable lastInteractTarget;
 
     public void Init()
     {
@@ -144,6 +146,57 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
                 }
             }
         }
+
+        DetectClosestInteractable();
+    }
+
+    private void DetectClosestInteractable()
+    {
+        lastInteractTarget = currentInteractTarget; // 保存上一次的
+
+        currentInteractTarget = null;
+
+        if (player == null) return;
+
+        Vector2 origin = player.transform.position;
+        Vector2 direction = player.GetFacingDirection(); // 玩家面朝方向
+
+        var hits = Physics2D.RaycastAll(origin, direction, player.maxInteractDistance, LayerMask.GetMask("Interactable", "NPC"));
+
+        float closestDistance = float.MaxValue;
+        foreach (var hit in hits)
+        {
+            var interact = hit.collider.GetComponent<IInteractable>();
+            if (interact != null)
+            {
+                float dist = Vector2.Distance(origin, hit.point);
+                if (dist < closestDistance)
+                {
+                    closestDistance = dist;
+                    currentInteractTarget = interact;
+                }
+            }
+        }
+
+        if (currentInteractTarget != lastInteractTarget)
+        {
+            OnInteractTargetChanged(lastInteractTarget, currentInteractTarget);
+        }
+    }
+
+    private void OnInteractTargetChanged(IInteractable oldTarget, IInteractable newTarget)
+    {
+        // 可以取消旧目标高亮
+        if (oldTarget != null)
+        {
+            
+        }
+
+        // 可以激活新目标提示
+        if (newTarget != null)
+        {
+            
+        }
     }
 
     public void SendGamePlayMsg<M>(M msg) where M : IFlowMessage
@@ -205,6 +258,7 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
             this.player = player;
             player.transform.SetParent(entityParents[typeof(GamePlayPlayer)].transform);
             player.Init();
+            currentInteractTarget = null;
         }
         else if (spawnedEntity is GamePlayEnemy enemy)
         {

@@ -5,6 +5,13 @@ using UnityEngine;
 
 public class GamePlayPlayer : GamePlayEntity
 {
+    public float maxInteractDistance = 5f;
+
+    public Vector2 GetFacingDirection()
+    {
+        return transform.right;
+    }
+
 #if UNITY_EDITOR
     public override bool GetHierarchyComment(out string name, out Color color)
     {

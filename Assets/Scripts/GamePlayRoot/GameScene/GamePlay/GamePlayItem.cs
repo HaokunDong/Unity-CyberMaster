@@ -3,8 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GamePlayItem : GamePlayEntity
+
+public interface IInteractable
 {
+    Transform Transform { get; }
+    void OnInteract();
+}
+public class GamePlayItem : GamePlayEntity, IInteractable
+{
+    public Transform Transform => gameObject.transform;
+
+    public void OnInteract()
+    {
+        throw new System.NotImplementedException();
+    }
+
 #if UNITY_EDITOR
     public override bool GetHierarchyComment(out string name, out Color color)
     {
