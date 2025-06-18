@@ -17,6 +17,7 @@ namespace GameScene.FlowNode.Base
     public struct OnTriggerEventMsg : IFlowMessage
     {
         public uint TriggerGamePlayId;
+        public TriggerEventType Type;
     }
     
     [Name("OnInit")]

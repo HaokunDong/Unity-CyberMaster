@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using ParadoxNotion.Design;
@@ -8,8 +7,7 @@ using Cysharp.Text;
 
 namespace FlowCanvas.Nodes
 {
-    [Category("Flow Controllers/Switchers")]
-    [Description("Generic switch node. Routes flow based on the input value. Supports integer, string, enum, and more.")]
+    [Category("Switch")]
     [ContextDefinedInputs(typeof(Flow))]
     public abstract class SwitchGeneric<T> : FlowControlNode
     {
@@ -101,6 +99,6 @@ public class SwitchOnBool : SwitchGeneric<bool>
 {
     protected override FlowCanvas.ValueInput<bool> AddInput(int i)
     {
-        return AddValueInput<bool>(ZString.Concat("Case ", StringUtils.GetAlphabetLetter(i))).SetDefaultAndSerializedValue(false);
+        return AddValueInput<bool>(ZString.Concat("Case ", StringUtils.GetAlphabetLetter(i))).SetDefaultAndSerializedValue(i % 2 == 0 ? true : false);
     }
 }
