@@ -60,6 +60,7 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
     private RepeatingTask task;
     private CancellationTokenSource cts;
     private IInteractable currentInteractTarget;
+    public IInteractable InteractTarget => currentInteractTarget;
     private IInteractable lastInteractTarget;
 
     public void Init()
@@ -96,7 +97,7 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         cts = new CancellationTokenSource();
 
         task = new RepeatingTask(
-            intervalInSeconds: 0.2f,
+            intervalInSeconds: 0.3f,
             action: async () =>
             {
                 CheckAllTriggerAndDistanceSpawn();
@@ -159,21 +160,43 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         if (player == null) return;
 
         Vector2 origin = player.transform.position;
-        Vector2 direction = player.GetFacingDirection(); // 玩家面朝方向
+        Vector2 facing = player.GetFacingDirection().normalized;
+        float maxDistance = player.maxInteractDistance;
+        int layerMask = LayerMask.GetMask("Interactable", "NPC");
 
-        var hits = Physics2D.RaycastAll(origin, direction, player.maxInteractDistance, LayerMask.GetMask("Interactable", "NPC"));
+        // 先检测前方
+        var frontHits = Physics2D.RaycastAll(origin, facing, maxDistance, layerMask);
 
         float closestDistance = float.MaxValue;
-        foreach (var hit in hits)
+        foreach (var hit in frontHits)
         {
-            var interact = hit.collider.GetComponent<IInteractable>();
-            if (interact != null)
+            var interactable = hit.collider.GetComponent<IInteractable>();
+            if (interactable != null && interactable.canInteract)
             {
                 float dist = Vector2.Distance(origin, hit.point);
                 if (dist < closestDistance)
                 {
                     closestDistance = dist;
-                    currentInteractTarget = interact;
+                    currentInteractTarget = interactable;
+                }
+            }
+        }
+
+        //再检测身后
+        if(currentInteractTarget == null)
+        {
+            var backHits = Physics2D.RaycastAll(origin, -facing, maxDistance, layerMask);
+            foreach (var hit in backHits)
+            {
+                var interactable = hit.collider.GetComponent<IInteractable>();
+                if (interactable != null && interactable.canInteract)
+                {
+                    float dist = Vector2.Distance(origin, hit.point);
+                    if (dist < closestDistance)
+                    {
+                        closestDistance = dist;
+                        currentInteractTarget = interactable;
+                    }
                 }
             }
         }
@@ -189,13 +212,13 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         // 可以取消旧目标高亮
         if (oldTarget != null)
         {
-            
+            InteractHUD.Instance.SetTarget(null);
         }
 
         // 可以激活新目标提示
         if (newTarget != null)
         {
-            
+            InteractHUD.Instance.SetTarget(newTarget.Transform);
         }
     }
 

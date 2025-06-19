@@ -6,6 +6,7 @@ using UnityEngine;
 public class GamePlayNPC : GamePlayAIEntity, IInteractable
 {
     public Transform Transform => gameObject.transform;
+    public bool canInteract => true;
 
     public void OnInteract()
     {

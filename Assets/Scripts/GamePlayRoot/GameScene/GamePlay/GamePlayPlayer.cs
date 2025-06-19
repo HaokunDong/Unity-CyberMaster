@@ -12,6 +12,14 @@ public class GamePlayPlayer : GamePlayEntity
         return transform.right;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            GamePlayRoot.Current?.InteractTarget?.OnInteract();
+        }
+    }
+
 #if UNITY_EDITOR
     public override bool GetHierarchyComment(out string name, out Color color)
     {

@@ -18,6 +18,7 @@ namespace Everlasting.Config
 			{
 				yield return Internal.EnemyTableLoader.Load();
 				yield return Internal.GamePlayTableLoader.Load();
+				yield return Internal.ItemTableLoader.Load();
 			}
 			await UniTask.WhenAll(LoadAll());
 		}
@@ -26,6 +27,7 @@ namespace Everlasting.Config
 		{
 			Internal.EnemyTableLoader.Clear();
 			Internal.GamePlayTableLoader.Clear();
+			Internal.ItemTableLoader.Clear();
 		}
 	}
 }
