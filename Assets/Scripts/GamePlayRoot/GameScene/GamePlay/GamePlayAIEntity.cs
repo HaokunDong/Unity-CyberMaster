@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using Everlasting.Extend;
 using Managers;
 using NodeCanvas.Framework;
+using NodeCanvas.Tasks.Conditions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,9 @@ public abstract class GamePlayAIEntity : GamePlayEntity
     public Rigidbody2D rb;
 
     public string graphPath;
+    public bool pauseWhenInvisible;
+
+    protected bool isAIActive = true;
 
     public override void Init()
     {
@@ -37,6 +41,32 @@ public abstract class GamePlayAIEntity : GamePlayEntity
                     CustomAIBlackboardWriteIn(blackboard);
                 }
                 graphOwner.StartBehaviour();
+            }
+        }
+    }
+
+    public virtual void SetAIActive(bool active)
+    {
+        if(!pauseWhenInvisible)
+        {
+            return;
+        }
+        if (active && !isAIActive)
+        {
+            isAIActive = true;
+            graphOwner?.StartBehaviour();
+            if(animator)
+            {
+                animator.enabled = true;
+            }
+        }
+        else if(!active && isAIActive)
+        {
+            isAIActive = false;
+            graphOwner?.PauseBehaviour();
+            if (animator)
+            {
+                animator.enabled = false;
             }
         }
     }

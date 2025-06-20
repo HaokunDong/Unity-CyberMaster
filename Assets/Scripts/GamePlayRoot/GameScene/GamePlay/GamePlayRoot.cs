@@ -1,3 +1,4 @@
+using Cinemachine;
 using Cysharp.Text;
 using Cysharp.Threading.Tasks;
 using Everlasting.Config;
@@ -63,6 +64,8 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
     public IInteractable InteractTarget => currentInteractTarget;
     private IInteractable lastInteractTarget;
 
+    private CinemachineVirtualCamera virtualCamera;
+
     public void Init()
     {
         entityParents = new Dictionary<Type, GamePlayEntityParent>();
@@ -109,6 +112,7 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         );
 
         task.Start();
+        virtualCamera = Camera.main?.GetComponent<CinemachineBrain>()?.ActiveVirtualCamera as CinemachineVirtualCamera;
     }
 
     private void CheckAllTriggerAndDistanceSpawn()
@@ -149,6 +153,7 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         }
 
         DetectClosestInteractable();
+        CheckVisibleAIs();
     }
 
     private void DetectClosestInteractable()
@@ -222,6 +227,43 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         }
     }
 
+    private void CheckVisibleAIs()
+    {
+        if (player == null || (enemyDict == null && NPCDict == null)) return;
+
+        float cameraSize = virtualCamera != null ? virtualCamera.m_Lens.OrthographicSize : Camera.main.orthographicSize;
+        float activeRange = 2 * cameraSize * 1.3f;
+        Vector2 playerPos = player.transform.position;
+
+        if(enemyDict != null)
+        {
+            foreach (var kv in enemyDict)
+            {
+                var enemy = kv.Value;
+                if (enemy == null) continue;
+
+                float dist = Vector2.Distance(playerPos, enemy.transform.position);
+                bool shouldBeActive = dist <= activeRange;
+
+                enemy.SetAIActive(shouldBeActive);
+            }
+        }
+        
+        if(NPCDict != null)
+        {
+            foreach (var kv in NPCDict)
+            {
+                var npc = kv.Value;
+                if (npc == null) continue;
+
+                float dist = Vector2.Distance(playerPos, npc.transform.position);
+                bool shouldBeActive = dist <= activeRange;
+
+                npc.SetAIActive(shouldBeActive);
+            }
+        }
+    }
+
     public void SendGamePlayMsg<M>(M msg) where M : IFlowMessage
     {
         flowCtl?.SendFlowMessage(msg);
@@ -282,6 +324,10 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
             player.transform.SetParent(entityParents[typeof(GamePlayPlayer)].transform);
             player.Init();
             currentInteractTarget = null;
+            if(virtualCamera != null)
+            {
+                virtualCamera.Follow = player.transform;
+            }
         }
         else if (spawnedEntity is GamePlayEnemy enemy)
         {

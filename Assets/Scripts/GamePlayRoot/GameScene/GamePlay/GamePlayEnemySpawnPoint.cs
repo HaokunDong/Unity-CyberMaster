@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class GamePlayEnemySpawnPoint : GamePlaySpawnPoint<GamePlayEnemy>
 {
+    public bool spawnedEnemyPauseWhenInvisible = true;
+
     public override async UniTask<GamePlayEnemy> Spawn<GamePlayEnemy>()
     {
         var data = EnemyTable.GetTableData(spawnEntityTableId);
@@ -17,6 +19,7 @@ public class GamePlayEnemySpawnPoint : GamePlaySpawnPoint<GamePlayEnemy>
             if (aie != null)
             {
                 aie.graphPath = data.Graph;
+                aie.pauseWhenInvisible = spawnedEnemyPauseWhenInvisible;
             }
             return e;
         }

@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using Everlasting.Config;
 using GameBase.Log;
 using NodeCanvas.Framework;
+using NodeCanvas.Tasks.Conditions;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
@@ -64,6 +65,34 @@ public class GamePlayEnemy : GamePlayAIEntity
         }
         else
         {
+            skillDriver.Pause();
+        }
+    }
+
+    public override void SetAIActive(bool active)
+    {
+        if (!pauseWhenInvisible)
+        {
+            return;
+        }
+        if (active && !isAIActive)
+        {
+            isAIActive = true;
+            graphOwner?.StartBehaviour();
+            if (animator)
+            {
+                animator.enabled = true;
+            }
+            skillDriver.Resume();
+        }
+        else if (!active && isAIActive)
+        {
+            isAIActive = false;
+            graphOwner?.PauseBehaviour();
+            if (animator)
+            {
+                animator.enabled = false;
+            }
             skillDriver.Pause();
         }
     }
