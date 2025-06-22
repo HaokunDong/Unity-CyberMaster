@@ -30,5 +30,7 @@ public class ShieldSoldierIdleState : EnemyState
         {
             stateMachine.ChangeState(shieldSoldier.runState);
         }
+
+
     }
 }
