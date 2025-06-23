@@ -29,6 +29,13 @@ public class ShieldSoldierRunState : EnemyState
     {
         base.Update();
 
+        shieldSoldier.SetVelocity(shieldSoldier.facingDir * shieldSoldier.moveSpeed, rb.velocity.y);
+
+        if (!shieldSoldier.IsPlayerInViewRange())
+        {
+            stateMachine.ChangeState(shieldSoldier.idleState);
+        }
+
         if (shieldSoldier.IsPlayerInAttackRange())
         {
             stateMachine.ChangeState(shieldSoldier.primaryAttackState);

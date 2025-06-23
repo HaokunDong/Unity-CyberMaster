@@ -28,6 +28,33 @@ public class Enemy_ShieldSoldier : Enemy
         stateMachine.Initialize(idleState);
 
     }
+    protected override void Update()
+    {
+        base.Update();
+
+        Debug.Log(stateMachine.currentState.ToString());
+    }
+
+    /*    protected override void OnDrawGizmos()
+        {
+            base.OnDrawGizmos();
+            //Gizmos.DrawWireSphere(attackCheck[2].position, attackCheckRadius[2]);
+
+            *//*        #region DrawStabAttack
+            #if UNITY_EDITOR
+                    Collider2D[] hits = Physics2D.OverlapBoxAll(stabAttackCheck.position, stabAttackSize, 0);
+                    Gizmos.color = hits.Length > 0 ? Color.green : Color.white;
+            #else
+                        Gizmos.color = Color.blue;
+            #endif
+                    // 绘制旋转的矩形
+                    Matrix4x4 rotationMatrix = Matrix4x4.TRS(stabAttackCheck.position, Quaternion.Euler(0, 0, 0), Vector3.one);
+                    Gizmos.matrix = rotationMatrix;
+                    Gizmos.DrawWireCube(Vector3.zero, new Vector3(stabAttackSize.x, stabAttackSize.y, 0));
+                    Gizmos.matrix = Matrix4x4.identity; // 重置矩阵
+                    #endregion*//*
+
+        }*/
 
     public virtual bool IsPlayerInViewRange()
     {
