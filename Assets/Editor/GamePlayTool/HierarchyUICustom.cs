@@ -25,7 +25,7 @@ namespace GamePlayTool.Editor
                     var gpe = go.GetComponent<GamePlayEntity>();
                     if (gpe != null)
                     {
-                        if(GUI.Button(new Rect(selectionrect.xMin + 0.8f * selectionrect.width, selectionrect.yMin, 0.2f * selectionrect.width, selectionrect.height), "复制GamePlayId"))
+                        if(GUI.Button(new Rect(selectionrect.xMin + 0.8f * selectionrect.width, selectionrect.yMin, 0.15f * selectionrect.width, selectionrect.height), "复制GPId"))
                         {
                             LogUtils.Trace($"复制GamePlayId: {gpe.GamePlayId} ({gpe.name})", LogChannel.Message);
                             EditorGUIUtility.systemCopyBuffer = gpe.GamePlayId.ToString();
@@ -34,7 +34,7 @@ namespace GamePlayTool.Editor
                     }
                     else
                     {
-                        GUI.Label(selectionrect, name, LabelStyleRight(color));
+                        GUI.Label(new Rect(selectionrect.xMin, selectionrect.yMin, 0.95f * selectionrect.width, selectionrect.height), name, LabelStyleRight(color));
                     }
                 }
             }

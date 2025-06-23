@@ -13,6 +13,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Tools;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -37,7 +38,7 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
     public static GamePlayRoot Current = null;
 
     [ReadOnly]
-    public uint GamePlayId;
+    public uint RootId;
 
     [NonSerialized, ReadOnly, ShowInInspector]
     public GamePlayPlayer player = null;
@@ -66,7 +67,7 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
 
     private CinemachineVirtualCamera virtualCamera;
 
-    public void Init()
+    public async UniTask Init()
     {
         entityParents = new Dictionary<Type, GamePlayEntityParent>();
         var ps = transform.GetComponentsInChildren<GamePlayEntityParent>(true);
@@ -79,15 +80,6 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         CollectDict(ref itemDict);
         CollectDict(ref triggerDict);
         CollectDict(ref spawnPointDict);
-
-        foreach(var kv in spawnPointDict)
-        {
-            var sp = kv.Value;
-            if(sp.timing == SpawnTiming.AfterInit)
-            {
-                sp.Spawn().Forget();
-            }
-        }
 
         FlowCtl?.Init();
 
@@ -113,6 +105,17 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
 
         task.Start();
         virtualCamera = Camera.main?.GetComponent<CinemachineBrain>()?.ActiveVirtualCamera as CinemachineVirtualCamera;
+
+        await UniTask.DelayFrame(1);
+
+        foreach (var kv in spawnPointDict)
+        {
+            var sp = kv.Value;
+            if (sp.timing == SpawnTiming.AfterInit)
+            {
+                sp.Spawn().Forget();
+            }
+        }
     }
 
     private void CheckAllTriggerAndDistanceSpawn()
@@ -331,21 +334,21 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         }
         else if (spawnedEntity is GamePlayEnemy enemy)
         {
-            var id = GamePlayId * GAP_L + (uint)GamePlayIdBegin.Enemy_Gen + index;
+            var id = RootId * GAP_L + (uint)GamePlayIdBegin.Enemy_Gen + index;
             enemyDict[id] = enemy;
             enemy.GamePlayId = id;
             enemy.transform.SetParent(entityParents[typeof(GamePlayEnemy)].transform);
         }
         else if(spawnedEntity is GamePlayNPC NPC)
         {
-            var id = GamePlayId * GAP_L + (uint)GamePlayIdBegin.NPC_Gen + index;
+            var id = RootId * GAP_L + (uint)GamePlayIdBegin.NPC_Gen + index;
             NPCDict[id] = NPC;
             NPC.GamePlayId = id;
             NPC.transform.SetParent(entityParents[typeof(GamePlayNPC)].transform);
         }
         else if (spawnedEntity is GamePlayItem item)
         {
-            var id = GamePlayId * GAP_L + (uint)GamePlayIdBegin.Item_Gen + index;
+            var id = RootId * GAP_L + (uint)GamePlayIdBegin.Item_Gen + index;
             itemDict[id] = item;
             item.GamePlayId = id;
             item.transform.SetParent(entityParents[typeof(GamePlayItem)].transform);
@@ -442,7 +445,7 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
             var root = instance.GetComponent<GamePlayRoot>();
             if(root != null)
             {
-                var GamePlayId = root.GamePlayId;
+                var GamePlayId = root.RootId;
                 if (GamePlayId > 0)
                 {
                     if (s_needParseGamePlayRoot)
@@ -509,13 +512,13 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         }
         if(table != null)
         {
-            GamePlayId = table.Id;
+            RootId = table.Id;
         }
         else
         {
-            GamePlayId = 0;
+            RootId = 0;
         }
-        name = ZString.Concat("关卡根节点", " id: ", GamePlayId);
+        name = ZString.Concat("关卡根节点", " id: ", RootId);
         color = Color.green;
         return true;
     }
