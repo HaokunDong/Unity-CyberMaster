@@ -18,10 +18,16 @@ public class GamePlayPlayerSpawnPoint : GamePlaySpawnPoint<GamePlayPlayer>
     {
         var obj = await Managers.ResourceManager.LoadAssetAsync<GameObject>("Player/Player", ResType.Prefab);
         GamePlayPlayer p = obj.GetComponent<GamePlayPlayer>();
-
+        //临时兼容老Player处理
+        if (Quaternion.Angle(transform.rotation, Quaternion.identity) > 90)
+        {
+            var player = obj.GetComponent<Player>();
+            player.FlipData();
+        }
+        //临时兼容老Player处理
         if (!playerCreateAnim.IsNullOrEmpty())
         {
-            var animator = p.GetComponentInChildren<Animator>();
+            var animator = obj.GetComponentInChildren<Animator>();
             if(animator != null)
             {
                 animator.Play(playerCreateAnim);
