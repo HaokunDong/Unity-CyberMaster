@@ -16,23 +16,47 @@ MonoBehaviour:
   deleteDllAfterBuilds: 1
   AutomateForAllAOTPlatforms: 1
   automateForPlatforms: 0900000014000000
-  lastScan: 638232861648495950
+  lastScan: 638863706002396900
   supportSerializedTypes:
-  - TypeName: System.Boolean[,], mscorlib
+  - TypeName: 
+    IsCustom: 1
+    Emit: 1
+  - TypeName: 
+    IsCustom: 1
+    Emit: 1
+  - TypeName: 
+    IsCustom: 1
+    Emit: 1
+  - TypeName: 
+    IsCustom: 1
+    Emit: 1
+  - TypeName: DecisionSystem.ScoreCurve, Assembly-CSharp
     IsCustom: 1
     Emit: 1
   - TypeName: Dictionary<string, LocomotionStateData_SyncGroup.SyncGroupMarker>
     IsCustom: 1
     Emit: 1
-  - TypeName: System.Collections.Generic.Dictionary`2[[System.UInt32, mscorlib],[System.Int32,
-      mscorlib]], mscorlib
+  - TypeName: Dictionary<uint, List<QuestMonitorStatistics>>
     IsCustom: 1
     Emit: 1
-  - TypeName: Dictionary<uint, List<QuestMonitorStatistics>>
+  - TypeName: LocomotionStateData_SyncGroup.SyncGroupMarker
+    IsCustom: 1
+    Emit: 1
+  - TypeName: QuestMonitorStatistics
     IsCustom: 1
     Emit: 1
   - TypeName: System.Collections.Generic.Dictionary`2[[WorldMapLevel, Assembly-CSharp],[UnityEngine.Sprite,
       UnityEngine.CoreModule]], mscorlib
+    IsCustom: 1
+    Emit: 1
+  - TypeName: WorldMapLevel, Assembly-CSharp
+    IsCustom: 1
+    Emit: 1
+  - TypeName: System.Boolean[,], mscorlib
+    IsCustom: 1
+    Emit: 1
+  - TypeName: System.Collections.Generic.Dictionary`2[[System.UInt32, mscorlib],[System.Int32,
+      mscorlib]], mscorlib
     IsCustom: 1
     Emit: 1
   - TypeName: UnityEngine.Keyframe, UnityEngine.CoreModule
@@ -44,397 +68,6 @@ MonoBehaviour:
   - TypeName: System.Collections.Generic.List`1[[System.UInt32, mscorlib]], mscorlib
     IsCustom: 1
     Emit: 1
-  - TypeName: LocomotionStateData_SyncGroup.SyncGroupMarker
-    IsCustom: 1
-    Emit: 1
-  - TypeName: QuestMonitorStatistics
-    IsCustom: 1
-    Emit: 1
-  - TypeName: DecisionSystem.ScoreCurve, Assembly-CSharp
-    IsCustom: 1
-    Emit: 1
   - TypeName: UnityEngine.Vector3, UnityEngine.CoreModule
     IsCustom: 1
-    Emit: 1
-  - TypeName: WorldMapLevel, Assembly-CSharp
-    IsCustom: 1
-    Emit: 1
-  - TypeName: GamePlayTool.Misc.ActiveCtrlNodeSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Everlasting.Config.AttributeTable+Alias, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: GameLogic.BackpackModule+BackpackItemState, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: GameLogic.BackpackModuleSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: GamePlayTool.BaseModuleSaveData[], Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: GameLogic.BattleSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Puzzle.Tritris.CharacterTritrisSystem.CharacterTritrisContainerInfo,
-      Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Puzzle.Tritris.CharacterTritrisSystem.CharacterTritrisPieceInfo, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Puzzle.Tritris.CharacterTritrisSystem.CharacterTritrisSystemModule+CharacterTritrisSystemSaveData,
-      Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: DecisionSystem.Consideration, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: CookingModule+CookingModuleSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: HankBook.DiaryEntrySaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.Dictionary`2[[Everlasting.Config.AttributeTable+Alias,
-      Assembly-CSharp],[System.UInt32, mscorlib]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.Dictionary`2[[Guide.GuideLogicCtrl+ModuleEnable,
-      Assembly-CSharp],[System.Boolean, mscorlib]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.Dictionary`2[[UI.Panels.HudNaviDataModel+WayPointKey,
-      Assembly-CSharp],[System.Collections.Generic.List`1[[UI.Panels.HudNaviDataModel+WayPointData,
-      Assembly-CSharp]], mscorlib]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[Managers.SkillTreeNodePerkRecord,
-      Assembly-CSharp]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.Dictionary`2[[UI.Panels.Shop.ShopMainDataModel+MerchantSellItemKey,
-      Assembly-CSharp],[System.Int32, mscorlib]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.Dictionary`2[[SlotTag, Assembly-CSharp],[System.Boolean,
-      mscorlib]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.Dictionary`2[[SlotTag, Assembly-CSharp],[System.UInt64,
-      mscorlib]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.Collections.Generic.Dictionary`2[[System.String,
-      mscorlib],[Hypergryph.MatControlBase+MatSaveInfo, Assembly-CSharp]], mscorlib]],
-      mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.Single,
-      mscorlib]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[Hypergryph.MatControlBase+MatSaveInfo,
-      Assembly-CSharp]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.String,
-      mscorlib]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.Dictionary`2[[System.UInt32, mscorlib],[GameLogic.BackpackModule+BackpackItemState,
-      Assembly-CSharp]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.Dictionary`2[[System.UInt32, mscorlib],[Puzzle.Tritris.CharacterTritrisSystem.CharacterTritrisContainerInfo,
-      Assembly-CSharp]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.Dictionary`2[[System.UInt32, mscorlib],[Puzzle.Tritris.CharacterTritrisSystem.CharacterTritrisPieceInfo,
-      Assembly-CSharp]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.Dictionary`2[[System.UInt32, mscorlib],[Puzzle.Tritris.GameplayTritrisTerminal.PieceInstallInfo,
-      Assembly-CSharp]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.Dictionary`2[[System.UInt32, mscorlib],[QuestSystem.QuestChainSaveData,
-      Assembly-CSharp]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.Dictionary`2[[System.UInt32, mscorlib],[Managers.RoleSkillTreeInfo,
-      Assembly-CSharp]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.Dictionary`2[[System.UInt32, mscorlib],[System.UInt32,
-      mscorlib]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.Dictionary`2[[System.UInt32, mscorlib],[System.UInt64,
-      mscorlib]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[GamePlayTool.GamePlaySaveData,
-      Assembly-CSharp]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.Dictionary`2[[System.UInt64, mscorlib],[GamePlayTool.GamePlaySpawnData,
-      Assembly-CSharp]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: EnemyGroupSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.EnumEqualityComparer`1[[Everlasting.Config.AttributeTable+Alias,
-      Assembly-CSharp]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.EnumEqualityComparer`1[[Guide.GuideLogicCtrl+ModuleEnable,
-      Assembly-CSharp]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.EnumEqualityComparer`1[[SlotTag, Assembly-CSharp]],
-      mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: DecisionSystem.EScoreCurveType, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Hypergryph.EventSaveInfo, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: GameScene.GamePlay.GamePlayRootData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: GameScene.GamePlay.GamePlayRootSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: GamePlayTool.GamePlaySaveActiveState, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: GamePlayTool.GamePlaySaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: GamePlayTool.GamePlaySpawnData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: GamePlayTool.GamePlayUnitSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: GameLogic.GameStateModule+GameStateSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.GenericEqualityComparer`1[[UI.Panels.HudNaviDataModel+WayPointKey,
-      Assembly-CSharp]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.GenericEqualityComparer`1[[UI.Panels.Shop.ShopMainDataModel+MerchantSellItemKey,
-      Assembly-CSharp]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.GenericEqualityComparer`1[[System.String,
-      mscorlib]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.GenericEqualityComparer`1[[System.UInt32,
-      mscorlib]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.GenericEqualityComparer`1[[System.UInt64,
-      mscorlib]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Guide.GuideLogicCtrl+ModuleEnable, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: HankBook.HandbookSave, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.HashSet`1[[System.String, mscorlib]], System.Core
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.HashSet`1[[System.UInt32, mscorlib]], System.Core
-    IsCustom: 0
-    Emit: 1
-  - TypeName: HeroStateSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: UI.Panels.HudNaviDataModel+MarkerAppendType, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: UI.Panels.HudNaviDataModel+WayPointData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: UI.Panels.HudNaviDataModel+WayPointKey, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: UI.Panels.HudNaviDataModel+WayPointSource, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: DecisionSystem.Input_MyHealth, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: DecisionSystem.Input_TargetHealth, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Int32[,], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Int32[], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Guide.InteractiveGuide.InteractiveGuideSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Guide.InteractiveGuide.InteractiveGuideUIElementActiveSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.KeyValuePair`2[[System.UInt32, mscorlib],[System.UInt32,
-      mscorlib]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Puzzle.Klotski.KlotskiBoxSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Puzzle.Klotski.KlotskiLinkSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Puzzle.Klotski.KlotskiSocketSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.List`1[[DecisionSystem.Consideration, Assembly-CSharp]],
-      mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.List`1[[HankBook.DiaryEntrySaveData, Assembly-CSharp]],
-      mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.List`1[[System.Single, mscorlib]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.List`1[[HeroStateSaveData, Assembly-CSharp]],
-      mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.List`1[[UI.Panels.HudNaviDataModel+WayPointData,
-      Assembly-CSharp]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.List`1[[System.Collections.Generic.KeyValuePair`2[[System.UInt32,
-      mscorlib],[System.UInt32, mscorlib]], mscorlib]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.List`1[[Hypergryph.MatControlBase+AnimationClipInfo,
-      Assembly-CSharp]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.List`1[[Puzzle.Tritris.GameplayTritrisTerminal.PieceInstallInfo,
-      Assembly-CSharp]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.List`1[[QuestSystem.QuestMonitorStatistics,
-      Assembly-CSharp]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: MagicModule+MagicModuleSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: MapPOIInfo, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Hypergryph.MatControlBase+AnimationClipInfo, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Hypergryph.MatControlBase+MatSaveInfo, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: GamePlayTool.NpcGroupSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: GamePlayTool.NpcSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: GameScene.GamePlay.UnityNode.PathMove.PathStairsAutoGeneratorSimple+PathStairsSaveData,
-      Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Puzzle.Tritris.GameplayTritrisTerminal.PieceInstallInfo, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: PlayerStateModule+TeamState+CoreTeamState, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: UnityEngine.Quaternion, UnityEngine.CoreModule
-    IsCustom: 0
-    Emit: 1
-  - TypeName: QuestSystem.QuestChainSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Managers.QuestMgrSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: QuestSystem.QuestMonitorState, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Managers.RestManagerSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Managers.RoleSkillTreeInfo, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Managers.RVMgrSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Managers.RVMoveState, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: SceneEnemySaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: GamePlayTool.SceneItemSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: GameScene.SceneLevelSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: GameScene.ScenePlayerSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: UI.Panels.Shop.ShopMainDataModel+MerchantSellItemKey, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Managers.SkillTreeNodePerkRecord, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: SlotTag, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Managers.TeammateSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: GamePlayTool.TriggerSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Puzzle.Tritris.Common.TritrisCell, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Puzzle.Tritris.Common.TritrisCell[], Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Puzzle.Tritris.Common.TritrisRotation, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Puzzle.Tritris.GameplayTritrisTerminal.TritrisTerminalSaveData, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.UInt32[], mscorlib
-    IsCustom: 0
-    Emit: 1
-  - TypeName: Managers.WwiseInfo, Assembly-CSharp
-    IsCustom: 0
     Emit: 1
