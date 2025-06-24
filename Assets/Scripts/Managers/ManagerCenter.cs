@@ -6,14 +6,18 @@ using UnityEngine;
 public class ManagerCenter : Singleton<ManagerCenter>
 {
     public TickersManager TickersMgr;
-    public CooldownManager CooldownManager;
+    public CooldownManager CooldownMgr;
+    public TimeLineManager TimeLineMgr;
 
     public void Init()
     {
         TickersMgr = new TickersManager();
         TickersMgr.Init();
 
-        CooldownManager = new CooldownManager();
-        CooldownManager.Init();
+        CooldownMgr = new CooldownManager();
+        CooldownMgr.Init();
+
+        TimeLineMgr = new TimeLineManager();
+        TimeLineMgr.Init();
     }
 }

@@ -26,7 +26,7 @@ public class GamePlayEnemy : GamePlayAIEntity
 
         if(data != null)
         {
-            var gp = ManagerCenter.Ins.CooldownManager.GetOrCreateGroup(GamePlayId, UpdateMode.FixedUpdate);
+            var gp = ManagerCenter.Ins.CooldownMgr.GetOrCreateGroup(GamePlayId, UpdateMode.FixedUpdate);
             MoveCD = gp.Set("MoveCD", data.MoveCD);
             CheckFaceFlipCD = gp.Set("CheckFaceFlipCD", data.CheckFaceFlipTime);
             ComboAttackCD = gp.Set("ComboAttackCD", data.ComboAttackCD);
@@ -100,7 +100,7 @@ public class GamePlayEnemy : GamePlayAIEntity
     public override void OnDispose()
     {
         base.OnDispose();
-        ManagerCenter.Ins.CooldownManager.RemoveOwner(GamePlayId);
+        ManagerCenter.Ins.CooldownMgr.RemoveOwner(GamePlayId);
     }
 
 #if UNITY_EDITOR

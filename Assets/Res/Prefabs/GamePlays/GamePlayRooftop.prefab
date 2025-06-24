@@ -21001,7 +21001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5bd6453d7763274c92d1e5b65836b00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RootId: 0
+  RootId: 10003
 --- !u!114 &1663161220569685152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21015,26 +21015,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _serializedExposedParameters: []
-  _boundGraphSerialization: '{"type":"GameScene.FlowNode.GamePlayFlowGraph","nodes":[{"_position":{"x":283.3333,"y":275.3333},"$type":"GameScene.FlowNode.Base.OnInitEvent","$id":"0"},{"logType":2,"_inputPortValues":{"Value":{"$content":"22","$type":"System.String"}},"_position":{"x":604.0,"y":359.0},"$type":"GameScene.FlowNode.Function.LogText","$id":"1"},{"_position":{"x":-132.8959,"y":524.1987},"$type":"GameScene.FlowNode.Base.OnTriggerEvent","$id":"2"},{"_field":{"_baseInfo":"GameScene.FlowNode.Base.OnTriggerEventMsg|TriggerGamePlayId"},"_position":{"x":164.5568,"y":864.499},"$type":"FlowCanvas.Nodes.ReflectedFieldNodeWrapper","$version":1,"$id":"3"},{"_inputPortValues":{"Case
-    A":{"$content":1,"$type":"System.UInt32"},"Case B":{"$content":1000102001,"$type":"System.UInt32"}},"_position":{"x":911.718,"y":819.0173},"$type":"SwitchOnUint","$id":"4"},{"GamePlayId":{},"_inputPortValues":{"Spawn
-    Point Id":{"$content":1000101001,"$type":"System.UInt32"}},"_position":{"x":1337.872,"y":895.1531},"$type":"GameScene.FlowNode.GamePlayNode.GamePlaySpawnNode","$id":"5"},{"logType":2,"_inputPortValues":{"Value":{"$content":"3333","$type":"System.String"}},"_position":{"x":1229.676,"y":649.9756},"$type":"GameScene.FlowNode.Function.LogText","$id":"6"},{"_field":{"_baseInfo":"GameScene.FlowNode.Base.OnTriggerEventMsg|Type"},"_position":{"x":148.8229,"y":744.7713},"$type":"FlowCanvas.Nodes.ReflectedFieldNodeWrapper","$version":1,"$id":"7"},{"_type":{"_baseInfo":"TriggerEventType"},"_position":{"x":403.0,"y":534.0},"$type":"FlowCanvas.Nodes.SwitchEnum","$id":"8"},{"_position":{"x":-95.88795,"y":1044.44},"$type":"GameScene.FlowNode.Base.OnTriggerEvent","$id":"9"},{"logType":2,"_position":{"x":689.3298,"y":1026.322},"$type":"GameScene.FlowNode.Function.LogText","$id":"10"},{"_field":{"_baseInfo":"GameScene.FlowNode.Base.OnTriggerEventMsg|Type"},"_position":{"x":19.99975,"y":1281.319},"$type":"FlowCanvas.Nodes.ReflectedFieldNodeWrapper","$version":1,"$id":"11"},{"_method":{"_baseInfo":"System.String|Concat|System.String","_paramsInfo":"System.Object|System.Object"},"_position":{"x":424.2934,"y":1194.935},"$type":"FlowCanvas.Nodes.ReflectedMethodNodeWrapper","$id":"12"},{"_field":{"_baseInfo":"GameScene.FlowNode.Base.OnTriggerEventMsg|TriggerGamePlayId"},"_position":{"x":106.2934,"y":1193.935},"$type":"FlowCanvas.Nodes.ReflectedFieldNodeWrapper","$version":1,"$id":"13"}],"connections":[{"_sourcePortName":"OnEvent","_targetPortName":"In","_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"FlowCanvas.BinderConnection"},{"_sourcePortName":"Message","_targetPortName":"OnTriggerEventMsg","_sourceNode":{"$ref":"2"},"_targetNode":{"$ref":"3","$version":1},"$type":"FlowCanvas.BinderConnection`1[[GameScene.FlowNode.Base.OnTriggerEventMsg,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},{"_sourcePortName":"Message","_targetPortName":"OnTriggerEventMsg","_sourceNode":{"$ref":"2"},"_targetNode":{"$ref":"7","$version":1},"$type":"FlowCanvas.BinderConnection`1[[GameScene.FlowNode.Base.OnTriggerEventMsg,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},{"_sourcePortName":"OnEvent","_targetPortName":"In","_sourceNode":{"$ref":"2"},"_targetNode":{"$ref":"8"},"$type":"FlowCanvas.BinderConnection"},{"_sourcePortName":"Value","_targetPortName":"\u8f93\u5165","_sourceNode":{"$ref":"3","$version":1},"_targetNode":{"$ref":"4"},"$type":"FlowCanvas.BinderConnection`1[[System.UInt32,
-    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},{"_sourcePortName":"B","_targetPortName":"In
-    ","_sourceNode":{"$ref":"4"},"_targetNode":{"$ref":"5"},"$type":"FlowCanvas.BinderConnection"},{"_sourcePortName":"A","_targetPortName":"In","_sourceNode":{"$ref":"4"},"_targetNode":{"$ref":"6"},"$type":"FlowCanvas.BinderConnection"},{"_sourcePortName":"Value","_targetPortName":"Enum","_sourceNode":{"$ref":"7","$version":1},"_targetNode":{"$ref":"8"},"$type":"FlowCanvas.BinderConnection`1[[TriggerEventType,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},{"_sourcePortName":"Enter","_targetPortName":"In","_sourceNode":{"$ref":"8"},"_targetNode":{"$ref":"4"},"$type":"FlowCanvas.BinderConnection"},{"_sourcePortName":"OnEvent","_targetPortName":"In","_sourceNode":{"$ref":"9"},"_targetNode":{"$ref":"10"},"$type":"FlowCanvas.BinderConnection"},{"_sourcePortName":"Message","_targetPortName":"OnTriggerEventMsg","_sourceNode":{"$ref":"9"},"_targetNode":{"$ref":"11","$version":1},"$type":"FlowCanvas.BinderConnection`1[[GameScene.FlowNode.Base.OnTriggerEventMsg,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},{"_sourcePortName":"Message","_targetPortName":"OnTriggerEventMsg","_sourceNode":{"$ref":"9"},"_targetNode":{"$ref":"13","$version":1},"$type":"FlowCanvas.BinderConnection`1[[GameScene.FlowNode.Base.OnTriggerEventMsg,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},{"_sourcePortName":"Value","_targetPortName":"arg0","_sourceNode":{"$ref":"11","$version":1},"_targetNode":{"$ref":"12"},"$type":"FlowCanvas.BinderConnection`1[[System.Object,
-    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},{"_sourcePortName":"Value","_targetPortName":"Value","_sourceNode":{"$ref":"12"},"_targetNode":{"$ref":"10"},"$type":"FlowCanvas.BinderConnection`1[[System.String,
-    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},{"_sourcePortName":"Value","_targetPortName":"arg1","_sourceNode":{"$ref":"13","$version":1},"_targetNode":{"$ref":"12"},"$type":"FlowCanvas.BinderConnection`1[[System.Object,
-    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}],"canvasGroups":[],"localBlackboard":{"_variables":{}}}'
+  _boundGraphSerialization: "{\"type\":\"GameScene.FlowNode.GamePlayFlowGraph\",\"nodes\":[{\"_position\":{\"x\":283.3333,\"y\":275.3333},\"$type\":\"GameScene.FlowNode.Base.OnInitEvent\",\"$id\":\"0\"},{\"PrefabPath\":{},\"_inputPortValues\":{\"Prefab
+    \u8DEF\u5F84\":{\"$content\":\"TimeLinePrefab/Cutscene_FallSequence\",\"$type\":\"System.String\"}},\"_position\":{\"x\":649.225,\"y\":433.6698},\"$type\":\"GameScene.FlowNode.GamePlayNode.GamePlayLoadPrefabAndPlayTimelineNode\",\"$id\":\"1\"},{\"GamePlayId\":{},\"_inputPortValues\":{\"Spawn
+    Point Id\":{\"$content\":1000301001,\"$type\":\"System.UInt32\"}},\"_position\":{\"x\":995.5675,\"y\":567.6608},\"$type\":\"GameScene.FlowNode.GamePlayNode.GamePlaySpawnNode\",\"$id\":\"2\"}],\"connections\":[{\"_sourcePortName\":\"OnEvent\",\"_targetPortName\":\"In
+    \",\"_sourceNode\":{\"$ref\":\"0\"},\"_targetNode\":{\"$ref\":\"1\"},\"$type\":\"FlowCanvas.BinderConnection\"},{\"_sourcePortName\":\"OnFinish\",\"_targetPortName\":\"In
+    \",\"_sourceNode\":{\"$ref\":\"1\"},\"_targetNode\":{\"$ref\":\"2\"},\"$type\":\"FlowCanvas.BinderConnection\"}],\"canvasGroups\":[],\"localBlackboard\":{\"_variables\":{}}}"
   _boundGraphObjectReferences: []
   _boundGraphSource:
     _version: 3.25
     _category: 
     _comments: 
-    _translation: {x: 284, y: -79}
-    _zoomFactor: 0.8215649
+    _translation: {x: 160.07047, y: -146.93533}
+    _zoomFactor: 1
   _firstActivation: 0
   _enableAction: 1
   _disableAction: 2
@@ -21745,13 +21737,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6823882835182155985}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.08, y: 1.73, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 16.94, y: 0.9949993, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4069490053013625361}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &4742659522161609518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21764,11 +21756,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b60629c992b8a54590fb31446ff46d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GamePlayId: 1000101002
+  GamePlayId: 1000301001
   spawnEntityTableId: 0
-  timing: 1
+  timing: 0
   needRaycastDetect: 0
   spawnDistance: 10
+  playerCreateAnim: PlayerIdle
 --- !u!1 &6943639376534300559
 GameObject:
   m_ObjectHideFlags: 0

@@ -81,13 +81,13 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         CollectDict(ref triggerDict);
         CollectDict(ref spawnPointDict);
 
-        FlowCtl?.Init();
-
         if (Current != this)
         {
             Current?.task?.Stop();
-            Current = this;
         }
+        Current = this;
+
+        FlowCtl?.Init();
 
         cts = new CancellationTokenSource();
 
