@@ -227,7 +227,7 @@ MonoBehaviour:
   - {x: 0.2206626, y: -0.9899998, z: 0}
   m_ShapePathHash: 136114589
   m_Mesh: {fileID: 0}
-  m_InstanceId: 39432
+  m_InstanceId: 51962
   m_LocalBounds:
     m_Center: {x: 0.0049883127, y: -0.031554222, z: 0}
     m_Extent: {x: 0.21567428, y: 0.95844555, z: 0}
@@ -268,6 +268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GamePlayId: 0
+  maxInteractDistance: 5
 --- !u!1 &1632458685840708588
 GameObject:
   m_ObjectHideFlags: 0

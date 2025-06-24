@@ -103,8 +103,8 @@ public class Player : Entity
         stateMachine.Initialize(idleState);
 
         RefreshInfoState();
-        lifeBar.On(BarComEvent.MAX_ARRIVE, PlayerWin);
-        lifeBar.On(BarComEvent.MIN_ARRIVE, PlayerLose);
+        lifeBar?.On(BarComEvent.MAX_ARRIVE, PlayerWin);
+        lifeBar?.On(BarComEvent.MIN_ARRIVE, PlayerLose);
     }
 
     protected override void Update()
@@ -207,7 +207,10 @@ public class Player : Entity
     public void ChargeAttackMove() => stateMachine.currentState.AnimationEventTrigger();
     public void RefreshInfoState()
     {
-        lifeBar.t = (info.life - 50) / 50;
+        if(lifeBar != null)
+        {
+            lifeBar.t = (info.life - 50) / 50;
+        }
     }
     
     public void TriggerExecutionRetreat()
