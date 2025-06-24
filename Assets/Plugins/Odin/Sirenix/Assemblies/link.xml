@@ -3,4 +3,7 @@
        <assembly fullname="Sirenix.Serialization.Config" preserve="all"/>
        <assembly fullname="Sirenix.Serialization" preserve="all"/>
        <assembly fullname="Sirenix.Utilities" preserve="all"/>
+	   <assembly fullname="mscorlib">
+		<type fullname="System.String" preserve="all" />
+	   </assembly>
 </linker>
