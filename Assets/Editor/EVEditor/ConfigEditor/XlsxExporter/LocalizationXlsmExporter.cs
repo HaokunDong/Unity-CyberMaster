@@ -6,14 +6,14 @@ using System.Linq;
 using System.Text;
 using CsvHelper;
 using Everlasting.Extend;
-//using EverlastingEditor.Utils;
-//using Localization;
-//using Localization.Enum;
+using EverlastingEditor.Utils;
+using Localization;
+using Localization.Enum;
 using OfficeOpenXml;
 using UnityEditor;
 using UnityEngine;
 using FileMode = System.IO.FileMode;
-//using LocalizationAsset = Localization.LocalizationAsset;
+using LocalizationAsset = Localization.LocalizationAsset;
 
 namespace EverlastingEditor.Config.Export
 {
@@ -169,21 +169,21 @@ namespace EverlastingEditor.Config.Export
             }
         }
 
-        //public static void MapLocalizationSetting()
-        //{
-        //    var localizationSetting = AssetDatabase.LoadAssetAtPath<LocalizationSetting>(LOCALIZATION_SETTING_RELATIVE_PATH);
-        //    localizationSetting.inputFiles.Clear();
+        public static void MapLocalizationSetting()
+        {
+            var localizationSetting = AssetDatabase.LoadAssetAtPath<LocalizationSetting>(LOCALIZATION_SETTING_RELATIVE_PATH);
+            localizationSetting.inputFiles.Clear();
 
-        //    var csvFilePaths = EditorUtils.GetFiles(ExcelExportConfig.CsvOutputPath, "*.csv");
-        //    foreach (var csvFilePath in csvFilePaths)
-        //    {
-        //        var csvFile = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets" + csvFilePath.Substring(Application.dataPath.Length));
-        //        var localizationAsset = new LocalizationAsset { textAsset = csvFile, format = TextFileFormat.CSV };
-        //        localizationSetting.inputFiles.Add(localizationAsset);
-        //    }
-            
-        //    EditorUtility.SetDirty(localizationSetting);
-        //    AssetDatabase.SaveAssets();
-        //}
+            var csvFilePaths = EditorUtils.GetFiles(ExcelExportConfig.CsvOutputPath, "*.csv");
+            foreach (var csvFilePath in csvFilePaths)
+            {
+                var csvFile = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets" + csvFilePath.Substring(Application.dataPath.Length));
+                var localizationAsset = new LocalizationAsset { textAsset = csvFile, format = TextFileFormat.CSV };
+                localizationSetting.inputFiles.Add(localizationAsset);
+            }
+
+            EditorUtility.SetDirty(localizationSetting);
+            AssetDatabase.SaveAssets();
+        }
     }
 }

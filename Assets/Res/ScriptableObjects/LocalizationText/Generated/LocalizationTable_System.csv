@@ -1,0 +1,68 @@
+﻿key,Chinese,English,Japanese,Korean,Tchinese
+test,测试,TEST,テスト,테스트,測試
+coin,金币,Coins,コイン,금,金幣
+system_get_coin,获得{0}#coin#,Obtained {0} #coin#,{0}#coin#を獲得した,Acquire{0}#coin#,獲得{0}#coin#
+setting_title,设置,Setting,設定,설정,檔案
+setting_display_mode,显示模式,Display Mode,ディスプレイモード,디스플레이 모드,顯示模式
+setting_my_voice,男主角声音,My Voice,主人公の声,주인공의 목소리,男主聲音
+setting_full_screen,全屏,Full Screen Mode,全画面表示,전체 화면,全螢幕
+setting_window,窗口,Window Mode,ウィンドウモード,창 모드,視窗
+setting_on,开启,On,オン,켜다,開啟
+setting_off,关闭,Off,オフ,폐쇄,關閉
+setting_sound_master,主音量,Master Volume,主音量,주요 볼륨,主音量
+setting_sound_fx,音效,Effect Volume,効果音,음향 효과,音效
+setting_sound_bgm,背景音乐,BGM Volume,BGM,배경 음악,背景音樂
+setting_language,语言设置,Language Chinese,言語設定,언어 설정,語言配置
+setting_language_chinese,简体中文,English,日本語,한국인,繁體中文
+setting_key_instruction,按键说明,Key Instruction,ボタンの説明,버튼 설명,按鈕說明
+setting_exist,退出,Exist,終了,그만두다,退出
+setting_pause,暂停,Pause,一時停止,정지시키다,暫停
+setting_options,选项,Options,オプション,옵션,選項
+setting_jump,跳过,Skip,スキップ,뛰어넘다,跳過
+setting_backward,回退,Backward,巻き戻す,롤백,回退
+setting_forward,快进,Forward,早送り,빨리감기,快轉
+setting_form_left_to_right,（左至右）,(From Left to Right),(左から右へ),(왼쪽에서 오른쪽으로),（左至右）
+character1Name,御园丽华,,御園麗華,,
+character2Name,相川铃音,,相川鈴音,,
+character3Name,小鸟游亜衣美,,小鳥遊亜依美,,
+achievement1Title,成就标题1,,クリアタイトル1,,
+achievement2Title,成就标题2,,クリアタイトル2,,
+achievement3Title,成就标题3,,クリアタイトル3,,
+achievement4Title,成就标题4,,クリアタイトル4,,
+achievement5Title,成就标题5,,クリアタイトル5,,
+achievement6Title,成就标题6,,クリアタイトル6,,
+achievement7Title,成就标题7,,クリアタイトル7,,
+achievement8Title,成就标题8,,クリアタイトル8,,
+achievement9Title,成就标题9,,クリアタイトル9,,
+achievement10Title,成就标题10,,クリアタイトル10,,
+achievement11Title,成就标题11,,クリアタイトル11,,
+achievement1Info,成就信息1,,クリア情報1,,
+achievement2Info,成就信息2,,クリア情報2,,
+achievement3Info,成就信息3,,クリア情報3,,
+achievement4Info,成就信息4,,クリア情報4,,
+achievement5Info,成就信息5,,クリア情報5,,
+achievement6Info,成就信息6,,クリア情報6,,
+achievement7Info,成就信息7,,クリア情報7,,
+achievement8Info,成就信息8,,クリア情報8,,
+achievement9Info,成就信息9,,クリア情報9,,
+achievement10Info,成就信息10,,クリア情報10,,
+achievement11Info,成就信息11,,クリア情報11,,
+notAchieved,未达成,,未達成,,
+storyLine,故事线,,ストーリーライン,,
+continueGame,继续游戏,,ゲームを続く,,
+getItem,获得道具,,道具を入手,,
+favorability,好感度 {0},,好感度{0},,
+unlockAchievement,解锁成就,,クリアのロックを解除,,
+chapter1Name,使徒、来袭,,使徒、来ます,,
+chapter2Name,刘姥姥二进大观园,,劉おばあちゃんが二度目に大観園に入った,,
+chapter3Name,我的王之力啊,,私の王の力,,
+chapter1,第一章,,第一話,,
+chapter2,第二章,,第二話,,
+chapter3,第三章,,第三話,,
+lastChoiceTitle,选择要攻略的女性,,ターゲットにしたい女性を選ぶ,,
+choice,选择,,選ぶ,,
+item1NameKey,玩偶,,人形,,
+item2NameKey,女仆装,,メイド服,,
+item3NameKey,御守,,御守り,,
+yes,是,,はい,,
+no,否,,いえ,,

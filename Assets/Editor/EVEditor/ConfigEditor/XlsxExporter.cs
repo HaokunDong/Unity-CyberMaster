@@ -4,11 +4,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using EverlastingEditor.Config.Export;
-//using Localization;
+using GameBase.Log;
+using Localization;
 using Tools.Editor;
 using UnityEditor;
 using UnityEditor.VersionControl;
-using Debug = UnityEngine.Debug;
 
 namespace EverlastingEditor
 {
@@ -48,63 +48,63 @@ namespace EverlastingEditor
 		    }
 	    }
 
-        //[MenuItem("Tools/Language/导出Excel多语言数据源至CSV文件", false, 1)]
-        //private static void ExportLocalizationCsv()
-        //{
-        //    var excelExportConfig = ExcelExportConfig.BuildConfig(Path.Combine(ExcelExportConfig.XlsxPath, "Config.txt"));
-        //    if (excelExportConfig == null)
-        //    {
-        //        Debug.LogError("缺少打表工具配置文件");
-        //        return;
-        //    }
-            
-        //    var assets = new AssetList {new Asset(ExcelExportConfig.CsvOutputPath), new Asset(LocalizationXlsmExporter.LocalizationSettingFullPath)};
-        //    if (Provider.enabled)
-        //    {
-        //        Provider.Checkout(assets, CheckoutMode.Asset).Wait();
-        //    }
-            
-        //    ClearFolder(ExcelExportConfig.CsvOutputPath);
-        //    var exportResult = true;
-        //    var (_, _, localizationTables) = excelExportConfig.GetFilesToBeProcessed();
-        //    //var setting = AssetDatabase.LoadAssetAtPath<LocalizationSpeakerSetting>(LocalizationSpeakerSetting.SETTING_PATH);
-        //    //setting.Clear();
-        //    Parallel.ForEach(localizationTables, file =>
-        //    {
-        //        var name = Path.GetFileNameWithoutExtension(file);
-        //        name = char.ToUpper(name[0]) + name.Substring(1);
-        //        try
-        //        {
-        //            var relativePath = EditorFileUtils.GetRelativePath(file, excelExportConfig.localizationTableXlsmFilePath);
-        //            var csvOutputPath = Path.Combine(ExcelExportConfig.CsvOutputPath, relativePath).Replace(".xlsm", ".csv");
-        //            new LocalizationXlsmExporter(name, file, csvOutputPath/*, setting*/).Export();
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            Debug.LogError($"处理{name}表出现异常： {e}"); 
-        //            exportResult = false;
-        //        }
-        //    });
-        //    //EditorUtility.SetDirty(setting);
+		[MenuItem("Tools/Language/导出Excel多语言数据源至CSV文件", false, 1)]
+		private static void ExportLocalizationCsv()
+		{
+			var excelExportConfig = ExcelExportConfig.BuildConfig(Path.Combine(ExcelExportConfig.XlsxPath, "Config.txt"));
+			if (excelExportConfig == null)
+			{
+				LogUtils.Error("缺少打表工具配置文件");
+				return;
+			}
 
-        //    if (!exportResult)
-        //    {
-        //        ShowExportFailedPrompt();
-        //        return;
-        //    }
+			var assets = new AssetList { new Asset(ExcelExportConfig.CsvOutputPath), new Asset(LocalizationXlsmExporter.LocalizationSettingFullPath) };
+			if (Provider.enabled)
+			{
+				Provider.Checkout(assets, CheckoutMode.Asset).Wait();
+			}
 
-        //    AssetDatabase.Refresh();
-        //    if (Provider.enabled)
-        //    {
-        //        Provider.Revert(assets, RevertMode.Unchanged).Wait();
-        //    }
-            
-        //    LocalizationXlsmExporter.MapLocalizationSetting();
-        //    LocalizationManager.EditorInit();
-        //    Debug.Log("多语言表格导出结束");
-        //}
+			ClearFolder(ExcelExportConfig.CsvOutputPath);
+			var exportResult = true;
+			var (_, _, localizationTables) = excelExportConfig.GetFilesToBeProcessed();
+			//var setting = AssetDatabase.LoadAssetAtPath<LocalizationSpeakerSetting>(LocalizationSpeakerSetting.SETTING_PATH);
+			//setting.Clear();
+			Parallel.ForEach(localizationTables, file =>
+			{
+				var name = Path.GetFileNameWithoutExtension(file);
+				name = char.ToUpper(name[0]) + name.Substring(1);
+				try
+				{
+					var relativePath = EditorFileUtils.GetRelativePath(file, excelExportConfig.localizationTableXlsmFilePath);
+					var csvOutputPath = Path.Combine(ExcelExportConfig.CsvOutputPath, relativePath).Replace(".xlsm", ".csv");
+					new LocalizationXlsmExporter(name, file, csvOutputPath/*, setting*/).Export();
+				}
+				catch (Exception e)
+				{
+                    LogUtils.Error($"处理{name}表出现异常： {e}");
+					exportResult = false;
+				}
+			});
+			//EditorUtility.SetDirty(setting);
 
-	    [MenuItem("Tools/Excel配置导出")]
+			if (!exportResult)
+			{
+				ShowExportFailedPrompt();
+				return;
+			}
+
+			AssetDatabase.Refresh();
+			if (Provider.enabled)
+			{
+				Provider.Revert(assets, RevertMode.Unchanged).Wait();
+			}
+
+			LocalizationXlsmExporter.MapLocalizationSetting();
+			LocalizationManager.EditorInit();
+            LogUtils.Debug("多语言表格导出结束");
+		}
+
+		[MenuItem("Tools/Excel配置导出")]
 	    private static void Export()
 	    {
 		    var outputPath = ExcelExportConfig.ConfigOutputPath;
@@ -113,7 +113,7 @@ namespace EverlastingEditor
 		    var excelExportConfig = ExcelExportConfig.BuildConfig(Path.Combine(ExcelExportConfig.XlsxPath, "Config.txt"));
 		    if (excelExportConfig == null)
 		    {
-			    Debug.LogError("缺少打表工具配置文件");
+                LogUtils.Error("缺少打表工具配置文件");
 			    return;
 		    }
 		    
@@ -141,7 +141,7 @@ namespace EverlastingEditor
 			    }
 			    catch (Exception e)
 			    {
-				    Debug.LogError($"处理{name}表出现异常： {e}");
+                    LogUtils.Error($"处理{name}表出现异常： {e}");
                     exportResult = false;
                 }
 		    });
@@ -157,7 +157,7 @@ namespace EverlastingEditor
 			    }
 			    catch (Exception e)
 			    {
-				    Debug.LogError($"处理{name}表出现异常： {e}");
+                    LogUtils.Error($"处理{name}表出现异常： {e}");
                     exportResult = false;
                 }
 		    });
@@ -169,7 +169,7 @@ namespace EverlastingEditor
             }
 		    
 		    new Loader(names.ToArray(), outputPath).Export();
-		    Debug.Log("表格导出结束");
+            LogUtils.Debug("表格导出结束");
 		    
 		    AssetDatabase.Refresh();
 		    if (Provider.enabled)

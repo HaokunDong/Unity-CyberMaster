@@ -1,5 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using Everlasting.Config;
+using GameBase.Log;
+using Localization;
 using Managers;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -33,6 +35,9 @@ public class GameFacade : MonoBehaviour
         await ResourceManager.Init();
         await InitTableData();
         await InitScriptableObjects();
+        LocalizationManager.setting.selectedLanguage = LocalizationManager.String2Lan(PlayerPrefs.GetString(PlayerPrefsKey.Language, "Chinese"));
+        LogUtils.Warning($"当前语言:{LocalizationManager.setting.selectedLanguage}");
+        LogUtils.Warning($"多语言测试 key:coin text:{LocalizationManager.setting.Get("coin")}");
         await OnInitEnd();
     }
 

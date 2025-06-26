@@ -11,7 +11,6 @@ using Managers;
 using Sirenix.Serialization;
 using UnityEngine;
 using SerializationUtility = Sirenix.Serialization.SerializationUtility;
-
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -291,5 +290,43 @@ namespace Tools
             sw.Close();
             file.Close();
         }
+
+#if UNITY_EDITOR
+        /// <summary>
+        /// 查找在某个文件夹下的所有类型资源
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="folder">工程中文件夹相对路径</param>
+        /// <param name="result">返回搜索的结果</param>
+        public static void FindAssetInFolder<T>(string folder, List<T> result) where T : UnityEngine.Object
+        {
+            if (result == null)
+                result = new List<T>();
+            result.Clear();
+
+            //定位到指定文件夹
+            if (!Directory.Exists(folder))
+                return;
+            var directory = new DirectoryInfo(folder);
+
+            //查询该文件夹下的所有文件；
+            var files = directory.GetFiles();
+            int length = files.Length;
+            for (int i = 0; i < length; i++)
+            {
+                var file = files[i];
+
+                //跳过Unity的meta文件（后缀名为.meta）
+                if (file.Extension.Contains("meta"))
+                    continue;
+
+                //根据路径直接拼出对应的文件的相对路径
+                string path = $"{folder}/{file.Name}";
+                var asset = AssetDatabase.LoadAssetAtPath<T>(path);
+                if (asset != null)
+                    result.Add(asset);
+            }
+        }
+#endif
     }
 }
