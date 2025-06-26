@@ -95,7 +95,7 @@ namespace Localization
 
             if (string.IsNullOrEmpty(curLanguage))
             {
-                var language = PlayerPrefs.GetString(PlayerPrefsKey.Language, "Japanese");
+                var language = PlayerPrefs.GetString(PlayerPrefsKey.Language, "Chinese");
                 if (false == string.IsNullOrEmpty(language))
                 {
                     switch (language)

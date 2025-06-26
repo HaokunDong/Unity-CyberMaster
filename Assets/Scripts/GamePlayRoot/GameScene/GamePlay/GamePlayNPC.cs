@@ -1,4 +1,5 @@
 using Cysharp.Text;
+using NodeCanvas.DialogueTrees;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,9 +9,23 @@ public class GamePlayNPC : GamePlayAIEntity, IInteractable
     public Transform Transform => gameObject.transform;
     public bool canInteract => true;
 
+    private DialogueTreeController dialogueTreeController = null;
+
+    private DialogueTreeController DialogueTreeController
+    {
+        get
+        {
+            if (dialogueTreeController == null)
+            {
+                dialogueTreeController = GetComponent<DialogueTreeController>();
+            }
+            return dialogueTreeController;
+        }
+    }
+
     public void OnInteract()
     {
-        throw new System.NotImplementedException();
+        DialogueTreeController?.StartDialogue();
     }
 
 #if UNITY_EDITOR

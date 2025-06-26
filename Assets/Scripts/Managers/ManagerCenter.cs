@@ -1,13 +1,11 @@
 using GameBase.Tickers;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class ManagerCenter : Singleton<ManagerCenter>
 {
     public TickersManager TickersMgr;
     public CooldownManager CooldownMgr;
     public TimeLineManager TimeLineMgr;
+    public DialogueManager DialogueMgr;
 
     public void Init()
     {
@@ -19,5 +17,8 @@ public class ManagerCenter : Singleton<ManagerCenter>
 
         TimeLineMgr = new TimeLineManager();
         TimeLineMgr.Init();
+
+        DialogueMgr = new DialogueManager();
+        DialogueMgr.Init();
     }
 }

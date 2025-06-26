@@ -1,3 +1,4 @@
+using GameBase.Log;
 using UnityEngine;
 
 public class InteractHUD : MonoBehaviour
@@ -18,7 +19,7 @@ public class InteractHUD : MonoBehaviour
         mainCamera = Camera.main;
         if (interactHintPrefab == null)
         {
-            Debug.LogError("Interact Hint Prefab is not assigned in the inspector.");
+            LogUtils.Error("Interact Hint Prefab is not assigned in the inspector.");
             return;
         }
         interactHintInstance = Instantiate(interactHintPrefab, transform);
