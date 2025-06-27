@@ -1,13 +1,16 @@
 using Cysharp.Text;
+using Cysharp.Threading.Tasks;
+using Everlasting.Config;
+using Everlasting.Extend;
+using Managers;
 using NodeCanvas.DialogueTrees;
-using System.Collections;
-using System.Collections.Generic;
+using NodeCanvas.Framework;
 using UnityEngine;
 
 public class GamePlayNPC : GamePlayAIEntity, IInteractable
 {
     public Transform Transform => gameObject.transform;
-    public bool canInteract => true;
+    public bool canInteract => (dialogueTreeController != null && dialogueTreeController.behaviour != null);
 
     private DialogueTreeController dialogueTreeController = null;
 
@@ -20,6 +23,33 @@ public class GamePlayNPC : GamePlayAIEntity, IInteractable
                 dialogueTreeController = GetComponent<DialogueTreeController>();
             }
             return dialogueTreeController;
+        }
+    }
+
+    public override void AfterAIInit(Blackboard blackboard)
+    {
+        base.AfterAIInit(blackboard);
+        var data = NPCTable.GetTableData(TableId);
+
+        if(data != null)
+        {
+            if(!data.DialoguePath.IsNullOrEmpty())
+            {
+                TrySetDialogue(data.DialoguePath).Forget();
+            }
+        }
+    }
+
+    public async UniTask TrySetDialogue(string path)
+    {
+        var tree = await ResourceManager.LoadAssetAsync<DialogueTree>(path, ResType.Dialogue);
+        if(tree != null)
+        {
+            if(dialogueTreeController == null)
+            {
+                dialogueTreeController = gameObject.AddComponent<DialogueTreeController>();
+            }
+            dialogueTreeController.behaviour = tree;
         }
     }
 

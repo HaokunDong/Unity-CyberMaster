@@ -1,10 +1,9 @@
 using Cysharp.Threading.Tasks;
 using Everlasting.Extend;
 using Managers;
+using NodeCanvas.BehaviourTrees;
 using NodeCanvas.Framework;
-using NodeCanvas.Tasks.Conditions;
-using System.Collections;
-using System.Collections.Generic;
+using NodeCanvas.StateMachines;
 using UnityEngine;
 
 public abstract class GamePlayAIEntity : GamePlayEntity
@@ -27,22 +26,31 @@ public abstract class GamePlayAIEntity : GamePlayEntity
 
     public async UniTask InitAI()
     {
-        if(graphOwner != null && !graphPath.IsNullOrEmpty())
+        if(!graphPath.IsNullOrEmpty())
         {
             var graph = await ResourceManager.LoadAssetAsync<Graph>(graphPath, ResType.AIGraph);
             if(graph != null)
             {
+                if(graphOwner == null)
+                {
+                    graphOwner = graphPath.StartsWith("FSM") ? gameObject.AddComponent<FSMOwner>() : gameObject.AddComponent<BehaviourTreeOwner>();
+                }
+                if(blackboard == null)
+                {
+                    blackboard = gameObject.AddComponent<Blackboard>();
+                }
+                graphOwner.blackboard = blackboard;
                 graphOwner.graph = graph; 
-                if (blackboard != null && animator != null)
+                if (blackboard != null)
                 {
                     blackboard.SetVariableValue("self", this);
                     blackboard.SetVariableValue("animator", animator);
                     blackboard.SetVariableValue("rb", rb);
-                    CustomAIBlackboardWriteIn(blackboard);
                 }
-                graphOwner.StartBehaviour();
             }
         }
+        AfterAIInit(blackboard);
+        graphOwner?.StartBehaviour();
     }
 
     public virtual void SetAIActive(bool active)
@@ -71,7 +79,7 @@ public abstract class GamePlayAIEntity : GamePlayEntity
         }
     }
 
-    public virtual void CustomAIBlackboardWriteIn(Blackboard blackboard) { }
+    public virtual void AfterAIInit(Blackboard blackboard) { }
 
     public virtual void RenewBlackboard<T>(Blackboard blackboard, string key, T t) 
     {

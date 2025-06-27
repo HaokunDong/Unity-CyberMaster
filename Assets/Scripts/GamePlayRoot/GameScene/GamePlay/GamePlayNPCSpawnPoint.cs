@@ -8,6 +8,8 @@ using UnityEngine;
 
 public class GamePlayNPCSpawnPoint : GamePlaySpawnPoint<GamePlayNPC>
 {
+    public bool spawnedEnemyPauseWhenInvisible = true;
+
     public override async UniTask<GamePlayNPC> Spawn<GamePlayNPC>()
     {
         var data = NPCTable.GetTableData(spawnEntityTableId);
@@ -15,6 +17,12 @@ public class GamePlayNPCSpawnPoint : GamePlaySpawnPoint<GamePlayNPC>
         {
             var obj = await ResourceManager.LoadAssetAsync<GameObject>(data.Prefab, ResType.Prefab);
             GamePlayNPC npc = obj.GetComponent<GamePlayNPC>();
+            var aie = npc as GamePlayAIEntity;
+            if (aie != null)
+            {
+                aie.graphPath = data.AIPath;
+                aie.pauseWhenInvisible = spawnedEnemyPauseWhenInvisible;
+            }
             return npc;
         }
         return null;

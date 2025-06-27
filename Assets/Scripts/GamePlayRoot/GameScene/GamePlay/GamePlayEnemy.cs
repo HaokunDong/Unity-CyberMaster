@@ -19,9 +19,9 @@ public class GamePlayEnemy : GamePlayAIEntity
     private Cooldown LeapAttackCD;
     private Cooldown StabAttackCD;
 
-    public override void CustomAIBlackboardWriteIn(Blackboard blackboard)
+    public override void AfterAIInit(Blackboard blackboard)
     {
-        base.CustomAIBlackboardWriteIn(blackboard);
+        base.AfterAIInit(blackboard);
         var data = EnemyTable.GetTableData(TableId);  
 
         if(data != null)

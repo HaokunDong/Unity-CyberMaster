@@ -15,13 +15,17 @@ namespace Everlasting.Config
 		public readonly string NPCName;
 		public readonly string Prefab;
 		public readonly string DialogueHeadPath;
+		public readonly string AIPath;
+		public readonly string DialoguePath;
 		
-		public NPCTable(uint Id, string NPCName, string Prefab, string DialogueHeadPath)
+		public NPCTable(uint Id, string NPCName, string Prefab, string DialogueHeadPath, string AIPath, string DialoguePath)
 		{
 			this.Id = Id;
 			this.NPCName = NPCName;
 			this.Prefab = Prefab;
 			this.DialogueHeadPath = DialogueHeadPath;
+			this.AIPath = AIPath;
+			this.DialoguePath = DialoguePath;
 		}
 		public static int Count => NPCTableLoader.ConfigCount;
 		public static NPCTable GetTableData(uint id) => NPCTableLoader.ConfigDic.TryGetValue(id, out var cfg) ? cfg : null;
@@ -60,7 +64,9 @@ namespace Everlasting.Config
 						var NPCName = poolString[binary.ReadInt()];
 						var Prefab = poolString[binary.ReadInt()];
 						var DialogueHeadPath = poolString[binary.ReadInt()];
-						var cfg = new NPCTable(Id, NPCName, Prefab, DialogueHeadPath);
+						var AIPath = poolString[binary.ReadInt()];
+						var DialoguePath = poolString[binary.ReadInt()];
+						var cfg = new NPCTable(Id, NPCName, Prefab, DialogueHeadPath, AIPath, DialoguePath);
 						ConfigList[i] = cfg;
 						ConfigDic.Add(Id, cfg);
 					}
