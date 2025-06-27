@@ -28,9 +28,13 @@ public class PlayerRunState : PlayerGroundedState
             stateMachine.ChangeState(player.idleState);
         }
 
-        if (Input.GetKey(KeyCode.LeftAlt))
+        if (ManagerCenter.Ins.PlayerInputMgr.CanGamePlayInput) 
         {
-            stateMachine.ChangeState(player.moveState);
+            if (Input.GetKey(KeyCode.LeftAlt))
+            {
+                stateMachine.ChangeState(player.moveState);
+            }
         }
+       
     }
 }

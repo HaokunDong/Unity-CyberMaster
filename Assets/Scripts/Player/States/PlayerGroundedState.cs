@@ -22,43 +22,45 @@ public class PlayerGroundedState : PlayerState
     {
         base.Update();
 
-
-        if (Input.GetKeyDown(KeyCode.L))
+        if(ManagerCenter.Ins.PlayerInputMgr.CanGamePlayInput)
         {
-            stateMachine.ChangeState(player.dodgeState);
-        }
-
-        if (Input.GetKey(KeyCode.J))
-        {
-            if (IsStunned())
+            if (Input.GetKeyDown(KeyCode.L))
             {
-                player.attackLimitation = 0;
-                stateMachine.ChangeState(player.beStunnedState);
+                stateMachine.ChangeState(player.dodgeState);
             }
-            else if (player.canExecution && player.RaycastDetectEnemy())
+
+            if (Input.GetKey(KeyCode.J))
             {
-                player.canExecution = false;
-                stateMachine.ChangeState(player.executionState);
+                if (IsStunned())
+                {
+                    player.attackLimitation = 0;
+                    stateMachine.ChangeState(player.beStunnedState);
+                }
+                else if (player.canExecution && player.RaycastDetectEnemy())
+                {
+                    player.canExecution = false;
+                    stateMachine.ChangeState(player.executionState);
+                }
+                else
+                {
+                    stateMachine.ChangeState(player.primaryAttackState);
+                }
             }
-            else
+
+            if (Input.GetKey(KeyCode.U))
             {
-                stateMachine.ChangeState(player.primaryAttackState);
+                stateMachine.ChangeState(player.chargeAttackState);
             }
-        }
 
-        if (Input.GetKey(KeyCode.U))
-        {
-            stateMachine.ChangeState(player.chargeAttackState);
-        }
+            if (Input.GetKey(KeyCode.Space))
+            {
+                stateMachine.ChangeState(player.postureState);
+            }
 
-        if (Input.GetKey(KeyCode.Space))
-        {
-            stateMachine.ChangeState(player.postureState);
-        }
-
-        if (Input.GetKeyDown(KeyCode.K) && player.IsGroundDetected())
-        {
-            stateMachine.ChangeState(player.jumpState);
+            if (Input.GetKeyDown(KeyCode.K) && player.IsGroundDetected())
+            {
+                stateMachine.ChangeState(player.jumpState);
+            }
         }
 
         if (!player.IsGroundDetected())

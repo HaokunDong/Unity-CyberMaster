@@ -26,9 +26,12 @@ public class PlayerMoveState : PlayerGroundedState
 
         player.SetVelocity(xInput * player.moveSpeed, rb.velocity.y);
 
-        if (!Input.GetKey(KeyCode.LeftAlt))
+        if (ManagerCenter.Ins.PlayerInputMgr.CanGamePlayInput)
         {
-            stateMachine.ChangeState(player.runState);
+            if (!Input.GetKey(KeyCode.LeftAlt))
+            {
+                stateMachine.ChangeState(player.runState);
+            }
         }
 
         if (xInput == 0)

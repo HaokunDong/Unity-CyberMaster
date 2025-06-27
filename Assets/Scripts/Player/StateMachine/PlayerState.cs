@@ -40,8 +40,15 @@ public class PlayerState
         stateTimer -= Time.deltaTime;
         postureTimer += Time.deltaTime;
 
-        xInput = Input.GetAxisRaw("Horizontal");
-        yInput = Input.GetAxisRaw("Vertical");
+        if(ManagerCenter.Ins.PlayerInputMgr.CanGamePlayInput)
+        {
+            xInput = Input.GetAxisRaw("Horizontal");
+            yInput = Input.GetAxisRaw("Vertical");
+        }
+        else
+        {
+            xInput = yInput = 0;
+        }
 
         player.animator.SetFloat("yVelocity", rb.velocity.y);
         player.animator.SetFloat("PostureFloat", postureTimer);

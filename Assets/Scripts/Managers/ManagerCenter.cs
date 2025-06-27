@@ -6,6 +6,7 @@ public class ManagerCenter : Singleton<ManagerCenter>
     public CooldownManager CooldownMgr;
     public TimeLineManager TimeLineMgr;
     public DialogueManager DialogueMgr;
+    public PlayerInputManager PlayerInputMgr;
 
     public void Init()
     {
@@ -20,5 +21,8 @@ public class ManagerCenter : Singleton<ManagerCenter>
 
         DialogueMgr = new DialogueManager();
         DialogueMgr.Init();
+
+        PlayerInputMgr = new PlayerInputManager();
+        PlayerInputMgr.Init();
     }
 }

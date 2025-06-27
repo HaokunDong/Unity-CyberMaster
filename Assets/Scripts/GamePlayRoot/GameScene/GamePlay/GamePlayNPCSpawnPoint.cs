@@ -2,8 +2,6 @@ using Cysharp.Text;
 using Cysharp.Threading.Tasks;
 using Everlasting.Config;
 using Managers;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GamePlayNPCSpawnPoint : GamePlaySpawnPoint<GamePlayNPC>

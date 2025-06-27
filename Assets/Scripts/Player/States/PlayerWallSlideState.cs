@@ -30,20 +30,24 @@ public class PlayerWallSlideState : PlayerState
             stateMachine.ChangeState(player.idleState);
         }
 
-        if (Input.GetKey(KeyCode.K))
+        if(ManagerCenter.Ins.PlayerInputMgr.CanGamePlayInput)
         {
-            stateMachine.ChangeState(player.wallJumpState);
-            return;
-        }
+            if (Input.GetKey(KeyCode.K))
+            {
+                stateMachine.ChangeState(player.wallJumpState);
+                return;
+            }
 
-        if (yInput < 0)
-        {
-            rb.velocity = new Vector2(0, rb.velocity.y);
+            if (yInput < 0)
+            {
+                rb.velocity = new Vector2(0, rb.velocity.y);
+            }
+            else
+            {
+                rb.velocity = new Vector2(0, rb.velocity.y * 0.5f);
+            }
         }
-        else
-        {
-            rb.velocity = new Vector2(0, rb.velocity.y * 0.5f);
-        }
+        
 
         if (player.IsGroundDetected())
         {

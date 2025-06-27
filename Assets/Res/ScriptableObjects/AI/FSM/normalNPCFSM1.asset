@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f945e777233a59f4aba40aeca29093a6, type: 3}
+  m_Name: normalNPCFSM1
+  m_EditorClassIdentifier: 
+  _serializedGraph: '{"type":"NodeCanvas.StateMachines.FSM","nodes":[{"_actionList":{"executionMode":1,"actions":[{"CDTime":{"_value":3.0},"cdName":"idleCD","$type":"AddACooldownAndSaveInBBAction"},{"dtPos":{},"posName":"P1","$type":"SetSelfAddPositionAction"},{"dtPos":{"_value":{"x":10.0}},"posName":"P2","$type":"SetSelfAddPositionAction"}]},"_name":"InitState","_position":{"x":638.0,"y":177.0},"$type":"NodeCanvas.StateMachines.ActionState","$id":"0"},{"_actionList":{"executionMode":1,"actions":[{"cd":{"_name":"idleCD"},"changeCDTime":{},"newCDTime":{"_value":1.0},"$type":"ResetACooldownAction"},{"parameter":{"_value":"Idle"},"overrideAgent":{"_type":"UnityEngine.Animator","_name":"animator"},"$type":"AnimatorTryOpenOnlyABoolAction"}]},"_name":"IdleState
+    P1","_position":{"x":882.1774,"y":463.1774},"$type":"NodeCanvas.StateMachines.ActionState","$id":"1"},{"_actionList":{"executionMode":1,"actions":[{"parameter":{"_value":"Move"},"overrideAgent":{"_type":"UnityEngine.Animator","_name":"animator"},"$type":"AnimatorTryOpenOnlyABoolAction"},{"target":{"_name":"P2"},"speed":{"_value":2.0},"stopDistance":{"_value":0.1},"waitActionFinish":true,"$type":"MoveTowardsVec3Action"}]},"_name":"Move2P2","_position":{"x":219.5803,"y":682.2742},"$type":"NodeCanvas.StateMachines.ActionState","$id":"2"},{"_actionList":{"executionMode":1,"actions":[{"cd":{"_name":"idleCD"},"changeCDTime":{},"newCDTime":{"_value":1.0},"$type":"ResetACooldownAction"},{"parameter":{"_value":"Idle"},"overrideAgent":{"_type":"UnityEngine.Animator","_name":"animator"},"$type":"AnimatorTryOpenOnlyABoolAction"}]},"_name":"IdleState
+    P2","_position":{"x":914.8651,"y":1122.093},"$type":"NodeCanvas.StateMachines.ActionState","$id":"3"},{"_actionList":{"executionMode":1,"actions":[{"parameter":{"_value":"Move"},"overrideAgent":{"_type":"UnityEngine.Animator","_name":"animator"},"$type":"AnimatorTryOpenOnlyABoolAction"},{"target":{"_name":"P1"},"speed":{"_value":2.0},"stopDistance":{"_value":0.1},"waitActionFinish":true,"$type":"MoveTowardsVec3Action"}]},"_name":"Move2P1","_position":{"x":1550.678,"y":817.1381},"$type":"NodeCanvas.StateMachines.ActionState","$id":"4"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"NodeCanvas.StateMachines.FSMConnection"},{"_condition":{"cd":{"_name":"idleCD"},"$type":"IsACooldownReadyConditionTask"},"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"2"},"$type":"NodeCanvas.StateMachines.FSMConnection"},{"_sourceNode":{"$ref":"2"},"_targetNode":{"$ref":"3"},"$type":"NodeCanvas.StateMachines.FSMConnection"},{"_condition":{"cd":{"_name":"idleCD"},"$type":"IsACooldownReadyConditionTask"},"_sourceNode":{"$ref":"3"},"_targetNode":{"$ref":"4"},"$type":"NodeCanvas.StateMachines.FSMConnection"},{"_sourceNode":{"$ref":"4"},"_targetNode":{"$ref":"1"},"$type":"NodeCanvas.StateMachines.FSMConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{}}}'
+  _objectReferences: []
+  _graphSource:
+    _version: 3.25
+    _category: 
+    _comments: 
+    _translation: {x: -15, y: -122}
+    _zoomFactor: 0.84930575
+  _haltSerialization: 0

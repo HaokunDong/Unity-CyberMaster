@@ -55,7 +55,18 @@ public class GamePlayNPC : GamePlayAIEntity, IInteractable
 
     public void OnInteract()
     {
+        WaitNPCInteract().Forget();
+    }
+
+    private async UniTask WaitNPCInteract()
+    {
+        ManagerCenter.Ins.PlayerInputMgr.CanGamePlayInput = false;
+        graphOwner?.PauseBehaviour();
         DialogueTreeController?.StartDialogue();
+        await UniTask.DelayFrame(3);
+        await UniTask.WaitUntil(() => !ManagerCenter.Ins.DialogueMgr.IsInDialogue);
+        ManagerCenter.Ins.PlayerInputMgr.CanGamePlayInput = true;
+        graphOwner?.StartBehaviour();
     }
 
 #if UNITY_EDITOR

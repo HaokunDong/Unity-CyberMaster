@@ -25,6 +25,11 @@ namespace GameScene.FlowNode.Base
 
     }
 
+    public struct OnInteractAsyncEventMsg : IFlowAsyncMessage
+    {
+
+    }
+
 
     [Name("OnInit")]
     [Category("事件Event/Common")]
@@ -55,9 +60,23 @@ namespace GameScene.FlowNode.Base
 
     }
 
-    [Name("交互")]
+    [Name("瞬间交互")]
     [Category("事件Event/Common")]
     public class OnInteractEvent : BaseFlowEvent<OnInteractEventMsg>
+    {
+
+    }
+
+    [Name("非瞬间交互 开始")]
+    [Category("事件Event/Common")]
+    public class Interact_OnEnter : BaseFlowEventAsync<OnInteractAsyncEventMsg>
+    {
+
+    }
+
+    [Name("非瞬间交互 结束")]
+    [Category("事件Event/Common")]
+    public class Interact_OnEnter_End : BaseFlowEventAsyncEnd<OnInteractAsyncEventMsg>
     {
 
     }

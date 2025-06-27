@@ -10,6 +10,7 @@ public class Cooldown
     public float Remaining => _remaining <= 0f ? 0f : _remaining;
     public bool IsReady => _remaining <= 0f;
     private float _remaining;
+    private float _duration;
 
     private List<(string tag, Action cb)> _onCooldownEnd = new();
     private List<(string tag, Action<float> cb)> _onTick = new();
@@ -23,7 +24,14 @@ public class Cooldown
     public void Reset(float? newDuration = null, bool clearCallbacks = false)
     {
         if (newDuration.HasValue)
+        {
             _remaining = newDuration.Value;
+            _duration = newDuration.Value;
+        }
+        else
+        {
+            _remaining = _duration;
+        }
         if (clearCallbacks)
         {
             _onCooldownEnd.Clear();

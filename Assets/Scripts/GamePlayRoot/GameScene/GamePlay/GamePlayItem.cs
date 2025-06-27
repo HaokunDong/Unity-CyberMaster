@@ -1,4 +1,5 @@
 using Cysharp.Text;
+using Cysharp.Threading.Tasks;
 using GameScene.FlowNode;
 using GameScene.FlowNode.Base;
 using System.Collections;
@@ -36,7 +37,18 @@ public class GamePlayItem : GamePlayEntity, IInteractable
     }
     public void OnInteract()
     {
-        FlowCtl?.SendFlowMessage(new OnInteractEventMsg());
+        OnInteract2BP().Forget();
+    }
+
+    private async UniTask OnInteract2BP()
+    {
+        if(FlowCtl != null)
+        {
+            FlowCtl.SendFlowMessage(new OnInteractEventMsg());
+            ManagerCenter.Ins.PlayerInputMgr.CanGamePlayInput = false;
+            await FlowCtl.SendFlowMessageAsync(new OnInteractAsyncEventMsg());
+            ManagerCenter.Ins.PlayerInputMgr.CanGamePlayInput = true;
+        }
     }
 
 #if UNITY_EDITOR

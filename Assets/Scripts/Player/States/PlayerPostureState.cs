@@ -26,18 +26,21 @@ public class PlayerPostureState : PlayerState
     {
         base.Update();
 
-        if (!Input.GetKey(KeyCode.Space))
+        if (ManagerCenter.Ins.PlayerInputMgr.CanGamePlayInput) 
         {
-            stateMachine.ChangeState(player.idleState);
-        }
-
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            if (player.canBounceOther)
+            if (!Input.GetKey(KeyCode.Space))
             {
-                stateMachine.ChangeState(player.bounceAttackState);
+                stateMachine.ChangeState(player.idleState);
             }
-        }
+
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                if (player.canBounceOther)
+                {
+                    stateMachine.ChangeState(player.bounceAttackState);
+                }
+            }
+        }   
     }
 
     public override void OnHit(Entity from)
