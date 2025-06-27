@@ -14,10 +14,13 @@ public class GamePlayPlayer : GamePlayEntity
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (ManagerCenter.Ins.PlayerInputMgr.CanGamePlayInput)
         {
-            GamePlayRoot.Current?.InteractTarget?.OnInteract();
-        }
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                GamePlayRoot.Current?.InteractTarget?.OnInteract();
+            }
+        } 
     }
 
 #if UNITY_EDITOR
