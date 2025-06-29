@@ -16,7 +16,7 @@ public class LiHuoBattleState : EnemyState
     {
         base.Enter();
 
-        BuildLihuoBehaviourTree();
+        //BuildLihuoBehaviourTree();
     }
     
     public override void Exit()
@@ -29,7 +29,7 @@ public class LiHuoBattleState : EnemyState
     {
         base.Update();
 
-        behaviourTree.Execute();
+        //behaviourTree.Execute();
     }
 
     public void BuildLihuoBehaviourTree()
