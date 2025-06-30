@@ -286,23 +286,23 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         {
             return null;
         }
-        if (typeof(T) == typeof(GamePlayEnemy) && enemyDict != null && enemyDict.TryGetValue(GamePlayId, out var enemy))
+        if (typeof(GamePlayEnemy).IsAssignableFrom(typeof(T)) && enemyDict != null && enemyDict.TryGetValue(GamePlayId, out var enemy))
         {
             return enemy as T;
         }
-        else if (typeof(T) == typeof(GamePlayNPC) && NPCDict != null && NPCDict.TryGetValue(GamePlayId, out var npc))
+        else if (typeof(GamePlayNPC).IsAssignableFrom(typeof(T)) && NPCDict != null && NPCDict.TryGetValue(GamePlayId, out var npc))
         {
             return npc as T;
         }
-        else if (typeof(T) == typeof(GamePlayItem) && itemDict != null && itemDict.TryGetValue(GamePlayId, out var item))
+        else if (typeof(GamePlayItem).IsAssignableFrom(typeof(T)) && itemDict != null && itemDict.TryGetValue(GamePlayId, out var item))
         {
             return item as T;
         }
-        else if (typeof(T) == typeof(GamePlayTrigger) && triggerDict != null && triggerDict.TryGetValue(GamePlayId, out var trigger))
+        else if (typeof(GamePlayTrigger).IsAssignableFrom(typeof(T)) && triggerDict != null && triggerDict.TryGetValue(GamePlayId, out var trigger))
         {
             return trigger as T;
         }
-        else if (typeof(T) == typeof(GamePlaySpawnPoint) && spawnPointDict != null && spawnPointDict.TryGetValue(GamePlayId, out var spawnPoint))
+        else if (typeof(GamePlaySpawnPoint).IsAssignableFrom(typeof(T)) && spawnPointDict != null && spawnPointDict.TryGetValue(GamePlayId, out var spawnPoint))
         {
             return spawnPoint as T;
         }

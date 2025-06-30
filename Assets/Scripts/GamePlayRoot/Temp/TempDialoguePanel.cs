@@ -78,6 +78,7 @@ public class TempDialoguePanel : MonoBehaviour
     public void OnClickContinue()
     {
         onContinueClicked?.Invoke();
+        onContinueClicked = null;
     }
 
     private void OnOptionClicked(int index)

@@ -2,8 +2,6 @@ using Cysharp.Text;
 using Cysharp.Threading.Tasks;
 using GameScene.FlowNode;
 using GameScene.FlowNode.Base;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -48,6 +46,19 @@ public class GamePlayItem : GamePlayEntity, IInteractable
             ManagerCenter.Ins.PlayerInputMgr.CanGamePlayInput = false;
             await FlowCtl.SendFlowMessageAsync(new OnInteractAsyncEventMsg());
             ManagerCenter.Ins.PlayerInputMgr.CanGamePlayInput = true;
+        }
+    }
+
+    public void SendGamePlayMsg<M>(M msg) where M : IFlowMessage
+    {
+        flowCtl?.SendFlowMessage(msg);
+    }
+
+    public async UniTask SendGamePlayAsyncMsg<M>(M msg) where M : IFlowAsyncMessage
+    {
+        if (flowCtl != null)
+        {
+            await flowCtl.SendFlowMessageAsync(msg);
         }
     }
 
