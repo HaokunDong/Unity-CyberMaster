@@ -3,12 +3,9 @@ using Everlasting.Config;
 using Localization;
 using NodeCanvas.DialogueTrees;
 using NodeCanvas.Framework;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 using ParadoxNotion.Design;
 using System;
 using System.Collections.Generic;
-using Unity.Mathematics;
-
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -245,7 +242,7 @@ public class DialogueChoiceNode : DTNode
             choice.aks.Clear();
         }
 
-        var wLen = math.min(choice.aks.Count * 23, 400);
+        var wLen = Math.Min(choice.aks.Count * 23, 400);
         choice.scrollPos = GUILayout.BeginScrollView(choice.scrollPos, GUILayout.Width(380), GUILayout.Height(wLen));
         if (choice.aks != null && choice.aks.Count > 0)
         {

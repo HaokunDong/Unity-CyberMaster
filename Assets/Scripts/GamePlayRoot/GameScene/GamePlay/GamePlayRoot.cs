@@ -272,6 +272,14 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         flowCtl?.SendFlowMessage(msg);
     }
 
+    public async UniTask SendGamePlayAsyncMsg<M>(M msg) where M : IFlowAsyncMessage
+    {
+        if(flowCtl != null)
+        {
+            await flowCtl.SendFlowMessageAsync(msg);
+        }
+    }
+
     public T GetAGamePlayEntity<T>(uint GamePlayId) where T : GamePlayEntity
     {
         if (GamePlayId <= 0)

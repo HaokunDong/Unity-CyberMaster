@@ -34,6 +34,7 @@ namespace FlowCanvas.Nodes
                 caseInput.Add(AddInput(i));
                 caseOutput.Add(AddFlowOutput(StringUtils.GetAlphabetLetter(i)));
             }
+            caseOutput.Add(AddFlowOutput("Default"));
 
             AddValueOutput("Current", () => { return current; });
             AddFlowInput("In", Enter);
@@ -55,6 +56,10 @@ namespace FlowCanvas.Nodes
             if (index >= 0)
             {
                 caseOutput[index].Call(f);
+            }
+            else
+            {
+                caseOutput[caseOutput.Count - 1].Call(f); // Default case
             }
         }
 
