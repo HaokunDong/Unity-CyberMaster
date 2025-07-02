@@ -580,7 +580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b60629c992b8a54590fb31446ff46d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GamePlayId: 1000101002
+  GamePlayId: 1000401002
   spawnEntityTableId: 0
   timing: 1
   needRaycastDetect: 0
@@ -633,7 +633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5bd6453d7763274c92d1e5b65836b00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RootId: 0
+  RootId: 10004
 --- !u!114 &1815256335926261987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21084,7 +21084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c1b632727a6e8f4280b857b15456233, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GamePlayId: 1000101001
+  GamePlayId: 1000401001
   spawnEntityTableId: 35001
   timing: 0
   needRaycastDetect: 0
@@ -21276,7 +21276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7312814d74ef2434eb384ff4bbe19622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GamePlayId: 1000102001
+  GamePlayId: 1000402001
   triggerType: 0
   triggerCooldown: 0
   targetLayerMask:

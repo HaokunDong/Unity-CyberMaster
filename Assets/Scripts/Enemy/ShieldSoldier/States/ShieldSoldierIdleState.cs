@@ -13,8 +13,6 @@ public class ShieldSoldierIdleState : EnemyState
     public override void Enter()
     {
         base.Enter();
-        stateTimer = 1f;
-        shieldSoldier.SetZeroVelocity();
     }
 
     public override void Exit()
@@ -25,12 +23,5 @@ public class ShieldSoldierIdleState : EnemyState
     public override void Update()
     {
         base.Update();
-
-        if (shieldSoldier.IsPlayerInViewRange())
-        {
-            stateMachine.ChangeState(shieldSoldier.runState);
-        }
-
-
     }
 }

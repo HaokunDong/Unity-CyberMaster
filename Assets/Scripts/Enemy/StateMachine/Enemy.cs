@@ -63,22 +63,6 @@ public class Enemy : Entity
         stateMachine.currentState.BeExecution();
     }
 
-/*    public virtual bool IsInAttackRange()
-    {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll
-                (attackCheck[attackCount].position, attackCheckRadius[attackCount]);
-        foreach (var hit in colliders)
-        {
-
-            if (hit.GetComponent<Player>() != null)
-            {
-                return true;
-            }
-        }
-        return false;
-    }*/
-
-
     public virtual bool IsPlayerExist()
     {
         if (player != null)

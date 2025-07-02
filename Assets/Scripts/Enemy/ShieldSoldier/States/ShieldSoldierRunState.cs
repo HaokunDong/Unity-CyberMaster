@@ -13,11 +13,6 @@ public class ShieldSoldierRunState : EnemyState
     public override void Enter()
     {
         base.Enter();
-
-        if(shieldSoldier.facingDir != shieldSoldier.RelativePosition())
-        {
-            shieldSoldier.FlipController(shieldSoldier.RelativePosition());
-        }
     }
 
     public override void Exit()
@@ -28,17 +23,5 @@ public class ShieldSoldierRunState : EnemyState
     public override void Update()
     {
         base.Update();
-
-        shieldSoldier.SetVelocity(shieldSoldier.facingDir * shieldSoldier.moveSpeed, rb.velocity.y);
-
-        if (!shieldSoldier.IsPlayerInViewRange())
-        {
-            stateMachine.ChangeState(shieldSoldier.idleState);
-        }
-
-        if (shieldSoldier.IsPlayerInAttackRange())
-        {
-            stateMachine.ChangeState(shieldSoldier.primaryAttackState);
-        }
     }
 }
