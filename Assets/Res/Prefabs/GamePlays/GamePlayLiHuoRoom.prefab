@@ -517,8 +517,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6636393807607356627}
-  - {fileID: 6091221296434053959}
+  - {fileID: 3363660599675489914}
+  - {fileID: 2078826804322745455}
   m_Father: {fileID: 5909928335414193390}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1524769208902726203
@@ -536,7 +536,7 @@ MonoBehaviour:
   label: "\u51FA\u751F\u70B9\u8282\u70B9"
   typeName: GamePlaySpawnPoint
   c: {r: 1, g: 0, b: 0.65080976, a: 1}
---- !u!1 &1791724682483385495
+--- !u!1 &1806974355539747111
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -544,48 +544,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6091221296434053959}
-  - component: {fileID: 7309791069522719866}
+  - component: {fileID: 2078826804322745455}
+  - component: {fileID: 3675048191264890143}
   m_Layer: 0
-  m_Name: PlayerSpawnP
+  m_Name: LiHuoSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6091221296434053959
+--- !u!4 &2078826804322745455
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1791724682483385495}
+  m_GameObject: {fileID: 1806974355539747111}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -38.41, y: -2.3, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7615770873937067487}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7309791069522719866
+--- !u!114 &3675048191264890143
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1791724682483385495}
+  m_GameObject: {fileID: 1806974355539747111}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b60629c992b8a54590fb31446ff46d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c1b632727a6e8f4280b857b15456233, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   GamePlayId: 1000401002
-  spawnEntityTableId: 0
-  timing: 1
+  spawnEntityTableId: 35001
+  timing: 0
   needRaycastDetect: 0
   spawnDistance: 10
-  playerCreateAnim: 
+  spawnedEnemyPauseWhenInvisible: 1
 --- !u!1 &1909059943787535699
 GameObject:
   m_ObjectHideFlags: 0
@@ -21040,56 +21040,6 @@ MonoBehaviour:
   comment: "\u654C\u4EBA/NPC/\u4EA4\u4E92\u7269..."
   c: {r: 0, g: 0.9218221, b: 1, a: 1}
   show: 1
---- !u!1 &4179205682452603272
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6636393807607356627}
-  - component: {fileID: 79092072098427288}
-  m_Layer: 0
-  m_Name: BossSpawnP
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6636393807607356627
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4179205682452603272}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.1, y: -3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7615770873937067487}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &79092072098427288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4179205682452603272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c1b632727a6e8f4280b857b15456233, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GamePlayId: 1000401001
-  spawnEntityTableId: 35001
-  timing: 0
-  needRaycastDetect: 0
-  spawnDistance: 30
-  spawnedEnemyPauseWhenInvisible: 1
 --- !u!1 &4366932270608864813
 GameObject:
   m_ObjectHideFlags: 0
@@ -21377,3 +21327,53 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!1 &8401140353908250257
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3363660599675489914}
+  - component: {fileID: 2194293652500128097}
+  m_Layer: 0
+  m_Name: PlayerSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3363660599675489914
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8401140353908250257}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7615770873937067487}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2194293652500128097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8401140353908250257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b60629c992b8a54590fb31446ff46d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GamePlayId: 1000401001
+  spawnEntityTableId: 0
+  timing: 0
+  needRaycastDetect: 0
+  spawnDistance: 10
+  playerCreateAnim: 
