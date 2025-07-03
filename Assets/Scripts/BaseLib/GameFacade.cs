@@ -5,7 +5,6 @@ using Localization;
 using Managers;
 using System.Threading.Tasks;
 using UnityEngine;
-
 public class GameFacade : MonoBehaviour
 {
 #if UNITY_EDITOR
@@ -24,8 +23,8 @@ public class GameFacade : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        ManagerCenter.Ins.TickersMgr.Update(Time.deltaTime);
-        ManagerCenter.Ins.CooldownMgr.TickByMode(UpdateMode.Update, Time.deltaTime, Time.unscaledDeltaTime);
+        ManagerCenter.Ins.TickersMgr?.Update(Time.deltaTime);
+        ManagerCenter.Ins.CooldownMgr?.TickByMode(UpdateMode.Update, Time.deltaTime, Time.unscaledDeltaTime);
     }
     #region 初始化
     private async UniTask Init()
@@ -43,13 +42,13 @@ public class GameFacade : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ManagerCenter.Ins.CooldownMgr.TickByMode(UpdateMode.FixedUpdate, Time.deltaTime, Time.unscaledDeltaTime);
+        ManagerCenter.Ins.CooldownMgr?.TickByMode(UpdateMode.FixedUpdate, Time.deltaTime, Time.unscaledDeltaTime);
     }
 
     private void LateUpdate()
     {
-        ManagerCenter.Ins.TickersMgr.LateUpdate(Time.deltaTime);
-        ManagerCenter.Ins.CooldownMgr.TickByMode(UpdateMode.LateUpdate, Time.deltaTime, Time.unscaledDeltaTime);
+        ManagerCenter.Ins.TickersMgr?.LateUpdate(Time.deltaTime);
+        ManagerCenter.Ins.CooldownMgr?.TickByMode(UpdateMode.LateUpdate, Time.deltaTime, Time.unscaledDeltaTime);
     }
 
     private async UniTask InitTableData()
