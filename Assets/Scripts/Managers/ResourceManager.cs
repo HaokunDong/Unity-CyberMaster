@@ -118,8 +118,11 @@ namespace Managers
             s_assetLoader = new AssetBundleLoader();
 #endif
             await s_assetLoader.Init();
-            s_objPoolParent = new GameObject("ResObjectPool");
-            s_objUsedParent = new GameObject("ResObjectUsed");
+            if(Application.isPlaying)
+            {
+                s_objPoolParent = new GameObject("ResObjectPool");
+                s_objUsedParent = new GameObject("ResObjectUsed");
+            }
             Application.lowMemory += delegate()
             {
                 LogUtils.Error("内存低警告");

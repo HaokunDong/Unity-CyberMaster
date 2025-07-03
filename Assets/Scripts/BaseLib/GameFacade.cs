@@ -4,14 +4,13 @@ using GameBase.Log;
 using Localization;
 using Managers;
 using System.Threading.Tasks;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 public class GameFacade : MonoBehaviour
 {
-#if UNITY_EDITOR
-    public bool testCurrentScene = false;
-#endif
-
-    // Start is called before the first frame update
+    public uint GamePlayLevelId = 10003;
     private void Awake()
     {
         QualitySettings.vSyncCount = 0;
@@ -35,8 +34,6 @@ public class GameFacade : MonoBehaviour
         await InitTableData();
         await InitScriptableObjects();
         LocalizationManager.setting.selectedLanguage = LocalizationManager.String2Lan(PlayerPrefs.GetString(PlayerPrefsKey.Language, "Chinese"));
-        LogUtils.Warning($"当前语言:{LocalizationManager.setting.selectedLanguage}");
-        LogUtils.Warning($"多语言测试 key:coin text:{LocalizationManager.setting.Get("coin")}");
         await OnInitEnd();
     }
 
@@ -65,7 +62,10 @@ public class GameFacade : MonoBehaviour
     #region 初始化结束后
     private async Task OnInitEnd()
     {
-        var gpObj = await ResourceManager.LoadAssetAsync<GameObject>(GamePlayTable.GetTableData(10003).Prefab, ResType.Prefab);
+#if UNITY_EDITOR
+        GamePlayLevelId = (uint)EditorPrefs.GetInt("SelectedGamePlayLevelId", (int)GamePlayLevelId);
+#endif
+        var gpObj = await ResourceManager.LoadAssetAsync<GameObject>(GamePlayTable.GetTableData(GamePlayLevelId).Prefab, ResType.Prefab);
         var gp = gpObj.GetComponent<GamePlayRoot>();
         gp.Init().Forget();
     }
