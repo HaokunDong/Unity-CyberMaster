@@ -27,6 +27,8 @@ public class SkillConfig : SerializedScriptableObject
 
     [NonSerialized, ShowInInspector, ReadOnly]
     public GameObject owner;
+    [NonSerialized, ShowInInspector, ReadOnly]
+    public SkillDriver skillDriver;
     public event Func<int> OnGetFaceDir;
     public event Action OwnFacePlayer;
 

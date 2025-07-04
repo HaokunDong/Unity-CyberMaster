@@ -11,26 +11,49 @@ public class SkillDriver
     private readonly Func<float> getDeltaTime;
 
     public SkillConfig skillConfig { get; private set; } = null;
+    public uint SkillOwnerGPId { get; private set; }
+    public Type ShillOwnerGPType { get; private set; }
 
     private int currentFrame;
+    public int CurrentFrame => currentFrame;
+
     private float frameElapsed;
     private float frameInterval => 1f / skillConfig.FrameRate;
 
     private bool isPlaying = false;
     private bool isPaused = false;
 
-    public bool IsPlaying => isPlaying;
+    public bool IsPlaying
+    {
+        get => isPlaying;
+        private set
+        {
+            if (isPlaying != value)
+            {
+                isPlaying = value;
+                if (isPlaying)
+                {
+                    SkillBoxManager.PlayingSkillCount++;
+                }
+                else
+                {
+                    SkillBoxManager.PlayingSkillCount--;
+                }
+            }
+        }
+    }
     public bool IsPaused => isPaused;
-    public bool IsCompleted { get; private set; } = false;
 
     public event Action OnSkillFinished;
     private event Func<int> OnGetFaceDir;
-    private event Action<SkillHitBoxClip> OnHitBoxTriggered;
+    public event Action<HitResType, uint, uint, float> OnHitBoxTriggered;
     private event Action OnFacePlayer;
     private List<ISkillTrack> tracks;
 
-    public SkillDriver(Animator animator, Rigidbody2D rb, Action<SkillHitBoxClip> OnHitBoxTriggered, Func<float> getDeltaTime, Func<int> getDir, Action facePlayer)
+    public SkillDriver(uint GPId, Type type, Animator animator, Rigidbody2D rb, Action<HitResType, uint, uint, float> OnHitBoxTriggered, Func<float> getDeltaTime, Func<int> getDir, Action facePlayer)
     {
+        this.SkillOwnerGPId = GPId;
+        this.ShillOwnerGPType = type;
         this.animator = animator;
         this.rb = rb;
         this.getDeltaTime = getDeltaTime;
@@ -43,6 +66,7 @@ public class SkillDriver
     {
         skillConfig = config;
         skillConfig.owner = animator? animator.gameObject : rb.gameObject;
+        skillConfig.skillDriver = this;
         skillConfig.OnGetFaceDir -= this.OnGetFaceDir;
         skillConfig.OnGetFaceDir += this.OnGetFaceDir;
         skillConfig.OwnFacePlayer -= this.OnFacePlayer;
@@ -79,12 +103,11 @@ public class SkillDriver
     {
         currentFrame = Mathf.Clamp(startFrame, 0, skillConfig.FrameCount);
         frameElapsed = 0f;
-        isPlaying = true;
-        IsCompleted = false;
+        IsPlaying = true;
 
         int maxFrame = skillConfig.FrameCount;
 
-        while (isPlaying && currentFrame <= maxFrame)
+        while (IsPlaying && currentFrame <= maxFrame)
         {
             if (isPaused)
             {
@@ -98,7 +121,7 @@ public class SkillDriver
             while (frameElapsed >= frameInterval)
             {
                 frameElapsed -= frameInterval;
-                foreach(var t in tracks)
+                foreach (var t in tracks)
                 {
                     t.Update(currentFrame);
                 }
@@ -108,8 +131,7 @@ public class SkillDriver
                 {
                     if (skillConfig != null && skillConfig.isLoopSkill)
                     {
-                        isPlaying = false;
-                        IsCompleted = true;
+                        IsPlaying = false;
                         LoopSkill().Forget();
                     }
                     else
@@ -148,7 +170,11 @@ public class SkillDriver
             t.OnSkillEnd();
         }
 
-        isPlaying = false;
-        IsCompleted = true;
+        IsPlaying = false;
+    }
+
+    public void OnHit(HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue)
+    {
+        OnHitBoxTriggered?.Invoke(hitRestype, attackerGPId, beHitterGPId, damageBaseValue);
     }
 }

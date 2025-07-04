@@ -167,6 +167,9 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: HitDamageValue
+      Entry: 4
+      Data: 1
     - Name: layer
       Entry: 7
       Data: UnityEngine.LayerMask, UnityEngine.CoreModule

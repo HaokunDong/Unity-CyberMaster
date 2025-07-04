@@ -19,6 +19,15 @@ partial class SkillEditorInspector
         frameCountField.RegisterValueChangedCallback(TrackDurationFieldValueChangedCallback<HitBoxTrack, HitBoxTrackItem, SkillHitBoxClip>);
         root.Add(frameCountField);
 
+        var damageValue = new FloatField("ÉËº¦»ù×¼Öµ");
+        damageValue.value = item.Clip.HitDamageValue;
+        damageValue.RegisterValueChangedCallback(evt =>
+        {
+            item.Clip.HitDamageValue = evt.newValue;
+            SkillEditorWindows.Instance.SaveConfig();
+        });
+        root.Add(damageValue);
+
         var layer = new LayerMaskField("Åö×²²ã");
         layer.value = item.Clip.layer;
         layer.RegisterValueChangedCallback(evt =>

@@ -1,12 +1,8 @@
 using Cysharp.Text;
-using Cysharp.Threading.Tasks;
 using Everlasting.Config;
 using GameBase.Log;
 using NodeCanvas.Framework;
-using NodeCanvas.Tasks.Conditions;
 using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GamePlayEnemy : GamePlayAIEntity
@@ -47,9 +43,14 @@ public class GamePlayEnemy : GamePlayAIEntity
         }
 
         skillDriver = new SkillDriver(
+            GamePlayId,
+            typeof(GamePlayEnemy),
             animator,
             rb,
-            (SkillHitBoxClip clip) => LogUtils.Warning($"HitBox Triggered: {clip}"),
+            (HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue) => 
+                {
+                    LogUtils.Warning($"攻击命中类型: {hitRestype} 攻击者GPId: {attackerGPId} 受击者GPId: {beHitterGPId} 伤害基准值: {damageBaseValue}"); 
+                },
             () => Time.fixedDeltaTime,
             () => facingDir,
             () => { FacePlayer(); }
