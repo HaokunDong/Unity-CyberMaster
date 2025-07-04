@@ -41,15 +41,15 @@ public class PlayerBounceAttackState : PlayerState
             stateMachine.ChangeState(player.postureState);
         }
     }
-    public override void OnHit(Entity from)
+    public override void OnHit(uint attackerGPId)
     {
-        HitEffectController.Create((from.transform.position + player.transform.position) / 2, new HitEffectInfo() { type = HitEffectType.BounceHit });
+        /*HitEffectController.Create((from.transform.position + player.transform.position) / 2, new HitEffectInfo() { type = HitEffectType.BounceHit });
         player.info.life = Mathf.Clamp(player.info.life + GlobalRef.Ins.cfg.playerIncreaseLife_bounce, 0, 100);
 
         if (player.facingDir != -from.facingDir)//Flip when player is attecked when player in posture.
         {
             player.Flip();
-        }
+        }*/
 
     }
 }

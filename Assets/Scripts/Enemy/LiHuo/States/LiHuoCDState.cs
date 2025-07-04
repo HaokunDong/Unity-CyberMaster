@@ -40,11 +40,11 @@ public class LiHuoCDState : EnemyState
         PlayerManager.Ins.player.OnExecution.AddListener(Dead);
     }
 
-    public override void OnHit(Entity from)
+    public override void OnHit(uint attackerGPId)
     {
-        base.OnHit(from);
+        base.OnHit(attackerGPId);
 
-        liHuo.SetMovement(from.attackForce[from.attackCount] * from.facingDir, rb.velocity.y);
+        //liHuo.SetMovement(attackerGPId.attackForce[from.attackCount] * from.facingDir, rb.velocity.y);
 
         if (liHuo.canBounceOther)
         {
@@ -52,13 +52,13 @@ public class LiHuoCDState : EnemyState
         }
 
         //Play the HitEffect and sound effect clips
-        HitEffectController.Create((from.transform.position + enemy.transform.position) / 2f, new HitEffectInfo() { type = HitEffectType.BlockHit });
+/*        HitEffectController.Create((from.transform.position + enemy.transform.position) / 2f, new HitEffectInfo() { type = HitEffectType.BlockHit });
         if (from is Player)
         {
             Player p = from as Player;
             p.info.life = Mathf.Clamp(p.info.life + GlobalRef.Ins.cfg.playerIncreaseLife_attack, 0, 100);
             p.RefreshInfoState();
-        }
+        }*/
     }
 
     public void Dead()

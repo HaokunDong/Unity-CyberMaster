@@ -72,7 +72,7 @@ public class Entity : MonoBehaviour
         
     }
 
-    public virtual void OnHitFromTarget(Entity from)
+    public virtual void OnHitFromTarget(uint attackerGPId)
     {
 
     }

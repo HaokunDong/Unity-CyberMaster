@@ -90,6 +90,11 @@ public abstract class GamePlayEntity : MonoBehaviour, ICustomHierarchyComment
         
     }
 
+    public virtual void OnHitBoxTrigger(HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue)
+    {
+
+    }
+
 #if UNITY_EDITOR
     public abstract bool GetHierarchyComment(out string name, out Color color);
 #endif

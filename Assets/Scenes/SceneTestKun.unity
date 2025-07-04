@@ -723,7 +723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d94a439a7b1844548acacfd85c1893c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testCurrentScene: 0
+  GamePlayLevelId: 10003
 --- !u!4 &781085729
 Transform:
   m_ObjectHideFlags: 0

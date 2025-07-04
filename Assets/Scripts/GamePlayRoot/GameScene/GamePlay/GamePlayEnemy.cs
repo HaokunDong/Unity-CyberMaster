@@ -49,7 +49,8 @@ public class GamePlayEnemy : GamePlayAIEntity
             rb,
             (HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue) => 
                 {
-                    LogUtils.Warning($"攻击命中类型: {hitRestype} 攻击者GPId: {attackerGPId} 受击者GPId: {beHitterGPId} 伤害基准值: {damageBaseValue}"); 
+                    LogUtils.Warning($"攻击命中类型: {hitRestype} 攻击者GPId: {attackerGPId} 受击者GPId: {beHitterGPId} 伤害基准值: {damageBaseValue}");
+                    GamePlayRoot.Current.player.OnHitBoxTrigger(hitRestype, attackerGPId, beHitterGPId, damageBaseValue);
                 },
             () => Time.fixedDeltaTime,
             () => facingDir,

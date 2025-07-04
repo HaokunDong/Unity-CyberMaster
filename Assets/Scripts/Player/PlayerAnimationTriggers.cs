@@ -13,7 +13,7 @@ public class PlayerAnimationTriggers : MonoBehaviour
 
     private void AttackTrigger()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll
+        /*Collider2D[] colliders = Physics2D.OverlapCircleAll
             (player.attackCheck[player.attackCount].position, player.attackCheckRadius[player.attackCount]);
 
         foreach (var hit in colliders)
@@ -23,12 +23,12 @@ public class PlayerAnimationTriggers : MonoBehaviour
                 hit.GetComponent<Enemy>().OnHitFromTarget(player);
                 player.HitTarget();
             }
-        }
+        }*/
     }
 
     private void ChargeAttackTrigger()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(player.chargeAttackCheck.position, player.chargeAttackRadius);
+        /*Collider2D[] colliders = Physics2D.OverlapCircleAll(player.chargeAttackCheck.position, player.chargeAttackRadius);
 
         foreach (var hit in colliders)
         {
@@ -37,7 +37,7 @@ public class PlayerAnimationTriggers : MonoBehaviour
                 hit.GetComponent<Enemy>().OnHitFromTarget(player);
                 player.HitTarget();
             }
-        }
+        }*/
     }
 
     private void ChargeAttackMove()
@@ -47,7 +47,7 @@ public class PlayerAnimationTriggers : MonoBehaviour
 
     private void BeStunnedTrigger()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll
+        /*Collider2D[] colliders = Physics2D.OverlapCircleAll
             (player.attackCheck[player.attackCount].position, player.attackCheckRadius[player.attackCount]);
 
         foreach (var hit in colliders)
@@ -56,7 +56,7 @@ public class PlayerAnimationTriggers : MonoBehaviour
             {
                 hit.GetComponent<Enemy>().OnHitFromTarget(player);
             }
-        }
+        }*/
     }
 
     private void ExecutionEnemyTrigger()

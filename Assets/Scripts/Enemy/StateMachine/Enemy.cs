@@ -51,10 +51,10 @@ public class Enemy : Entity
         stateMachine.currentState.Update();
     }
 
-    public override void OnHitFromTarget(Entity from)
+    public override void OnHitFromTarget(uint attackerGPId)
     {
-        base.OnHitFromTarget(from);
-        stateMachine.currentState.OnHit(from);
+        base.OnHitFromTarget(attackerGPId);
+        stateMachine.currentState.OnHit(attackerGPId);
     }
 
     public override void BeExecution()

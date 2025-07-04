@@ -9,10 +9,16 @@ using UnityEngine;
 public class GamePlayPlayer : GamePlayEntity
 {
     public float maxInteractDistance = 5f;
+    public Player player;
 
     public Vector2 GetFacingDirection()
     {
         return transform.right;
+    }
+
+    private void Start()
+    {
+        player = GetComponent<Player>();
     }
 
     private void Update()
@@ -29,6 +35,13 @@ public class GamePlayPlayer : GamePlayEntity
                 TestBladeFightSkill().Forget();
             }
         } 
+    }
+
+    public override void OnHitBoxTrigger(HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue)
+    {
+        base.OnHitBoxTrigger(hitRestype, attackerGPId, beHitterGPId, damageBaseValue);
+
+        player.OnHitFromTarget(attackerGPId);
     }
 
     private async UniTask TestBladeFightSkill()
