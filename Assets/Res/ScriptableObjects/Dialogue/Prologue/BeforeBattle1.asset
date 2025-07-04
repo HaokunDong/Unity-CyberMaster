@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3f478ef69fbe04fa9ed3664a8a443e, type: 3}
+  m_Name: BeforeBattle1
+  m_EditorClassIdentifier: 
+  _serializedGraph: '{"type":"NodeCanvas.DialogueTrees.DialogueTree","nodes":[{"NpcId":45004,"m_key":"Dialogue_Soldier_BeforeBattle1_1","_position":{"x":672.0,"y":148.0},"$type":"NormalDialogueNode","$id":"0"},{"NpcId":45005,"m_key":"Dialogue_Soldier_BeforeBattle1_2","_position":{"x":590.0,"y":258.0},"$type":"NormalDialogueNode","$id":"1"},{"NpcId":45006,"m_key":"Dialogue_Soldier_BeforeBattle1_3","_position":{"x":405.0,"y":376.0},"$type":"NormalDialogueNode","$id":"2"},{"NpcId":45007,"m_key":"Dialogue_SoldierLeader_BeforeBattle1_1","_position":{"x":321.5082,"y":519.1962},"$type":"NormalDialogueNode","$id":"3"},{"NpcId":0,"m_key":"Dialogue_Sun_BeforeBattle1","_position":{"x":857.4681,"y":657.0687},"$type":"NormalDialogueNode","$id":"4"},{"NpcId":45007,"m_key":"Dialogue_SoldierLeader_BeforeBattle1_2","_position":{"x":921.9243,"y":763.9417},"$type":"NormalDialogueNode","$id":"5"},{"NpcId":45008,"m_key":"Dialogue_SoldierLeader_BeforeBattle1_3","_position":{"x":912.9243,"y":890.9417},"$type":"NormalDialogueNode","$id":"6"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"NodeCanvas.DialogueTrees.DTConnection"},{"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"2"},"$type":"NodeCanvas.DialogueTrees.DTConnection"},{"_sourceNode":{"$ref":"2"},"_targetNode":{"$ref":"3"},"$type":"NodeCanvas.DialogueTrees.DTConnection"},{"_sourceNode":{"$ref":"3"},"_targetNode":{"$ref":"4"},"$type":"NodeCanvas.DialogueTrees.DTConnection"},{"_sourceNode":{"$ref":"4"},"_targetNode":{"$ref":"5"},"$type":"NodeCanvas.DialogueTrees.DTConnection"},{"_sourceNode":{"$ref":"5"},"_targetNode":{"$ref":"6"},"$type":"NodeCanvas.DialogueTrees.DTConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{}},"derivedData":{"actorParameters":[],"$type":"NodeCanvas.DialogueTrees.DialogueTree+DerivedSerializationData"}}'
+  _objectReferences: []
+  _graphSource:
+    _version: 3.25
+    _category: 
+    _comments: 
+    _translation: {x: 0.2592487, y: -157.82953}
+    _zoomFactor: 0.9462322
+  _haltSerialization: 0
+  actorParameters: []
