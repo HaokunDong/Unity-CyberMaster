@@ -40,6 +40,16 @@ public abstract class GamePlayEntity : MonoBehaviour, ICustomHierarchyComment
         return true;
     }
 
+    public virtual bool isFacing(GamePlayEntity oe)
+    {
+        if (GamePlayRoot.Current != null && oe != null)
+        {
+            float dirToPlayer = oe.transform.position.x - transform.position.x;
+            return (dirToPlayer > 0 && facingDir > 0) || (dirToPlayer < 0 && facingDir < 0);
+        }
+        return true;
+    }
+
     public virtual bool FacePlayer()
     {
         if(!isFacingPlayer())

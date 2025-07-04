@@ -132,6 +132,7 @@ public class SkillDriver
                     if (skillConfig != null && skillConfig.isLoopSkill)
                     {
                         IsPlaying = false;
+                        this.skillConfig.SkillAttackTimeWindowData.OnSkillEnd();
                         LoopSkill().Forget();
                     }
                     else

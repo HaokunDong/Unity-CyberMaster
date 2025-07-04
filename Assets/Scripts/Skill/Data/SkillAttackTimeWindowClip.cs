@@ -41,4 +41,13 @@ public class SkillAttackTimeWindowTrack : BaseSkillTrack<SkillAttackTimeWindowCl
             hitDict[frameClip] = true;
         }
     }
+
+    public override void OnSkillEnd()
+    {
+        base.OnSkillEnd();
+        foreach (var clip in skillClipDict.Values)
+        {
+            hitDict[clip] = false;
+        }
+    }
 }
