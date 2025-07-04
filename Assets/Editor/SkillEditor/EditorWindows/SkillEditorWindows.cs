@@ -97,6 +97,8 @@ public class SkillEditorWindows : EditorWindow
     private ObjectField SkillConfigObjectField;
     private GameObject currentPreviewCharacterPrefab;
     private GameObject currentPreviewCharacterObj;
+    private Toggle IsLoopSkillToggle;
+
     public GameObject PreviewCharacterObj { get => currentPreviewCharacterObj; }
 
     private void InitTopMenu()
@@ -110,6 +112,7 @@ public class SkillEditorWindows : EditorWindow
         PreviewCharacterPrefabObjectField = root.Q<ObjectField>(nameof(PreviewCharacterPrefabObjectField));
         PreviewCharacterObjectField = root.Q<ObjectField>(nameof(PreviewCharacterObjectField));
         SkillConfigObjectField = root.Q<ObjectField>(nameof(SkillConfigObjectField));
+        IsLoopSkillToggle = root.Q<Toggle>(nameof(IsLoopSkillToggle));
 
         LoadEditorSceneButton.clicked += LoadEditorSceneButtonClick;
         LoadOldSceneButton.clicked += LoadOldSceneButtonClick;
@@ -118,6 +121,14 @@ public class SkillEditorWindows : EditorWindow
         PreviewCharacterPrefabObjectField.RegisterValueChangedCallback(PreviewCharacterPrefabObjectFieldChanged);
         PreviewCharacterObjectField.RegisterValueChangedCallback(PreviewCharacterObjectFielChanged);
         SkillConfigObjectField.RegisterValueChangedCallback(SkillConfigObjectFieldChanged);
+        IsLoopSkillToggle.RegisterValueChangedCallback(evt =>
+        {
+            if (skillConfig != null)
+            {
+                skillConfig.isLoopSkill = evt.newValue;
+                SaveConfig();
+            }
+        });
     }
 
 
@@ -216,7 +227,7 @@ public class SkillEditorWindows : EditorWindow
     private void SkillConfigObjectFieldChanged(ChangeEvent<UnityEngine.Object> evt)
     {
         skillConfig = evt.newValue as SkillConfig;
-        
+        IsLoopSkillToggle.value = skillConfig?.isLoopSkill ?? false;
         CurrentSelectFrameIndex = 0;
         if (skillConfig == null)
         {

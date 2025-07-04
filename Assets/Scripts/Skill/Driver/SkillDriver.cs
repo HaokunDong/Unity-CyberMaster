@@ -106,14 +106,29 @@ public class SkillDriver
                 currentFrame++;
                 if (currentFrame > maxFrame)
                 {
-                    Stop();
-                    OnSkillFinished?.Invoke();
+                    if (skillConfig != null && skillConfig.isLoopSkill)
+                    {
+                        isPlaying = false;
+                        IsCompleted = true;
+                        LoopSkill().Forget();
+                    }
+                    else
+                    {
+                        Stop();
+                        OnSkillFinished?.Invoke();
+                    }
                     break;
                 }
             }
 
             await UniTask.WaitForFixedUpdate();
         }
+    }
+
+    private async UniTask LoopSkill()
+    {
+        await UniTask.DelayFrame(3);
+        PlayAsync().Forget();
     }
 
     public void Pause()

@@ -7,6 +7,7 @@
         <uie:ObjectField label="演示角色预制体" name="PreviewCharacterPrefabObjectField" type="UnityEngine.GameObject, UnityEngine.CoreModule" allow-scene-objects="false" style="flex-grow: 1; flex-shrink: 1; align-items: center; margin-left: 15px; font-size: 15px;" />
         <uie:ObjectField label="场景中的角色" name="PreviewCharacterObjectField" type="UnityEngine.GameObject, UnityEngine.CoreModule" allow-scene-objects="true" style="flex-grow: 1; flex-shrink: 1; align-items: center; margin-left: 15px; font-size: 15px;" />
         <uie:ObjectField label="技能配置文件" name="SkillConfigObjectField" type="SkillConfig,Assembly-CSharp" allow-scene-objects="false" style="flex-grow: 1; flex-shrink: 1; align-items: center; margin-left: 15px; font-size: 15px;" />
+        <ui:Toggle label="循环技能" name="IsLoopSkillToggle" />
     </ui:VisualElement>
     <ui:VisualElement name="Conent" style="flex-direction: row; height: auto; width: auto;">
         <ui:VisualElement name="Left" style="width: 200px; min-width: 250px; border-right-width: 2px; border-left-color: rgb(32, 32, 32); border-right-color: rgb(32, 32, 32); border-top-color: rgb(32, 32, 32); border-bottom-color: rgb(32, 32, 32); margin-right: 0;">
@@ -35,4 +36,5 @@
             <ui:IMGUIContainer name="SelectLine" style="position: absolute; left: 10px;" />
         </ui:VisualElement>
     </ui:VisualElement>
+    <ui:UnsignedLongField label="Unsigned Long Field" value="42" />
 </ui:UXML>
