@@ -43,7 +43,7 @@ public class GamePlayEnemy : GamePlayAIEntity
         }
 
         skillDriver = new SkillDriver(
-            GamePlayId,
+            this,
             typeof(GamePlayEnemy),
             animator,
             rb,

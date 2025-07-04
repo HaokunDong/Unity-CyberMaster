@@ -9,6 +9,7 @@ public class SkillDriver
     private readonly Animator animator;
     private readonly Rigidbody2D rb;
     private readonly Func<float> getDeltaTime;
+    private GamePlayEntity owner;
 
     public SkillConfig skillConfig { get; private set; } = null;
     public uint SkillOwnerGPId { get; private set; }
@@ -50,9 +51,10 @@ public class SkillDriver
     private event Action OnFacePlayer;
     private List<ISkillTrack> tracks;
 
-    public SkillDriver(uint GPId, Type type, Animator animator, Rigidbody2D rb, Action<HitResType, uint, uint, float> OnHitBoxTriggered, Func<float> getDeltaTime, Func<int> getDir, Action facePlayer)
+    public SkillDriver(GamePlayEntity entity, Type type, Animator animator, Rigidbody2D rb, Action<HitResType, uint, uint, float> OnHitBoxTriggered, Func<float> getDeltaTime, Func<int> getDir, Action facePlayer)
     {
-        this.SkillOwnerGPId = GPId;
+        this.owner = entity;
+        this.SkillOwnerGPId = entity.GamePlayId;
         this.ShillOwnerGPType = type;
         this.animator = animator;
         this.rb = rb;
@@ -65,7 +67,7 @@ public class SkillDriver
     public void SetSkill(SkillConfig config)
     {
         skillConfig = config;
-        skillConfig.owner = animator? animator.gameObject : rb.gameObject;
+        skillConfig.owner = owner;
         skillConfig.skillDriver = this;
         skillConfig.OnGetFaceDir -= this.OnGetFaceDir;
         skillConfig.OnGetFaceDir += this.OnGetFaceDir;

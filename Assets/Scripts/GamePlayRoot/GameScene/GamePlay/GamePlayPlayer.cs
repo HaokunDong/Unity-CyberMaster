@@ -34,7 +34,7 @@ public class GamePlayPlayer : GamePlayEntity
     private async UniTask TestBladeFightSkill()
     {
         var skillDriver = new SkillDriver(
-            0,
+            this,
             typeof(GamePlayPlayer),
             gameObject.GetComponentInChildren<Animator>(),
             gameObject.GetComponentInChildren<Rigidbody2D>(),

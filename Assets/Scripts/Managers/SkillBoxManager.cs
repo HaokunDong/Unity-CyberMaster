@@ -85,8 +85,7 @@ public class SkillBoxManager
 
     private static void CheckPlayerEnemyFladeFight()
     {
-        var playerObj = playerHitCalUnit.skillDriver.skillConfig.owner.transform.parent;
-        var player = playerObj.GetComponent<GamePlayPlayer>();
+        var player = playerHitCalUnit.skillDriver.skillConfig.owner;
         var playerClip = playerHitCalUnit.clip;
         Vector2 pOrigin = playerHitCalUnit.skillDriver.skillConfig.owner.transform.position;
         var pFaceDir = playerHitCalUnit.skillDriver.skillConfig.GetOwnFaceDir();
@@ -99,8 +98,7 @@ public class SkillBoxManager
             var finish = false;
             var clip = kv.Value.clip;
             var sd = kv.Value.skillDriver;
-            var enemyObj = sd.skillConfig.owner.transform.parent;
-            var enemy = enemyObj.GetComponent<GamePlayEnemy>();
+            var enemy = sd.skillConfig.owner;
             //双方要面对面才可能产生拼刀
             if(player.isFacing(enemy) && enemy.isFacing(player))
             {

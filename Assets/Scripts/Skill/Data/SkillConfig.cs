@@ -26,7 +26,7 @@ public class SkillConfig : SerializedScriptableObject
     public List<ISkillTrack> Tracks = new List<ISkillTrack>();
 
     [NonSerialized, ShowInInspector, ReadOnly]
-    public GameObject owner;
+    public GamePlayEntity owner;
     [NonSerialized, ShowInInspector, ReadOnly]
     public SkillDriver skillDriver;
     public event Func<int> OnGetFaceDir;
