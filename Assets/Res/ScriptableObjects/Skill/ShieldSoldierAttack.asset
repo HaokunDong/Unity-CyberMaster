@@ -419,7 +419,19 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
+      Data: 4
+    - Name: 
+      Entry: 9
       Data: 0
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 8
+    - Name: 
+      Entry: 9
+      Data: 19
     - Name: 
       Entry: 13
       Data: 
@@ -427,5 +439,6 @@ MonoBehaviour:
       Entry: 8
       Data: 
   SkillName: 
-  FrameCount: 100
+  FrameCount: 26
   FrameRate: 13
+  isLoopSkill: 0

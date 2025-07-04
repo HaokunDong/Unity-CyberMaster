@@ -216,7 +216,7 @@ public class SkillEditorWindows : EditorWindow
     private void SkillConfigObjectFieldChanged(ChangeEvent<UnityEngine.Object> evt)
     {
         skillConfig = evt.newValue as SkillConfig;
-
+        
         CurrentSelectFrameIndex = 0;
         if (skillConfig == null)
         {
@@ -224,9 +224,10 @@ public class SkillEditorWindows : EditorWindow
         }
         else
         {
+            AutoTrimByAnimationData(skillConfig);
             CurrentFrameCount = skillConfig.FrameCount;
         }
-
+        DestroyTracks();
         //刷新轨道
         ResetTrack();
         LastConfig = skillConfig;
@@ -378,7 +379,6 @@ public class SkillEditorWindows : EditorWindow
         {
             CurrentSelectFrameIndex = newValue;
         }
-
     }
     private void TimeShaftMouseMove(MouseMoveEvent evt)
     {
@@ -436,6 +436,21 @@ public class SkillEditorWindows : EditorWindow
     {
         timeShaft.MarkDirtyLayout();//标记为需要立刻重新绘制的
         selectLine.MarkDirtyLayout();//标记为需要立刻重新绘制的
+    }
+
+    private void AutoTrimByAnimationData(SkillConfig config)
+    {
+        var maxFrame = 0;
+        var tracks = config.GetTracks();
+        foreach (var kvp in config.SkillAnimationData.skillClipDict)
+        {
+            if (kvp.Key + kvp.Value.DurationFrame > maxFrame)
+            {
+                maxFrame = kvp.Key + kvp.Value.DurationFrame;
+            }
+        }
+        config.FrameCount = maxFrame;
+        SaveConfig();
     }
 
     #endregion

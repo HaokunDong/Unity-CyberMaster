@@ -20,6 +20,8 @@ public class SkillConfig : SerializedScriptableObject
     [NonSerialized, OdinSerialize, ReadOnly]
     public SkillVelocityTrack SkillVelocityData = new SkillVelocityTrack();
 
+    public bool isLoopSkill = false;
+
     [NonSerialized, OdinSerialize]
     public List<ISkillTrack> Tracks = new List<ISkillTrack>();
 

@@ -1463,3 +1463,4 @@ MonoBehaviour:
   SkillName: 
   FrameCount: 80
   FrameRate: 13
+  isLoopSkill: 0
