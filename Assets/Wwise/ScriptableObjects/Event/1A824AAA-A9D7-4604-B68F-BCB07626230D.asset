@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d19d3ce7595a8480096567c19ed49ea5, type: 3}
   m_Name: 1A824AAA-A9D7-4604-B68F-BCB07626230D
   m_EditorClassIdentifier: 
-  objectName: Battle_Over
-  id: 2693679364
+  objectName: Battle
+  id: 2937832959
   guid: 1A824AAA-A9D7-4604-B68F-BCB07626230D

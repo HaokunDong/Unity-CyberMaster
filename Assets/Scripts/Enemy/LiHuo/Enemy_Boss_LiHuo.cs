@@ -87,9 +87,9 @@ public class Enemy_Boss_LiHuo : Enemy
         //Debug.Log(stateMachine.currentState.ToString());
     }
 
-    public override void OnHitFromTarget(Entity from)
+    public override void OnHitFromTarget(uint attackerGPId)
     {
-        base.OnHitFromTarget(from);
+        base.OnHitFromTarget(attackerGPId);
     }
 
     protected override void OnDrawGizmos()
@@ -230,7 +230,7 @@ public class Enemy_Boss_LiHuo : Enemy
     #region SkillTrigger
     public void StabAttackTrigger()
     {
-        Collider2D[] hits = Physics2D.OverlapBoxAll(stabAttackCheck.position, stabAttackSize, 0);
+        /*Collider2D[] hits = Physics2D.OverlapBoxAll(stabAttackCheck.position, stabAttackSize, 0);
         foreach(var hit in hits)
         {
             if(hit.GetComponent<Player>() != null)
@@ -238,11 +238,11 @@ public class Enemy_Boss_LiHuo : Enemy
                 hit.GetComponent<Player>().OnHitFromTarget(this);
                 HitTarget();
             }
-        }
+        }*/
     }
     public void LeapAttackTrigger()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(leapAttackCheck.position, leapAttackRadius);
+        /*Collider2D[] colliders = Physics2D.OverlapCircleAll(leapAttackCheck.position, leapAttackRadius);
         foreach (var hit in colliders)
         {
             if (hit.GetComponent<Player>() != null)
@@ -251,7 +251,7 @@ public class Enemy_Boss_LiHuo : Enemy
                 hit.GetComponent<Player>().OnHitFromTarget(this);
                 HitTarget();
             }
-        }
+        }*/
     }
     #endregion
 }

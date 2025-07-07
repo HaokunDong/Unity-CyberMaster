@@ -10,7 +10,7 @@ namespace GameScene.FlowNode.Base
     //这类事件必须要配一个End节点
     [Category("Events")]
     [Color("ff5c5c")]
-    [ContextDefinedOutputsAttribute(typeof(Flow))]
+    [ContextDefinedOutputs(typeof(Flow))]
     [ExecutionPriority(1)]
     public class BaseFlowEventAsync<T> : BaseFlowNode where T : IFlowAsyncMessage
     {

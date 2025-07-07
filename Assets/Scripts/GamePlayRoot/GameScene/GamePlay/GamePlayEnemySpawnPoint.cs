@@ -27,7 +27,17 @@ public class GamePlayEnemySpawnPoint : GamePlaySpawnPoint<GamePlayEnemy>
     }
 
 #if UNITY_EDITOR
-
+    protected override async UniTask TryLoadPreviewPrefab()
+    {
+        if (spawnEntityTableId > 0)
+        {
+            var data = EnemyTable.GetTableData(spawnEntityTableId);
+            if (data != null)
+            {
+                previewPrefab = await ResourceManager.LoadAssetAsyncButNotInstance<GameObject>(data.Prefab, ResType.Prefab);
+            }
+        }
+    }
     public override bool GetHierarchyComment(out string name, out Color color)
     {
         name = ZString.Concat("Enemy³öÉúµã: ", GamePlayId);

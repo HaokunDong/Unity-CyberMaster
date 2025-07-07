@@ -93,6 +93,13 @@ namespace Managers
             {ResType.FullPath, ""},
         };
 
+#if UNITY_EDITOR
+        [InitializeOnLoadMethod]
+        private static void EnitorInit()
+        {
+            Init().Forget();
+        }
+#endif
         public static async UniTask Init()
         {
             if (s_isInit)
@@ -111,8 +118,11 @@ namespace Managers
             s_assetLoader = new AssetBundleLoader();
 #endif
             await s_assetLoader.Init();
-            s_objPoolParent = new GameObject("ResObjectPool");
-            s_objUsedParent = new GameObject("ResObjectUsed");
+            if(Application.isPlaying)
+            {
+                s_objPoolParent = new GameObject("ResObjectPool");
+                s_objUsedParent = new GameObject("ResObjectUsed");
+            }
             Application.lowMemory += delegate()
             {
                 LogUtils.Error("内存低警告");
@@ -273,6 +283,19 @@ namespace Managers
             return await objUniTask as T;
         }
 
+        public static async UniTask<T> LoadAssetAsyncButNotInstance<T>(string path, ResType abType) where T : Object
+        {
+            UniTask<Object> objUniTask = default;
+            if (string.IsNullOrEmpty(path))
+            {
+                LogUtils.Error("path is empty, you must fix it !");
+                return await objUniTask as T;
+            }
+            string relativePath = GetRelativePath(path, abType);
+            objUniTask = _LoadAssetAsync<T>(relativePath, false, false);
+            return await objUniTask as T;
+        }
+
         /// <summary>
         /// 异步加载资源
         /// </summary>
@@ -327,7 +350,7 @@ namespace Managers
         /// <summary>
         /// 对象加载
         /// </summary>
-        private static async UniTask<Object> _LoadAssetAsync<T>(string path, bool folder = false)
+        private static async UniTask<Object> _LoadAssetAsync<T>(string path, bool folder = false, bool forceInstanceObj = true)
         {
             Object obj = GetGameObjectFormPool(path);
             if (obj != null) return obj;
@@ -343,7 +366,7 @@ namespace Managers
 
             if (folder == false)
             {
-                if (IsInstanceAsset(obj))
+                if (forceInstanceObj && IsInstanceAsset(obj))
                 {
                     GameObject newInstance = InstanceObj(obj, path);
                     newInstance.SetActive(true);

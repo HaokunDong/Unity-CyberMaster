@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
-using GameBase.Log;
 
 public class TempDialoguePanel : MonoBehaviour
 {
@@ -15,9 +14,9 @@ public class TempDialoguePanel : MonoBehaviour
     public Transform optionsRoot;
     public GameObject continueIndicator;
     public GameObject optionButtonPrefab;
-
     // 当前对话结束时触发
     public Action onContinueClicked;
+    public Action<int> onChoiceClicked;
 
     private void Awake()
     {
@@ -28,16 +27,20 @@ public class TempDialoguePanel : MonoBehaviour
     /// <summary>
     /// 初始化显示一段对话
     /// </summary>
-    public void Show(string speakerName, Sprite portrait, string text, Action action = null, List<string> options = null)
+    public void Show(string speakerName, Sprite portrait, string text, Action action = null, List<string> options = null, Action<int> cAction = null)
     {
         gameObject.SetActive(true);
 
-        speakerNameText.text = speakerName;
-        speakerPortrait.sprite = portrait;
-        dialogueText.text = text;
+        if(speakerName != null)
+            speakerNameText.text = speakerName;
+        if (portrait != null)
+            speakerPortrait.sprite = portrait;
+        if (text != null)
+            dialogueText.text = text;
         onContinueClicked = action;
+        onChoiceClicked = cAction;
 
-        if(optionsRoot != null)
+        if (optionsRoot != null)
         {
             foreach (Transform child in optionsRoot)
             {
@@ -51,12 +54,14 @@ public class TempDialoguePanel : MonoBehaviour
         if (options != null && options.Count > 0)
         {
             continueIndicator.SetActive(false);
-            foreach (var opt in options)
+            for (int i = 0; i < options.Count; i++)
             {
+                var opt = options[i];
                 var btnObj = Instantiate(optionButtonPrefab, optionsRoot);
                 var btnText = btnObj.GetComponentInChildren<Text>();
                 btnText.text = opt;
-                btnObj.GetComponent<Button>().onClick.AddListener(() => OnOptionClicked(opt));
+                var index = i;
+                btnObj.GetComponent<Button>().onClick.AddListener(() => OnOptionClicked(index));
             }
         }
         else
@@ -73,11 +78,11 @@ public class TempDialoguePanel : MonoBehaviour
     public void OnClickContinue()
     {
         onContinueClicked?.Invoke();
+        onContinueClicked = null;
     }
 
-    private void OnOptionClicked(string optionText)
+    private void OnOptionClicked(int index)
     {
-        Debug.Log($"选中选项：{optionText}");
-        // 这里你可以触发对应选项逻辑
+        onChoiceClicked?.Invoke(index);
     }
 }

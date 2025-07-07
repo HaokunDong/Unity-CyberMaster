@@ -20,11 +20,15 @@ public class SkillConfig : SerializedScriptableObject
     [NonSerialized, OdinSerialize, ReadOnly]
     public SkillVelocityTrack SkillVelocityData = new SkillVelocityTrack();
 
+    public bool isLoopSkill = false;
+
     [NonSerialized, OdinSerialize]
     public List<ISkillTrack> Tracks = new List<ISkillTrack>();
 
     [NonSerialized, ShowInInspector, ReadOnly]
-    public GameObject owner;
+    public GamePlayEntity owner;
+    [NonSerialized, ShowInInspector, ReadOnly]
+    public SkillDriver skillDriver;
     public event Func<int> OnGetFaceDir;
     public event Action OwnFacePlayer;
 

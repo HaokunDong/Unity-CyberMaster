@@ -16,6 +16,9 @@ public enum SpawnTiming
 
 public abstract class GamePlaySpawnPoint : GamePlayEntity
 {
+#if UNITY_EDITOR
+    [OnValueChanged("OnTableIdChanged")]
+#endif
     public uint spawnEntityTableId;
     public SpawnTiming timing;
     [ShowIf("@timing == SpawnTiming.DistanceCloseEnough")]
@@ -42,7 +45,14 @@ public abstract class GamePlaySpawnPoint : GamePlayEntity
     }
 
 #if UNITY_EDITOR
-    private void OnDrawGizmos()
+    protected GameObject previewPrefab;
+    protected virtual void OnTableIdChanged()
+    {
+        previewPrefab = null;
+    }
+
+    protected virtual async UniTask TryLoadPreviewPrefab() { }
+    protected virtual void OnDrawGizmosImip()
     {
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position, 0.5f);
@@ -79,6 +89,39 @@ public abstract class GamePlaySpawnPoint : GamePlayEntity
 
         GUI.Label(new Rect(screenPos.x, screenPos.y, 200, 60), ZString.Concat(text, "\r\n", GamePlayId), style);
         Handles.EndGUI();
+
+        if (previewPrefab == null)
+        {
+            TryLoadPreviewPrefab().Forget();
+        }
+
+        if (previewPrefab != null)
+        {
+            var spriteRenderer = previewPrefab.GetComponentInChildren<SpriteRenderer>();
+            if (spriteRenderer == null || spriteRenderer.sprite == null) return;
+
+            Texture2D texture = AssetPreview.GetAssetPreview(spriteRenderer.sprite);
+
+            if (texture != null)
+            {
+                // 创建一个矩形用于绘制（投影到 SceneView）
+                Handles.BeginGUI();
+
+                float w = 150f;
+                float h = 150f;
+
+                Rect rect = new Rect(screenPos.x - w / 2, screenPos.y - h / 2, w, h);
+                Color oldColor = GUI.color;
+                GUI.color = new Color(1, 1, 1, 0.3f);
+                GUI.DrawTexture(rect, texture);
+                GUI.color = oldColor;
+                Handles.EndGUI();
+            }
+        }
+    }
+    private void OnDrawGizmos()
+    {
+        OnDrawGizmosImip();
     }
 #endif
 }

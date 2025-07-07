@@ -7,6 +7,7 @@ public class ManagerCenter : Singleton<ManagerCenter>
     public TimeLineManager TimeLineMgr;
     public DialogueManager DialogueMgr;
     public PlayerInputManager PlayerInputMgr;
+    public SkillBoxManager SkillBoxMgr;
 
     public void Init()
     {
@@ -24,5 +25,8 @@ public class ManagerCenter : Singleton<ManagerCenter>
 
         PlayerInputMgr = new PlayerInputManager();
         PlayerInputMgr.Init();
+
+        SkillBoxMgr = new SkillBoxManager();
+        SkillBoxMgr.Init();
     }
 }

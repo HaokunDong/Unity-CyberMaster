@@ -43,9 +43,9 @@ public class PlayerPostureState : PlayerState
         }   
     }
 
-    public override void OnHit(Entity from)
+    public override void OnHit(uint attackerGPId)
     {
-        HitEffectController.Create((from.transform.position + player.transform.position) / 2f, new HitEffectInfo() { type = HitEffectType.BlockHit });
+        /*HitEffectController.Create((from.transform.position + player.transform.position) / 2f, new HitEffectInfo() { type = HitEffectType.BlockHit });
         player.info.life = Mathf.Clamp(player.info.life - GlobalRef.Ins.cfg.playerDecayLife_defense, 0, 100);
 
         if (player.facingDir != -from.facingDir)//Flip when player is attecked when player in posture.
@@ -55,6 +55,6 @@ public class PlayerPostureState : PlayerState
 
         player.SetMovement(from.attackForce[from.attackCount] * from.facingDir, rb.velocity.y);
 
-        stateMachine.ChangeState(player.postureMoveState);
+        stateMachine.ChangeState(player.postureMoveState);*/
     }
 }

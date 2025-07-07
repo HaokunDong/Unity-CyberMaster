@@ -2,8 +2,6 @@ using Cysharp.Text;
 using Cysharp.Threading.Tasks;
 using Everlasting.Config;
 using Managers;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GamePlayItemSpawnPoint : GamePlaySpawnPoint<GamePlayItem>
@@ -21,7 +19,17 @@ public class GamePlayItemSpawnPoint : GamePlaySpawnPoint<GamePlayItem>
     }
 
 #if UNITY_EDITOR
-
+    protected override async UniTask TryLoadPreviewPrefab()
+    {
+        if (spawnEntityTableId > 0)
+        {
+            var data = ItemTable.GetTableData(spawnEntityTableId);
+            if (data != null)
+            {
+                previewPrefab = await ResourceManager.LoadAssetAsyncButNotInstance<GameObject>(data.Prefab, ResType.Prefab);
+            }
+        }
+    }
     public override bool GetHierarchyComment(out string name, out Color color)
     {
         name = ZString.Concat("Item³öÉúµã: ", GamePlayId);

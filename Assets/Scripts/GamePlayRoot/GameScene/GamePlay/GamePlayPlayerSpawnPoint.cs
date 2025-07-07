@@ -3,12 +3,10 @@ using Cysharp.Threading.Tasks;
 using Everlasting.Extend;
 using Managers;
 using UnityEngine;
-using UnityEngine.Playables;
 
 public class GamePlayPlayerSpawnPoint : GamePlaySpawnPoint<GamePlayPlayer>
 {
     public string playerCreateAnim = null;
-
     public override bool CheckCanSpawn()
     {
         return !spawned;
@@ -16,7 +14,7 @@ public class GamePlayPlayerSpawnPoint : GamePlaySpawnPoint<GamePlayPlayer>
 
     public override async UniTask<GamePlayPlayer> Spawn<GamePlayPlayer>()
     {
-        var obj = await Managers.ResourceManager.LoadAssetAsync<GameObject>("Player/Player", ResType.Prefab);
+        var obj = await ResourceManager.LoadAssetAsync<GameObject>("Player/Player", ResType.Prefab);
         GamePlayPlayer p = obj.GetComponent<GamePlayPlayer>();
         //临时兼容老Player处理
         if (Quaternion.Angle(transform.rotation, Quaternion.identity) > 90)
@@ -37,7 +35,10 @@ public class GamePlayPlayerSpawnPoint : GamePlaySpawnPoint<GamePlayPlayer>
     }
 
 #if UNITY_EDITOR
-
+    protected override async UniTask TryLoadPreviewPrefab()
+    {
+        previewPrefab = await ResourceManager.LoadAssetAsyncButNotInstance<GameObject>("Player/Player", ResType.Prefab);
+    }
     public override bool GetHierarchyComment(out string name, out Color color)
     {
         name = ZString.Concat("Player出生点: ", GamePlayId);

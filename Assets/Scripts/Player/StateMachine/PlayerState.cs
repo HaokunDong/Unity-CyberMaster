@@ -70,15 +70,15 @@ public class PlayerState
         eventsTriggerCalled = true;
     }
 
-    public virtual void OnHit(Entity from) //受到攻击
+    public virtual void OnHit(uint attackerGPId) //受到攻击
     {
-        player.info.life = Mathf.Clamp(player.info.life - GlobalRef.Ins.cfg.playerDecayLife_hitted, 0, 100);
+        //player.info.life = Mathf.Clamp(player.info.life - GlobalRef.Ins.cfg.playerDecayLife_hitted, 0, 100);
 
-        if (player.facingDir != -from.facingDir)//Flip when player is attecked.
+/*        if (player.facingDir != -from.facingDir)//Flip when player is attecked.
         {
             player.Flip();
-        }
-
+        }*/
+        //Debug.Log("Player Be Attack!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         player.PlayerDead.AddListener(Dead);
         stateMachine.ChangeState(player.beAttackedState);
     }

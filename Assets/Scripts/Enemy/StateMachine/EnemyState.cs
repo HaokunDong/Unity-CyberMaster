@@ -56,7 +56,7 @@ public class EnemyState
         eventsTriggerCalled = true;
     }
 
-    public virtual void OnHit(Entity from)
+    public virtual void OnHit(uint attackerGPId)
     {
 
     }

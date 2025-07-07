@@ -1,5 +1,3 @@
-using FlowCanvas;
-using FlowCanvas.Nodes;
 using ParadoxNotion.Design;
 
 namespace GameScene.FlowNode.Base
@@ -12,6 +10,14 @@ namespace GameScene.FlowNode.Base
     public struct OnInitEventAsyncMsg : IFlowAsyncMessage
     {
 
+    }
+
+    public struct OnCommonGameFlowAsyncMsg : IFlowAsyncMessage
+    {
+        public bool boolValue;
+        public int intValue;
+        public string stringValue;
+        public float floatValue;
     }
 
     public struct OnTriggerEventMsg : IFlowMessage
@@ -77,6 +83,20 @@ namespace GameScene.FlowNode.Base
     [Name("非瞬间交互 结束")]
     [Category("事件Event/Common")]
     public class Interact_OnEnter_End : BaseFlowEventAsyncEnd<OnInteractAsyncEventMsg>
+    {
+
+    }
+
+    [Name("通用异步消息 开始")]
+    [Category("事件Event/Common")]
+    public class CommonGameFlow_OnEnter : BaseFlowEventAsync<OnCommonGameFlowAsyncMsg>
+    {
+
+    }
+
+    [Name("通用异步消息 结束")]
+    [Category("事件Event/Common")]
+    public class CommonGameFlow_OnEnter_End : BaseFlowEventAsyncEnd<OnCommonGameFlowAsyncMsg>
     {
 
     }

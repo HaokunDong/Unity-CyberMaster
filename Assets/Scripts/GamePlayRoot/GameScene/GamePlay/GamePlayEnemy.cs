@@ -1,12 +1,8 @@
 using Cysharp.Text;
-using Cysharp.Threading.Tasks;
 using Everlasting.Config;
 using GameBase.Log;
 using NodeCanvas.Framework;
-using NodeCanvas.Tasks.Conditions;
 using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GamePlayEnemy : GamePlayAIEntity
@@ -44,12 +40,19 @@ public class GamePlayEnemy : GamePlayAIEntity
             blackboard.SetVariableValue("StabDistance", data.StabDistance);
             blackboard.SetVariableValue("MoveSpeed", data.MoveSpeed);
             blackboard.SetVariableValue("PrimaryAttackSkillPath", data.PrimaryAttackSkillPath);
+            blackboard.SetVariableValue("LeapAttackSkillPath", data.LeapAttackSkillPath);
         }
 
         skillDriver = new SkillDriver(
+            this,
+            typeof(GamePlayEnemy),
             animator,
             rb,
-            (SkillHitBoxClip clip) => LogUtils.Warning($"HitBox Triggered: {clip}"),
+            (HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue) => 
+                {
+                    LogUtils.Warning($"攻击命中类型: {hitRestype} 攻击者GPId: {attackerGPId} 受击者GPId: {beHitterGPId} 伤害基准值: {damageBaseValue}");
+                    GamePlayRoot.Current.player.OnHitBoxTrigger(hitRestype, attackerGPId, beHitterGPId, damageBaseValue);
+                },
             () => Time.fixedDeltaTime,
             () => facingDir,
             () => { FacePlayer(); }
