@@ -14,6 +14,7 @@ public class GamePlayEnemy : GamePlayAIEntity
     private Cooldown ComboAttackCD;
     private Cooldown LeapAttackCD;
     private Cooldown StabAttackCD;
+    private Cooldown WithdrawAttackCD;
 
     public override void AfterAIInit(Blackboard blackboard)
     {
@@ -28,6 +29,7 @@ public class GamePlayEnemy : GamePlayAIEntity
             ComboAttackCD = gp.Set("ComboAttackCD", data.ComboAttackCD);
             LeapAttackCD = gp.Set("LeapAttackCD", data.LeapAttackCD);
             StabAttackCD = gp.Set("StabAttackCD", data.StabAttackCD);
+            WithdrawAttackCD = gp.Set("WithdrawAttackCD", data.WithdrawAttackCD);
 
             blackboard.SetVariableValue("CheckFaceFlipCD", CheckFaceFlipCD);
             blackboard.SetVariableValue("MoveCD", MoveCD);
@@ -41,6 +43,8 @@ public class GamePlayEnemy : GamePlayAIEntity
             blackboard.SetVariableValue("MoveSpeed", data.MoveSpeed);
             blackboard.SetVariableValue("PrimaryAttackSkillPath", data.PrimaryAttackSkillPath);
             blackboard.SetVariableValue("LeapAttackSkillPath", data.LeapAttackSkillPath);
+            blackboard.SetVariableValue("StabAttackSkillPath", data.StabAttackSkillPath);
+            blackboard.SetVariableValue("StabAttackSkillPath", data.WithdrawAttackSkillPath);
         }
 
         skillDriver = new SkillDriver(
