@@ -369,13 +369,39 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: SkillBlockBoxData
+      Entry: 7
+      Data: 18|SkillBlockBoxTrack, Assembly-CSharp
+    - Name: skillClipDict
+      Entry: 7
+      Data: 19|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillBlockBoxClip,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 20|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: Tracks
       Entry: 7
-      Data: 18|System.Collections.Generic.List`1[[ISkillTrack, Assembly-CSharp]],
+      Data: 21|System.Collections.Generic.List`1[[ISkillTrack, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 5
     - Name: 
       Entry: 9
       Data: 0
@@ -388,6 +414,9 @@ MonoBehaviour:
     - Name: 
       Entry: 9
       Data: 14
+    - Name: 
+      Entry: 9
+      Data: 18
     - Name: 
       Entry: 13
       Data: 

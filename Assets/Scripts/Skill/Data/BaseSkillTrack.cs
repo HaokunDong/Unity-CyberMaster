@@ -76,7 +76,7 @@ public abstract class BaseSkillTrack<T> : ISkillTrack where T : SkillClipBase
 
     public virtual T TryGetHitBoxClipAtFrameBinary(int frame)
     {
-        if(sortedClips == null)
+        if(sortedClips == null || sortedClips.Count <= 0)
         {
             BuildSortedClips();
         }

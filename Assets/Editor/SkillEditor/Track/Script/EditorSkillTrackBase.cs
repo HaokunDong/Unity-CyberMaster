@@ -222,7 +222,7 @@ public abstract class EditorSkillTrackBase<SCB> : EditorSkillTrackBase where SCB
 
     public virtual SCB TryGetHitBoxClipAtFrameBinary(int frame)
     {
-        if (sortedClips == null)
+        if (sortedClips == null || sortedClips.Count <= 0)
         {
             BuildSortedClips();
         }
@@ -304,7 +304,7 @@ public abstract class EditorSkillTrackBase<SCB> : EditorSkillTrackBase where SCB
             {
                 leftC = TryGetHitBoxClipAtFrameBinary(left--);
             }
-            while (rightC == null && right < sortedClips.Last().Key)
+            while (rightC == null && right <= sortedClips.Last().Key)
             {
                 rightC = TryGetHitBoxClipAtFrameBinary(right++);
             }

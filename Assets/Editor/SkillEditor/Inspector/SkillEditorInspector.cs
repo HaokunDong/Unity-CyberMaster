@@ -70,6 +70,10 @@ public partial class SkillEditorInspector : Editor
         {
             DrawTrackItem(atwt);
         }
+        else if( currentTrackItem is BlockBoxTrackItem blockItem)
+        {
+            DrawTrackItem(blockItem);
+        }
 
         //删除
         Button deleteButton = new Button(DeleteButtonClick);
@@ -118,7 +122,8 @@ public partial class SkillEditorInspector : Editor
     private void DeleteButtonClick()
     {
         if (currentTrack != null)
-        { 
+        {
+            SkillEditorWindows.Instance.OnDelItem();
             currentTrack.DeleteTrackItem(trackItemFrameIndex); //此函数提供数据保存和刷新视图的逻辑
             Selection.activeObject = null;
             currentTrack.ResetView();

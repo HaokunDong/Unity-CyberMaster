@@ -7,12 +7,14 @@ using System;
 using System.Collections.Generic;
 using Tools;
 using Color = UnityEngine.Color;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.RefAndLookup;
 
 public class SkillEditorWindows : EditorWindow
 {
     public static SkillEditorWindows Instance;
 
     private List<Box> DrawHitBoxes = null;
+    private List<Box> DrawBlockBoxes = null;
     private int selectDrawHitBox = -1;
     public static TrackItemBase selectedTrackItem = null;
 
@@ -266,7 +268,8 @@ public class SkillEditorWindows : EditorWindow
             currentSelectFrameIndex = Mathf.Clamp(value, 0, CurrentFrameCount);
             CurrentFrameTextField.value = currentSelectFrameIndex;
             UpdateTimerShaftView();
-            SetDrawHitBoxes(skillConfig?.SkillHitBoxData?.TryGetHitBoxClipAtFrameBinary(currentSelectFrameIndex)?.HitBoxs);
+            SetHitBoxes(skillConfig?.SkillHitBoxData?.TryGetHitBoxClipAtFrameBinary(currentSelectFrameIndex)?.HitBoxs);
+            SetBlockBoxes(skillConfig?.SkillBlockBoxData?.TryGetHitBoxClipAtFrameBinary(currentSelectFrameIndex)?.BlockBoxs);
             TickSkill();
         }
     }
@@ -543,6 +546,7 @@ public class SkillEditorWindows : EditorWindow
             EditorUtility.SetDirty(skillConfig);
             AssetDatabase.SaveAssetIfDirty(skillConfig);
             skillConfig.SkillHitBoxData.OnSave();
+            skillConfig.SkillBlockBoxData.OnSave();
         }
     }
 
@@ -579,12 +583,14 @@ public class SkillEditorWindows : EditorWindow
         InitTrack<AttackTimeWindowTrack, SkillAttackTimeWindowClip>(skillConfig.SkillAttackTimeWindowData.skillClipDict, "攻击时间段");
         InitTrack<HitBoxTrack, SkillHitBoxClip>(skillConfig.SkillHitBoxData.skillClipDict, "打击");
         InitTrack<VelocityTrack, SkillVelocityClip>(skillConfig.SkillVelocityData.skillClipDict, "速度");
+        InitTrack<BlockBoxTrack, SkillBlockBoxClip>(skillConfig.SkillBlockBoxData.skillClipDict, "格挡");
     }
 
     private void OnEnable()
     {
-        SetDrawHitBoxes(null);
-        if(PrefabStageUtility.GetCurrentPrefabStage() != null)
+        SetHitBoxes(null);
+        SetBlockBoxes(null);
+        if (PrefabStageUtility.GetCurrentPrefabStage() != null)
         {
             var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
             if(prefabStage != null)
@@ -604,7 +610,8 @@ public class SkillEditorWindows : EditorWindow
 
     private void OnDisable()
     {
-        SetDrawHitBoxes(null);
+        SetHitBoxes(null);
+        SetBlockBoxes(null);
         // 注销事件
         SceneView.duringSceneGui -= OnSceneGUI;
     }
@@ -625,6 +632,8 @@ public class SkillEditorWindows : EditorWindow
             {
                 if(selectedTrackItem != null)
                 {
+                    OnDelItem(selectedTrackItem);
+
                     SkillEditorInspector.currentTrack.DeleteTrackItem(selectedTrackItem.FrameIndex);
                     Selection.activeObject = null;
                     SkillEditorInspector.currentTrack.ResetView();
@@ -638,6 +647,31 @@ public class SkillEditorWindows : EditorWindow
             else if(e.keyCode == KeyCode.RightArrow)
             {
                 CurrentSelectFrameIndex++;
+            }
+        }
+    }
+
+    public void OnDelItem()
+    {
+        if(selectedTrackItem != null)
+        {
+            OnDelItem(selectedTrackItem);
+        }
+    }
+    private void OnDelItem(TrackItemBase item)
+    {
+        if (item is BlockBoxTrackItem bbItem)
+        {
+            if (DrawBlockBoxes == bbItem.Clip.BlockBoxs)
+            {
+                SetBlockBoxes(null);
+            }
+        }
+        else if (item is HitBoxTrackItem hbItem)
+        {
+            if (DrawHitBoxes == hbItem.Clip.HitBoxs)
+            {
+                SetHitBoxes(null);
             }
         }
     }
@@ -743,13 +777,18 @@ public class SkillEditorWindows : EditorWindow
         }
     }
 
-    private void SetDrawHitBoxes(List<Box> list)
+    private void SetHitBoxes(List<Box> list)
     {
         if(DrawHitBoxes != list)
         {
             selectDrawHitBox = -1;
         }
         DrawHitBoxes = list;
+    }
+
+    private void SetBlockBoxes(List<Box> list)
+    {
+        DrawBlockBoxes = list;
     }
 
     public void SelectAHitBox(int index)
@@ -764,20 +803,33 @@ public class SkillEditorWindows : EditorWindow
             var index = 0;
             foreach (var box in DrawHitBoxes)
             {
-                var vs = MathEx.GetRotatedRectVertices(box.center, box.size, box.rotation);
-                Vector3[] array = new Vector3[4]
-                {
+                DrawBox(box, index);
+                index++;
+            }
+        }
+
+        if(DrawBlockBoxes != null && DrawBlockBoxes.Count > 0)
+        {
+            foreach (var box in DrawBlockBoxes)
+            {
+                DrawBox(box, -1);
+            }
+        }
+
+        HandleUtility.Repaint(); // 保证 SceneView 刷新
+    }
+
+    private void DrawBox(Box box, int index)
+    {
+        var vs = MathEx.GetRotatedRectVertices(box.center, box.size, box.rotation);
+        Vector3[] array = new Vector3[4]
+        {
                     new Vector3(vs[0].x, vs[0].y, 0f),
                     new Vector3(vs[1].x, vs[1].y, 0f),
                     new Vector3(vs[2].x, vs[2].y, 0f),
                     new Vector3(vs[3].x, vs[3].y, 0f)
-                };
-                Handles.DrawSolidRectangleWithOutline(array, selectDrawHitBox == index ? new Color(1, 1, 0, 0.2f) : new Color(1, 0, 0, 0.2f), Color.yellow);
-                index++;
-            }
-
-            HandleUtility.Repaint(); // 保证 SceneView 刷新
-        }
+        };
+        Handles.DrawSolidRectangleWithOutline(array, selectDrawHitBox == index ? new Color(1, 1, 0, 0.2f) : new Color(1, 0, 0, 0.2f), Color.yellow);
     }
     #endregion
 }

@@ -19,6 +19,8 @@ public class SkillConfig : SerializedScriptableObject
     public SkillHitBoxTrack SkillHitBoxData = new SkillHitBoxTrack();
     [NonSerialized, OdinSerialize, ReadOnly]
     public SkillVelocityTrack SkillVelocityData = new SkillVelocityTrack();
+    [NonSerialized, OdinSerialize, ReadOnly]
+    public SkillBlockBoxTrack SkillBlockBoxData = new SkillBlockBoxTrack();
 
     public bool isLoopSkill = false;
 
@@ -38,6 +40,7 @@ public class SkillConfig : SerializedScriptableObject
         if (!Tracks.Contains(SkillAttackTimeWindowData)) Tracks.Add(SkillAttackTimeWindowData);
         if (!Tracks.Contains(SkillHitBoxData)) Tracks.Add(SkillHitBoxData);
         if (!Tracks.Contains(SkillVelocityData)) Tracks.Add(SkillVelocityData);
+        if (!Tracks.Contains(SkillBlockBoxData)) Tracks.Add(SkillBlockBoxData);
         return Tracks;
     }
 
