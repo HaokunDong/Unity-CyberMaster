@@ -10,6 +10,7 @@ public interface ISkillTrack
     void Update(int frame);
 
     void OnSkillEnd();
+    void EmptyClipUpdate();
 }
 
 public abstract class BaseSkillTrack<T> : ISkillTrack where T : SkillClipBase
@@ -34,20 +35,29 @@ public abstract class BaseSkillTrack<T> : ISkillTrack where T : SkillClipBase
     {
         if (frame < 0 || frame > skillConfig.FrameCount) return;
         var clip = TryGetHitBoxClipAtFrameBinary(frame);
-        if(clip != null)
+        if (clip != null)
         {
-            if(clip != currentClip)
+            if (clip != currentClip)
             {
                 currentClip = clip;
                 currentClip.OnClipFirstFrame(frame);
             }
             currentClip.OnClipUpdate(frame);
             var next = TryGetHitBoxClipAtFrameBinary(frame + 1);
-            if(next != currentClip)
+            if (next != currentClip)
             {
                 currentClip.OnClipLastFrame(frame);
             }
         }
+        else
+        {
+            EmptyClipUpdate();
+        }
+    }
+
+    public virtual void EmptyClipUpdate()
+    {
+
     }
 
     public virtual void OnSkillEnd()

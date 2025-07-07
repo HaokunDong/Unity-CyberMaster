@@ -65,4 +65,9 @@ public class  SkillHitBoxTrack : BaseSkillTrack<SkillHitBoxClip>
             clip.config = config;
         }
     }
+
+    public override void EmptyClipUpdate()
+    {
+        SkillBoxManager.RegisterHitBox(null, null);
+    }
 }

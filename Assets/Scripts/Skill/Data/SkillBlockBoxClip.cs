@@ -1,6 +1,7 @@
 using Sirenix.Serialization;
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 
 public class SkillBlockBoxClip : SkillClipBase
 {
@@ -28,5 +29,10 @@ public class SkillBlockBoxTrack : BaseSkillTrack<SkillBlockBoxClip>
         {
             clip.config = config;
         }
+    }
+
+    public override void EmptyClipUpdate()
+    {
+        SkillBoxManager.RegisterBlockBox(null, null);
     }
 }
