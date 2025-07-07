@@ -24,11 +24,11 @@ public class SkillHitBoxClip : SkillClipBase
         var hasHit = parentTrack.skillConfig.SkillAttackTimeWindowData.HasHit(frame);
         if(!hasHit)
         {
-            SkillBoxManager.Register(this, config.skillDriver);
+            SkillBoxManager.RegisterHitBox(this, config.skillDriver);
         }
         else
         {
-            SkillBoxManager.Register(null, null);
+            SkillBoxManager.RegisterHitBox(null, null);
         }
     }
 }

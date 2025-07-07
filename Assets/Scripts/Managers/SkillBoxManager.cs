@@ -16,6 +16,18 @@ public class HitCalUnit
     }
 }
 
+public class BlockCalUnit
+{
+    public SkillBlockBoxClip clip;
+    public SkillDriver skillDriver;
+
+    public void Set(SkillBlockBoxClip c, SkillDriver sd)
+    {
+        clip = c;
+        skillDriver = sd;
+    }
+}
+
 public enum HitResType
 {
     None = 0,
@@ -28,9 +40,11 @@ public enum HitResType
 
 public class SkillBoxManager
 {
-    private static int prepareSkillCount;
+    private static int prepareSkillHitCount;
+    private static int prepareSkillBlockCount;
     private static int playingSkillCount;
     private static HitCalUnit[] hitCalUnits = null;
+    private static BlockCalUnit[] blockCalUnits = null;
 
     public static int PlayingSkillCount
     {
@@ -42,7 +56,11 @@ public class SkillBoxManager
     }
 
     private static Dictionary<uint, HitCalUnit> enemyHitCalUnitDict = null;
+    private static Dictionary<uint, BlockCalUnit> enemyBlockCalUnitDict = null;
+    private static HashSet<uint> finishedPlayerHitEnemy = null;
+    private static HashSet<uint> playerHitEnemyBodyId = null;
     private static HitCalUnit playerHitCalUnit = null;
+    private static BlockCalUnit playerBlockCalUnit = null;
     private static LayerMask PlayerLayerMask = LayerMask.GetMask("Player");
     private static LayerMask EnemyLayerMask = LayerMask.GetMask("Enemy");
     private static List<Collider2D> hits;
@@ -50,12 +68,21 @@ public class SkillBoxManager
     public void Init()
     {
         PlayingSkillCount = 0;
-        enemyHitCalUnitDict ??= new ();
+        enemyHitCalUnitDict ??= new();
+        enemyBlockCalUnitDict ??= new();
+        finishedPlayerHitEnemy ??= new();
+        playerHitEnemyBodyId ??= new();
         hits ??= new ();
         hitCalUnits = new HitCalUnit[10];
         for (int i = 0; i < hitCalUnits.Length; i++)
         {
             hitCalUnits[i] = new HitCalUnit();
+        }
+
+        blockCalUnits = new BlockCalUnit[10];
+        for (int i = 0; i < blockCalUnits.Length; i++)
+        {
+            blockCalUnits[i] = new BlockCalUnit();
         }
         Loop().Forget();
     }
@@ -64,9 +91,14 @@ public class SkillBoxManager
     {
         while (true)
         {
-            prepareSkillCount = 0;
+            prepareSkillHitCount = 0;
+            prepareSkillBlockCount = 0;
             enemyHitCalUnitDict.Clear();
+            enemyBlockCalUnitDict.Clear();
+            finishedPlayerHitEnemy.Clear();
+            playerHitEnemyBodyId.Clear();
             playerHitCalUnit = null;
+            playerBlockCalUnit = null;
             await UniTask.WaitForFixedUpdate();
         }
     }
@@ -75,10 +107,29 @@ public class SkillBoxManager
     {
         if(playerHitCalUnit != null)
         {
-            CheckPlayerEnemyFladeFight();
+            if (enemyHitCalUnitDict.Count > 0)
+            {
+                //检查拼刀
+                CheckPlayerEnemyFladeFight();
+            }
+
+            if(enemyBlockCalUnitDict.Count > 0)
+            {
+                //检查玩家攻击敌人格挡
+                CheckHitEnemyBlock();
+            }
+            //检查玩家攻击敌人身体
+            CheckHitEnemyBody();
         }
-        else
+        
+        if(enemyHitCalUnitDict.Count > 0)
         {
+            if (playerBlockCalUnit != null)
+            {
+                //检查敌人攻击玩家格挡
+                CheckHitPlayerBlock();
+            }
+            //检查敌人攻击玩家身体
             CheckHitPlayerBody();
         }
     }
@@ -87,11 +138,11 @@ public class SkillBoxManager
     {
         var player = playerHitCalUnit.skillDriver.skillConfig.owner;
         var playerClip = playerHitCalUnit.clip;
-        Vector2 pOrigin = playerHitCalUnit.skillDriver.skillConfig.owner.transform.position;
+        Vector2 pOrigin = player.transform.position;
         var pFaceDir = playerHitCalUnit.skillDriver.skillConfig.GetOwnFaceDir();
         foreach (var kv in enemyHitCalUnitDict)
         {
-            if(kv.Value.hasFinish)
+            if(finishedPlayerHitEnemy.Contains(kv.Key) || kv.Value.hasFinish)
             {
                 continue;
             }
@@ -114,11 +165,11 @@ public class SkillBoxManager
                         {
                             sd.OnHit(HitResType.PlayerEnemyBladeFight, kv.Key, 0, 1);
                             sd.skillConfig.SkillAttackTimeWindowData.Hit(sd.CurrentFrame);
+                            kv.Value.hasFinish = true;
 
                             playerHitCalUnit.skillDriver.OnHit(HitResType.PlayerEnemyBladeFight, 0, kv.Key, 1);
-                            playerHitCalUnit.skillDriver.skillConfig.SkillAttackTimeWindowData.Hit(playerHitCalUnit.skillDriver.CurrentFrame);
+                            finishedPlayerHitEnemy.Add(kv.Key);
                             finish = true;
-                            kv.Value.hasFinish = true;
                             break;
                         }
                     }
@@ -131,10 +182,136 @@ public class SkillBoxManager
         }
     }
 
+    private static void CheckHitEnemyBlock()
+    {
+        var player = playerHitCalUnit.skillDriver.skillConfig.owner;
+        var playerClip = playerHitCalUnit.clip;
+        Vector2 pOrigin = player.transform.position;
+        var pFaceDir = playerHitCalUnit.skillDriver.skillConfig.GetOwnFaceDir();
+        foreach (var kv in enemyBlockCalUnitDict)
+        {
+            if (finishedPlayerHitEnemy.Contains(kv.Key))
+            {
+                continue;
+            }
+            var finish = false;
+            var clip = kv.Value.clip;
+            var sd = kv.Value.skillDriver;
+            var enemy = sd.skillConfig.owner;
+            //双方要面对面才可能产生格挡
+            if (player.isFacing(enemy) && enemy.isFacing(player))
+            {
+                Vector2 origin = sd.skillConfig.owner.transform.position;
+                var faceDir = sd.skillConfig.GetOwnFaceDir();
+                foreach (var pBox in playerClip.HitBoxs)
+                {
+                    var (pc, ps, pr) = TransformBox(pOrigin, pFaceDir, pBox);
+                    foreach (var eBox in clip.BlockBoxs)
+                    {
+                        var (ec, es, er) = TransformBox(origin, faceDir, eBox);
+                        if (BoxOverlap(pc, ps, pr, ec, es, er))
+                        {
+                            playerHitCalUnit.skillDriver.OnHit(HitResType.PlayerHitEnemyBlock, 0, kv.Key, playerClip.HitDamageValue);
+                            finishedPlayerHitEnemy.Add(kv.Key);
+
+                            finish = true;
+                            break;
+                        }
+                    }
+                    if (finish)
+                    {
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    private static void CheckHitEnemyBody()
+    {
+        playerHitEnemyBodyId.Clear();
+        var player = playerHitCalUnit.skillDriver.skillConfig.owner;
+        var playerClip = playerHitCalUnit.clip;
+        Vector2 pOrigin = player.transform.position;
+        var pFaceDir = playerHitCalUnit.skillDriver.skillConfig.GetOwnFaceDir();
+        foreach (var box in playerClip.HitBoxs)
+        {
+            Vector2 worldCenter = pOrigin + new Vector2(box.center.x * pFaceDir, box.center.y);
+            Collider2D[] results = Physics2D.OverlapBoxAll(worldCenter, box.size, box.rotation, EnemyLayerMask);
+            if (results != null && results.Length > 0)
+            {
+                foreach(var res in results)
+                {
+                    var enemy = res.GetComponent<GamePlayEnemy>();
+                    var eid = enemy?.GamePlayId ?? 0;
+                    if(eid > 0 && !finishedPlayerHitEnemy.Contains(eid) && !playerHitEnemyBodyId.Contains(eid))
+                    {
+                        playerHitEnemyBodyId.Add(eid);
+                        finishedPlayerHitEnemy.Add(eid);
+                    }
+                }
+            }
+        }
+
+        foreach (var id in playerHitEnemyBodyId)
+        {
+            playerHitCalUnit.skillDriver.OnHit(HitResType.PlayerHitEnemyBody, 0, id, playerClip.HitDamageValue);
+        }
+    }
+
+    private static void CheckHitPlayerBlock()
+    {
+        var player = playerBlockCalUnit.skillDriver.skillConfig.owner;
+        var playerClip = playerBlockCalUnit.clip;
+        Vector2 pOrigin = player.transform.position;
+        var pFaceDir = playerBlockCalUnit.skillDriver.skillConfig.GetOwnFaceDir();
+        foreach (var kv in enemyHitCalUnitDict)
+        {
+            if (kv.Value.hasFinish)
+            {
+                continue;
+            }
+            var finish = false;
+            var clip = kv.Value.clip;
+            var sd = kv.Value.skillDriver;
+            var enemy = sd.skillConfig.owner;
+            //双方要面对面才可能产生格挡
+            if (player.isFacing(enemy) && enemy.isFacing(player))
+            {
+                Vector2 origin = sd.skillConfig.owner.transform.position;
+                var faceDir = sd.skillConfig.GetOwnFaceDir();
+                foreach (var pBox in playerClip.BlockBoxs)
+                {
+                    var (pc, ps, pr) = TransformBox(pOrigin, pFaceDir, pBox);
+                    foreach (var eBox in clip.HitBoxs)
+                    {
+                        var (ec, es, er) = TransformBox(origin, faceDir, eBox);
+                        if (BoxOverlap(pc, ps, pr, ec, es, er))
+                        {
+                            sd.OnHit(HitResType.EnemyHitPlayerBlock, kv.Key, 0, clip.HitDamageValue);
+                            sd.skillConfig.SkillAttackTimeWindowData.Hit(sd.CurrentFrame);
+                            kv.Value.hasFinish = true;
+
+                            finish = true;
+                            break;
+                        }
+                    }
+                    if (finish)
+                    {
+                        break;
+                    }
+                }
+            }
+        }
+    }
     private static void CheckHitPlayerBody()
     {
         foreach (var kv in enemyHitCalUnitDict)
         {
+            if(kv.Value.hasFinish)
+            {
+                continue;
+            }
             hits.Clear();
             var clip = kv.Value.clip;
             var sd = kv.Value.skillDriver;
@@ -161,30 +338,57 @@ public class SkillBoxManager
             {
                 sd.OnHit(HitResType.EnemyHitPlayerBody, kv.Key, 0, clip.HitDamageValue);
                 sd.skillConfig.SkillAttackTimeWindowData.Hit(sd.CurrentFrame);
+                kv.Value.hasFinish = true;
             }
         }
     }
 
-    public static void Register(SkillHitBoxClip clip, SkillDriver sd)
+    public static void RegisterHitBox(SkillHitBoxClip clip, SkillDriver sd)
     {
         if (clip != null)
         {
-            hitCalUnits[prepareSkillCount].Set(clip, sd);
+            hitCalUnits[prepareSkillHitCount].Set(clip, sd);
             if (typeof(GamePlayEnemy).IsAssignableFrom(sd.ShillOwnerGPType))
             {
-                enemyHitCalUnitDict[sd.SkillOwnerGPId] = hitCalUnits[prepareSkillCount];
+                enemyHitCalUnitDict[sd.SkillOwnerGPId] = hitCalUnits[prepareSkillHitCount];
             }
             else if(typeof(GamePlayPlayer).IsAssignableFrom(sd.ShillOwnerGPType))
             {
-                playerHitCalUnit = hitCalUnits[prepareSkillCount];
+                playerHitCalUnit = hitCalUnits[prepareSkillHitCount];
             }
         }
-        prepareSkillCount++;
-        Debug.LogError("prepareSkillCount " + prepareSkillCount);
-        if (prepareSkillCount == playingSkillCount)
+        prepareSkillHitCount++;
+
+        if (prepareSkillHitCount == playingSkillCount && prepareSkillBlockCount == playingSkillCount)
         {
             
-            if (prepareSkillCount > 0)
+            if (prepareSkillHitCount > 0)
+            {
+                Check();
+            }
+        }
+    }
+
+    public static void RegisterBlockBox(SkillBlockBoxClip clip, SkillDriver sd)
+    {
+        if (clip != null)
+        {
+            blockCalUnits[prepareSkillBlockCount].Set(clip, sd);
+            if (typeof(GamePlayEnemy).IsAssignableFrom(sd.ShillOwnerGPType))
+            {
+                enemyBlockCalUnitDict[sd.SkillOwnerGPId] = blockCalUnits[prepareSkillBlockCount];
+            }
+            else if (typeof(GamePlayPlayer).IsAssignableFrom(sd.ShillOwnerGPType))
+            {
+                playerBlockCalUnit = blockCalUnits[prepareSkillBlockCount];
+            }
+        }
+        prepareSkillBlockCount++;
+
+        if (prepareSkillHitCount == playingSkillCount && prepareSkillBlockCount == playingSkillCount)
+        {
+
+            if (prepareSkillHitCount > 0)
             {
                 Check();
             }

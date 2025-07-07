@@ -13,7 +13,7 @@ public class SkillBlockBoxClip : SkillClipBase
     public override void OnClipUpdate(int frame)
     {
         base.OnClipUpdate(frame);
-        //SkillBoxManager.Register(this, config.skillDriver);
+        SkillBoxManager.RegisterBlockBox(this, config.skillDriver);
     }
 }
 

@@ -30,7 +30,7 @@ public abstract class BaseSkillTrack<T> : ISkillTrack where T : SkillClipBase
         BuildSortedClips();
     }
 
-    public virtual void Update(int frame)
+    public void Update(int frame)
     {
         if (frame < 0 || frame > skillConfig.FrameCount) return;
         var clip = TryGetHitBoxClipAtFrameBinary(frame);
