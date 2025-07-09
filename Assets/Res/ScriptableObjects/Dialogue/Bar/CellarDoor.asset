@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3f478ef69fbe04fa9ed3664a8a443e, type: 3}
+  m_Name: CellarDoor
+  m_EditorClassIdentifier: 
+  _serializedGraph: '{"type":"NodeCanvas.DialogueTrees.DialogueTree","nodes":[{"_condition":{"valueA":{"_name":"visited","_targetVariableID":"7766e65f-c285-439e-8e1e-5e4e8583391d"},"valueB":{"_value":true},"$type":"NodeCanvas.Tasks.Conditions.CheckBoolean"},"_position":{"x":624.9238,"y":28.90994},"$type":"NodeCanvas.DialogueTrees.ConditionNode","$id":"0"},{"NpcId":45012,"m_key":"Dialogue_LaoXiugu_CellarDoor","_position":{"x":106.0604,"y":369.453},"$type":"NormalDialogueNode","$id":"1"},{"_action":{"boolVariable":{"_name":"visited","_targetVariableID":"7766e65f-c285-439e-8e1e-5e4e8583391d"},"$type":"NodeCanvas.Tasks.Actions.SetBoolean"},"_position":{"x":933.0,"y":318.0},"$type":"NodeCanvas.DialogueTrees.ActionNode","$id":"2"},{"NpcId":45010,"m_key":"Door_Cellar_1","_position":{"x":505.011,"y":570.0002},"$type":"NormalDialogueNode","$id":"3"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"NodeCanvas.DialogueTrees.DTConnection"},{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"2"},"$type":"NodeCanvas.DialogueTrees.DTConnection"},{"_sourceNode":{"$ref":"2"},"_targetNode":{"$ref":"3"},"$type":"NodeCanvas.DialogueTrees.DTConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{"visited":{"_name":"visited","_id":"7766e65f-c285-439e-8e1e-5e4e8583391d","$type":"NodeCanvas.Framework.Variable`1[[System.Boolean,
+    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}}},"derivedData":{"actorParameters":[],"$type":"NodeCanvas.DialogueTrees.DialogueTree+DerivedSerializationData"}}'
+  _objectReferences: []
+  _graphSource:
+    _version: 3.25
+    _category: 
+    _comments: 
+    _translation: {x: 290.99982, y: 208.99994}
+    _zoomFactor: 0.5791816
+  _haltSerialization: 0
+  actorParameters: []
