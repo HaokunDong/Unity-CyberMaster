@@ -126,9 +126,9 @@ public class Player : Entity
     public override void OnHitFromTarget(uint attackerGPId)
     {
         base.OnHitFromTarget(attackerGPId);
-
+        
         if (isInvincible) return;
-
+        
         //SetMovement(liHuo.attackForce[liHuo.attackCount] * liHuo.facingDir, rb.velocity.y);
         stateMachine.currentState.OnHit(attackerGPId);
         //RefreshInfoState();

@@ -35,8 +35,13 @@ public class GamePlayEnemy : GamePlayAIEntity
             blackboard.SetVariableValue("MoveCD", MoveCD);
             blackboard.SetVariableValue("MoveCDTime", data.MoveCD);
             blackboard.SetVariableValue("ComboAttackCD", ComboAttackCD);
+            blackboard.SetVariableValue("ComboAttackCDTime", data.ComboAttackCD);
             blackboard.SetVariableValue("LeapAttackCD", LeapAttackCD);
+            blackboard.SetVariableValue("LeapAttackCDTime", data.LeapAttackCD);
             blackboard.SetVariableValue("StabAttackCD", StabAttackCD);
+            blackboard.SetVariableValue("StabAttackCDTime", data.StabAttackCD);
+            blackboard.SetVariableValue("WithdrawAttackCD", WithdrawAttackCD);
+            blackboard.SetVariableValue("WithdrawAttackCDTime", data.WithdrawAttackCD);
             blackboard.SetVariableValue("PlayerTooFarRange", data.PlayerTooFarRange);
             blackboard.SetVariableValue("AttackDistance", data.AttackDistance);
             blackboard.SetVariableValue("StabDistance", data.StabDistance);
@@ -44,7 +49,7 @@ public class GamePlayEnemy : GamePlayAIEntity
             blackboard.SetVariableValue("PrimaryAttackSkillPath", data.PrimaryAttackSkillPath);
             blackboard.SetVariableValue("LeapAttackSkillPath", data.LeapAttackSkillPath);
             blackboard.SetVariableValue("StabAttackSkillPath", data.StabAttackSkillPath);
-            blackboard.SetVariableValue("StabAttackSkillPath", data.WithdrawAttackSkillPath);
+            blackboard.SetVariableValue("WithdrawAttackSkillPath", data.WithdrawAttackSkillPath);
         }
 
         skillDriver = new SkillDriver(
@@ -54,7 +59,7 @@ public class GamePlayEnemy : GamePlayAIEntity
             rb,
             (HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue) => 
                 {
-                    LogUtils.Warning($"¹¥»÷ÃüÖÐÀàÐÍ: {hitRestype} ¹¥»÷ÕßGPId: {attackerGPId} ÊÜ»÷ÕßGPId: {beHitterGPId} ÉËº¦»ù×¼Öµ: {damageBaseValue}");
+                    LogUtils.Warning($"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: {hitRestype} ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½GPId: {attackerGPId} ï¿½Ü»ï¿½ï¿½ï¿½GPId: {beHitterGPId} ï¿½Ëºï¿½ï¿½ï¿½×¼Öµ: {damageBaseValue}");
                     GamePlayRoot.Current.player.OnHitBoxTrigger(hitRestype, attackerGPId, beHitterGPId, damageBaseValue);
                 },
             () => Time.fixedDeltaTime,
@@ -63,7 +68,7 @@ public class GamePlayEnemy : GamePlayAIEntity
         );
     }
 
-    [Button("¼¼ÄÜÔÝÍ£²âÊÔ")]
+    [Button("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½")]
     private void TestPause()
     {
         if(skillDriver.IsPaused)

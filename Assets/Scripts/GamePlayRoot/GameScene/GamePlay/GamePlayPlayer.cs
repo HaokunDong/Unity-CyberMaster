@@ -41,6 +41,13 @@ public class GamePlayPlayer : GamePlayEntity
     {
         base.OnHitBoxTrigger(hitRestype, attackerGPId, beHitterGPId, damageBaseValue);
 
+        GamePlayEnemy enemy = GamePlayRoot.Current.GetAGamePlayEntity<GamePlayEnemy>(attackerGPId);
+
+        if(player.facingDir == enemy.facingDir)
+        {
+            player.Flip();
+        }
+
         player.OnHitFromTarget(attackerGPId);
     }
 

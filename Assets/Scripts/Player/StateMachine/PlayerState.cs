@@ -1,3 +1,4 @@
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -74,11 +75,7 @@ public class PlayerState
     {
         //player.info.life = Mathf.Clamp(player.info.life - GlobalRef.Ins.cfg.playerDecayLife_hitted, 0, 100);
 
-/*        if (player.facingDir != -from.facingDir)//Flip when player is attecked.
-        {
-            player.Flip();
-        }*/
-        //Debug.Log("Player Be Attack!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
         player.PlayerDead.AddListener(Dead);
         stateMachine.ChangeState(player.beAttackedState);
     }
