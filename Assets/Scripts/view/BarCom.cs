@@ -10,11 +10,19 @@ public static class BarComEvent
 }
 public class BarCom : MonoBehaviour
 {
+    public static BarCom Instance { get; private set; }
+
     public RectTransform floatPoint;
     public RectTransform leftMask;
     public RectTransform rightMask;
     public RectTransform bar;
     public GameObject changePrefab;
+
+    private void Awake()
+    {
+        Instance = this;
+        gameObject.SetActive(false);
+    }
 
     public float _t = 0;
     public float t

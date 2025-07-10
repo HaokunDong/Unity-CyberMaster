@@ -93,7 +93,8 @@ public class Player : Entity
 
         deadState = new PlayerDeadState(stateMachine, this, "Dead");
 
-        lifeBar = GlobalRef.Ins.barCom?.GetComponent<BarCom>();
+        lifeBar = BarCom.Instance;
+        lifeBar.gameObject.SetActive(true);
     }
 
     protected override void Start()
@@ -131,7 +132,8 @@ public class Player : Entity
         
         //SetMovement(liHuo.attackForce[liHuo.attackCount] * liHuo.facingDir, rb.velocity.y);
         stateMachine.currentState.OnHit(attackerGPId);
-        //RefreshInfoState();
+        info.life -= 5;
+        RefreshInfoState();
     }
 
     protected override void OnDrawGizmos()
