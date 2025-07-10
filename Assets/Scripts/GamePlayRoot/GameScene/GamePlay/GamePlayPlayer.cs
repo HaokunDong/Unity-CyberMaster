@@ -23,6 +23,10 @@ public class GamePlayPlayer : GamePlayEntity
 
     private void Update()
     {
+        if(SkillBoxManager.IsACharacterBeHitThisFrame(0))
+        {
+            LogUtils.Error("Hit", LogChannel.Battle, Color.green);
+        }
         if (ManagerCenter.Ins.PlayerInputMgr.CanGamePlayInput)
         {
             if (Input.GetKeyDown(KeyCode.P))
