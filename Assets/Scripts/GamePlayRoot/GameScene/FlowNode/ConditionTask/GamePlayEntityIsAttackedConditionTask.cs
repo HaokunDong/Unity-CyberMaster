@@ -8,9 +8,11 @@ using UnityEngine;
 [Category("GamePlay")]
 public class GamePlayEntityIsAttackedConditionTask : ConditionTask<GamePlayEntity>
 {
+    protected override string info => agentInfo + " is Attacked";
+
     protected override bool OnCheck()
     {
-        if (SkillBoxManager.IsACharacterBeHitThisFrame(35001))
+        if (SkillBoxManager.IsACharacterBeHitThisFrame(agent.GamePlayId))
         {
             Debug.Log("HIT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             return true;
