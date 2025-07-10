@@ -50,6 +50,7 @@ public class GamePlayEnemy : GamePlayAIEntity
             blackboard.SetVariableValue("LeapAttackSkillPath", data.LeapAttackSkillPath);
             blackboard.SetVariableValue("StabAttackSkillPath", data.StabAttackSkillPath);
             blackboard.SetVariableValue("WithdrawAttackSkillPath", data.WithdrawAttackSkillPath);
+            blackboard.SetVariableValue("BlockSkillOnePath", data.BlockSkillOnePath);
         }
 
         skillDriver = new SkillDriver(

@@ -224,13 +224,13 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 1
     - Name: 
       Entry: 7
       Data: 
     - Name: $k
       Entry: 3
-      Data: 0
+      Data: 11
     - Name: $v
       Entry: 7
       Data: 14|SkillVelocityClip, Assembly-CSharp
@@ -251,85 +251,7 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 11
-    - Name: $v
-      Entry: 7
-      Data: 15|SkillVelocityClip, Assembly-CSharp
-    - Name: DurationFrame
-      Entry: 3
-      Data: 1
-    - Name: FacePlayerFirstFrame
-      Entry: 5
-      Data: true
-    - Name: FacePlayerEveryFrame
-      Entry: 5
-      Data: false
-    - Name: UseCurrentFacing
-      Entry: 5
-      Data: true
-    - Name: velocity
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 20
-    - Name: 
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 13
-    - Name: $v
-      Entry: 7
-      Data: 16|SkillVelocityClip, Assembly-CSharp
-    - Name: DurationFrame
-      Entry: 3
-      Data: 1
-    - Name: FacePlayerFirstFrame
-      Entry: 5
-      Data: true
-    - Name: FacePlayerEveryFrame
-      Entry: 5
-      Data: false
-    - Name: UseCurrentFacing
-      Entry: 5
-      Data: true
-    - Name: velocity
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 0
+      Data: 3
     - Name: 
       Entry: 4
       Data: 0
@@ -353,14 +275,14 @@ MonoBehaviour:
       Data: 
     - Name: SkillBlockBoxData
       Entry: 7
-      Data: 17|SkillBlockBoxTrack, Assembly-CSharp
+      Data: 15|SkillBlockBoxTrack, Assembly-CSharp
     - Name: skillClipDict
       Entry: 7
-      Data: 18|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillBlockBoxClip,
+      Data: 16|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillBlockBoxClip,
         Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 19|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
+      Data: 17|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
         mscorlib]], mscorlib
     - Name: 
       Entry: 8
@@ -379,7 +301,7 @@ MonoBehaviour:
       Data: 
     - Name: Tracks
       Entry: 7
-      Data: 20|System.Collections.Generic.List`1[[ISkillTrack, Assembly-CSharp]],
+      Data: 18|System.Collections.Generic.List`1[[ISkillTrack, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
@@ -398,7 +320,7 @@ MonoBehaviour:
       Data: 12
     - Name: 
       Entry: 9
-      Data: 17
+      Data: 15
     - Name: 
       Entry: 13
       Data: 
