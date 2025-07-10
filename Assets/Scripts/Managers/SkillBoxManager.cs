@@ -64,6 +64,9 @@ public class SkillBoxManager
     private static LayerMask PlayerLayerMask = LayerMask.GetMask("Player");
     private static LayerMask EnemyLayerMask = LayerMask.GetMask("Enemy");
     private static List<Collider2D> hits;
+    private static Dictionary<uint, bool> charBeHit = null;
+    private static Dictionary<uint, bool> charBeHitBlocked = null;
+    private static Dictionary<uint, bool> charBladeFighted = null;
 
     public void Init()
     {
@@ -73,6 +76,9 @@ public class SkillBoxManager
         finishedPlayerHitEnemy ??= new();
         playerHitEnemyBodyId ??= new();
         hits ??= new ();
+        charBeHit ??= new();
+        charBeHitBlocked ??= new();
+        charBladeFighted ??= new();
         hitCalUnits = new HitCalUnit[10];
         for (int i = 0; i < hitCalUnits.Length; i++)
         {
@@ -99,6 +105,9 @@ public class SkillBoxManager
             playerHitEnemyBodyId.Clear();
             playerHitCalUnit = null;
             playerBlockCalUnit = null;
+            charBeHit.Clear();
+            charBeHitBlocked.Clear();
+            charBladeFighted.Clear();
             await UniTask.WaitForFixedUpdate();
         }
     }
@@ -167,6 +176,9 @@ public class SkillBoxManager
                             sd.skillConfig.SkillAttackTimeWindowData.Hit(sd.CurrentFrame);
                             kv.Value.hasFinish = true;
 
+                            charBladeFighted[kv.Key] = true;
+                            charBladeFighted[0] = true;
+
                             playerHitCalUnit.skillDriver.OnHit(HitResType.PlayerEnemyBladeFight, 0, kv.Key, 1);
                             finishedPlayerHitEnemy.Add(kv.Key);
                             finish = true;
@@ -213,7 +225,7 @@ public class SkillBoxManager
                         {
                             playerHitCalUnit.skillDriver.OnHit(HitResType.PlayerHitEnemyBlock, 0, kv.Key, playerClip.HitDamageValue);
                             finishedPlayerHitEnemy.Add(kv.Key);
-
+                            charBeHitBlocked[kv.Key] = true;
                             finish = true;
                             break;
                         }
@@ -256,6 +268,7 @@ public class SkillBoxManager
         foreach (var id in playerHitEnemyBodyId)
         {
             playerHitCalUnit.skillDriver.OnHit(HitResType.PlayerHitEnemyBody, 0, id, playerClip.HitDamageValue);
+            charBeHit[id] = true;
         }
     }
 
@@ -290,6 +303,7 @@ public class SkillBoxManager
                         {
                             sd.OnHit(HitResType.EnemyHitPlayerBlock, kv.Key, 0, clip.HitDamageValue);
                             sd.skillConfig.SkillAttackTimeWindowData.Hit(sd.CurrentFrame);
+                            charBeHitBlocked[0] = true;
                             kv.Value.hasFinish = true;
 
                             finish = true;
@@ -338,6 +352,7 @@ public class SkillBoxManager
             {
                 sd.OnHit(HitResType.EnemyHitPlayerBody, kv.Key, 0, clip.HitDamageValue);
                 sd.skillConfig.SkillAttackTimeWindowData.Hit(sd.CurrentFrame);
+                charBeHit[0] = true;
                 kv.Value.hasFinish = true;
             }
         }
@@ -393,6 +408,21 @@ public class SkillBoxManager
                 Check();
             }
         }
+    }
+
+    public static bool IsACharacterBladeFightThisFrame(uint GPId)
+    {
+        return charBladeFighted.ContainsKey(GPId);
+    }
+
+    public static bool IsACharacterBeHitAndBlockedThisFrame(uint GPId)
+    {
+        return charBeHitBlocked.ContainsKey(GPId);
+    }
+
+    public static bool IsACharacterBeHitThisFrame(uint GPId)
+    {
+        return charBeHit.ContainsKey(GPId);
     }
 
     private static (Vector2 center, Vector2 size, float rotation) TransformBox(Vector2 origin, int faceDir, Box localBox)
