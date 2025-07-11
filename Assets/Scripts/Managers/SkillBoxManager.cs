@@ -108,7 +108,7 @@ public class SkillBoxManager
             charBeHit.Clear();
             charBeHitBlocked.Clear();
             charBladeFighted.Clear();
-            await UniTask.WaitForFixedUpdate();
+            await UniTask.Yield(PlayerLoopTiming.LastPostLateUpdate);
         }
     }
 
