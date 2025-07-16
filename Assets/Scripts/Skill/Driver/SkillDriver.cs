@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using GameBase.Log;
 using UnityEngine;
 
 public class SkillDriver
@@ -43,12 +42,14 @@ public class SkillDriver
             }
         }
     }
+
     public bool IsPaused => isPaused;
 
     public event Action OnSkillFinished;
     private event Func<int> OnGetFaceDir;
     public event Action<HitResType, uint, uint, float> OnHitBoxTriggered;
     private event Action OnFacePlayer;
+
     private List<ISkillTrack> tracks;
 
     public SkillDriver(GamePlayEntity entity, Type type, Animator animator, Rigidbody2D rb, Action<HitResType, uint, uint, float> OnHitBoxTriggered, Func<float> getDeltaTime, Func<int> getDir, Action facePlayer)
@@ -75,17 +76,13 @@ public class SkillDriver
         skillConfig.OwnFacePlayer += this.OnFacePlayer;
 
         tracks = skillConfig.GetTracks();
-        foreach(var t in tracks)
+        foreach (var t in tracks)
         {
-            if(t is SkillAnimationTrack)
+            if (t is SkillAnimationTrack)
             {
                 t.Init(skillConfig, animator);
             }
-            //else if (t is SkillAttackTimeWindowTrack)
-            //{
-            //    t.Init(skillConfig, null);
-            //}
-            else if(t is SkillHitBoxTrack)
+            else if (t is SkillHitBoxTrack)
             {
                 t.Init(skillConfig, OnHitBoxTriggered);
             }
@@ -107,9 +104,12 @@ public class SkillDriver
 
     public async UniTask PlayFromFrame(int startFrame)
     {
+        if (skillConfig == null) return;
+
+        IsPlaying = true;
+        isPaused = false;
         currentFrame = Mathf.Clamp(startFrame, 0, skillConfig.FrameCount);
         frameElapsed = 0f;
-        IsPlaying = true;
 
         int maxFrame = skillConfig.FrameCount;
 
@@ -127,6 +127,7 @@ public class SkillDriver
             while (frameElapsed >= frameInterval)
             {
                 frameElapsed -= frameInterval;
+
                 foreach (var t in tracks)
                 {
                     t.Update(currentFrame);
@@ -135,29 +136,25 @@ public class SkillDriver
                 currentFrame++;
                 if (currentFrame > maxFrame)
                 {
-                    if (skillConfig != null && skillConfig.isLoopSkill)
+                    
+                    if (skillConfig.isLoopSkill)
                     {
                         IsPlaying = false;
                         this.skillConfig.SkillAttackTimeWindowData.OnSkillEnd();
-                        LoopSkill().Forget();
+                        await PlayFromFrame(0);
                     }
                     else
                     {
                         Stop();
                         OnSkillFinished?.Invoke();
                     }
-                    break;
+
+                    return;
                 }
             }
 
             await UniTask.WaitForFixedUpdate();
         }
-    }
-
-    private async UniTask LoopSkill()
-    {
-        await UniTask.DelayFrame(3);
-        PlayAsync().Forget();
     }
 
     public void Pause()
