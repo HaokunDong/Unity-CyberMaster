@@ -17,6 +17,7 @@ public class GamePlayEntityIsAttackedConditionTask : ConditionTask<GamePlayEntit
             Debug.Log("HIT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             return true;
         }
+        Debug.Log("FALSE!!!");
         return false;
     }
 }
