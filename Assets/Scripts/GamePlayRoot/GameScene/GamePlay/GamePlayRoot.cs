@@ -11,6 +11,7 @@ using Sirenix.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,6 +21,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 #endif
 using UnityEngine;
+using ReadOnlyAttribute = Sirenix.OdinInspector.ReadOnlyAttribute;
 
 public enum GamePlayIdBegin
 {
@@ -31,11 +33,64 @@ public enum GamePlayIdBegin
     Enemy_Gen = 41000,
     Item = 50000,
     Item_Gen = 51000,
+
+    LevelLink = 90000, //关卡链接点
 }
 
 public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
 {
     public static GamePlayRoot Current = null;
+
+    public bool inited = false;
+
+    public bool IsActive
+    {
+        get => gameObject.activeInHierarchy;
+        set
+        {
+            if (value)
+            {
+                StopTask();
+                gameObject.SetActive(true);
+                RunTask().Forget();
+            }
+            else
+            {
+                StopTask();
+                gameObject.SetActive(false);
+            }
+        }
+    }
+
+    private void StopTask()
+    {
+        cts?.Cancel();
+        cts?.Dispose();
+        cts = null;
+        task?.Stop();
+        task = null;
+    }
+
+    private async UniTask RunTask()
+    {
+        await UniTask.WaitUntil(() => inited);
+
+        cts = new CancellationTokenSource();
+
+        task = new RepeatingTask(
+            intervalInSeconds: 0.3f,
+            action: async () =>
+            {
+                CheckAllTriggerAndDistanceSpawn();
+            },
+            externalToken: cts.Token,
+            initialDelayInSeconds: 1.0f,
+            continueCondition: () => this.isActiveAndEnabled,
+            onCompleted: () => LogUtils.Warning("任务完成或中断")
+        );
+
+        task.Start();
+    }
 
     [ReadOnly]
     public uint RootId;
@@ -58,6 +113,8 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
     private Dictionary<uint, GamePlayTrigger> triggerDict = null;
     [ShowInInspector]
     private Dictionary<uint, GamePlaySpawnPoint> spawnPointDict = null;
+    [ShowInInspector]
+    private Dictionary<uint, GamePlayLevelLink> linkDict = null;
 
     private RepeatingTask task;
     private CancellationTokenSource cts;
@@ -69,6 +126,7 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
 
     public async UniTask Init()
     {
+        inited = false;
         entityParents = new Dictionary<Type, GamePlayEntityParent>();
         var ps = transform.GetComponentsInChildren<GamePlayEntityParent>(true);
         foreach(var p in ps)
@@ -80,30 +138,10 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         CollectDict(ref itemDict);
         CollectDict(ref triggerDict);
         CollectDict(ref spawnPointDict);
-
-        if (Current != this)
-        {
-            Current?.task?.Stop();
-        }
+        CollectDict(ref linkDict);
         Current = this;
 
         FlowCtl?.Init();
-
-        cts = new CancellationTokenSource();
-
-        task = new RepeatingTask(
-            intervalInSeconds: 0.3f,
-            action: async () =>
-            {
-                CheckAllTriggerAndDistanceSpawn();
-            },
-            externalToken: cts.Token,
-            initialDelayInSeconds: 1.0f,
-            continueCondition: () => this.isActiveAndEnabled,
-            onCompleted: () => LogUtils.Warning("任务完成或中断")
-        );
-
-        task.Start();
         virtualCamera = Camera.main?.GetComponent<CinemachineBrain>()?.ActiveVirtualCamera as CinemachineVirtualCamera;
 
         await UniTask.DelayFrame(1);
@@ -116,6 +154,8 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
                 sp.Spawn().Forget();
             }
         }
+        inited = true;
+        IsActive = true;
     }
 
     private void CheckAllTriggerAndDistanceSpawn()
@@ -306,6 +346,10 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         {
             return spawnPoint as T;
         }
+        else if (typeof(GamePlayLevelLink).IsAssignableFrom(typeof(T)) && linkDict != null && linkDict.TryGetValue(GamePlayId, out var levelLink))
+        {
+            return levelLink as T;
+        }
         return null;
     }
 
@@ -468,6 +512,8 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
                         GenId(gamePlayTriggers, GamePlayId, GamePlayIdBegin.Trigger);
                         var gamePlaySpawnPoints = instance.transform.GetComponentsInChildren<GamePlaySpawnPoint>();
                         GenId(gamePlaySpawnPoints, GamePlayId, GamePlayIdBegin.SpawnPoint);
+                        var links = instance.transform.GetComponentsInChildren<GamePlayLevelLink>();
+                        GenId(links, GamePlayId, GamePlayIdBegin.LevelLink);
                     }
 
                     s_needParseGamePlayRoot = false;

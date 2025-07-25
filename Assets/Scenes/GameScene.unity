@@ -704,6 +704,7 @@ GameObject:
   m_Component:
   - component: {fileID: 781085729}
   - component: {fileID: 781085728}
+  - component: {fileID: 781085730}
   m_Layer: 0
   m_Name: GameFacade
   m_TagString: Untagged
@@ -723,7 +724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d94a439a7b1844548acacfd85c1893c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testCurrentScene: 0
+  GamePlayLevelId: 10003
 --- !u!4 &781085729
 Transform:
   m_ObjectHideFlags: 0
@@ -739,6 +740,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &781085730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781085727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 680a1fc0b89285d459c2983595381d99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &905433964
 GameObject:
   m_ObjectHideFlags: 0

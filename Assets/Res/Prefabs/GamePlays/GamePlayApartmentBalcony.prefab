@@ -932,6 +932,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b60629c992b8a54590fb31446ff46d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   GamePlayId: 1000801001
   spawnEntityTableId: 0
   timing: 1

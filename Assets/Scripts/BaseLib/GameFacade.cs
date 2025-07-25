@@ -65,9 +65,7 @@ public class GameFacade : MonoBehaviour
 #if UNITY_EDITOR
         GamePlayLevelId = (uint)EditorPrefs.GetInt("SelectedGamePlayLevelId", (int)GamePlayLevelId);
 #endif
-        var gpObj = await ResourceManager.LoadAssetAsync<GameObject>(GamePlayTable.GetTableData(GamePlayLevelId).Prefab, ResType.Prefab);
-        var gp = gpObj.GetComponent<GamePlayRoot>();
-        gp.Init().Forget();
+        World.Ins.BeginLoad(GamePlayLevelId).Forget();
     }
     #endregion
 
