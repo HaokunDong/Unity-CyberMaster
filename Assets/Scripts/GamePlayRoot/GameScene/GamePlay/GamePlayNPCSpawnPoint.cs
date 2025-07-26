@@ -8,7 +8,7 @@ public class GamePlayNPCSpawnPoint : GamePlaySpawnPoint<GamePlayNPC>
 {
     public bool spawnedEnemyPauseWhenInvisible = true;
 
-    public override async UniTask<GamePlayNPC> Spawn<GamePlayNPC>()
+    public override async UniTask<GamePlayEntity> SpawnEntity()
     {
         var data = NPCTable.GetTableData(spawnEntityTableId);
         if (data != null)

@@ -8,6 +8,8 @@ public abstract class GamePlayEntity : MonoBehaviour, ICustomHierarchyComment
 {
     [ReadOnly]
     public uint GamePlayId;
+    [ReadOnly, NonSerialized]
+    public uint RootId = 0;
 #if UNITY_EDITOR
     [Button("¸´ÖÆGamePlayId")]
     private void CopyGamePlayId()
@@ -32,9 +34,9 @@ public abstract class GamePlayEntity : MonoBehaviour, ICustomHierarchyComment
 
     public virtual bool isFacingPlayer()
     {
-        if(GamePlayRoot.Current != null && GamePlayRoot.Current.player != null)
+        if(World.Ins.Player != null)
         {
-            float dirToPlayer = GamePlayRoot.Current.player.transform.position.x - transform.position.x;
+            float dirToPlayer = World.Ins.Player.transform.position.x - transform.position.x;
             return (dirToPlayer > 0 && facingDir > 0) || (dirToPlayer < 0 && facingDir < 0);
         }
         return true;
@@ -42,7 +44,7 @@ public abstract class GamePlayEntity : MonoBehaviour, ICustomHierarchyComment
 
     public virtual bool isFacing(GamePlayEntity oe)
     {
-        if (GamePlayRoot.Current != null && oe != null)
+        if (oe != null)
         {
             float dirToPlayer = oe.transform.position.x - transform.position.x;
             return (dirToPlayer > 0 && facingDir > 0) || (dirToPlayer < 0 && facingDir < 0);
@@ -83,6 +85,20 @@ public abstract class GamePlayEntity : MonoBehaviour, ICustomHierarchyComment
     {
         facingDir = facingDir * -1;
         facingRight = !facingRight;
+    }
+
+    public uint GetRootId()
+    {
+        if(RootId <= 0)
+        {
+            RootId = GamePlayId / GamePlayRoot.GAP_L;
+        }
+        return RootId;
+    }
+
+    public GamePlayRoot GetRoot()
+    {
+        return World.Ins.GetRootByRootId(RootId);
     }
 
     public virtual void OnDispose()

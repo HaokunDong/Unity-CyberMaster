@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class GamePlayItemSpawnPoint : GamePlaySpawnPoint<GamePlayItem>
 {
-    public override async UniTask<GamePlayItem> Spawn<GamePlayItem>()
+    public override async UniTask<GamePlayEntity> SpawnEntity()
     {
         var data = ItemTable.GetTableData(spawnEntityTableId);
         if (data != null)

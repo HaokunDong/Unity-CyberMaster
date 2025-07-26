@@ -21,7 +21,8 @@ namespace GameScene.FlowNode.GamePlayNode
 
         protected override UniTask InvokeFunction(Flow flow)
         {
-            if(GamePlayRoot.Current == null)
+            var root = World.Ins.GetRootByEntityId(GamePlayId.value);
+            if(root == null)
             {
                 LogUtils.Error($"GamePlaySpawnNode GamePlayRoot.Current为null Path:{GetController().gameObject.GetPath()}");
                 return UniTask.CompletedTask;
@@ -31,7 +32,7 @@ namespace GameScene.FlowNode.GamePlayNode
                 LogUtils.Error($"GamePlaySpawnNode 传入GamePlayId为0或负数 GamePlayId:{GamePlayId.value} Path:{GetController().gameObject.GetPath()}");
                 return UniTask.CompletedTask;
             }
-            return GamePlayRoot.Current.DoGamePlaySpawn(GamePlayId.value);
+            return root.DoGamePlaySpawn(GamePlayId.value);
         }
     }
 }

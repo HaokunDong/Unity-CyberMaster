@@ -1,9 +1,12 @@
 using Cysharp.Text;
+using Cysharp.Threading.Tasks;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class GamePlayLevelLink : GamePlayEntity
 {
     public uint RootId;
+    public string gateName;
     public Vector2 loadCenter;
     public Vector2 loadSize;
     public Vector2 enterCenter;
@@ -16,6 +19,12 @@ public class GamePlayLevelLink : GamePlayEntity
         name = ZString.Concat("¹Ø¿¨Á¬Í¨: ", GamePlayId);
         color = Color.green;
         return true;
+    }
+
+    [Button]
+    private void TestLoad()
+    {
+        World.Ins.BeginLoad(RootId, GetRootId(), gateName, transform.position + new Vector3(lockPoint.x, +lockPoint.y, 0)).Forget();
     }
 
     private void OnDrawGizmos()

@@ -22,11 +22,11 @@ namespace GameScene.FlowNode.GamePlayNode
 
         protected override UniTask InvokeFunction(Flow flow)
         {
-            if (GamePlayRoot.Current == null)
-            {
-                LogUtils.Error($"GamePlayLoadPrefabAndPlayTimelineNode GamePlayRoot.Current Ϊ null Path:{GetController().gameObject.GetPath()}");
-                return UniTask.CompletedTask;
-            }
+            //if (GamePlayRoot.Current == null)
+            //{
+            //    LogUtils.Error($"GamePlayLoadPrefabAndPlayTimelineNode GamePlayRoot.Current Ϊ null Path:{GetController().gameObject.GetPath()}");
+            //    return UniTask.CompletedTask;
+            //}
 
             var path = PrefabPath.value;
             if (string.IsNullOrEmpty(path))

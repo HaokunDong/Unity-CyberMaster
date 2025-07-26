@@ -61,7 +61,7 @@ public class GamePlayEnemy : GamePlayAIEntity
             (HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue) => 
                 {
                     LogUtils.Warning($"������������: {hitRestype} ������GPId: {attackerGPId} �ܻ���GPId: {beHitterGPId} �˺���׼ֵ: {damageBaseValue}");
-                    GamePlayRoot.Current.player.OnHitBoxTrigger(hitRestype, attackerGPId, beHitterGPId, damageBaseValue);
+                    World.Ins.Player.OnHitBoxTrigger(hitRestype, attackerGPId, beHitterGPId, damageBaseValue);
                 },
             () => Time.fixedDeltaTime,
             () => facingDir,

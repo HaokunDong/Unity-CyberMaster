@@ -31,7 +31,7 @@ public abstract class GamePlaySpawnPoint : GamePlayEntity
 
     public abstract UniTask<GamePlayEntity> Spawn();
 
-    public abstract UniTask<T> Spawn<T>() where T : GamePlayEntity;
+    public abstract UniTask<GamePlayEntity> SpawnEntity();
 
     public virtual bool CheckCanSpawn()
     {
@@ -138,10 +138,10 @@ public abstract class GamePlaySpawnPoint<T> : GamePlaySpawnPoint
         //先检查存档等条件决定是否要产生
         if(CheckCanSpawn())
         {
-            spawnedEntity = await Spawn<T>();
+            spawnedEntity = await SpawnEntity() as T;
             spawnedEntity.TableId = spawnEntityTableId;
             spawned = true;
-            GamePlayRoot.Current.AfterAnEntitySpawned(spawnedEntity, this);
+            World.Ins.GetRootByEntityId(GamePlayId)?.AfterAnEntitySpawned(spawnedEntity, this);
             AfterSpawn();
             return spawnedEntity;
         }

@@ -65,7 +65,11 @@ public class GameFacade : MonoBehaviour
 #if UNITY_EDITOR
         GamePlayLevelId = (uint)EditorPrefs.GetInt("SelectedGamePlayLevelId", (int)GamePlayLevelId);
 #endif
-        World.Ins.BeginLoad(GamePlayLevelId).Forget();
+        var root = await World.Ins.BeginLoad(GamePlayLevelId, 0, null, Vector3.zero);
+        if(root != null)
+        {
+            World.Ins.PlayerEnterGamePlayRoot(root);
+        }
     }
     #endregion
 

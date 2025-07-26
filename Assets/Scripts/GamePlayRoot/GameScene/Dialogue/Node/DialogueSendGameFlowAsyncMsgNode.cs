@@ -27,11 +27,12 @@ public class DialogueSendGameFlowAsyncMsgNode : DTNode
 
     private async UniTask SendAsyncMessage()
     {
-        if(GamePlayRoot.Current != null)
+        var root = World.Ins.GetRootByEntityId(gamePlayId.value);
+        if(root != null)
         {
             if (gamePlayId.value == 0)
             {
-                await GamePlayRoot.Current.SendGamePlayAsyncMsg(new OnCommonGameFlowAsyncMsg
+                await root.SendGamePlayAsyncMsg(new OnCommonGameFlowAsyncMsg
                 {
                     boolValue = boolValue.value,
                     intValue = intValue.value,
@@ -43,7 +44,7 @@ public class DialogueSendGameFlowAsyncMsgNode : DTNode
             {
                 if(isItsSpawnedItem.value)
                 {
-                    var isp = GamePlayRoot.Current.GetAGamePlayEntity<GamePlayItemSpawnPoint>(gamePlayId.value);
+                    var isp = root.GetAGamePlayEntity<GamePlayItemSpawnPoint>(gamePlayId.value);
                     if(isp != null)
                     {
                         var item = isp.spawnedEntity;
@@ -69,7 +70,7 @@ public class DialogueSendGameFlowAsyncMsgNode : DTNode
                 }
                 else
                 {
-                    var item = GamePlayRoot.Current.GetAGamePlayEntity<GamePlayItem>(gamePlayId.value);
+                    var item = root.GetAGamePlayEntity<GamePlayItem>(gamePlayId.value);
                     if (item != null)
                     {
                         await item.SendGamePlayAsyncMsg(new OnCommonGameFlowAsyncMsg

@@ -14,21 +14,21 @@ public class GetPlayerRelativeDistanceXYAction : ActionTask<Transform>
     protected override void OnExecute()
     {
         base.OnExecute();
-        if (GamePlayRoot.Current != null && GamePlayRoot.Current.player != null)
+        if (World.Ins.Player != null)
         {
             if(isCalX.value == isCalY.value)
             {
-                res.value = Vector2.Distance(GamePlayRoot.Current.player.transform.position, agent.position);
+                res.value = Vector2.Distance(World.Ins.Player.transform.position, agent.position);
             }
             else
             {
                 if (isCalX.value)
                 {
-                    res.value = Mathf.Abs(GamePlayRoot.Current.player.transform.position.x - agent.position.x);
+                    res.value = Mathf.Abs(World.Ins.Player.player.transform.position.x - agent.position.x);
                 }
                 else
                 {
-                    res.value = Mathf.Abs(GamePlayRoot.Current.player.transform.position.y - agent.position.y);
+                    res.value = Mathf.Abs(World.Ins.Player.transform.position.y - agent.position.y);
                 }
             }
         }

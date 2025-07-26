@@ -87,7 +87,8 @@ public class GamePlayTrigger : GamePlayEntity
 
     private void TriggerEnter()
     {
-        GamePlayRoot.Current?.SendGamePlayMsg(new OnTriggerEventMsg
+        var root = World.Ins.GetRootByEntityId(GamePlayId);
+        root?.SendGamePlayMsg(new OnTriggerEventMsg
         {
             TriggerGamePlayId = GamePlayId,
             Type = TriggerEventType.Enter
@@ -96,7 +97,8 @@ public class GamePlayTrigger : GamePlayEntity
 
     private void TriggerExit()
     {
-        GamePlayRoot.Current?.SendGamePlayMsg(new OnTriggerEventMsg
+        var root = World.Ins.GetRootByEntityId(GamePlayId);
+        root?.SendGamePlayMsg(new OnTriggerEventMsg
         {
             TriggerGamePlayId = GamePlayId,
             Type = TriggerEventType.Exit

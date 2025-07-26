@@ -9,13 +9,14 @@ public class GamePlayPlayerSpawnPoint : GamePlaySpawnPoint<GamePlayPlayer>
     public string playerCreateAnim = null;
     public override bool CheckCanSpawn()
     {
-        return !spawned;
+        return World.Ins.Player == null;
     }
 
-    public override async UniTask<GamePlayPlayer> Spawn<GamePlayPlayer>()
+    public override async UniTask<GamePlayEntity> SpawnEntity()
     {
         var obj = await ResourceManager.LoadAssetAsync<GameObject>("Player/Player", ResType.Prefab);
         GamePlayPlayer p = obj.GetComponent<GamePlayPlayer>();
+        World.Ins.SetPlayer(p);
         //临时兼容老Player处理
         if (Quaternion.Angle(transform.rotation, Quaternion.identity) > 90)
         {

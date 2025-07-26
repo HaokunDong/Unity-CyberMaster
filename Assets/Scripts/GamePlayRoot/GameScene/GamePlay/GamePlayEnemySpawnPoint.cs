@@ -8,7 +8,7 @@ public class GamePlayEnemySpawnPoint : GamePlaySpawnPoint<GamePlayEnemy>
 {
     public bool spawnedEnemyPauseWhenInvisible = true;
 
-    public override async UniTask<GamePlayEnemy> Spawn<GamePlayEnemy>()
+    public override async UniTask<GamePlayEntity> SpawnEntity()
     {
         var data = EnemyTable.GetTableData(spawnEntityTableId);
         if(data != null)

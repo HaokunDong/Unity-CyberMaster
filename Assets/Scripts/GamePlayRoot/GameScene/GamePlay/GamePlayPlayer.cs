@@ -31,7 +31,7 @@ public class GamePlayPlayer : GamePlayEntity
         {
             if (Input.GetKeyDown(KeyCode.P))
             {
-                GamePlayRoot.Current?.InteractTarget?.OnInteract();
+                World.Ins.InPlayGamePlayRoot?.InteractTarget?.OnInteract();
             }
 
             if (Input.GetKeyDown(KeyCode.RightAlt))
@@ -45,7 +45,7 @@ public class GamePlayPlayer : GamePlayEntity
     {
         base.OnHitBoxTrigger(hitRestype, attackerGPId, beHitterGPId, damageBaseValue);
 
-        GamePlayEnemy enemy = GamePlayRoot.Current.GetAGamePlayEntity<GamePlayEnemy>(attackerGPId);
+        GamePlayEnemy enemy = World.Ins.GetRootByEntityId(attackerGPId).GetAGamePlayEntity<GamePlayEnemy>(attackerGPId);
 
         if(player.facingDir == enemy.facingDir)
         {

@@ -2,19 +2,16 @@ using Cinemachine;
 using Cysharp.Text;
 using Cysharp.Threading.Tasks;
 using Everlasting.Config;
-using Everlasting.Extend;
 using GameBase.Log;
 using GameScene.FlowNode;
 using GameScene.FlowNode.Base;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Tools;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -39,8 +36,6 @@ public enum GamePlayIdBegin
 
 public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
 {
-    public static GamePlayRoot Current = null;
-
     public bool inited = false;
 
     public bool IsActive
@@ -62,7 +57,7 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         }
     }
 
-    private void StopTask()
+    public void StopTask()
     {
         cts?.Cancel();
         cts?.Dispose();
@@ -71,7 +66,7 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         task = null;
     }
 
-    private async UniTask RunTask()
+    public async UniTask RunTask()
     {
         await UniTask.WaitUntil(() => inited);
 
@@ -95,26 +90,25 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
     [ReadOnly]
     public uint RootId;
 
-    [NonSerialized, ReadOnly, ShowInInspector]
-    public GamePlayPlayer player = null;
+    public const uint GAP_L = 100000;
+    public const uint GAP = 1000;
 
-    private const uint GAP_L = 100000;
-    private const uint GAP = 1000;
-
-    [ShowInInspector]
+    [ShowInInspector, ReadOnly]
     private Dictionary<Type, GamePlayEntityParent> entityParents;
-    [ShowInInspector]
+    [ShowInInspector, ReadOnly]
     private Dictionary<uint, GamePlayEnemy> enemyDict = null;
-    [ShowInInspector]
+    [ShowInInspector, ReadOnly]
     private Dictionary<uint, GamePlayNPC> NPCDict = null;
-    [ShowInInspector]
+    [ShowInInspector, ReadOnly]
     private Dictionary<uint, GamePlayItem> itemDict = null;
-    [ShowInInspector]
+    [ShowInInspector, ReadOnly]
     private Dictionary<uint, GamePlayTrigger> triggerDict = null;
-    [ShowInInspector]
+    [ShowInInspector, ReadOnly]
     private Dictionary<uint, GamePlaySpawnPoint> spawnPointDict = null;
-    [ShowInInspector]
+    [ShowInInspector, ReadOnly]
     private Dictionary<uint, GamePlayLevelLink> linkDict = null;
+    [ShowInInspector, ReadOnly]
+    private Dictionary<uint, Dictionary<string, GamePlayLevelLink>> levelLinks;
 
     private RepeatingTask task;
     private CancellationTokenSource cts;
@@ -124,7 +118,7 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
 
     private CinemachineVirtualCamera virtualCamera;
 
-    public async UniTask Init()
+    public async UniTask Init(uint From, string gateName, Vector3 worldPos)
     {
         inited = false;
         entityParents = new Dictionary<Type, GamePlayEntityParent>();
@@ -139,7 +133,40 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         CollectDict(ref triggerDict);
         CollectDict(ref spawnPointDict);
         CollectDict(ref linkDict);
-        Current = this;
+
+        levelLinks ??= new();
+        levelLinks.Clear();
+        var links = linkDict.Values;
+        foreach (var link in links)
+        {
+            if (!levelLinks.ContainsKey(link.RootId))
+            {
+                levelLinks[link.RootId] = new();
+            }
+            levelLinks[link.RootId][link.gateName] = link;
+        }
+
+        GamePlayLevelLink lvl = null;
+        if (From > 0)
+        {
+            if(levelLinks.TryGetValue(From, out var dict))
+            {
+                if(dict.Count == 1)
+                {
+                    lvl = dict.Values.First();
+                }
+                else
+                {
+                    dict.TryGetValue(gateName, out lvl);
+                }
+            }
+        }
+        if(lvl != null)
+        {
+            var lvlPs = lvl.transform.position + new Vector3(lvl.lockPoint.x, +lvl.lockPoint.y, 0);
+            var dir = worldPos - lvlPs;
+            transform.position += dir;
+        }
 
         FlowCtl?.Init();
         virtualCamera = Camera.main?.GetComponent<CinemachineBrain>()?.ActiveVirtualCamera as CinemachineVirtualCamera;
@@ -160,6 +187,13 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
 
     private void CheckAllTriggerAndDistanceSpawn()
     {
+        if(World.Ins.InPlayGamePlayRoot != this)
+        {
+            currentInteractTarget = null;
+            lastInteractTarget = null;
+            return;
+        }
+
         if(triggerDict != null)
         {
             foreach (var trigger in triggerDict.Values)
@@ -168,7 +202,7 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
             }
         }
 
-        if(player != null && spawnPointDict != null)
+        if(World.Ins.Player != null && spawnPointDict != null)
         {
             foreach (var sp in spawnPointDict.Values)
             {
@@ -176,7 +210,7 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
                 {
                     if(sp.needRaycastDetect)
                     {
-                        Vector2 direction = (player.transform.position - sp.transform.position).normalized;
+                        Vector2 direction = (World.Ins.Player.transform.position - sp.transform.position).normalized;
                         var hit = Physics2D.Raycast(sp.transform.position, direction, sp.spawnDistance, LayerMask.GetMask("Player"));
                         if(hit.collider != null)
                         {
@@ -185,7 +219,7 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
                     }
                     else
                     {
-                        float distance = Vector3.Distance(sp.transform.position, player.transform.position);
+                        float distance = Vector3.Distance(sp.transform.position, World.Ins.Player.transform.position);
                         if(distance <= sp.spawnDistance)
                         {
                             sp.Spawn().Forget();
@@ -205,11 +239,11 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
 
         currentInteractTarget = null;
 
-        if (player == null) return;
+        if (World.Ins.Player == null) return;
 
-        Vector2 origin = player.transform.position;
-        Vector2 facing = player.GetFacingDirection().normalized;
-        float maxDistance = player.maxInteractDistance;
+        Vector2 origin = World.Ins.Player.transform.position;
+        Vector2 facing = World.Ins.Player.GetFacingDirection().normalized;
+        float maxDistance = World.Ins.Player.maxInteractDistance;
         int layerMask = LayerMask.GetMask("Interactable", "NPC");
 
         // ÏÈ¼ì²âÇ°·½
@@ -272,11 +306,11 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
 
     private void CheckVisibleAIs()
     {
-        if (player == null || (enemyDict == null && NPCDict == null)) return;
+        if (World.Ins.Player == null || (enemyDict == null && NPCDict == null)) return;
 
         float cameraSize = virtualCamera != null ? virtualCamera.m_Lens.OrthographicSize : Camera.main.orthographicSize;
         float activeRange = 2 * cameraSize * 1.3f;
-        Vector2 playerPos = player.transform.position;
+        Vector2 playerPos = World.Ins.Player.transform.position;
 
         if(enemyDict != null)
         {
@@ -375,8 +409,6 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         var index = gamePlaySpawnPoint.GamePlayId % GAP;
         if(spawnedEntity is GamePlayPlayer player)
         {
-            this.player = player;
-            player.transform.SetParent(entityParents[typeof(GamePlayPlayer)].transform);
             player.Init();
             currentInteractTarget = null;
             if(virtualCamera != null)
@@ -444,11 +476,6 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
 
     public async UniTask Dispose()
     {
-        if(Current == this)
-        {
-            Current = null;
-        }
-
         await UniTask.DelayFrame(1);
     }
 
