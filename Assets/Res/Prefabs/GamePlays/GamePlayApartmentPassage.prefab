@@ -394,6 +394,58 @@ MonoBehaviour:
   comment: "\u73AF\u5883\u88C5\u9970\u7236\u8282\u70B9"
   c: {r: 1, g: 0.5773492, b: 0, a: 1}
   show: 1
+--- !u!1 &3737654251754456059
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4209000404001485016}
+  - component: {fileID: 8531389045256405582}
+  m_Layer: 0
+  m_Name: GameObject (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4209000404001485016
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3737654251754456059}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.97, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5974237104410401189}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8531389045256405582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3737654251754456059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d8dc969c45045947b8c06e3ad069025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GamePlayId: 1000690002
+  RootId: 10007
+  gateName: 
+  loadCenter: {x: 0, y: 0}
+  loadSize: {x: 9, y: 6}
+  enterCenter: {x: 2.3, y: 0}
+  enterSize: {x: 3, y: 3}
+  lockPoint: {x: 3.3, y: -1.82}
 --- !u!1 &4348622794536660450
 GameObject:
   m_ObjectHideFlags: 0
@@ -804,9 +856,9 @@ MonoBehaviour:
   RootId: 10005
   gateName: 
   loadCenter: {x: 0, y: 0}
-  loadSize: {x: 8, y: 6}
+  loadSize: {x: 9, y: 6}
   enterCenter: {x: -2.79, y: 0}
-  enterSize: {x: 2, y: 3}
+  enterSize: {x: 3, y: 3}
   lockPoint: {x: -4, y: -1.82}
 --- !u!1 &5926824636036124356
 GameObject:
@@ -921,6 +973,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7452606823803334176}
+  - {fileID: 4209000404001485016}
   m_Father: {fileID: 3858697232086252859}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6844293397707254427

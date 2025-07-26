@@ -539,6 +539,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4479006010957703789}
+  - {fileID: 3737324745184171762}
   m_Father: {fileID: 5985980857968533856}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7529648609470441558
@@ -1028,7 +1029,7 @@ MonoBehaviour:
   loadCenter: {x: -3, y: 0}
   loadSize: {x: 8, y: 6}
   enterCenter: {x: -1, y: -1}
-  enterSize: {x: 1, y: 2}
+  enterSize: {x: 3, y: 2}
   lockPoint: {x: 0, y: -2.82}
 --- !u!1 &6448696470575317206
 GameObject:
@@ -1120,6 +1121,58 @@ MonoBehaviour:
   _updateMode: 0
   _graph: {fileID: 0}
   _blackboard: {fileID: 0}
+--- !u!1 &6669670487930490589
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3737324745184171762}
+  - component: {fileID: 5890010642364489652}
+  m_Layer: 0
+  m_Name: LinkLeft (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3737324745184171762
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6669670487930490589}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.26, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5600772612958252354}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5890010642364489652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6669670487930490589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d8dc969c45045947b8c06e3ad069025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GamePlayId: 1000590002
+  RootId: 10008
+  gateName: 
+  loadCenter: {x: -3, y: 0}
+  loadSize: {x: 8, y: 6}
+  enterCenter: {x: -4.88, y: -1}
+  enterSize: {x: 3, y: 2}
+  lockPoint: {x: -6.06, y: -2.82}
 --- !u!1 &6817596867779479488
 GameObject:
   m_ObjectHideFlags: 0

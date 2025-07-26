@@ -18,7 +18,7 @@ public class World : SingletonComp<World>
     [NonSerialized, ShowInInspector, ReadOnly]
     private HashSet<uint> InPipelineWorldIds = new();
 
-    public async UniTask<GamePlayRoot> BeginLoad(uint RootId, uint From, string gateName, Vector3 worldPos)
+    public async UniTask<GamePlayRoot> LoadAGamePlayRoot(uint RootId, uint From, string gateName, Vector3 worldPos)
     {
         if (!InPipelineWorldIds.Contains(RootId))
         {
@@ -29,7 +29,23 @@ public class World : SingletonComp<World>
             await gp.Init(From, gateName, worldPos);
         }
         GamePlayRootOnWorld.TryGetValue(RootId, out var res);
+        if(res != null)
+        {
+            res.IsActive = true;
+        }
         return res;
+    }
+
+    public async UniTask LeaveAGamePlayRoot(uint RootId)
+    {
+        if(GamePlayRootOnWorld.TryGetValue(RootId, out var res))
+        {
+            if(res != InPlayGamePlayRoot)
+            {
+                await UniTask.WaitUntil(() => res.inited);
+                res.IsActive = false;
+            }
+        }
     }
 
     public void SetPlayer(GamePlayPlayer p)

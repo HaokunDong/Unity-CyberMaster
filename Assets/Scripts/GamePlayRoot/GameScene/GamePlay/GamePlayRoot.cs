@@ -38,22 +38,27 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
 {
     public bool inited = false;
 
+    private bool isActive = false;
     public bool IsActive
     {
         get => gameObject.activeInHierarchy;
         set
         {
-            if (value)
+            if(isActive != value)
             {
-                StopTask();
-                gameObject.SetActive(true);
-                RunTask().Forget();
+                if (value)
+                {
+                    StopTask();
+                    gameObject.SetActive(true);
+                    RunTask().Forget();
+                }
+                else
+                {
+                    StopTask();
+                    gameObject.SetActive(false);
+                }
             }
-            else
-            {
-                StopTask();
-                gameObject.SetActive(false);
-            }
+            isActive = value;
         }
     }
 
@@ -64,6 +69,8 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         cts = null;
         task?.Stop();
         task = null;
+        levelLinkTask?.Stop();
+        levelLinkTask = null;
     }
 
     public async UniTask RunTask()
@@ -85,6 +92,20 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         );
 
         task.Start();
+
+        levelLinkTask = new RepeatingTask(
+            intervalInSeconds: 0.05f,
+            action: async () =>
+            {
+                CheckLevelLinks();
+            },
+            externalToken: cts.Token,
+            initialDelayInSeconds: 0.0f,
+            continueCondition: () => this.isActiveAndEnabled,
+            onCompleted: () => LogUtils.Warning("任务完成或中断")
+        );
+
+        levelLinkTask.Start();
     }
 
     [ReadOnly]
@@ -111,6 +132,7 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
     private Dictionary<uint, Dictionary<string, GamePlayLevelLink>> levelLinks;
 
     private RepeatingTask task;
+    private RepeatingTask levelLinkTask;
     private CancellationTokenSource cts;
     private IInteractable currentInteractTarget;
     public IInteractable InteractTarget => currentInteractTarget;
@@ -187,7 +209,7 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
 
     private void CheckAllTriggerAndDistanceSpawn()
     {
-        if(World.Ins.InPlayGamePlayRoot != this)
+        if (World.Ins.InPlayGamePlayRoot != this)
         {
             currentInteractTarget = null;
             lastInteractTarget = null;
@@ -231,6 +253,18 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
 
         DetectClosestInteractable();
         CheckVisibleAIs();
+    }
+
+    private void CheckLevelLinks()
+    {
+        foreach(var dict in levelLinks)
+        {
+            foreach(var kv in dict.Value)
+            {
+                kv.Value.CheckLoadAreaBounds();
+                kv.Value.CheckEnterBounds();
+            }
+        }
     }
 
     private void DetectClosestInteractable()
