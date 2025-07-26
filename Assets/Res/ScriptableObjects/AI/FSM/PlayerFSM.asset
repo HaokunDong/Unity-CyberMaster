@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f945e777233a59f4aba40aeca29093a6, type: 3}
   m_Name: PlayerFSM
   m_EditorClassIdentifier: 
-  _serializedGraph: '{"type":"NodeCanvas.StateMachines.FSM","nodes":[{"_actionList":{"actions":[{"parameter":{"_value":"Idle"},"$type":"AnimatorTryOpenOnlyABoolAction"},{"Velocity":{},"$type":"GamePlayAIEntitySetVelocityAction"}]},"_position":{"x":448.0,"y":212.0},"$type":"NodeCanvas.StateMachines.ActionState"},{"_actionList":{"executionMode":1,"actions":[]},"_position":{"x":527.0,"y":446.0},"$type":"NodeCanvas.StateMachines.ActionState"}],"connections":[],"canvasGroups":[],"localBlackboard":{"_variables":{}}}'
+  _serializedGraph: '{"type":"NodeCanvas.StateMachines.FSM","nodes":[{"_actionList":{"actions":[{"parameter":{"_value":"Idle"},"$type":"AnimatorTryOpenOnlyABoolAction"},{"Velocity":{},"$type":"GamePlayAIEntitySetVelocityAction"}]},"_name":"IdleState","_position":{"x":451.0,"y":181.0},"$type":"NodeCanvas.StateMachines.ActionState","$id":"0"},{"_actionList":{"executionMode":1,"actions":[]},"_name":"RunState","_position":{"x":201.0},"$type":"NodeCanvas.StateMachines.ActionState","$id":"1"},{"_actionList":{"executionMode":1,"actions":[]},"_name":"DodgeState","_position":{"x":109.6613,"y":299.964},"$type":"NodeCanvas.StateMachines.ActionState"},{"_actionList":{"executionMode":1,"actions":[]},"_name":"ChargeAttackState","_position":{"x":823.0,"y":339.0},"$type":"NodeCanvas.StateMachines.ActionState"},{"_actionList":{"executionMode":1,"actions":[]},"_name":"PostureState","_position":{"x":122.0,"y":416.0},"$type":"NodeCanvas.StateMachines.ActionState"},{"_onEnterList":{"executionMode":1,"actions":[]},"_onUpdateList":{"executionMode":1,"actions":[]},"_onExitList":{"executionMode":1,"actions":[]},"_position":{"x":417.0,"y":432.0},"$type":"NodeCanvas.StateMachines.SuperActionState"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"NodeCanvas.StateMachines.FSMConnection"},{"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"0"},"$type":"NodeCanvas.StateMachines.FSMConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{}}}'
   _objectReferences: []
   _graphSource:
     _version: 3.25
     _category: 
     _comments: 
-    _translation: {x: 0, y: 0}
+    _translation: {x: 154, y: 234}
     _zoomFactor: 1
   _haltSerialization: 0
