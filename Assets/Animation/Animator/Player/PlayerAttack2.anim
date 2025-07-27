@@ -22,32 +22,32 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: -1150325228, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
-    - time: 0.071428575
+    - time: 0.07692308
       value: {fileID: -1816954193, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
-    - time: 0.14285715
+    - time: 0.15384616
       value: {fileID: -1212233675, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
-    - time: 0.21428572
+    - time: 0.23076923
       value: {fileID: 720353863, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
-    - time: 0.2857143
+    - time: 0.30769232
       value: {fileID: 1985729698, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
-    - time: 0.35714287
+    - time: 0.3846154
       value: {fileID: 242349530, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
-    - time: 0.42857143
+    - time: 0.46153846
       value: {fileID: -1798984826, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
-    - time: 0.5
+    - time: 0.53846157
       value: {fileID: 1194623746, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
-    - time: 0.5714286
+    - time: 0.61538464
       value: {fileID: 1248881166, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
-    - time: 0.64285713
+    - time: 0.6923077
       value: {fileID: -1607342367, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
-    - time: 0.71428573
+    - time: 0.7692308
       value: {fileID: 1524325864, guid: 07a005f6a6cca174689c96bad947a18d, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 14
+  m_SampleRate: 13
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -80,7 +80,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.7857143
+    m_StopTime: 0.84615386
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -107,28 +107,28 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.14285715
+  - time: 0.15384616
     functionName: CanBeBouncedAttackTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.21428572
+  - time: 0.23076923
     functionName: AttackTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.2857143
+  - time: 0.30769232
     functionName: CanNotBeBouncedAttackTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.42857143
+  - time: 0.46153846
     functionName: AnimationTrigger
     data: 
     objectReferenceParameter: {fileID: 0}

@@ -15,7 +15,8 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 7400000, guid: 38fd90641051c434f90588dec8ec0f04, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -37,7 +38,34 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
       Data: 0
+    - Name: $v
+      Entry: 7
+      Data: 3|SkillAnimationClip, Assembly-CSharp
+    - Name: DurationFrame
+      Entry: 3
+      Data: 10
+    - Name: AnimationClip
+      Entry: 10
+      Data: 0
+    - Name: TransitionTime
+      Entry: 4
+      Data: 0
+    - Name: ApplyRootMotion
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -49,10 +77,10 @@ MonoBehaviour:
       Data: 
     - Name: SkillAttackTimeWindowData
       Entry: 7
-      Data: 3|SkillAttackTimeWindowTrack, Assembly-CSharp
+      Data: 4|SkillAttackTimeWindowTrack, Assembly-CSharp
     - Name: skillClipDict
       Entry: 7
-      Data: 4|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillAttackTimeWindowClip,
+      Data: 5|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillAttackTimeWindowClip,
         Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 9
@@ -71,17 +99,92 @@ MonoBehaviour:
       Data: 
     - Name: SkillHitBoxData
       Entry: 7
-      Data: 5|SkillHitBoxTrack, Assembly-CSharp
+      Data: 6|SkillHitBoxTrack, Assembly-CSharp
     - Name: skillClipDict
       Entry: 7
-      Data: 6|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillHitBoxClip,
+      Data: 7|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillHitBoxClip,
         Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 9
       Data: 2
     - Name: 
       Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 7
+      Data: 8|SkillHitBoxClip, Assembly-CSharp
+    - Name: DurationFrame
+      Entry: 3
+      Data: 1
+    - Name: HitBoxs
+      Entry: 7
+      Data: 9|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 10|Box, Assembly-CSharp
+    - Name: center
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0.74
+    - Name: 
+      Entry: 4
+      Data: 0.37
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: size
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 3.61
+    - Name: 
+      Entry: 4
+      Data: 2.52
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: rotation
+      Entry: 4
       Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: HitDamageValue
+      Entry: 4
+      Data: 1
+    - Name: layer
+      Entry: 7
+      Data: UnityEngine.LayerMask, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 128
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -93,17 +196,56 @@ MonoBehaviour:
       Data: 
     - Name: SkillVelocityData
       Entry: 7
-      Data: 7|SkillVelocityTrack, Assembly-CSharp
+      Data: 11|SkillVelocityTrack, Assembly-CSharp
     - Name: skillClipDict
       Entry: 7
-      Data: 8|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillVelocityClip,
+      Data: 12|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillVelocityClip,
         Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 9
       Data: 2
     - Name: 
       Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 7
+      Data: 13|SkillVelocityClip, Assembly-CSharp
+    - Name: DurationFrame
+      Entry: 3
+      Data: 1
+    - Name: FacePlayerFirstFrame
+      Entry: 5
+      Data: false
+    - Name: FacePlayerEveryFrame
+      Entry: 5
+      Data: false
+    - Name: UseCurrentFacing
+      Entry: 5
+      Data: true
+    - Name: velocity
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 5
+    - Name: 
+      Entry: 4
       Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -115,10 +257,10 @@ MonoBehaviour:
       Data: 
     - Name: SkillBlockBoxData
       Entry: 7
-      Data: 9|SkillBlockBoxTrack, Assembly-CSharp
+      Data: 14|SkillBlockBoxTrack, Assembly-CSharp
     - Name: skillClipDict
       Entry: 7
-      Data: 10|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillBlockBoxClip,
+      Data: 15|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillBlockBoxClip,
         Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 9
@@ -137,11 +279,26 @@ MonoBehaviour:
       Data: 
     - Name: Tracks
       Entry: 7
-      Data: 11|System.Collections.Generic.List`1[[ISkillTrack, Assembly-CSharp]],
+      Data: 16|System.Collections.Generic.List`1[[ISkillTrack, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
+      Data: 5
+    - Name: 
+      Entry: 9
       Data: 0
+    - Name: 
+      Entry: 9
+      Data: 4
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 11
+    - Name: 
+      Entry: 9
+      Data: 14
     - Name: 
       Entry: 13
       Data: 
@@ -149,6 +306,6 @@ MonoBehaviour:
       Entry: 8
       Data: 
   SkillName: 
-  FrameCount: 100
+  FrameCount: 10
   FrameRate: 13
   isLoopSkill: 0
