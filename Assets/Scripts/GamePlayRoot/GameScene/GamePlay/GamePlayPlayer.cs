@@ -1,24 +1,86 @@
 using Cysharp.Text;
 using Cysharp.Threading.Tasks;
+using Everlasting.Config;
 using GameBase.Log;
 using Managers;
-using System.Collections;
-using System.Collections.Generic;
+using NodeCanvas.Framework;
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class GamePlayPlayer : GamePlayEntity
+public class GamePlayPlayer : GamePlayAIEntity
 {
     public float maxInteractDistance = 5f;
-    public Player player;
+    //public Player player;
+
+    public PlayerInput playerInput;
+    public Vector2 moveInput = Vector2.zero;
+
+    [SerializeField] private Transform groundCheckPoint;
+    [SerializeField] private Vector2 groundCheckSize = new Vector2(0.5f, 0.1f);
+    [SerializeField] private LayerMask groundLayer;
+    private PlayerTable playerData;
+
+    private Vector2 moveVelocity;
+    public Vector2 MoveVelocity
+    {
+        get => moveVelocity;
+        private set
+        {
+            if(value != moveVelocity)
+            {
+                moveVelocity = value;
+                blackboard.SetVariableValue("MoveVelocity", MoveVelocity);
+            }
+        }
+    }
+
 
     public Vector2 GetFacingDirection()
     {
         return transform.right;
     }
 
+    private void Awake()
+    {
+        playerInput ??= new PlayerInput();
+    }
+
     private void Start()
     {
-        player = GetComponent<Player>();
+        //player = GetComponent<Player>();
+    }
+
+    public override void AfterAIInit(Blackboard blackboard)
+    {
+        base.AfterAIInit(blackboard);
+        playerData = PlayerTable.GetTableData(TableId);
+        blackboard.SetVariableValue("MoveVelocity", MoveVelocity);
+    }
+
+    private void OnEnable()
+    {
+        playerInput.GamePlaye.Move.performed += OnMove;
+        playerInput.GamePlaye.Move.canceled += OnMove;
+        playerInput.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerInput.GamePlaye.Move.performed -= OnMove;
+        playerInput.GamePlaye.Move.canceled -= OnMove;
+        playerInput.Disable();
+    }
+
+    private void OnMove(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>();
+        MoveVelocity = new Vector2(moveInput.x * playerData.MoveSpeed, 0);
+    }
+
+    public bool IsGrounded()
+    {
+        return Physics2D.BoxCast(groundCheckPoint.position, groundCheckSize, 0f, Vector2.zero, 0f, groundLayer);
     }
 
     private void Update()
@@ -47,12 +109,12 @@ public class GamePlayPlayer : GamePlayEntity
 
         GamePlayEnemy enemy = World.Ins.GetRootByEntityId(attackerGPId).GetAGamePlayEntity<GamePlayEnemy>(attackerGPId);
 
-        if(player.facingDir == enemy.facingDir)
+        if(!isFacing(enemy))
         {
-            player.Flip();
+            Flip();
         }
 
-        player.OnHitFromTarget(attackerGPId);
+        //player.OnHitFromTarget(attackerGPId);
     }
 
     private async UniTask TestBladeFightSkill()
@@ -82,6 +144,11 @@ public class GamePlayPlayer : GamePlayEntity
         name = ZString.Concat(GamePlayId);
         color = Color.red;
         return true;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawCube(groundCheckPoint.position, groundCheckSize);
     }
 #endif
 }

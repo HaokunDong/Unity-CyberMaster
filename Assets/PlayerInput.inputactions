@@ -1,5 +1,5 @@
 {
-    "name": "New Controls",
+    "name": "PlayerInput",
     "maps": [
         {
             "name": "GamePlaye",
@@ -81,6 +81,17 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "left",
+                    "id": "702ef778-2203-4c1a-a899-7ba0abe135fe",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "right",
                     "id": "6b0ed556-2bde-4357-bebc-13c5752f6541",
                     "path": "<Keyboard>/d",
@@ -90,6 +101,28 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "3aabe7f4-4c9a-44a9-b0bd-d1cc9e6b23a5",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "7b16b9d4-b889-4044-a00a-70c7ef634476",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

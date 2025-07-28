@@ -9,7 +9,6 @@ using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using Tools;
@@ -129,7 +128,7 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
     [ShowInInspector, ReadOnly]
     private Dictionary<uint, GamePlayLevelLink> linkDict = null;
     [ShowInInspector, ReadOnly]
-    private Dictionary<uint, Dictionary<string, GamePlayLevelLink>> levelLinks;
+    private Dictionary<uint, Dictionary<string, GamePlayLevelLink>> levelLinks = null;
 
     private RepeatingTask task;
     private RepeatingTask levelLinkTask;
@@ -156,16 +155,18 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         CollectDict(ref spawnPointDict);
         CollectDict(ref linkDict);
 
-        levelLinks ??= new();
-        levelLinks.Clear();
-        var links = linkDict.Values;
-        foreach (var link in links)
+        if(levelLinks == null)
         {
-            if (!levelLinks.ContainsKey(link.RootId))
+            levelLinks = new();
+            var links = linkDict.Values;
+            foreach (var link in links)
             {
-                levelLinks[link.RootId] = new();
+                if (!levelLinks.ContainsKey(link.RootId))
+                {
+                    levelLinks[link.RootId] = new();
+                }
+                levelLinks[link.RootId][link.gateName] = link;
             }
-            levelLinks[link.RootId][link.gateName] = link;
         }
 
         GamePlayLevelLink lvl = null;
@@ -261,8 +262,8 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         {
             foreach(var kv in dict.Value)
             {
-                kv.Value.CheckLoadAreaBounds();
                 kv.Value.CheckEnterBounds();
+                kv.Value.CheckLoadAreaBounds();
             }
         }
     }

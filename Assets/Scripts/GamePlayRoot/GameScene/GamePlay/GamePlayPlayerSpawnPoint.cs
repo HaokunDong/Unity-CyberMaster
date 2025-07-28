@@ -1,5 +1,6 @@
 using Cysharp.Text;
 using Cysharp.Threading.Tasks;
+using Everlasting.Config;
 using Everlasting.Extend;
 using Managers;
 using UnityEngine;
@@ -14,25 +15,35 @@ public class GamePlayPlayerSpawnPoint : GamePlaySpawnPoint<GamePlayPlayer>
 
     public override async UniTask<GamePlayEntity> SpawnEntity()
     {
-        var obj = await ResourceManager.LoadAssetAsync<GameObject>("Player/Player", ResType.Prefab);
-        GamePlayPlayer p = obj.GetComponent<GamePlayPlayer>();
-        World.Ins.SetPlayer(p);
-        //临时兼容老Player处理
-        if (Quaternion.Angle(transform.rotation, Quaternion.identity) > 90)
+        var data = PlayerTable.GetTableData(spawnEntityTableId);
+        if (data != null)
         {
-            var player = obj.GetComponent<Player>();
-            player.FlipData();
-        }
-        //临时兼容老Player处理
-        if (!playerCreateAnim.IsNullOrEmpty())
-        {
-            var animator = obj.GetComponentInChildren<Animator>();
-            if(animator != null)
+            var obj = await ResourceManager.LoadAssetAsync<GameObject>(data.Prefab, ResType.Prefab);
+            GamePlayPlayer p = obj.GetComponent<GamePlayPlayer>();
+            World.Ins.SetPlayer(p);
+            if (p != null)
             {
-                animator.Play(playerCreateAnim);
+                p.graphPath = data.Graph;
+                p.pauseWhenInvisible = false;
             }
+            //临时兼容老Player处理
+            //if (Quaternion.Angle(transform.rotation, Quaternion.identity) > 90)
+            //{
+            //    var player = obj.GetComponent<Player>();
+            //    player.FlipData();
+            //}
+            //临时兼容老Player处理
+            if (!playerCreateAnim.IsNullOrEmpty())
+            {
+                var animator = obj.GetComponentInChildren<Animator>();
+                if (animator != null)
+                {
+                    animator.Play(playerCreateAnim);
+                }
+            }
+            return p;
         }
-        return p;
+        return null;
     }
 
 #if UNITY_EDITOR

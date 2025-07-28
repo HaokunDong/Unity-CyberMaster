@@ -24,7 +24,7 @@ public class GetPlayerRelativeDistanceXYAction : ActionTask<Transform>
             {
                 if (isCalX.value)
                 {
-                    res.value = Mathf.Abs(World.Ins.Player.player.transform.position.x - agent.position.x);
+                    res.value = Mathf.Abs(World.Ins.Player.transform.position.x - agent.position.x);
                 }
                 else
                 {
