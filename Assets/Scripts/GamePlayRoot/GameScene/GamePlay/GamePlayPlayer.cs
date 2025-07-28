@@ -22,6 +22,7 @@ public class GamePlayPlayer : GamePlayAIEntity
     private PlayerTable playerData;
 
     private Vector2 moveVelocity;
+    private Vector2 runVelocity;
     public Vector2 MoveVelocity
     {
         get => moveVelocity;
@@ -31,6 +32,18 @@ public class GamePlayPlayer : GamePlayAIEntity
             {
                 moveVelocity = value;
                 blackboard.SetVariableValue("MoveVelocity", MoveVelocity);
+            }
+        }
+    }
+    public Vector2 RunVelocity
+    {
+        get => runVelocity;
+        private set
+        {
+            if (value != runVelocity)
+            {
+                runVelocity = value;
+                blackboard.SetVariableValue("RunVelocity", RunVelocity);
             }
         }
     }
@@ -56,19 +69,21 @@ public class GamePlayPlayer : GamePlayAIEntity
         base.AfterAIInit(blackboard);
         playerData = PlayerTable.GetTableData(TableId);
         blackboard.SetVariableValue("MoveVelocity", MoveVelocity);
+        blackboard.SetVariableValue("RunVelocity", RunVelocity);
     }
 
     private void OnEnable()
     {
-        playerInput.GamePlaye.Move.performed += OnMove;
-        playerInput.GamePlaye.Move.canceled += OnMove;
+        playerInput.GamePlay.Run.performed += OnRun;
+        playerInput.GamePlay.Run.canceled += OnRun;
+
         playerInput.Enable();
     }
 
     private void OnDisable()
     {
-        playerInput.GamePlaye.Move.performed -= OnMove;
-        playerInput.GamePlaye.Move.canceled -= OnMove;
+        playerInput.GamePlay.Run.performed -= OnRun;
+        playerInput.GamePlay.Run.canceled -= OnRun;
         playerInput.Disable();
     }
 
@@ -76,6 +91,12 @@ public class GamePlayPlayer : GamePlayAIEntity
     {
         moveInput = context.ReadValue<Vector2>();
         MoveVelocity = new Vector2(moveInput.x * playerData.MoveSpeed, 0);
+    }
+
+    private void OnRun(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>();
+        RunVelocity = new Vector2(moveInput.x * playerData.RunSpeed, 0);
     }
 
     public bool IsGrounded()
