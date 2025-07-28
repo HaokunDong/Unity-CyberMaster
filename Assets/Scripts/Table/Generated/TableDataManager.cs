@@ -20,6 +20,7 @@ namespace Everlasting.Config
 				yield return Internal.GamePlayTableLoader.Load();
 				yield return Internal.ItemTableLoader.Load();
 				yield return Internal.NPCTableLoader.Load();
+				yield return Internal.PlayerTableLoader.Load();
 			}
 			await UniTask.WhenAll(LoadAll());
 		}
@@ -30,6 +31,7 @@ namespace Everlasting.Config
 			Internal.GamePlayTableLoader.Clear();
 			Internal.ItemTableLoader.Clear();
 			Internal.NPCTableLoader.Clear();
+			Internal.PlayerTableLoader.Clear();
 		}
 	}
 }
