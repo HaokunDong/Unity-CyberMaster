@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using OfficeOpenXml;
+using Sirenix.Utilities;
 
 namespace EverlastingEditor.Config.Export
 {
@@ -27,20 +28,33 @@ namespace EverlastingEditor.Config.Export
 		    {
 			    MainSheetView = new ExcelSheetView(worksheet, filePath);
 		    }
-		    foreach (var ws in excel.Workbook.Worksheets)
-		    {
-			    if (ws.Name != MainDataSheetName && !ws.Name.StartsWith("~"))
-			    {
-				    if (ws.Name != "Setting")
-				    {
-					    SubSheetViews.Add(new ExcelSheetView(ws, filePath));
-				    }
-				    else
-				    {
-					    SettingSheetView = new ExcelSheetView(ws, filePath);
-				    }
-			    }
-		    }
+			try 
+			{
+                foreach (var ws in excel.Workbook.Worksheets)
+                {
+					if(ws.Dimension == null)
+					{
+						//跳过空sheet
+						continue;
+					}
+                    if (ws.Name != MainDataSheetName && !ws.Name.StartsWith("~"))
+                    {
+                        if (ws.Name != "Setting")
+                        {
+                            SubSheetViews.Add(new ExcelSheetView(ws, filePath));
+                        }
+                        else
+                        {
+                            SettingSheetView = new ExcelSheetView(ws, filePath);
+                        }
+                    }
+                }
+            }
+			catch(Exception e)
+			{
+                throw e;
+            }
+		    
 		    if (SettingSheetView == null && MainSheetView == null)
 		    {
 			    throw new Exception($"没有找到Worksheet");
@@ -71,6 +85,10 @@ namespace EverlastingEditor.Config.Export
 				    {
 					    throw new Exception($"{e.Message}\n处理列{Utils.ColumnNum2Label(i)}失败", e);
 				    }
+					if (column.Name.IsNullOrWhitespace())
+					{
+                        throw new Exception($"列{column.ColumnNum}无键名");
+                    }
 					columns.Add(column);
 			    }
 			    Dictionary<string, Column> columnsDic = new Dictionary<string, Column>();

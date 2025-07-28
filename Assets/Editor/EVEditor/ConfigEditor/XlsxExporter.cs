@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -14,31 +15,35 @@ namespace EverlastingEditor
 {
 	class XlsxExporter
     {
-	    // class XlsxPostprocessor : AssetPostprocessor
-	    // {
-		   //  static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets,
-			  //   string[] movedFromAssetPaths)
-		   //  {
-			  //   List<string> stringList = ListPool<string>.Fetch();
-			  //   foreach (var asset in importedAssets)
-			  //   {
-				 //    if (asset.StartsWith("Assets/Config/") && asset.EndsWith(".xlsx") && !asset.Contains("~"))
-				 //    {
-					//     stringList.Add(asset);
-				 //    }
-			  //   }
-	    //
-			  //   if (stringList.Count != 0)
-			  //   {
-				 //    ExportOnes(stringList.ToArray());
-				 //    ExportLoader();
-				 //    AssetDatabase.Refresh();
-			  //   }
-			  //   ListPool<string>.Release(stringList);
-		   //  }
-	    // }
+        // class XlsxPostprocessor : AssetPostprocessor
+        // {
+        //  static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets,
+        //   string[] movedFromAssetPaths)
+        //  {
+        //   List<string> stringList = ListPool<string>.Fetch();
+        //   foreach (var asset in importedAssets)
+        //   {
+        //    if (asset.StartsWith("Assets/Config/") && asset.EndsWith(".xlsx") && !asset.Contains("~"))
+        //    {
+        //     stringList.Add(asset);
+        //    }
+        //   }
+        //
+        //   if (stringList.Count != 0)
+        //   {
+        //    ExportOnes(stringList.ToArray());
+        //    ExportLoader();
+        //    AssetDatabase.Refresh();
+        //   }
+        //   ListPool<string>.Release(stringList);
+        //  }
+        // }
 
-	    private static void ClearFolder(string folderPath)
+        private static List<string> errorLogs = new List<string>();
+        private static object lockObj = new object();
+
+
+        private static void ClearFolder(string folderPath)
 	    {
 		    var di = new DirectoryInfo(folderPath);
 		    foreach (var file in di.GetFiles())
@@ -51,7 +56,8 @@ namespace EverlastingEditor
 		[MenuItem("Tools/Language/导出Excel多语言数据源至CSV文件", false, 1)]
 		private static void ExportLocalizationCsv()
 		{
-			var excelExportConfig = ExcelExportConfig.BuildConfig(Path.Combine(ExcelExportConfig.XlsxPath, "Config.txt"));
+			errorLogs.Clear();
+            var excelExportConfig = ExcelExportConfig.BuildConfig(Path.Combine(ExcelExportConfig.XlsxPath, "Config.txt"));
 			if (excelExportConfig == null)
 			{
 				LogUtils.Error("缺少打表工具配置文件");
@@ -81,7 +87,10 @@ namespace EverlastingEditor
 				}
 				catch (Exception e)
 				{
-                    LogUtils.Error($"处理{name}表出现异常： {e}");
+					lock (lockObj)
+					{
+                        errorLogs.Add($"处理{name}表出现异常： {e}");
+					}
 					exportResult = false;
 				}
 			});
@@ -89,7 +98,11 @@ namespace EverlastingEditor
 
 			if (!exportResult)
 			{
-				ShowExportFailedPrompt();
+                foreach (var log in errorLogs)
+                {
+                    LogUtils.Error(log);
+                }
+                ShowExportFailedPrompt();
 				return;
 			}
 
@@ -107,7 +120,8 @@ namespace EverlastingEditor
 		[MenuItem("Tools/Excel配置导出")]
 	    private static void Export()
 	    {
-		    var outputPath = ExcelExportConfig.ConfigOutputPath;
+            errorLogs.Clear();
+            var outputPath = ExcelExportConfig.ConfigOutputPath;
 		    var binaryOutputPath = ExcelExportConfig.BinaryOutputPath;
 		    
 		    var excelExportConfig = ExcelExportConfig.BuildConfig(Path.Combine(ExcelExportConfig.XlsxPath, "Config.txt"));
@@ -134,17 +148,20 @@ namespace EverlastingEditor
 		    {
 			    var name = Path.GetFileNameWithoutExtension(file);
 			    name = char.ToUpper(name[0]) + name.Substring(1);
-			    try
-			    {
-				    new CsExporter(name, file, outputPath, binaryOutputPath).Export();
-				    names.Add(name);
-			    }
-			    catch (Exception e)
-			    {
-                    LogUtils.Error($"处理{name}表出现异常： {e}");
+                try
+                {
+                    new CsExporter(name, file, outputPath, binaryOutputPath).Export();
+                    names.Add(name);
+                }
+                catch (Exception e)
+                {
+                    lock (lockObj)
+                    {
+                        errorLogs.Add($"处理{name}表出现异常： {e}");
+                    }
                     exportResult = false;
                 }
-		    });
+            });
 		    
 		    Parallel.ForEach(compositeTables, pair =>
 		    {
@@ -157,13 +174,20 @@ namespace EverlastingEditor
 			    }
 			    catch (Exception e)
 			    {
-                    LogUtils.Error($"处理{name}表出现异常： {e}");
+                    lock (lockObj)
+                    {
+                        errorLogs.Add($"处理{name}表出现异常： {e}");
+                    }
                     exportResult = false;
                 }
 		    });
 
             if (!exportResult)
             {
+                foreach (var log in errorLogs)
+                {
+                    LogUtils.Error(log);
+                }
                 ShowExportFailedPrompt();
                 return;
             }
