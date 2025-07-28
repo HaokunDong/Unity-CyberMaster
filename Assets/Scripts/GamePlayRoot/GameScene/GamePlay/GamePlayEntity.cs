@@ -9,7 +9,7 @@ public abstract class GamePlayEntity : MonoBehaviour, ICustomHierarchyComment
     [ReadOnly]
     public uint GamePlayId;
     [ReadOnly, NonSerialized]
-    public uint RootId = 0;
+    public uint GamePlayRootId = 0;
 #if UNITY_EDITOR
     [Button("¸´ÖÆGamePlayId")]
     private void CopyGamePlayId()
@@ -89,16 +89,16 @@ public abstract class GamePlayEntity : MonoBehaviour, ICustomHierarchyComment
 
     public uint GetRootId()
     {
-        if(RootId <= 0)
+        if(GamePlayRootId <= 0)
         {
-            RootId = GamePlayId / GamePlayRoot.GAP_L;
+            GamePlayRootId = GamePlayId / GamePlayRoot.GAP_L;
         }
-        return RootId;
+        return GamePlayRootId;
     }
 
     public GamePlayRoot GetRoot()
     {
-        return World.Ins.GetRootByRootId(RootId);
+        return World.Ins.GetRootByRootId(GamePlayRootId);
     }
 
     public virtual void OnDispose()

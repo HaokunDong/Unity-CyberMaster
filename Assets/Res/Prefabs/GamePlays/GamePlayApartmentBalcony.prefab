@@ -1732,7 +1732,7 @@ MonoBehaviour:
   gateName: 
   loadCenter: {x: -3, y: 0}
   loadSize: {x: 8, y: 6}
-  enterCenter: {x: -1, y: -1}
+  enterCenter: {x: -1.76, y: -1}
   enterSize: {x: 3, y: 2}
   lockPoint: {x: 0.15, y: -2.04}
 --- !u!1 &8679621842400873558
