@@ -17,7 +17,6 @@ public class GamePlayerIsGroundMoveConditionTask : ConditionTask<GamePlayPlayer>
             return false;
         }
 
-        Vector2 moveInput = agent.moveInput;
-        return moveInput != Vector2.zero;
+        return Mathf.Abs(agent.Velocity.x) > 0;
     }
 }

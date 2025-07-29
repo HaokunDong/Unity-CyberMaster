@@ -76,4 +76,6 @@ crashlytics-build.properties
 .DS_Store
 .editorconfig
 /EXE
-/Assets/StreamingAssets
+/Assets/StreamingAssets/ab
+Assets/StreamingAssets/ab.meta
+/Assets/StreamingAssets/Audio

@@ -4,7 +4,6 @@ using Everlasting.Config;
 using GameBase.Log;
 using Managers;
 using NodeCanvas.Framework;
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,30 +19,19 @@ public class GamePlayPlayer : GamePlayAIEntity
     [SerializeField] private Vector2 groundCheckSize = new Vector2(0.5f, 0.1f);
     [SerializeField] private LayerMask groundLayer;
     private PlayerTable playerData;
+    private SmoothDirectionInput moveVelocitySmoothDirectionInput;
 
-    private Vector2 moveVelocity;
-    private Vector2 runVelocity;
-    public Vector2 MoveVelocity
+    private Vector2 velocity;
+    public Vector2 Velocity
     {
-        get => moveVelocity;
+        get => velocity;
         private set
         {
-            if(value != moveVelocity)
+            if(value != velocity)
             {
-                moveVelocity = value;
-                blackboard.SetVariableValue("MoveVelocity", MoveVelocity);
-            }
-        }
-    }
-    public Vector2 RunVelocity
-    {
-        get => runVelocity;
-        private set
-        {
-            if (value != runVelocity)
-            {
-                runVelocity = value;
-                blackboard.SetVariableValue("RunVelocity", RunVelocity);
+                velocity = value;
+                blackboard.SetVariableValue("Velocity", velocity);
+                blackboard.SetVariableValue("AbsVelocityX", Mathf.Abs(Velocity.x));
             }
         }
     }
@@ -57,6 +45,7 @@ public class GamePlayPlayer : GamePlayAIEntity
     private void Awake()
     {
         playerInput ??= new PlayerInput();
+        moveVelocitySmoothDirectionInput ??= new SmoothDirectionInput(1f, 3f, 0.1f, 0.05f);
     }
 
     private void Start()
@@ -68,8 +57,8 @@ public class GamePlayPlayer : GamePlayAIEntity
     {
         base.AfterAIInit(blackboard);
         playerData = PlayerTable.GetTableData(TableId);
-        blackboard.SetVariableValue("MoveVelocity", MoveVelocity);
-        blackboard.SetVariableValue("RunVelocity", RunVelocity);
+        blackboard.SetVariableValue("Velocity", Velocity);
+        blackboard.SetVariableValue("AbsVelocityX", Mathf.Abs(Velocity.x));
     }
 
     private void OnEnable()
@@ -87,16 +76,16 @@ public class GamePlayPlayer : GamePlayAIEntity
         playerInput.Disable();
     }
 
-    private void OnMove(InputAction.CallbackContext context)
-    {
-        moveInput = context.ReadValue<Vector2>();
-        MoveVelocity = new Vector2(moveInput.x * playerData.MoveSpeed, 0);
-    }
-
     private void OnRun(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-        RunVelocity = new Vector2(moveInput.x * playerData.RunSpeed, 0);
+        moveVelocitySmoothDirectionInput.SetRawInput(moveInput.x);
+    }
+
+    private void FixedUpdate()
+    {
+        moveVelocitySmoothDirectionInput.Update(Time.fixedDeltaTime);
+        Velocity = new Vector2(moveVelocitySmoothDirectionInput.CurrentValue * playerData.MaxMoveSpeed, 0);
     }
 
     public bool IsGrounded()

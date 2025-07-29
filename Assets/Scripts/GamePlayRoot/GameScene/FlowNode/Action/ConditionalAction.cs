@@ -1,12 +1,10 @@
 using NodeCanvas.Framework;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class ConditionalAction : ActionTask
 {
     public BBParameter<ConditionTask> condition;
     public BBParameter<ActionTask> task;
+    public BBParameter<ActionTask> elseTask;
 
     protected override void OnExecute()
     {
@@ -26,6 +24,13 @@ public class ConditionalAction : ActionTask
             if (condition.value.Check(agent, blackboard))
             {
                 task.value.Execute(agent, blackboard);
+            }
+            else
+            {
+                if(!elseTask.isNoneOrNull)
+                {
+                    elseTask.value.Execute(agent, blackboard);
+                }
             }
         }
     }

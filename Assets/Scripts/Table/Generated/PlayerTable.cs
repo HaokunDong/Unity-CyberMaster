@@ -14,18 +14,16 @@ namespace Everlasting.Config
 		public readonly uint Id;
 		public readonly string Prefab;
 		public readonly string Graph;
-		public readonly float MoveSpeed;
-		public readonly float RunSpeed;
+		public readonly float MaxMoveSpeed;
 		public readonly float JumpForce;
 		public readonly Vector2[] AttackDistance;
 		
-		public PlayerTable(uint Id, string Prefab, string Graph, float MoveSpeed, float RunSpeed, float JumpForce, Vector2[] AttackDistance)
+		public PlayerTable(uint Id, string Prefab, string Graph, float MaxMoveSpeed, float JumpForce, Vector2[] AttackDistance)
 		{
 			this.Id = Id;
 			this.Prefab = Prefab;
 			this.Graph = Graph;
-			this.MoveSpeed = MoveSpeed;
-			this.RunSpeed = RunSpeed;
+			this.MaxMoveSpeed = MaxMoveSpeed;
 			this.JumpForce = JumpForce;
 			this.AttackDistance = AttackDistance;
 		}
@@ -85,11 +83,10 @@ namespace Everlasting.Config
 						var Id = binary.ReadUInt();
 						var Prefab = poolString[binary.ReadInt()];
 						var Graph = poolString[binary.ReadInt()];
-						var MoveSpeed = binary.ReadFloat();
-						var RunSpeed = binary.ReadFloat();
+						var MaxMoveSpeed = binary.ReadFloat();
 						var JumpForce = binary.ReadFloat();
 						var AttackDistance = poolVector2Array[binary.ReadInt()];
-						var cfg = new PlayerTable(Id, Prefab, Graph, MoveSpeed, RunSpeed, JumpForce, AttackDistance);
+						var cfg = new PlayerTable(Id, Prefab, Graph, MaxMoveSpeed, JumpForce, AttackDistance);
 						ConfigList[i] = cfg;
 						ConfigDic.Add(Id, cfg);
 					}
