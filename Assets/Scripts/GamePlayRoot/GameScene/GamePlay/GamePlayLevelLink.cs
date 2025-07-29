@@ -2,6 +2,7 @@ using Cysharp.Text;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using System;
+using System.Threading;
 using UnityEngine;
 
 public class GamePlayLevelLink : GamePlayEntity
@@ -19,24 +20,48 @@ public class GamePlayLevelLink : GamePlayEntity
     [NonSerialized, ShowInInspector, ReadOnly]
     public bool isPlayerInEnterArea;
 
+    private CancellationTokenSource unloadCTS;
+
     public void CheckLoadAreaBounds()
     {
         if(World.Ins.Player != null)
         {
             var la = new Bounds((Vector2)transform.position + loadCenter, loadSize);
             bool isIn = la.Contains(World.Ins.Player.transform.position);
-            if(isIn != isPlayerInLoadArea)
+            if (isIn && !isPlayerInLoadArea)
             {
-                isPlayerInLoadArea = isIn;
-                if (isIn)
-                {
-                    World.Ins.LoadAGamePlayRoot(RootId, GetRootId(), gateName, transform.position + new Vector3(lockPoint.x, +lockPoint.y, 0)).Forget();
-                }
-                else
-                {
-                    World.Ins.LeaveAGamePlayRoot(RootId).Forget();
-                }
+                isPlayerInLoadArea = true;
+
+                // 取消原来的延迟卸载
+                unloadCTS?.Cancel();
+                unloadCTS = null;
+
+                World.Ins.LoadAGamePlayRoot(RootId, GetRootId(), gateName, transform.position + new Vector3(lockPoint.x, +lockPoint.y, 0)).Forget();
             }
+            else if (!isIn && isPlayerInLoadArea)
+            {
+                isPlayerInLoadArea = false;
+
+                // 启动延迟卸载逻辑
+                unloadCTS?.Cancel();
+                unloadCTS = new CancellationTokenSource();
+                var token = unloadCTS.Token;
+
+                DelayUnload(RootId, token).Forget();
+            }
+        }
+    }
+
+    private async UniTaskVoid DelayUnload(uint rootId, CancellationToken token)
+    {
+        try
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: token);
+            await World.Ins.LeaveAGamePlayRoot(rootId);
+        }
+        catch (OperationCanceledException)
+        {
+            // 被取消，不做卸载
         }
     }
 
