@@ -5,7 +5,7 @@ using NodeCanvas.Framework;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class GamePlayEnemy : GamePlayAIEntity
+public class GamePlayEnemy : GamePlayAIEntity, ISkillDriverUnit
 {
     public SkillDriver skillDriver;
     
@@ -15,6 +15,8 @@ public class GamePlayEnemy : GamePlayAIEntity
     private Cooldown LeapAttackCD;
     private Cooldown StabAttackCD;
     private Cooldown WithdrawAttackCD;
+
+    public SkillDriver skillDriverImp => skillDriver;
 
     public override void AfterAIInit(Blackboard blackboard)
     {

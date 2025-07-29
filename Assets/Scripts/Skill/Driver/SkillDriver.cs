@@ -1,7 +1,15 @@
 using System;
 using System.Collections.Generic;
+using Cysharp.Text;
 using Cysharp.Threading.Tasks;
+using Managers;
+using Sirenix.Utilities;
 using UnityEngine;
+
+public interface ISkillDriverUnit
+{
+    public SkillDriver skillDriverImp { get; }
+}
 
 public class SkillDriver
 {
@@ -22,6 +30,7 @@ public class SkillDriver
 
     private bool isPlaying = false;
     private bool isPaused = false;
+    private string bufferedSkillName = null;
 
     public bool IsPlaying
     {
@@ -63,6 +72,12 @@ public class SkillDriver
         this.OnGetFaceDir = getDir;
         this.OnFacePlayer = facePlayer;
         this.OnHitBoxTriggered = OnHitBoxTriggered;
+    }
+
+    public void BufferNextSkill(string skillName)
+    {
+        // 如果当前技能不允许接这个技能，也可以在这里判断
+        bufferedSkillName = skillName;
     }
 
     public void SetSkill(SkillConfig config)
@@ -147,6 +162,14 @@ public class SkillDriver
                     {
                         Stop();
                         OnSkillFinished?.Invoke();
+
+                        if (!bufferedSkillName.IsNullOrWhitespace())
+                        {
+                            var nextSkill = await ResourceManager.LoadAssetAsync<SkillConfig>(ZString.Concat("Skill/", bufferedSkillName), ResType.ScriptObject);
+                            bufferedSkillName = null;
+                            SetSkill(nextSkill);
+                            await PlayAsync();
+                        }
                     }
 
                     return;

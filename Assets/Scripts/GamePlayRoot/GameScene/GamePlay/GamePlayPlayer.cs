@@ -1,13 +1,12 @@
 using Cysharp.Text;
-using Cysharp.Threading.Tasks;
 using Everlasting.Config;
 using GameBase.Log;
-using Managers;
 using NodeCanvas.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class GamePlayPlayer : GamePlayAIEntity
+public class GamePlayPlayer : GamePlayAIEntity, ISkillDriverUnit
 {
     public float maxInteractDistance = 5f;
     //public Player player;
@@ -20,6 +19,8 @@ public class GamePlayPlayer : GamePlayAIEntity
     [SerializeField] private LayerMask groundLayer;
     private PlayerTable playerData;
     private SmoothDirectionInput moveVelocitySmoothDirectionInput;
+    private Dictionary<InputAction, string[]> inputSkillDict;
+    private SkillDriver skillDriver;
 
     private Vector2 velocity;
     public Vector2 Velocity
@@ -36,6 +37,7 @@ public class GamePlayPlayer : GamePlayAIEntity
         }
     }
 
+    public SkillDriver skillDriverImp => skillDriver;
 
     public Vector2 GetFacingDirection()
     {
@@ -46,6 +48,19 @@ public class GamePlayPlayer : GamePlayAIEntity
     {
         playerInput ??= new PlayerInput();
         moveVelocitySmoothDirectionInput ??= new SmoothDirectionInput(1f, 3f, 0.1f, 0.05f);
+        skillDriver ??= new SkillDriver(
+            this,
+            typeof(GamePlayPlayer),
+            gameObject.GetComponentInChildren<Animator>(),
+            gameObject.GetComponentInChildren<Rigidbody2D>(),
+            (HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue) =>
+            {
+                LogUtils.Warning($"攻击命中类型: {hitRestype} 攻击者GPId: {attackerGPId} 受击者GPId: {beHitterGPId} 伤害基准值: {damageBaseValue}");
+            },
+            () => Time.fixedDeltaTime,
+            () => facingDir,
+            () => { FacePlayer(); }
+        );
     }
 
     private void Start()
@@ -59,6 +74,16 @@ public class GamePlayPlayer : GamePlayAIEntity
         playerData = PlayerTable.GetTableData(TableId);
         blackboard.SetVariableValue("Velocity", Velocity);
         blackboard.SetVariableValue("AbsVelocityX", Mathf.Abs(Velocity.x));
+        blackboard.SetVariableValue("SkillDriver", skillDriver);
+        blackboard.SetVariableValue("beginSkill", false);
+        blackboard.SetVariableValue("SkillPath", string.Empty);
+
+        if (inputSkillDict == null)
+        {
+            inputSkillDict = new();
+            inputSkillDict[playerInput.GamePlay.PrimaryAttack] = playerData.PrimaryAttackSkillPath;
+            inputSkillDict[playerInput.GamePlay.Block] = new string[] { playerData.BlockSkillPath };
+        }
     }
 
     private void OnEnable()
@@ -84,8 +109,34 @@ public class GamePlayPlayer : GamePlayAIEntity
 
     private void FixedUpdate()
     {
-        moveVelocitySmoothDirectionInput.Update(Time.fixedDeltaTime);
-        Velocity = new Vector2(moveVelocitySmoothDirectionInput.CurrentValue * playerData.MaxMoveSpeed, 0);
+        if(playerData != null)
+        {
+            moveVelocitySmoothDirectionInput.Update(Time.fixedDeltaTime);
+            Velocity = new Vector2(moveVelocitySmoothDirectionInput.CurrentValue * playerData.MaxMoveSpeed, 0);
+
+            InputAction currentSkillAction = null;
+            if (playerInput.GamePlay.Block.WasPressedThisFrame())
+            {
+                currentSkillAction = playerInput.GamePlay.Block;
+            }
+
+            if(playerInput.GamePlay.PrimaryAttack.WasPressedThisFrame())
+            {
+                currentSkillAction = playerInput.GamePlay.PrimaryAttack;
+            }
+
+            if(currentSkillAction != null)
+            {
+                if (inputSkillDict.TryGetValue(currentSkillAction, out var ps))
+                {
+                    if (ps != null && ps.Length > 0)
+                    {
+                        blackboard.SetVariableValue("beginSkill", true);
+                        blackboard.SetVariableValue("SkillPath", ps[0]);
+                    }
+                }
+            }
+        }
     }
 
     public bool IsGrounded()
@@ -105,11 +156,6 @@ public class GamePlayPlayer : GamePlayAIEntity
             {
                 World.Ins.InPlayGamePlayRoot?.InteractTarget?.OnInteract();
             }
-
-            if (Input.GetKeyDown(KeyCode.RightAlt))
-            {
-                TestBladeFightSkill().Forget();
-            }
         } 
     }
 
@@ -125,27 +171,6 @@ public class GamePlayPlayer : GamePlayAIEntity
         }
 
         //player.OnHitFromTarget(attackerGPId);
-    }
-
-    private async UniTask TestBladeFightSkill()
-    {
-        var skillDriver = new SkillDriver(
-            this,
-            typeof(GamePlayPlayer),
-            gameObject.GetComponentInChildren<Animator>(),
-            gameObject.GetComponentInChildren<Rigidbody2D>(),
-            (HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue) =>
-            {
-                LogUtils.Warning($"攻击命中类型: {hitRestype} 攻击者GPId: {attackerGPId} 受击者GPId: {beHitterGPId} 伤害基准值: {damageBaseValue}");
-            },
-            () => Time.fixedDeltaTime,
-            () => facingDir,
-            () => { FacePlayer(); }
-        );
-
-        var skill = await ResourceManager.LoadAssetAsync<SkillConfig>("Skill/TestPlayerBladeFight", ResType.ScriptObject);
-        skillDriver.SetSkill(skill);
-        skillDriver.PlayAsync().Forget();
     }
 
 #if UNITY_EDITOR

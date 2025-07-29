@@ -34,7 +34,7 @@ public class SkillAnimationClip : SkillClipBase
         {
             int elapsed = frame - startFrame;
             float normalizedTime = Mathf.Clamp01((float)elapsed / durationFrames);
-            parentTrack.animator.Play(AnimationClip.name, 0, normalizedTime);
+            parentTrack.animator.Play(AnimationClip.name, parentTrack.skillLayerIndex, normalizedTime);
         }
     }
 }
@@ -44,6 +44,8 @@ public class SkillAnimationTrack : BaseSkillTrack<SkillAnimationClip>
 {
     [NonSerialized]
     public Animator animator;
+    [NonSerialized]
+    public int skillLayerIndex;
     private float oldSpeed;
 
     public override void Init(SkillConfig config, object o)
@@ -52,6 +54,7 @@ public class SkillAnimationTrack : BaseSkillTrack<SkillAnimationClip>
         animator = (o as Animator) ?? throw new ArgumentException("Animator is required for SkillAnimationTrack initialization.");
         oldSpeed = animator.speed;
         animator.speed = 0;
+        skillLayerIndex = animator.GetLayerIndex("SkillLayer");
 
         foreach (var clip in skillClipDict.Values)
         {
@@ -62,6 +65,7 @@ public class SkillAnimationTrack : BaseSkillTrack<SkillAnimationClip>
     public override void OnSkillEnd()
     {
         base.OnSkillEnd();
+        animator.Play("Empty", skillLayerIndex);
         animator.speed = oldSpeed;
     }
 }

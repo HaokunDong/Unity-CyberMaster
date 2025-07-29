@@ -5,7 +5,7 @@ using NodeCanvas.Framework;
 using ParadoxNotion.Design;
 
 [Category("GamePlay")]
-public class GamePlayEnemyPlaySkillAction : ActionTask<GamePlayEnemy>
+public class PlaySkillAction : ActionTask<ISkillDriverUnit>
 {
     public BBParameter<string> skillPath;
 
@@ -22,9 +22,9 @@ public class GamePlayEnemyPlaySkillAction : ActionTask<GamePlayEnemy>
             var skill = await ResourceManager.LoadAssetAsync<SkillConfig>(skillPath.value, ResType.ScriptObject);
             if(skill != null)
             {
-                agent.skillDriver.OnSkillFinished += OnSkillFinished;
-                agent.skillDriver.SetSkill(skill);
-                agent.skillDriver.PlayAsync().Forget();
+                agent.skillDriverImp.OnSkillFinished += OnSkillFinished;
+                agent.skillDriverImp.SetSkill(skill);
+                agent.skillDriverImp.PlayAsync().Forget();
                 return;
             }
         }
@@ -33,16 +33,16 @@ public class GamePlayEnemyPlaySkillAction : ActionTask<GamePlayEnemy>
 
     private void OnSkillFinished()
     {
-        agent.skillDriver.OnSkillFinished -= OnSkillFinished;
+        agent.skillDriverImp.OnSkillFinished -= OnSkillFinished;
         EndAction(true);
     }
 
     protected override void OnStop()
     {
-        agent.skillDriver.OnSkillFinished -= OnSkillFinished;
-        if (agent.skillDriver.IsPlaying)
+        agent.skillDriverImp.OnSkillFinished -= OnSkillFinished;
+        if (agent.skillDriverImp.IsPlaying)
         {
-            agent.skillDriver.Stop();
+            agent.skillDriverImp.Stop();
         }
     }
 }
