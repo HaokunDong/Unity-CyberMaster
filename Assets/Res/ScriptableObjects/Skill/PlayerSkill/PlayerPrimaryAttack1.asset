@@ -374,7 +374,7 @@ MonoBehaviour:
       Data: 25|CommandInputState, Assembly-CSharp
     - Name: CMD
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: InputState
       Entry: 3
       Data: 2
@@ -389,7 +389,7 @@ MonoBehaviour:
       Data: 
     - Name: $v
       Entry: 1
-      Data: PlayerSkill/PlayerPrimaryAttack3
+      Data: PlayerSkill/PlayerPrimaryAttack2
     - Name: 
       Entry: 8
       Data: 
@@ -423,7 +423,7 @@ MonoBehaviour:
       Data: 28|CommandInputState, Assembly-CSharp
     - Name: CMD
       Entry: 3
-      Data: 1
+      Data: 2
     - Name: InputState
       Entry: 3
       Data: 2

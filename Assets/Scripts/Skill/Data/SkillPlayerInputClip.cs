@@ -41,7 +41,7 @@ public class SkillPlayerInputClip : SkillClipBase
     public SkillConfig config;
     public InputToDoFlags inputToDoFlags = InputToDoFlags.None;
 
-    private bool CheckAllMatch(ref CommandInputState[] cs, string str)
+    private bool CheckAllMatch(ref CommandInputState[] cs, string str, bool cleanInputWhenMatch)
     {
         if (cs.Length > 0 && !str.IsNullOrWhitespace())
         {
@@ -52,6 +52,13 @@ public class SkillPlayerInputClip : SkillClipBase
                 {
                     allMatch = false;
                     break;
+                }
+            }
+            if(allMatch)
+            {
+                for (int i = 0; i < cs.Length; i++)
+                {
+                    InputButtonState.GetButtonState(cs[i].CMD)?.ClearFlagThisFrame();
                 }
             }
             return allMatch;
@@ -68,7 +75,7 @@ public class SkillPlayerInputClip : SkillClipBase
             {
                 if(InputButtonState.StaticIsMatchAny(config.cancelCommandInputState))
                 {
-                    config.skillDriver.CancelSkill().Forget();
+                    config.skillDriver.CancelSkill(true, true).Forget();
                     return;
                 }
             }
@@ -76,7 +83,18 @@ public class SkillPlayerInputClip : SkillClipBase
 
         if (inputToDoFlags.Has(InputToDoFlags.JumpSkillFrame))
         {
-
+            if (config.SkillJumpFrameCommandInputStateDict.Count > 0)
+            {
+                foreach (var kvp in config.SkillJumpFrameCommandInputStateDict)
+                {
+                    var cs = kvp.Key;
+                    if (CheckAllMatch(ref cs, "jump", true))
+                    {
+                        config.skillDriver.JumpToFrame(kvp.Value);
+                        return;
+                    }
+                }
+            }
         }
 
         if (inputToDoFlags.Has(InputToDoFlags.ChangeSkill))
@@ -86,7 +104,7 @@ public class SkillPlayerInputClip : SkillClipBase
                 foreach (var kvp in config.ChangeSkillCommandInputStateDict)
                 {
                     var cs = kvp.Key;
-                    if(CheckAllMatch(ref cs, kvp.Value))
+                    if(CheckAllMatch(ref cs, kvp.Value, true))
                     {
                         config.skillDriver.ChangeSkillAsync(kvp.Value).Forget();
                         return;
@@ -102,7 +120,7 @@ public class SkillPlayerInputClip : SkillClipBase
                 foreach (var kvp in config.AfterSkillCommandInputStateDict)
                 {
                     var cs = kvp.Key;
-                    if (CheckAllMatch(ref cs, kvp.Value))
+                    if (CheckAllMatch(ref cs, kvp.Value, true))
                     {
                         config.skillDriver.BufferNextSkill(kvp.Value);
                         return;

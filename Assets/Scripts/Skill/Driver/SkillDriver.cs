@@ -136,11 +136,14 @@ public class SkillDriver
         currentFrame = Mathf.Clamp(frame, 0, skillConfig.FrameCount);
     }
 
-    public async UniTask CancelSkill(bool stopInvoke = true)
+    public async UniTask CancelSkill(bool waitMinTime, bool stopInvoke)
     {
         if (!IsPlaying) return;
 
-        await UniTask.WaitUntil(() => Time.realtimeSinceStartup - startTime > 0.1f);//todo 坑:技能至少执行0.1秒 否则动画驱动那里可能有问题
+        if(waitMinTime)
+        {
+            await UniTask.WaitUntil(() => Time.realtimeSinceStartup - startTime > 0.1f);//todo 坑:技能至少执行0.1秒 否则动画驱动那里可能有问题
+        }
 
         skillCTS?.Cancel(); // 正确取消异步任务
         skillCTS?.Dispose();
@@ -165,7 +168,7 @@ public class SkillDriver
             newSkillPath = ZString.Concat("Skill/", newSkillPath);
         }
         var newSkillTask = ResourceManager.LoadAssetAsync<SkillConfig>(newSkillPath, ResType.ScriptObject);
-        var cancelTask = CancelSkill(false);
+        var cancelTask = CancelSkill(false, false);
         await UniTask.WhenAll(
             newSkillTask.ContinueWith(result => newSkill = result),
             cancelTask

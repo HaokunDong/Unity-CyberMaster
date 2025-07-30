@@ -315,7 +315,49 @@ MonoBehaviour:
       Data: 18
     - Name: 
       Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
       Data: 0
+    - Name: $v
+      Entry: 7
+      Data: 21|SkillPlayerInputClip, Assembly-CSharp
+    - Name: DurationFrame
+      Entry: 3
+      Data: 18
+    - Name: inputToDoFlags
+      Entry: 3
+      Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 18
+    - Name: $v
+      Entry: 7
+      Data: 22|SkillPlayerInputClip, Assembly-CSharp
+    - Name: DurationFrame
+      Entry: 3
+      Data: 5
+    - Name: inputToDoFlags
+      Entry: 3
+      Data: 12
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -327,18 +369,51 @@ MonoBehaviour:
       Data: 
     - Name: AfterSkillCommandInputStateDict
       Entry: 7
-      Data: 21|System.Collections.Generic.Dictionary`2[[CommandInputState[], Assembly-CSharp],[System.String,
+      Data: 23|System.Collections.Generic.Dictionary`2[[CommandInputState[], Assembly-CSharp],[System.String,
         mscorlib]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 22|System.Collections.Generic.ObjectEqualityComparer`1[[CommandInputState[],
+      Data: 24|System.Collections.Generic.ObjectEqualityComparer`1[[CommandInputState[],
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 12
-      Data: 0
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: 25|CommandInputState[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 26|CommandInputState, Assembly-CSharp
+    - Name: CMD
+      Entry: 3
+      Data: 1
+    - Name: InputState
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 1
+      Data: PlayerSkill/PlayerPrimaryAttack3
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -347,11 +422,11 @@ MonoBehaviour:
       Data: 
     - Name: ChangeSkillCommandInputStateDict
       Entry: 7
-      Data: 23|System.Collections.Generic.Dictionary`2[[CommandInputState[], Assembly-CSharp],[System.String,
+      Data: 27|System.Collections.Generic.Dictionary`2[[CommandInputState[], Assembly-CSharp],[System.String,
         mscorlib]], mscorlib
     - Name: comparer
       Entry: 9
-      Data: 22
+      Data: 24
     - Name: 
       Entry: 12
       Data: 0
@@ -363,14 +438,47 @@ MonoBehaviour:
       Data: 
     - Name: SkillJumpFrameCommandInputStateDict
       Entry: 7
-      Data: 24|System.Collections.Generic.Dictionary`2[[CommandInputState[], Assembly-CSharp],[System.Int32,
+      Data: 28|System.Collections.Generic.Dictionary`2[[CommandInputState[], Assembly-CSharp],[System.Int32,
         mscorlib]], mscorlib
     - Name: comparer
       Entry: 9
-      Data: 22
+      Data: 24
     - Name: 
       Entry: 12
-      Data: 0
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: 29|CommandInputState[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 30|CommandInputState, Assembly-CSharp
+    - Name: CMD
+      Entry: 3
+      Data: 1
+    - Name: InputState
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 3
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -379,7 +487,7 @@ MonoBehaviour:
       Data: 
     - Name: Tracks
       Entry: 7
-      Data: 25|System.Collections.Generic.List`1[[ISkillTrack, Assembly-CSharp]],
+      Data: 31|System.Collections.Generic.List`1[[ISkillTrack, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
