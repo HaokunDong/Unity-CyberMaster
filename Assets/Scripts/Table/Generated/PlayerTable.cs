@@ -17,10 +17,10 @@ namespace Everlasting.Config
 		public readonly float MaxMoveSpeed;
 		public readonly float JumpForce;
 		public readonly Vector2[] AttackDistance;
-		public readonly string[] PrimaryAttackSkillPath;
+		public readonly string PrimaryAttackSkillPath;
 		public readonly string BlockSkillPath;
 		
-		public PlayerTable(uint Id, string Prefab, string Graph, float MaxMoveSpeed, float JumpForce, Vector2[] AttackDistance, string[] PrimaryAttackSkillPath, string BlockSkillPath)
+		public PlayerTable(uint Id, string Prefab, string Graph, float MaxMoveSpeed, float JumpForce, Vector2[] AttackDistance, string PrimaryAttackSkillPath, string BlockSkillPath)
 		{
 			this.Id = Id;
 			this.Prefab = Prefab;
@@ -46,18 +46,6 @@ namespace Everlasting.Config
 			
 			private static string[] poolString = null;
 			private static Vector2[][] poolVector2Array = null;
-			private static string[][] poolStringArray = null;
-			
-			private static string[] LoadStringArray(IConfigBinary binary)
-			{
-				var count = binary.ReadInt();
-				var arr = new string[count];
-				for(int i = 0; i < count; i++)
-				{
-					arr[i] = poolString[binary.ReadInt()];
-				}
-				return arr;
-			}
 			
 			private static Vector2[] LoadVector2Array(IConfigBinary binary)
 			{
@@ -84,14 +72,6 @@ namespace Everlasting.Config
 				}
 				{
 					int count = binary.ReadInt();
-					poolStringArray =  new string[count][];
-					for(int i = 0; i < count; i++)
-					{
-						poolStringArray[i] = LoadStringArray(binary);
-					}
-				}
-				{
-					int count = binary.ReadInt();
 					poolVector2Array =  new Vector2[count][];
 					for(int i = 0; i < count; i++)
 					{
@@ -110,7 +90,7 @@ namespace Everlasting.Config
 						var MaxMoveSpeed = binary.ReadFloat();
 						var JumpForce = binary.ReadFloat();
 						var AttackDistance = poolVector2Array[binary.ReadInt()];
-						var PrimaryAttackSkillPath = poolStringArray[binary.ReadInt()];
+						var PrimaryAttackSkillPath = poolString[binary.ReadInt()];
 						var BlockSkillPath = poolString[binary.ReadInt()];
 						var cfg = new PlayerTable(Id, Prefab, Graph, MaxMoveSpeed, JumpForce, AttackDistance, PrimaryAttackSkillPath, BlockSkillPath);
 						ConfigList[i] = cfg;

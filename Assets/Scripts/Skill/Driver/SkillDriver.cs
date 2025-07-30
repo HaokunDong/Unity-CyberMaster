@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Text;
 using Cysharp.Threading.Tasks;
+using GameBase.Log;
 using Managers;
 using Sirenix.Utilities;
 using UnityEngine;
@@ -17,6 +19,7 @@ public class SkillDriver
     private readonly Rigidbody2D rb;
     private readonly Func<float> getDeltaTime;
     private GamePlayEntity owner;
+    private CancellationTokenSource skillCTS;
 
     public SkillConfig skillConfig { get; private set; } = null;
     public uint SkillOwnerGPId { get; private set; }
@@ -26,7 +29,8 @@ public class SkillDriver
     public int CurrentFrame => currentFrame;
 
     private float frameElapsed;
-    private float frameInterval => 1f / skillConfig.FrameRate;
+    private float frameInterval => skillConfig ? (1f / skillConfig.FrameRate) : 0.1f;
+    private float startTime = 0f;
 
     private bool isPlaying = false;
     private bool isPaused = false;
@@ -114,10 +118,66 @@ public class SkillDriver
 
     public async UniTask PlayAsync()
     {
-        await PlayFromFrame(0);
+        skillCTS?.Cancel(); // 先取消之前的
+        skillCTS = new CancellationTokenSource();
+
+        try
+        {
+            await PlayFromFrame(0, skillCTS.Token);
+        }
+        catch (OperationCanceledException)
+        {
+            LogUtils.Trace("技能被取消", LogChannel.Battle, Color.cyan);
+        }
     }
 
-    public async UniTask PlayFromFrame(int startFrame)
+    public void JumpToFrame(int frame)
+    {
+        currentFrame = Mathf.Clamp(frame, 0, skillConfig.FrameCount);
+    }
+
+    public async UniTask CancelSkill(bool stopInvoke = true)
+    {
+        if (!IsPlaying) return;
+
+        await UniTask.WaitUntil(() => Time.realtimeSinceStartup - startTime > 0.1f);//todo 坑:技能至少执行0.1秒 否则动画驱动那里可能有问题
+
+        skillCTS?.Cancel(); // 正确取消异步任务
+        skillCTS?.Dispose();
+        skillCTS = null;
+
+        Stop();
+        if(stopInvoke)
+        {
+            OnSkillFinished?.Invoke();
+        }
+
+        bufferedSkillName = null;
+        skillConfig = null;
+        IsPlaying = false;
+    }
+
+    public async UniTask ChangeSkillAsync(string newSkillPath)
+    {
+        SkillConfig newSkill = null;
+        if(!newSkillPath.StartsWith("Skill/"))
+        {
+            newSkillPath = ZString.Concat("Skill/", newSkillPath);
+        }
+        var newSkillTask = ResourceManager.LoadAssetAsync<SkillConfig>(newSkillPath, ResType.ScriptObject);
+        var cancelTask = CancelSkill(false);
+        await UniTask.WhenAll(
+            newSkillTask.ContinueWith(result => newSkill = result),
+            cancelTask
+        );
+        if(newSkill != null)
+        {
+            SetSkill(newSkill);
+            await PlayAsync();
+        }
+    }
+
+    public async UniTask PlayFromFrame(int startFrame, CancellationToken token)
     {
         if (skillConfig == null) return;
 
@@ -125,11 +185,14 @@ public class SkillDriver
         isPaused = false;
         currentFrame = Mathf.Clamp(startFrame, 0, skillConfig.FrameCount);
         frameElapsed = 0f;
+        startTime = Time.realtimeSinceStartup;
 
         int maxFrame = skillConfig.FrameCount;
 
         while (IsPlaying && currentFrame <= maxFrame)
         {
+            token.ThrowIfCancellationRequested();
+
             if (isPaused)
             {
                 await UniTask.WaitForFixedUpdate();
@@ -151,25 +214,20 @@ public class SkillDriver
                 currentFrame++;
                 if (currentFrame > maxFrame)
                 {
+
+                    Stop();
                     
-                    if (skillConfig.isLoopSkill)
+
+                    if (!bufferedSkillName.IsNullOrWhitespace())
                     {
-                        IsPlaying = false;
-                        this.skillConfig.SkillAttackTimeWindowData.OnSkillEnd();
-                        await PlayFromFrame(0);
+                        var nextSkill = await ResourceManager.LoadAssetAsync<SkillConfig>(ZString.Concat("Skill/", bufferedSkillName), ResType.ScriptObject);
+                        bufferedSkillName = null;
+                        SetSkill(nextSkill);
+                        await PlayAsync();
                     }
                     else
                     {
-                        Stop();
                         OnSkillFinished?.Invoke();
-
-                        if (!bufferedSkillName.IsNullOrWhitespace())
-                        {
-                            var nextSkill = await ResourceManager.LoadAssetAsync<SkillConfig>(ZString.Concat("Skill/", bufferedSkillName), ResType.ScriptObject);
-                            bufferedSkillName = null;
-                            SetSkill(nextSkill);
-                            await PlayAsync();
-                        }
                     }
 
                     return;

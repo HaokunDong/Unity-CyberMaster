@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using Tools;
 using Color = UnityEngine.Color;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.RefAndLookup;
 
 public class SkillEditorWindows : EditorWindow
 {
@@ -99,7 +98,6 @@ public class SkillEditorWindows : EditorWindow
     private ObjectField SkillConfigObjectField;
     private GameObject currentPreviewCharacterPrefab;
     private GameObject currentPreviewCharacterObj;
-    private Toggle IsLoopSkillToggle;
 
     public GameObject PreviewCharacterObj { get => currentPreviewCharacterObj; }
 
@@ -114,7 +112,6 @@ public class SkillEditorWindows : EditorWindow
         PreviewCharacterPrefabObjectField = root.Q<ObjectField>(nameof(PreviewCharacterPrefabObjectField));
         PreviewCharacterObjectField = root.Q<ObjectField>(nameof(PreviewCharacterObjectField));
         SkillConfigObjectField = root.Q<ObjectField>(nameof(SkillConfigObjectField));
-        IsLoopSkillToggle = root.Q<Toggle>(nameof(IsLoopSkillToggle));
 
         LoadEditorSceneButton.clicked += LoadEditorSceneButtonClick;
         LoadOldSceneButton.clicked += LoadOldSceneButtonClick;
@@ -123,14 +120,6 @@ public class SkillEditorWindows : EditorWindow
         PreviewCharacterPrefabObjectField.RegisterValueChangedCallback(PreviewCharacterPrefabObjectFieldChanged);
         PreviewCharacterObjectField.RegisterValueChangedCallback(PreviewCharacterObjectFielChanged);
         SkillConfigObjectField.RegisterValueChangedCallback(SkillConfigObjectFieldChanged);
-        IsLoopSkillToggle.RegisterValueChangedCallback(evt =>
-        {
-            if (skillConfig != null)
-            {
-                skillConfig.isLoopSkill = evt.newValue;
-                SaveConfig();
-            }
-        });
     }
 
 
@@ -229,7 +218,6 @@ public class SkillEditorWindows : EditorWindow
     private void SkillConfigObjectFieldChanged(ChangeEvent<UnityEngine.Object> evt)
     {
         skillConfig = evt.newValue as SkillConfig;
-        IsLoopSkillToggle.value = skillConfig?.isLoopSkill ?? false;
         CurrentSelectFrameIndex = 0;
         if (skillConfig == null)
         {
@@ -584,6 +572,8 @@ public class SkillEditorWindows : EditorWindow
         InitTrack<HitBoxTrack, SkillHitBoxClip>(skillConfig.SkillHitBoxData.skillClipDict, "打击");
         InitTrack<VelocityTrack, SkillVelocityClip>(skillConfig.SkillVelocityData.skillClipDict, "速度");
         InitTrack<BlockBoxTrack, SkillBlockBoxClip>(skillConfig.SkillBlockBoxData.skillClipDict, "格挡");
+        InitTrack<JumpFrameTrack, SkillJumpFrameClip>(skillConfig.SkillJumpFrameData.skillClipDict, "跳帧");
+        InitTrack<PlayerInputTrack, SkillPlayerInputClip>(skillConfig.SkillPlayerInputData.skillClipDict, "玩家输入");
     }
 
     private void OnEnable()

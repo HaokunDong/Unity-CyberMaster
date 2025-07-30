@@ -21,8 +21,15 @@ public class SkillConfig : SerializedScriptableObject
     public SkillVelocityTrack SkillVelocityData = new SkillVelocityTrack();
     [NonSerialized, OdinSerialize, ReadOnly]
     public SkillBlockBoxTrack SkillBlockBoxData = new SkillBlockBoxTrack();
+    [NonSerialized, OdinSerialize, ReadOnly]
+    public SkillJumpFrameTrack SkillJumpFrameData = new SkillJumpFrameTrack();
+    [NonSerialized, OdinSerialize, ReadOnly]
+    public SkillPlayerInputTrack SkillPlayerInputData = new SkillPlayerInputTrack();
 
-    public bool isLoopSkill = false;
+    [LabelText("技能结束连招派生")] public Dictionary<CommandInputState[], string> AfterSkillCommandInputStateDict = new();
+    [LabelText("技能中变招")] public Dictionary<CommandInputState[], string> ChangeSkillCommandInputStateDict = new();
+    [LabelText("技能中跳帧")] public Dictionary<CommandInputState[], int> SkillJumpFrameCommandInputStateDict = new();
+    [LabelText("取消操作")] public CommandInputState cancelCommandInputState;
 
     [NonSerialized, OdinSerialize]
     public List<ISkillTrack> Tracks = new List<ISkillTrack>();
@@ -41,6 +48,8 @@ public class SkillConfig : SerializedScriptableObject
         if (!Tracks.Contains(SkillHitBoxData)) Tracks.Add(SkillHitBoxData);
         if (!Tracks.Contains(SkillVelocityData)) Tracks.Add(SkillVelocityData);
         if (!Tracks.Contains(SkillBlockBoxData)) Tracks.Add(SkillBlockBoxData);
+        if (!Tracks.Contains(SkillJumpFrameData)) Tracks.Add(SkillJumpFrameData);
+        if (!Tracks.Contains(SkillPlayerInputData)) Tracks.Add(SkillPlayerInputData);
         return Tracks;
     }
 

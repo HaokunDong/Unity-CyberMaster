@@ -74,6 +74,14 @@ public partial class SkillEditorInspector : Editor
         {
             DrawTrackItem(blockItem);
         }
+        else if (currentTrackItem is JumpFrameTrackItem jumpFrameTrackItem)
+        {
+            DrawTrackItem(jumpFrameTrackItem);
+        }
+        else if (currentTrackItem is PlayerInputTrackItem playerInputTrackItem)
+        {
+            DrawTrackItem(playerInputTrackItem);
+        }
 
         //É¾³ý
         Button deleteButton = new Button(DeleteButtonClick);

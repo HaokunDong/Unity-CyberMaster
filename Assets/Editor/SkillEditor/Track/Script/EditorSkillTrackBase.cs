@@ -10,6 +10,8 @@ public abstract class EditorSkillTrackBase
     protected SkillSingleLineTrackStyle trackStyle;
     protected Dictionary<int, SkillTrackItemStyleBase> trackItemDic = new ();
 
+    protected virtual int GetNewMinFrameCount => 5;
+
     /// <summary>
     /// 在当前宽高进行刷新（内部变化）
     /// </summary>
@@ -144,7 +146,7 @@ public abstract class EditorSkillTrackBase<SCB> : EditorSkillTrackBase where SCB
             int selectFrameIndex = SkillEditorWindows.Instance.GetFrameIndexByPos(evt.localMousePosition.x);
 
             SCB clip = System.Activator.CreateInstance<SCB>();
-            clip.DurationFrame = GetCanAddFrameCount(selectFrameIndex, 5);
+            clip.DurationFrame = GetCanAddFrameCount(selectFrameIndex, GetNewMinFrameCount);
             //保存新增的动画数据
             skillClipDict.Add(selectFrameIndex, clip);
             SkillEditorWindows.Instance.SaveConfig();

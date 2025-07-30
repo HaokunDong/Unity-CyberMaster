@@ -2,6 +2,7 @@ using Cysharp.Text;
 using Everlasting.Config;
 using GameBase.Log;
 using NodeCanvas.Framework;
+using Sirenix.Utilities;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,8 +20,12 @@ public class GamePlayPlayer : GamePlayAIEntity, ISkillDriverUnit
     [SerializeField] private LayerMask groundLayer;
     private PlayerTable playerData;
     private SmoothDirectionInput moveVelocitySmoothDirectionInput;
-    private Dictionary<InputAction, string[]> inputSkillDict;
+    private Dictionary<CommandInputState, string> inputSkillDict;
     private SkillDriver skillDriver;
+    private InputButtonState attackInputButtonState;
+    private InputButtonState blockInputButtonState;
+    private CommandInputState attackCMI;
+    private CommandInputState blockCMI;
 
     private Vector2 velocity;
     public Vector2 Velocity
@@ -78,11 +83,16 @@ public class GamePlayPlayer : GamePlayAIEntity, ISkillDriverUnit
         blackboard.SetVariableValue("beginSkill", false);
         blackboard.SetVariableValue("SkillPath", string.Empty);
 
+        attackInputButtonState ??= new InputButtonState(playerInput.GamePlay.PrimaryAttack, InputCommand.Attack);
+        blockInputButtonState ??= new InputButtonState(playerInput.GamePlay.Block, InputCommand.Block);
+
         if (inputSkillDict == null)
         {
             inputSkillDict = new();
-            inputSkillDict[playerInput.GamePlay.PrimaryAttack] = playerData.PrimaryAttackSkillPath;
-            inputSkillDict[playerInput.GamePlay.Block] = new string[] { playerData.BlockSkillPath };
+            attackCMI = new CommandInputState { CMD = InputCommand.Attack, InputState = InputButtonFlags.JustPressed };
+            inputSkillDict[attackCMI] = playerData.PrimaryAttackSkillPath;
+            blockCMI = new CommandInputState { CMD = InputCommand.Block, InputState = InputButtonFlags.JustPressed };
+            inputSkillDict[blockCMI] = playerData.BlockSkillPath;
         }
     }
 
@@ -114,25 +124,32 @@ public class GamePlayPlayer : GamePlayAIEntity, ISkillDriverUnit
             moveVelocitySmoothDirectionInput.Update(Time.fixedDeltaTime);
             Velocity = new Vector2(moveVelocitySmoothDirectionInput.CurrentValue * playerData.MaxMoveSpeed, 0);
 
-            InputAction currentSkillAction = null;
-            if (playerInput.GamePlay.Block.WasPressedThisFrame())
-            {
-                currentSkillAction = playerInput.GamePlay.Block;
-            }
+            attackInputButtonState.Update(Time.fixedDeltaTime);
+            blockInputButtonState.Update(Time.fixedDeltaTime);
 
-            if(playerInput.GamePlay.PrimaryAttack.WasPressedThisFrame())
+            if (!skillDriver.IsPlaying)
             {
-                currentSkillAction = playerInput.GamePlay.PrimaryAttack;
-            }
-
-            if(currentSkillAction != null)
-            {
-                if (inputSkillDict.TryGetValue(currentSkillAction, out var ps))
+                CommandInputState matchCMI = null;
+                if (attackInputButtonState.IsMatchAny(attackCMI))
                 {
-                    if (ps != null && ps.Length > 0)
+                    matchCMI = attackCMI;
+                }
+                else if (blockInputButtonState.IsMatchAny(blockCMI))
+                {
+                    matchCMI = blockCMI;
+                }
+                if (matchCMI != null)
+                {
+                    if (inputSkillDict.TryGetValue(matchCMI, out var ps))
                     {
-                        blackboard.SetVariableValue("beginSkill", true);
-                        blackboard.SetVariableValue("SkillPath", ps[0]);
+                        //在触发技能前就清空输入状态 防止连续触发多次技能
+                        InputButtonState.GetButtonState(matchCMI.CMD)?.ClearFlagThisFrame();
+
+                        if (!ps.IsNullOrWhitespace())
+                        {
+                            blackboard.SetVariableValue("beginSkill", true);
+                            blackboard.SetVariableValue("SkillPath", ps);
+                        }
                     }
                 }
             }

@@ -1,7 +1,6 @@
 using Sirenix.Serialization;
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting.FullSerializer;
 
 public class SkillBlockBoxClip : SkillClipBase
 {
