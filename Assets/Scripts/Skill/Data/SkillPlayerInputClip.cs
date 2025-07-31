@@ -86,7 +86,7 @@ public class SkillPlayerInputClip : SkillClipBase
             }
         }
 
-        if (inputToDoFlags.Has(InputToDoFlags.JumpSkillFrame))
+        if (inputToDoFlags.Has(InputToDoFlags.JumpSkillFrame) && config.SkillJumpFrameCommandInputStateDict != null)
         {
             if (config.SkillJumpFrameCommandInputStateDict.Count > 0)
             {
@@ -102,7 +102,7 @@ public class SkillPlayerInputClip : SkillClipBase
             }
         }
 
-        if (inputToDoFlags.Has(InputToDoFlags.ChangeSkill))
+        if (inputToDoFlags.Has(InputToDoFlags.ChangeSkill) && config.ChangeSkillCommandInputStateDict != null)
         {
             if(config.ChangeSkillCommandInputStateDict.Count > 0)
             {
@@ -118,7 +118,7 @@ public class SkillPlayerInputClip : SkillClipBase
             }
         }
 
-        if (inputToDoFlags.Has(InputToDoFlags.NextSkillWithTailCut) && config.skillDriver.BufferedSkillName.IsNullOrWhitespace())
+        if (inputToDoFlags.Has(InputToDoFlags.NextSkillWithTailCut) && config.skillDriver.BufferedSkillName.IsNullOrWhitespace() && config.AfterSkillCommandInputStateDict != null)
         {
             if (config.AfterSkillCommandInputStateDict.Count > 0)
             {
@@ -134,7 +134,7 @@ public class SkillPlayerInputClip : SkillClipBase
             }
         }
 
-        if (inputToDoFlags.Has(InputToDoFlags.NextSkill) && config.skillDriver.BufferedSkillName.IsNullOrWhitespace())
+        if (inputToDoFlags.Has(InputToDoFlags.NextSkill) && config.skillDriver.BufferedSkillName.IsNullOrWhitespace() && config.AfterSkillCommandInputStateDict != null)
         {
             if (config.AfterSkillCommandInputStateDict.Count > 0)
             {

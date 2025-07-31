@@ -26,13 +26,55 @@ public class SkillConfig : SerializedScriptableObject
     [NonSerialized, OdinSerialize, ReadOnly]
     public SkillPlayerInputTrack SkillPlayerInputData = new SkillPlayerInputTrack();
 
-    [LabelText("技能结束连招派生")] public Dictionary<CommandInputState[], string> AfterSkillCommandInputStateDict = new();
-    [LabelText("技能中变招")] public Dictionary<CommandInputState[], string> ChangeSkillCommandInputStateDict = new();
-    [LabelText("技能中跳帧")] public Dictionary<CommandInputState[], int> SkillJumpFrameCommandInputStateDict = new();
-    [LabelText("取消操作")] public CommandInputState cancelCommandInputState;
+    [LabelText("技能结束连招"), GUIColor(0.3f, 0.8f, 0.8f, 1f), ShowIf("@AfterSkillCommandInputStateDict != null")] public Dictionary<CommandInputState[], string> AfterSkillCommandInputStateDict;
+#if UNITY_EDITOR
+    [Button("添加 技能结束连招"), GUIColor(0, 1, 0, 1), ShowIf("@AfterSkillCommandInputStateDict == null")]
+    private void AddAfterSkillCommandInputStateDict()
+    {
+        AfterSkillCommandInputStateDict ??= new();
+    }
+    [Button("清除 技能结束连招"), GUIColor(1, 0, 0, 1), ShowIf("@AfterSkillCommandInputStateDict != null")]
+    private void ClearAfterSkillCommandInputStateDict()
+    {
+        AfterSkillCommandInputStateDict?.Clear();
+        AfterSkillCommandInputStateDict = null;
+    }
+#endif
 
-    [NonSerialized, OdinSerialize]
-    public List<ISkillTrack> Tracks = new List<ISkillTrack>();
+    [LabelText("技能中变招"), GUIColor(0.3f, 0.8f, 0.8f, 1f), ShowIf("@ChangeSkillCommandInputStateDict != null")] public Dictionary<CommandInputState[], string> ChangeSkillCommandInputStateDict;
+#if UNITY_EDITOR
+    [Button("添加 技能中变招"), GUIColor(0, 1, 0, 1), ShowIf("@ChangeSkillCommandInputStateDict == null")]
+    private void AddChangeSkillCommandInputStateDict()
+    {
+        ChangeSkillCommandInputStateDict ??= new();
+    }
+    [Button("清除 技能中变招"), GUIColor(1, 0, 0, 1), ShowIf("@ChangeSkillCommandInputStateDict != null")]
+    private void ClearChangeSkillCommandInputStateDict()
+    {
+        ChangeSkillCommandInputStateDict?.Clear();
+        ChangeSkillCommandInputStateDict = null;
+    }
+#endif
+
+    [LabelText("技能中跳帧"), GUIColor(0.3f, 0.8f, 0.8f, 1f), ShowIf("@SkillJumpFrameCommandInputStateDict != null")] public Dictionary<CommandInputState[], int> SkillJumpFrameCommandInputStateDict;
+#if UNITY_EDITOR
+    [Button("添加 技能中跳帧"), GUIColor(0, 1, 0, 1), ShowIf("@SkillJumpFrameCommandInputStateDict == null")]
+    private void AddSkillJumpFrameCommandInputStateDict()
+    {
+        SkillJumpFrameCommandInputStateDict ??= new();
+    }
+    [Button("清除 技能中跳帧"), GUIColor(1, 0, 0, 1), ShowIf("@SkillJumpFrameCommandInputStateDict != null")]
+    private void ClearSkillJumpFrameCommandInputStateDict()
+    {
+        SkillJumpFrameCommandInputStateDict?.Clear();
+        SkillJumpFrameCommandInputStateDict = null;
+    }
+#endif
+
+    [LabelText("取消操作"), GUIColor(0.3f, 0.8f, 0.8f, 1f),] public CommandInputState cancelCommandInputState;
+
+    [NonSerialized, ShowInInspector, ReadOnly]
+    public List<ISkillTrack> Tracks;
 
     [NonSerialized, ShowInInspector, ReadOnly]
     public GamePlayEntity owner;
@@ -43,14 +85,21 @@ public class SkillConfig : SerializedScriptableObject
 
     public List<ISkillTrack> GetTracks()
     {
-        if (!Tracks.Contains(SkillAnimationData)) Tracks.Add(SkillAnimationData);
-        if (!Tracks.Contains(SkillAttackTimeWindowData)) Tracks.Add(SkillAttackTimeWindowData);
-        if (!Tracks.Contains(SkillHitBoxData)) Tracks.Add(SkillHitBoxData);
-        if (!Tracks.Contains(SkillVelocityData)) Tracks.Add(SkillVelocityData);
-        if (!Tracks.Contains(SkillBlockBoxData)) Tracks.Add(SkillBlockBoxData);
-        if (!Tracks.Contains(SkillJumpFrameData)) Tracks.Add(SkillJumpFrameData);
-        if (!Tracks.Contains(SkillPlayerInputData)) Tracks.Add(SkillPlayerInputData);
+        Tracks ??= new();
+        Tracks.Clear();
+        if (!Tracks.Contains(SkillAnimationData) && HasData(SkillAnimationData)) Tracks.Add(SkillAnimationData);
+        if (!Tracks.Contains(SkillAttackTimeWindowData) && HasData(SkillAttackTimeWindowData)) Tracks.Add(SkillAttackTimeWindowData);
+        if (!Tracks.Contains(SkillHitBoxData) && HasData(SkillHitBoxData)) Tracks.Add(SkillHitBoxData);
+        if (!Tracks.Contains(SkillVelocityData) && HasData(SkillVelocityData)) Tracks.Add(SkillVelocityData);
+        if (!Tracks.Contains(SkillBlockBoxData) && HasData(SkillBlockBoxData)) Tracks.Add(SkillBlockBoxData);
+        if (!Tracks.Contains(SkillJumpFrameData) && HasData(SkillJumpFrameData)) Tracks.Add(SkillJumpFrameData);
+        if (!Tracks.Contains(SkillPlayerInputData) && HasData(SkillPlayerInputData)) Tracks.Add(SkillPlayerInputData);
         return Tracks;
+    }
+
+    private bool HasData<T>(BaseSkillTrack<T> bst) where T : SkillClipBase
+    {
+        return (bst != null && bst.skillClipDict != null && bst.skillClipDict.Count > 0);
     }
 
     public int GetOwnFaceDir()
