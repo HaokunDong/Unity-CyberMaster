@@ -46,8 +46,6 @@ public class SkillAnimationTrack : BaseSkillTrack<SkillAnimationClip>
     public Animator animator;
     [NonSerialized]
     public int skillLayerIndex;
-    [NonSerialized]
-    public bool isStopping;
     private float oldSpeed;
 
     public override void Init(SkillConfig config, object o)

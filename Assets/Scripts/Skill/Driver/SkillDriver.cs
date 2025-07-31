@@ -35,6 +35,8 @@ public class SkillDriver
     private bool isPlaying = false;
     private bool isPaused = false;
     private string bufferedSkillName = null;
+    public string BufferedSkillName => bufferedSkillName;
+    private int skillTailCutFrame = -1;
 
     public bool IsPlaying
     {
@@ -78,10 +80,10 @@ public class SkillDriver
         this.OnHitBoxTriggered = OnHitBoxTriggered;
     }
 
-    public void BufferNextSkill(string skillName)
+    public void BufferNextSkill(string skillName, int tailCutFrame)
     {
-        // 如果当前技能不允许接这个技能，也可以在这里判断
         bufferedSkillName = skillName;
+        skillTailCutFrame = tailCutFrame;
     }
 
     public void SetSkill(SkillConfig config)
@@ -118,6 +120,7 @@ public class SkillDriver
 
     public async UniTask PlayAsync()
     {
+        skillTailCutFrame = -1;
         skillCTS?.Cancel(); // 先取消之前的
         skillCTS = new CancellationTokenSource();
 
@@ -207,14 +210,22 @@ public class SkillDriver
 
             while (frameElapsed >= frameInterval)
             {
-                frameElapsed -= frameInterval;
-
-                foreach (var t in tracks)
+                if(skillTailCutFrame == currentFrame)
                 {
-                    t.Update(currentFrame);
+                    currentFrame = maxFrame + 1;
                 }
+                else
+                {
+                    frameElapsed -= frameInterval;
 
-                currentFrame++;
+                    foreach (var t in tracks)
+                    {
+                        t.Update(currentFrame);
+                    }
+
+                    currentFrame++;
+                }
+                
                 if (currentFrame > maxFrame)
                 {
 

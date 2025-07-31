@@ -20,6 +20,9 @@ public enum InputToDoFlags
 
     [InspectorName("当前技能跳帧")]
     JumpSkillFrame = 1 << 3, // 01000
+
+    [InspectorName("跳过一定尾帧 之后连招")]
+    NextSkillWithTailCut = 1 << 4, // 10000
 }
 
 public static class InputToDoFlagsExtensions
@@ -40,6 +43,8 @@ public class SkillPlayerInputClip : SkillClipBase
     [NonSerialized]
     public SkillConfig config;
     public InputToDoFlags inputToDoFlags = InputToDoFlags.None;
+    [InspectorName("当前技能最多播放到第几帧")]
+    public int NextSkillTailCutFrame = -1;
 
     private bool CheckAllMatch(ref CommandInputState[] cs, string str, bool cleanInputWhenMatch)
     {
@@ -88,7 +93,7 @@ public class SkillPlayerInputClip : SkillClipBase
                 foreach (var kvp in config.SkillJumpFrameCommandInputStateDict)
                 {
                     var cs = kvp.Key;
-                    if (CheckAllMatch(ref cs, "jump", true))
+                    if (CheckAllMatch(ref cs, "Jump", true))
                     {
                         config.skillDriver.JumpToFrame(kvp.Value);
                         return;
@@ -113,7 +118,7 @@ public class SkillPlayerInputClip : SkillClipBase
             }
         }
 
-        if (inputToDoFlags.Has(InputToDoFlags.NextSkill))
+        if (inputToDoFlags.Has(InputToDoFlags.NextSkillWithTailCut) && config.skillDriver.BufferedSkillName.IsNullOrWhitespace())
         {
             if (config.AfterSkillCommandInputStateDict.Count > 0)
             {
@@ -122,7 +127,23 @@ public class SkillPlayerInputClip : SkillClipBase
                     var cs = kvp.Key;
                     if (CheckAllMatch(ref cs, kvp.Value, true))
                     {
-                        config.skillDriver.BufferNextSkill(kvp.Value);
+                        config.skillDriver.BufferNextSkill(kvp.Value, NextSkillTailCutFrame);
+                        return;
+                    }
+                }
+            }
+        }
+
+        if (inputToDoFlags.Has(InputToDoFlags.NextSkill) && config.skillDriver.BufferedSkillName.IsNullOrWhitespace())
+        {
+            if (config.AfterSkillCommandInputStateDict.Count > 0)
+            {
+                foreach (var kvp in config.AfterSkillCommandInputStateDict)
+                {
+                    var cs = kvp.Key;
+                    if (CheckAllMatch(ref cs, kvp.Value, true))
+                    {
+                        config.skillDriver.BufferNextSkill(kvp.Value, -1);
                         return;
                     }
                 }

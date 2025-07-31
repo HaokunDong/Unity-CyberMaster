@@ -22,5 +22,18 @@ partial class SkillEditorInspector
             currentTrack.ResetView();
         });
         root.Add(flagField);
+
+        if (item.Clip.inputToDoFlags.Has(InputToDoFlags.NextSkillWithTailCut))
+        {
+            var nextSkillTailCutFrameField = new IntegerField("当前技能最多播放到第几帧");
+            nextSkillTailCutFrameField.value = item.Clip.NextSkillTailCutFrame;
+            nextSkillTailCutFrameField.RegisterValueChangedCallback(evt =>
+            {
+                item.Clip.NextSkillTailCutFrame = evt.newValue;
+                SkillEditorWindows.Instance.SaveConfig();
+                currentTrack.ResetView();
+            });
+            root.Add(nextSkillTailCutFrameField);
+        }
     }
 }

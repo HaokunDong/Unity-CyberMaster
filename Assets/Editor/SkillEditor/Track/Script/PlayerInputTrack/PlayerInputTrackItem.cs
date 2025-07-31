@@ -18,7 +18,11 @@ public class PlayerInputTrackItem : TrackItemBase<PlayerInputTrack, SkillPlayerI
         }
         if (clip.inputToDoFlags.Has(InputToDoFlags.JumpSkillFrame))
         {
-            str += "Ìø";
+            str += "Ìø ";
+        }
+        if (clip.inputToDoFlags.Has(InputToDoFlags.NextSkillWithTailCut))
+        {
+            str += "Î² ";
         }
         itemStyle.SetTitle(str.Trim());
     }
