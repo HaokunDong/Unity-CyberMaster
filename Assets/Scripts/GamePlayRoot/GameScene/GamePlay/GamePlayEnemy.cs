@@ -1,4 +1,5 @@
 using Cysharp.Text;
+using Cysharp.Threading.Tasks;
 using Everlasting.Config;
 using GameBase.Log;
 using NodeCanvas.Framework;
@@ -63,26 +64,24 @@ public class GamePlayEnemy : GamePlayAIEntity, ISkillDriverUnit
             rb,
             (HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue) => 
                 {
-                    LogUtils.Warning($"������������: {hitRestype} ������GPId: {attackerGPId} �ܻ���GPId: {beHitterGPId} �˺���׼ֵ: {damageBaseValue}");
                     World.Ins.Player.OnHitBoxTrigger(hitRestype, attackerGPId, beHitterGPId, damageBaseValue);
                 },
             () => Time.fixedDeltaTime,
             () => facingDir,
             () => { FacePlayer(); }
         );
+
+        if(rb != null)
+        {
+            GroundFit().Forget();
+        }
     }
 
-    [Button("������ͣ����")]
-    private void TestPause()
+    private async UniTask GroundFit()
     {
-        if(skillDriver.IsPaused)
-        {
-            skillDriver.Resume();
-        }
-        else
-        {
-            skillDriver.Pause();
-        }
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        await UniTask.DelayFrame(1);
+        rb.bodyType = RigidbodyType2D.Kinematic;
     }
 
     public override void SetAIActive(bool active)
