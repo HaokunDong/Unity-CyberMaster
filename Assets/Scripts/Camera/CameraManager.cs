@@ -44,7 +44,7 @@ public class CameraManager : SingletonComp<CameraManager>
     #region ¾µÍ·¶¶¶¯
     public void ShakeCameraWithForce(float force)
     {
-        impulseSource.GenerateImpulse(force);
+        impulseSource?.GenerateImpulse(force);
     }
     #endregion
 }

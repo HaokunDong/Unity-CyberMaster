@@ -13,7 +13,7 @@ using UnityEditor.Build.Pipeline.Tasks;
 using UnityEditor.SceneManagement;
 using Cysharp.Text;
 
-namespace Hypergryph
+namespace Griffin
 {
     public class AssetBundlePack
     {

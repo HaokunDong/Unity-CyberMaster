@@ -205,8 +205,8 @@ public class Player : Entity
         }*/
     }
 
-    public void AnimationTrigger() => stateMachine.currentState.AnimationFinishTrigger();
-    public void ChargeAttackMove() => stateMachine.currentState.AnimationEventTrigger();
+    public void AnimationTrigger() => stateMachine?.currentState?.AnimationFinishTrigger();
+    public void ChargeAttackMove() => stateMachine?.currentState?.AnimationEventTrigger();
     public void RefreshInfoState()
     {
         if(lifeBar != null)

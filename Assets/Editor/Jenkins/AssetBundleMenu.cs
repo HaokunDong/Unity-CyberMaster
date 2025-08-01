@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Hypergryph
+namespace Griffin
 {
     public class AssetBundleMenu
     {

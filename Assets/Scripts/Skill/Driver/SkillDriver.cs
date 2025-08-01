@@ -10,6 +10,7 @@ using UnityEngine;
 
 public interface ISkillDriverUnit
 {
+    public GamePlayEntity skillDriverOwner { get; }
     public SkillDriver skillDriverImp { get; }
 }
 
@@ -57,6 +58,27 @@ public class SkillDriver
             }
         }
     }
+
+    private HitResType hitResTp = HitResType.None;
+    public HitResType HitResTp
+    {
+        get => hitResTp;
+        private set
+        {
+            if (hitResTp != value)
+            {
+                hitResTp = value;
+                RestHitResType().Forget();
+            }
+        }
+    }
+
+    private async UniTask RestHitResType()
+    {
+        await UniTask.Yield(PlayerLoopTiming.LastPostLateUpdate);
+        hitResTp = HitResType.None;
+    }
+
 
     public bool IsPaused => isPaused;
 
@@ -205,7 +227,7 @@ public class SkillDriver
                 continue;
             }
 
-            float delta = getDeltaTime?.Invoke() ?? Time.deltaTime;
+            float delta = getDeltaTime?.Invoke() ?? Time.fixedDeltaTime;
             frameElapsed += delta;
 
             while (frameElapsed >= frameInterval)
@@ -275,5 +297,6 @@ public class SkillDriver
     public void OnHit(HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue)
     {
         OnHitBoxTriggered?.Invoke(hitRestype, attackerGPId, beHitterGPId, damageBaseValue);
+        HitResTp = hitRestype;
     }
 }

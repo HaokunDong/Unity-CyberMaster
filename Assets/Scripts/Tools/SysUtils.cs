@@ -13,7 +13,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Debug = UnityEngine.Debug;
 
-namespace Hypergryph
+namespace Griffin
 {
 	public class SysUtils
 	{

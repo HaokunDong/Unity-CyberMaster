@@ -89,9 +89,9 @@ public class SkillConfig : SerializedScriptableObject
         Tracks.Clear();
         if (!Tracks.Contains(SkillAnimationData) && HasData(SkillAnimationData)) Tracks.Add(SkillAnimationData);
         if (!Tracks.Contains(SkillAttackTimeWindowData) && HasData(SkillAttackTimeWindowData)) Tracks.Add(SkillAttackTimeWindowData);
-        if (!Tracks.Contains(SkillHitBoxData) && HasData(SkillHitBoxData)) Tracks.Add(SkillHitBoxData);
+        if (!Tracks.Contains(SkillHitBoxData)) Tracks.Add(SkillHitBoxData ??= new());
         if (!Tracks.Contains(SkillVelocityData) && HasData(SkillVelocityData)) Tracks.Add(SkillVelocityData);
-        if (!Tracks.Contains(SkillBlockBoxData) && HasData(SkillBlockBoxData)) Tracks.Add(SkillBlockBoxData);
+        if (!Tracks.Contains(SkillBlockBoxData)) Tracks.Add(SkillBlockBoxData ??= new());
         if (!Tracks.Contains(SkillJumpFrameData) && HasData(SkillJumpFrameData)) Tracks.Add(SkillJumpFrameData);
         if (!Tracks.Contains(SkillPlayerInputData) && HasData(SkillPlayerInputData)) Tracks.Add(SkillPlayerInputData);
         return Tracks;

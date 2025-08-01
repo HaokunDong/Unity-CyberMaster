@@ -42,6 +42,7 @@ public class GamePlayPlayer : GamePlayAIEntity, ISkillDriverUnit
         }
     }
 
+    public GamePlayEntity skillDriverOwner => this;
     public SkillDriver skillDriverImp => skillDriver;
 
     public Vector2 GetFacingDirection()

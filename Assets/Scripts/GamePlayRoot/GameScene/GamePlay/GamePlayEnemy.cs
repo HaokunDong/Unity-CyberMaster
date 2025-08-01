@@ -16,6 +16,7 @@ public class GamePlayEnemy : GamePlayAIEntity, ISkillDriverUnit
     private Cooldown StabAttackCD;
     private Cooldown WithdrawAttackCD;
 
+    public GamePlayEntity skillDriverOwner => this;
     public SkillDriver skillDriverImp => skillDriver;
 
     public override void AfterAIInit(Blackboard blackboard)

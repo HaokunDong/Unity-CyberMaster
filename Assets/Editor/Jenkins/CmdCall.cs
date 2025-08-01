@@ -4,10 +4,10 @@ using System.IO;
 using System.Diagnostics;
 using System.Collections.Generic;
 using GameBase.Log;
-using Hypergryph;
+using Griffin;
 
 
-namespace Hypergryph
+namespace Griffin
 {
 	public class CmdCall {
 		public enum version { Dist, Dev }
