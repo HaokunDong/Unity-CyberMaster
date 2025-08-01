@@ -1,9 +1,13 @@
-using NodeCanvas.Framework;
+﻿using NodeCanvas.Framework;
+using ParadoxNotion.Design;
 
 public class ConditionalAction : ActionTask
 {
+    [Header("判断条件")]
     public BBParameter<ConditionTask> condition;
+    [Header("判断条件为真时")]
     public BBParameter<ActionTask> task;
+    [Header("判断条件为假时")]
     public BBParameter<ActionTask> elseTask;
 
     protected override void OnExecute()

@@ -1,13 +1,18 @@
-using NodeCanvas.Framework;
+﻿using NodeCanvas.Framework;
 using ParadoxNotion.Design;
 
 [Category("GamePlay")]
 public class SwitchSkillDiverHitResTypeAction : ActionTask<ISkillDriverUnit>
 {
+    [Header("敌人直接命中玩家时")]
     public BBParameter<ActionTask> EnemyHitPlayerBodyTask;
+    [Header("敌人命中玩家格挡时")]
     public BBParameter<ActionTask> EnemyHitPlayerBlockTask;
+    [Header("玩家敌人拼刀时")]
     public BBParameter<ActionTask> PlayerEnemyBladeFightTask;
+    [Header("玩家直接命中敌人时")]
     public BBParameter<ActionTask> PlayerHitEnemyBodyTask;
+    [Header("玩家命中敌人格挡时")]
     public BBParameter<ActionTask> PlayerHitEnemyBlockTask;
 
     protected override void OnExecute()

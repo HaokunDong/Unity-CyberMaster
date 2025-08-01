@@ -6,27 +6,35 @@ using UnityEngine;
 public static class BulletTimeTool
 {
     private static CancellationTokenSource bulletTimeCTS;
+    private static int currentWeight = 0;
 
     public static void PlayBulletTime(
+        int weight,
         float durationRealtime,
         AnimationCurve curve,
         Vector2 timeScaleRange)
     {
-        PlayBulletTime(durationRealtime, t => curve.Evaluate(t), timeScaleRange);
+        PlayBulletTime(weight, durationRealtime, t => curve.Evaluate(t), timeScaleRange);
     }
 
     public static void PlayBulletTime(
+        int weight,
         float durationRealtime,
         Func<float, float> scaleFunc01,
         Vector2 timeScaleRange)
     {
-        bulletTimeCTS?.Cancel();
-        bulletTimeCTS = new CancellationTokenSource();
+        if(weight >= currentWeight)
+        {
+            currentWeight = weight;
+            bulletTimeCTS?.Cancel();
+            bulletTimeCTS = new CancellationTokenSource();
 
-        RunBulletTimeRoutine(durationRealtime, scaleFunc01, timeScaleRange, bulletTimeCTS.Token).Forget();
+            RunBulletTimeRoutine(weight, durationRealtime, scaleFunc01, timeScaleRange, bulletTimeCTS.Token).Forget();
+        }
     }
 
     private static async UniTaskVoid RunBulletTimeRoutine(
+        int weight,
         float durationRealtime,
         Func<float, float> scaleFunc01,
         Vector2 timeScaleRange,

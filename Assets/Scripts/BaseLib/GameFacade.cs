@@ -14,8 +14,9 @@ public class GameFacade : MonoBehaviour
     private void Awake()
     {
         QualitySettings.vSyncCount = 0;
-        //Application.targetFrameRate = 120;
+        Application.targetFrameRate = 120;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        Time.timeScale = 1;
         Init().Forget();
     }
 
