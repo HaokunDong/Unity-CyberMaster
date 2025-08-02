@@ -233,7 +233,7 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 8
+      Data: 0.7
     - Name: 
       Entry: 4
       Data: 0
