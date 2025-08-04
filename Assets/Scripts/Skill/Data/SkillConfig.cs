@@ -9,7 +9,8 @@ public class SkillConfig : SerializedScriptableObject
 {
     [LabelText("技能名称")] public string SkillName;
     [LabelText("帧数上限") ,ReadOnly] public int FrameCount = 100;
-    [LabelText("帧率")] public int FrameRate = 13;
+    [LabelText("帧率")] public int FrameRate = 24;
+    [LabelText("是否能在空中释放的技能")] public bool isAnAirSkill = false;
 
     [NonSerialized, OdinSerialize, ReadOnly]
     public SkillAnimationTrack SkillAnimationData = new SkillAnimationTrack();

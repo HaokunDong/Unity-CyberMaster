@@ -1,6 +1,7 @@
 ﻿using NodeCanvas.Framework;
 using ParadoxNotion.Design;
 
+[Name("带判断条件的Action")]
 public class ConditionalAction : ActionTask
 {
     [Header("判断条件")]

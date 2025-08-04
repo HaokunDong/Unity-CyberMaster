@@ -19,6 +19,7 @@ public class GamePlayEnemy : GamePlayAIEntity, ISkillDriverUnit
 
     public GamePlayEntity skillDriverOwner => this;
     public SkillDriver skillDriverImp => skillDriver;
+    public bool isOnGround => IsGrounded();
 
     public override void AfterAIInit(Blackboard blackboard)
     {
@@ -75,6 +76,11 @@ public class GamePlayEnemy : GamePlayAIEntity, ISkillDriverUnit
         {
             GroundFit().Forget();
         }
+    }
+
+    public bool IsGrounded(float dy = 0)
+    {
+        return true;
     }
 
     private async UniTask GroundFit()

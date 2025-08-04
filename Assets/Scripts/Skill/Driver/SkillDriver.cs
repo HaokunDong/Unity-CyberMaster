@@ -12,6 +12,7 @@ public interface ISkillDriverUnit
 {
     public GamePlayEntity skillDriverOwner { get; }
     public SkillDriver skillDriverImp { get; }
+    public bool isOnGround { get; }
 }
 
 public class SkillDriver

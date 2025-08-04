@@ -435,6 +435,7 @@ MonoBehaviour:
   SkillName: 
   FrameCount: 11
   FrameRate: 13
+  isAnAirSkill: 1
   cancelCommandInputState:
     CMD: 0
     InputState: 0

@@ -37,13 +37,13 @@ public class GamePlayPlayer : GamePlayAIEntity, ISkillDriverUnit
             {
                 velocity = value;
                 blackboard.SetVariableValue("Velocity", velocity);
-                blackboard.SetVariableValue("AbsVelocityX", Mathf.Abs(Velocity.x));
             }
         }
     }
 
     public GamePlayEntity skillDriverOwner => this;
     public SkillDriver skillDriverImp => skillDriver;
+    public bool isOnGround => IsGrounded();
 
     public Vector2 GetFacingDirection()
     {
@@ -79,10 +79,10 @@ public class GamePlayPlayer : GamePlayAIEntity, ISkillDriverUnit
         base.AfterAIInit(blackboard);
         playerData = PlayerTable.GetTableData(TableId);
         blackboard.SetVariableValue("Velocity", Velocity);
-        blackboard.SetVariableValue("AbsVelocityX", Mathf.Abs(Velocity.x));
         blackboard.SetVariableValue("SkillDriver", skillDriver);
         blackboard.SetVariableValue("beginSkill", false);
         blackboard.SetVariableValue("SkillPath", string.Empty);
+        blackboard.SetVariableValue("isLanding", false);
 
         attackInputButtonState ??= new InputButtonState(playerInput.GamePlay.PrimaryAttack, InputCommand.Attack);
         blockInputButtonState ??= new InputButtonState(playerInput.GamePlay.Block, InputCommand.Block);
@@ -130,26 +130,33 @@ public class GamePlayPlayer : GamePlayAIEntity, ISkillDriverUnit
 
             if (!skillDriver.IsPlaying)
             {
-                CommandInputState matchCMI = null;
-                if (attackInputButtonState.IsMatchAny(attackCMI))
+                if (playerInput.GamePlay.Jump.IsPressed() && IsGrounded() && !blackboard.GetVariableValue<bool>("isLanding"))
                 {
-                    matchCMI = attackCMI;
+                    rb.velocity = new Vector2(Velocity.x, playerData.JumpForce);
                 }
-                else if (blockInputButtonState.IsMatchAny(blockCMI))
+                else
                 {
-                    matchCMI = blockCMI;
-                }
-                if (matchCMI != null)
-                {
-                    if (inputSkillDict.TryGetValue(matchCMI, out var ps))
+                    CommandInputState matchCMI = null;
+                    if (attackInputButtonState.IsMatchAny(attackCMI))
                     {
-                        //在触发技能前就清空输入状态 防止连续触发多次技能
-                        InputButtonState.GetButtonState(matchCMI.CMD)?.ClearFlagThisFrame();
-
-                        if (!ps.IsNullOrWhitespace())
+                        matchCMI = attackCMI;
+                    }
+                    else if (blockInputButtonState.IsMatchAny(blockCMI))
+                    {
+                        matchCMI = blockCMI;
+                    }
+                    if (matchCMI != null)
+                    {
+                        if (inputSkillDict.TryGetValue(matchCMI, out var ps))
                         {
-                            blackboard.SetVariableValue("beginSkill", true);
-                            blackboard.SetVariableValue("SkillPath", ps);
+                            //在触发技能前就清空输入状态 防止连续触发多次技能
+                            InputButtonState.GetButtonState(matchCMI.CMD)?.ClearFlagThisFrame();
+
+                            if (!ps.IsNullOrWhitespace())
+                            {
+                                blackboard.SetVariableValue("beginSkill", true);
+                                blackboard.SetVariableValue("SkillPath", ps);
+                            }
                         }
                     }
                 }
@@ -157,9 +164,9 @@ public class GamePlayPlayer : GamePlayAIEntity, ISkillDriverUnit
         }
     }
 
-    public bool IsGrounded()
+    public bool IsGrounded(float dy = 0)
     {
-        return Physics2D.BoxCast(groundCheckPoint.position, groundCheckSize, 0f, Vector2.zero, 0f, groundLayer);
+        return Physics2D.BoxCast(groundCheckPoint.position, groundCheckSize, 0, Vector2.down, dy, groundLayer);
     }
 
     private void Update()
