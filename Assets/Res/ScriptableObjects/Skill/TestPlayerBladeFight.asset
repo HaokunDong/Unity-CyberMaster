@@ -337,6 +337,9 @@ MonoBehaviour:
     - Name: inputToDoFlags
       Entry: 3
       Data: 1
+    - Name: NextSkillTailCutFrame
+      Entry: 3
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -408,43 +411,9 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: Tracks
-      Entry: 7
-      Data: 30|System.Collections.Generic.List`1[[ISkillTrack, Assembly-CSharp]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 7
-    - Name: 
-      Entry: 9
-      Data: 0
-    - Name: 
-      Entry: 9
-      Data: 5
-    - Name: 
-      Entry: 9
-      Data: 7
-    - Name: 
-      Entry: 9
-      Data: 9
-    - Name: 
-      Entry: 9
-      Data: 11
-    - Name: 
-      Entry: 9
-      Data: 17
-    - Name: 
-      Entry: 9
-      Data: 21
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
   SkillName: 
   FrameCount: 6
-  FrameRate: 13
+  FrameRate: 24
   cancelCommandInputState:
     CMD: 2
     InputState: 4

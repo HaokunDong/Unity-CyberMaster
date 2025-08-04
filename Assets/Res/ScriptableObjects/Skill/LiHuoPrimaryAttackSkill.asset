@@ -16,12 +16,9 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 7400000, guid: ec113f7d63e94b64ba2b9c30e4f19adb, type: 2}
-    - {fileID: 7400000, guid: fc1940cb6e95ac6409fddb54d9aa5b1e, type: 2}
     - {fileID: 7400000, guid: 1922aca4dceff464d83d1e3a48097e79, type: 2}
-    - {fileID: 7400000, guid: 13408a387b04f6c4a864eb1367815c98, type: 2}
-    - {fileID: 7400000, guid: edb5861274431764397089945869e04c, type: 2}
-    - {fileID: 7400000, guid: 86665d57c8b0d1c48914ed23acf6ac32, type: 2}
+    - {fileID: 7400000, guid: fc1940cb6e95ac6409fddb54d9aa5b1e, type: 2}
+    - {fileID: 7400000, guid: ec113f7d63e94b64ba2b9c30e4f19adb, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -43,19 +40,19 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 6
+      Data: 3
     - Name: 
       Entry: 7
       Data: 
     - Name: $k
       Entry: 3
-      Data: 0
+      Data: 37
     - Name: $v
       Entry: 7
       Data: 3|SkillAnimationClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
-      Data: 12
+      Data: 27
     - Name: AnimationClip
       Entry: 10
       Data: 0
@@ -76,13 +73,13 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 12
+      Data: 23
     - Name: $v
       Entry: 7
       Data: 4|SkillAnimationClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
-      Data: 7
+      Data: 14
     - Name: AnimationClip
       Entry: 10
       Data: 1
@@ -103,97 +100,16 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 19
+      Data: 0
     - Name: $v
       Entry: 7
       Data: 5|SkillAnimationClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
-      Data: 17
+      Data: 23
     - Name: AnimationClip
       Entry: 10
       Data: 2
-    - Name: TransitionTime
-      Entry: 4
-      Data: 0
-    - Name: ApplyRootMotion
-      Entry: 5
-      Data: false
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 36
-    - Name: $v
-      Entry: 7
-      Data: 6|SkillAnimationClip, Assembly-CSharp
-    - Name: DurationFrame
-      Entry: 3
-      Data: 15
-    - Name: AnimationClip
-      Entry: 10
-      Data: 3
-    - Name: TransitionTime
-      Entry: 4
-      Data: 0
-    - Name: ApplyRootMotion
-      Entry: 5
-      Data: false
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 51
-    - Name: $v
-      Entry: 7
-      Data: 7|SkillAnimationClip, Assembly-CSharp
-    - Name: DurationFrame
-      Entry: 3
-      Data: 17
-    - Name: AnimationClip
-      Entry: 10
-      Data: 4
-    - Name: TransitionTime
-      Entry: 4
-      Data: 0
-    - Name: ApplyRootMotion
-      Entry: 5
-      Data: false
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 68
-    - Name: $v
-      Entry: 7
-      Data: 8|SkillAnimationClip, Assembly-CSharp
-    - Name: DurationFrame
-      Entry: 3
-      Data: 12
-    - Name: AnimationClip
-      Entry: 10
-      Data: 5
     - Name: TransitionTime
       Entry: 4
       Data: 0
@@ -217,30 +133,30 @@ MonoBehaviour:
       Data: 
     - Name: SkillAttackTimeWindowData
       Entry: 7
-      Data: 9|SkillAttackTimeWindowTrack, Assembly-CSharp
+      Data: 6|SkillAttackTimeWindowTrack, Assembly-CSharp
     - Name: skillClipDict
       Entry: 7
-      Data: 10|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillAttackTimeWindowClip,
+      Data: 7|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillAttackTimeWindowClip,
         Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 11|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
+      Data: 8|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
         mscorlib]], mscorlib
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 2
     - Name: 
       Entry: 7
       Data: 
     - Name: $k
       Entry: 3
-      Data: 14
+      Data: 28
     - Name: $v
       Entry: 7
-      Data: 12|SkillAttackTimeWindowClip, Assembly-CSharp
+      Data: 9|SkillAttackTimeWindowClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
       Data: 4
@@ -255,46 +171,10 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 53
+      Data: 43
     - Name: $v
       Entry: 7
-      Data: 13|SkillAttackTimeWindowClip, Assembly-CSharp
-    - Name: DurationFrame
-      Entry: 3
-      Data: 5
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 24
-    - Name: $v
-      Entry: 7
-      Data: 14|SkillAttackTimeWindowClip, Assembly-CSharp
-    - Name: DurationFrame
-      Entry: 3
-      Data: 5
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 69
-    - Name: $v
-      Entry: 7
-      Data: 15|SkillAttackTimeWindowClip, Assembly-CSharp
+      Data: 10|SkillAttackTimeWindowClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
       Data: 5
@@ -315,38 +195,38 @@ MonoBehaviour:
       Data: 
     - Name: SkillHitBoxData
       Entry: 7
-      Data: 16|SkillHitBoxTrack, Assembly-CSharp
+      Data: 11|SkillHitBoxTrack, Assembly-CSharp
     - Name: skillClipDict
       Entry: 7
-      Data: 17|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillHitBoxClip,
+      Data: 12|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillHitBoxClip,
         Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 9
       Data: 2
     - Name: 
       Entry: 12
-      Data: 12
+      Data: 5
     - Name: 
       Entry: 7
       Data: 
     - Name: $k
       Entry: 3
-      Data: 8
+      Data: 15
     - Name: $v
       Entry: 7
-      Data: 18|SkillHitBoxClip, Assembly-CSharp
+      Data: 13|SkillHitBoxClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
       Data: 1
     - Name: HitBoxs
       Entry: 7
-      Data: 19|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
+      Data: 14|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 3
     - Name: 
       Entry: 7
-      Data: 20|Box, Assembly-CSharp
+      Data: 15|Box, Assembly-CSharp
     - Name: center
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -379,7 +259,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 21|Box, Assembly-CSharp
+      Data: 16|Box, Assembly-CSharp
     - Name: center
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -412,7 +292,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 22|Box, Assembly-CSharp
+      Data: 17|Box, Assembly-CSharp
     - Name: center
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -472,22 +352,22 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 15
+      Data: 29
     - Name: $v
       Entry: 7
-      Data: 23|SkillHitBoxClip, Assembly-CSharp
+      Data: 18|SkillHitBoxClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
       Data: 1
     - Name: HitBoxs
       Entry: 7
-      Data: 24|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
+      Data: 19|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 3
     - Name: 
       Entry: 7
-      Data: 25|Box, Assembly-CSharp
+      Data: 20|Box, Assembly-CSharp
     - Name: center
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -520,7 +400,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 26|Box, Assembly-CSharp
+      Data: 21|Box, Assembly-CSharp
     - Name: center
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -553,7 +433,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 27|Box, Assembly-CSharp
+      Data: 22|Box, Assembly-CSharp
     - Name: center
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -613,22 +493,22 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 16
+      Data: 30
     - Name: $v
       Entry: 7
-      Data: 28|SkillHitBoxClip, Assembly-CSharp
+      Data: 23|SkillHitBoxClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
       Data: 1
     - Name: HitBoxs
       Entry: 7
-      Data: 29|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
+      Data: 24|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 30|Box, Assembly-CSharp
+      Data: 25|Box, Assembly-CSharp
     - Name: center
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -688,22 +568,22 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 25
+      Data: 45
     - Name: $v
       Entry: 7
-      Data: 31|SkillHitBoxClip, Assembly-CSharp
+      Data: 26|SkillHitBoxClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
       Data: 1
     - Name: HitBoxs
       Entry: 7
-      Data: 32|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
+      Data: 27|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 33|Box, Assembly-CSharp
+      Data: 28|Box, Assembly-CSharp
     - Name: center
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -763,22 +643,22 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 26
+      Data: 46
     - Name: $v
       Entry: 7
-      Data: 34|SkillHitBoxClip, Assembly-CSharp
+      Data: 29|SkillHitBoxClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
       Data: 1
     - Name: HitBoxs
       Entry: 7
-      Data: 35|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
+      Data: 30|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 36|Box, Assembly-CSharp
+      Data: 31|Box, Assembly-CSharp
     - Name: center
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -834,531 +714,6 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 44
-    - Name: $v
-      Entry: 7
-      Data: 37|SkillHitBoxClip, Assembly-CSharp
-    - Name: DurationFrame
-      Entry: 3
-      Data: 1
-    - Name: HitBoxs
-      Entry: 7
-      Data: 38|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 39|Box, Assembly-CSharp
-    - Name: center
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 1.5
-    - Name: 
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: size
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 6
-    - Name: 
-      Entry: 4
-      Data: 2
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: rotation
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: HitDamageValue
-      Entry: 4
-      Data: 1
-    - Name: layer
-      Entry: 7
-      Data: UnityEngine.LayerMask, UnityEngine.CoreModule
-    - Name: 
-      Entry: 3
-      Data: 64
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 55
-    - Name: $v
-      Entry: 7
-      Data: 40|SkillHitBoxClip, Assembly-CSharp
-    - Name: DurationFrame
-      Entry: 3
-      Data: 1
-    - Name: HitBoxs
-      Entry: 7
-      Data: 41|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 42|Box, Assembly-CSharp
-    - Name: center
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 2.2
-    - Name: 
-      Entry: 4
-      Data: 0.7
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: size
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 3.5
-    - Name: 
-      Entry: 4
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: rotation
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: HitDamageValue
-      Entry: 4
-      Data: 1
-    - Name: layer
-      Entry: 7
-      Data: UnityEngine.LayerMask, UnityEngine.CoreModule
-    - Name: 
-      Entry: 3
-      Data: 64
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 56
-    - Name: $v
-      Entry: 7
-      Data: 43|SkillHitBoxClip, Assembly-CSharp
-    - Name: DurationFrame
-      Entry: 3
-      Data: 1
-    - Name: HitBoxs
-      Entry: 7
-      Data: 44|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 45|Box, Assembly-CSharp
-    - Name: center
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 1.6
-    - Name: 
-      Entry: 4
-      Data: 1.9
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: size
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 2
-    - Name: 
-      Entry: 4
-      Data: 2
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: rotation
-      Entry: 4
-      Data: 70
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: HitDamageValue
-      Entry: 4
-      Data: 1
-    - Name: layer
-      Entry: 7
-      Data: UnityEngine.LayerMask, UnityEngine.CoreModule
-    - Name: 
-      Entry: 3
-      Data: 64
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 63
-    - Name: $v
-      Entry: 7
-      Data: 46|SkillHitBoxClip, Assembly-CSharp
-    - Name: DurationFrame
-      Entry: 3
-      Data: 1
-    - Name: HitBoxs
-      Entry: 7
-      Data: 47|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 48|Box, Assembly-CSharp
-    - Name: center
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 2
-    - Name: 
-      Entry: 4
-      Data: 0.5
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: size
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 6
-    - Name: 
-      Entry: 4
-      Data: 2.5
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: rotation
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: HitDamageValue
-      Entry: 4
-      Data: 1
-    - Name: layer
-      Entry: 7
-      Data: UnityEngine.LayerMask, UnityEngine.CoreModule
-    - Name: 
-      Entry: 3
-      Data: 64
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 70
-    - Name: $v
-      Entry: 7
-      Data: 49|SkillHitBoxClip, Assembly-CSharp
-    - Name: DurationFrame
-      Entry: 3
-      Data: 1
-    - Name: HitBoxs
-      Entry: 7
-      Data: 50|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 51|Box, Assembly-CSharp
-    - Name: center
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 3
-    - Name: 
-      Entry: 4
-      Data: 0.5
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: size
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 2
-    - Name: 
-      Entry: 4
-      Data: 2.5
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: rotation
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: HitDamageValue
-      Entry: 4
-      Data: 1
-    - Name: layer
-      Entry: 7
-      Data: UnityEngine.LayerMask, UnityEngine.CoreModule
-    - Name: 
-      Entry: 3
-      Data: 64
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 71
-    - Name: $v
-      Entry: 7
-      Data: 52|SkillHitBoxClip, Assembly-CSharp
-    - Name: DurationFrame
-      Entry: 3
-      Data: 1
-    - Name: HitBoxs
-      Entry: 7
-      Data: 53|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 54|Box, Assembly-CSharp
-    - Name: center
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 2.5
-    - Name: 
-      Entry: 4
-      Data: 1.3
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: size
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 3
-    - Name: 
-      Entry: 4
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: rotation
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: HitDamageValue
-      Entry: 4
-      Data: 1
-    - Name: layer
-      Entry: 7
-      Data: UnityEngine.LayerMask, UnityEngine.CoreModule
-    - Name: 
-      Entry: 3
-      Data: 64
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 48
-    - Name: $v
-      Entry: 7
-      Data: 55|SkillHitBoxClip, Assembly-CSharp
-    - Name: DurationFrame
-      Entry: 3
-      Data: 1
-    - Name: HitBoxs
-      Entry: 7
-      Data: 56|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 57|Box, Assembly-CSharp
-    - Name: center
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 1.84
-    - Name: 
-      Entry: 4
-      Data: 0.48
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: size
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 5.97
-    - Name: 
-      Entry: 4
-      Data: 2
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: rotation
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: HitDamageValue
-      Entry: 4
-      Data: 1
-    - Name: layer
-      Entry: 7
-      Data: UnityEngine.LayerMask, UnityEngine.CoreModule
-    - Name: 
-      Entry: 3
-      Data: 64
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -1369,30 +724,30 @@ MonoBehaviour:
       Data: 
     - Name: SkillVelocityData
       Entry: 7
-      Data: 58|SkillVelocityTrack, Assembly-CSharp
+      Data: 32|SkillVelocityTrack, Assembly-CSharp
     - Name: skillClipDict
       Entry: 7
-      Data: 59|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillVelocityClip,
+      Data: 33|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillVelocityClip,
         Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 60|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
+      Data: 34|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
         mscorlib]], mscorlib
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 7
       Data: 
     - Name: $k
       Entry: 3
-      Data: 9
+      Data: 8
     - Name: $v
       Entry: 7
-      Data: 61|SkillVelocityClip, Assembly-CSharp
+      Data: 35|SkillVelocityClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
       Data: 13
@@ -1428,13 +783,52 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 56
+      Data: 38
     - Name: $v
       Entry: 7
-      Data: 62|SkillVelocityClip, Assembly-CSharp
+      Data: 36|SkillVelocityClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
       Data: 13
+    - Name: FacePlayerFirstFrame
+      Entry: 5
+      Data: true
+    - Name: FacePlayerEveryFrame
+      Entry: 5
+      Data: false
+    - Name: UseCurrentFacing
+      Entry: 5
+      Data: true
+    - Name: velocity
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 24
+    - Name: $v
+      Entry: 7
+      Data: 37|SkillVelocityClip, Assembly-CSharp
+    - Name: DurationFrame
+      Entry: 3
+      Data: 7
     - Name: FacePlayerFirstFrame
       Entry: 5
       Data: true
@@ -1473,42 +867,42 @@ MonoBehaviour:
       Data: 
     - Name: SkillBlockBoxData
       Entry: 7
-      Data: 63|SkillBlockBoxTrack, Assembly-CSharp
+      Data: 38|SkillBlockBoxTrack, Assembly-CSharp
     - Name: skillClipDict
       Entry: 7
-      Data: 64|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillBlockBoxClip,
+      Data: 39|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillBlockBoxClip,
         Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 65|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
+      Data: 40|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
         mscorlib]], mscorlib
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 12
-      Data: 8
+      Data: 3
     - Name: 
       Entry: 7
       Data: 
     - Name: $k
       Entry: 3
-      Data: 5
+      Data: 14
     - Name: $v
       Entry: 7
-      Data: 66|SkillBlockBoxClip, Assembly-CSharp
+      Data: 41|SkillBlockBoxClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
       Data: 3
     - Name: BlockBoxs
       Entry: 7
-      Data: 67|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
+      Data: 42|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 3
     - Name: 
       Entry: 7
-      Data: 68|Box, Assembly-CSharp
+      Data: 43|Box, Assembly-CSharp
     - Name: center
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -1541,7 +935,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 69|Box, Assembly-CSharp
+      Data: 44|Box, Assembly-CSharp
     - Name: center
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -1574,7 +968,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 70|Box, Assembly-CSharp
+      Data: 45|Box, Assembly-CSharp
     - Name: center
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -1622,22 +1016,22 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 14
+      Data: 29
     - Name: $v
       Entry: 7
-      Data: 71|SkillBlockBoxClip, Assembly-CSharp
+      Data: 46|SkillBlockBoxClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
       Data: 2
     - Name: BlockBoxs
       Entry: 7
-      Data: 72|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
+      Data: 47|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 3
     - Name: 
       Entry: 7
-      Data: 73|Box, Assembly-CSharp
+      Data: 48|Box, Assembly-CSharp
     - Name: center
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -1670,7 +1064,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 74|Box, Assembly-CSharp
+      Data: 49|Box, Assembly-CSharp
     - Name: center
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -1703,7 +1097,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 75|Box, Assembly-CSharp
+      Data: 50|Box, Assembly-CSharp
     - Name: center
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -1751,22 +1145,22 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 24
+      Data: 45
     - Name: $v
       Entry: 7
-      Data: 76|SkillBlockBoxClip, Assembly-CSharp
+      Data: 51|SkillBlockBoxClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
       Data: 2
     - Name: BlockBoxs
       Entry: 7
-      Data: 77|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
+      Data: 52|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 78|Box, Assembly-CSharp
+      Data: 53|Box, Assembly-CSharp
     - Name: center
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -1810,56 +1204,31 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
-      Entry: 7
+      Entry: 13
       Data: 
-    - Name: $k
-      Entry: 3
-      Data: 43
-    - Name: $v
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: SkillJumpFrameData
       Entry: 7
-      Data: 79|SkillBlockBoxClip, Assembly-CSharp
-    - Name: DurationFrame
-      Entry: 3
-      Data: 2
-    - Name: BlockBoxs
+      Data: 54|SkillJumpFrameTrack, Assembly-CSharp
+    - Name: skillClipDict
       Entry: 7
-      Data: 80|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
+      Data: 55|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillJumpFrameClip,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 56|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 81|Box, Assembly-CSharp
-    - Name: center
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 1.5
-    - Name: 
-      Entry: 4
       Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: size
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 6
-    - Name: 
-      Entry: 4
-      Data: 2
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: rotation
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -1869,299 +1238,40 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
+    - Name: SkillPlayerInputData
       Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 47
-    - Name: $v
+      Data: 57|SkillPlayerInputTrack, Assembly-CSharp
+    - Name: skillClipDict
       Entry: 7
-      Data: 82|SkillBlockBoxClip, Assembly-CSharp
-    - Name: DurationFrame
-      Entry: 3
-      Data: 2
-    - Name: BlockBoxs
-      Entry: 7
-      Data: 83|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 84|Box, Assembly-CSharp
-    - Name: center
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 1.84
-    - Name: 
-      Entry: 4
-      Data: 0.48
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: size
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 5.97
-    - Name: 
-      Entry: 4
-      Data: 2
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: rotation
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 54
-    - Name: $v
-      Entry: 7
-      Data: 85|SkillBlockBoxClip, Assembly-CSharp
-    - Name: DurationFrame
-      Entry: 3
-      Data: 2
-    - Name: BlockBoxs
-      Entry: 7
-      Data: 86|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 87|Box, Assembly-CSharp
-    - Name: center
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 1.65
-    - Name: 
-      Entry: 4
-      Data: 0.83
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: size
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 3.84
-    - Name: 
-      Entry: 4
-      Data: 2.35
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: rotation
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 61
-    - Name: $v
-      Entry: 7
-      Data: 88|SkillBlockBoxClip, Assembly-CSharp
-    - Name: DurationFrame
-      Entry: 3
-      Data: 3
-    - Name: BlockBoxs
-      Entry: 7
-      Data: 89|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 90|Box, Assembly-CSharp
-    - Name: center
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 2
-    - Name: 
-      Entry: 4
-      Data: 0.5
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: size
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 6
-    - Name: 
-      Entry: 4
-      Data: 2.5
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: rotation
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 69
-    - Name: $v
-      Entry: 7
-      Data: 91|SkillBlockBoxClip, Assembly-CSharp
-    - Name: DurationFrame
-      Entry: 3
-      Data: 2
-    - Name: BlockBoxs
-      Entry: 7
-      Data: 92|System.Collections.Generic.List`1[[Box, Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 93|Box, Assembly-CSharp
-    - Name: center
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 2.3
-    - Name: 
-      Entry: 4
-      Data: 0.84
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: size
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 3.78
-    - Name: 
-      Entry: 4
-      Data: 3.79
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: rotation
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Tracks
-      Entry: 7
-      Data: 94|System.Collections.Generic.List`1[[ISkillTrack, Assembly-CSharp]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 5
-    - Name: 
+      Data: 58|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillPlayerInputClip,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
       Entry: 9
+      Data: 56
+    - Name: 
+      Entry: 12
       Data: 0
-    - Name: 
-      Entry: 9
-      Data: 16
-    - Name: 
-      Entry: 9
-      Data: 58
-    - Name: 
-      Entry: 9
-      Data: 9
-    - Name: 
-      Entry: 9
-      Data: 63
     - Name: 
       Entry: 13
       Data: 
     - Name: 
       Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: AfterSkillCommandInputStateDict
+      Entry: 6
+      Data: 
+    - Name: ChangeSkillCommandInputStateDict
+      Entry: 6
+      Data: 
+    - Name: SkillJumpFrameCommandInputStateDict
+      Entry: 6
       Data: 
   SkillName: 
-  FrameCount: 80
-  FrameRate: 13
-  isLoopSkill: 0
+  FrameCount: 64
+  FrameRate: 24
+  cancelCommandInputState:
+    CMD: 0
+    InputState: 0

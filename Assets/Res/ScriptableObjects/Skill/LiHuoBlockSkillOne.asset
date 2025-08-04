@@ -50,7 +50,7 @@ MonoBehaviour:
       Data: 3|SkillAnimationClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
-      Data: 8
+      Data: 6
     - Name: AnimationClip
       Entry: 10
       Data: 0
@@ -228,7 +228,7 @@ MonoBehaviour:
       Data: 
     - Name: SkillJumpFrameData
       Entry: 7
-      Data: 15|SkilJumpFrameTrack, Assembly-CSharp
+      Data: 15|SkillJumpFrameTrack, Assembly-CSharp
     - Name: skillClipDict
       Entry: 7
       Data: 16|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillJumpFrameClip,
@@ -252,13 +252,39 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: SkillPlayerInputData
+      Entry: 7
+      Data: 18|SkillPlayerInputTrack, Assembly-CSharp
+    - Name: skillClipDict
+      Entry: 7
+      Data: 19|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillPlayerInputClip,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 20|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: AfterSkillCommandInputStateDict
       Entry: 7
-      Data: 18|System.Collections.Generic.Dictionary`2[[CommandInputState[], Assembly-CSharp],[System.String,
+      Data: 21|System.Collections.Generic.Dictionary`2[[CommandInputState[], Assembly-CSharp],[System.String,
         mscorlib]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 19|System.Collections.Generic.ObjectEqualityComparer`1[[CommandInputState[],
+      Data: 22|System.Collections.Generic.ObjectEqualityComparer`1[[CommandInputState[],
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 8
@@ -274,11 +300,11 @@ MonoBehaviour:
       Data: 
     - Name: ChangeSkillCommandInputStateDict
       Entry: 7
-      Data: 20|System.Collections.Generic.Dictionary`2[[CommandInputState[], Assembly-CSharp],[System.String,
+      Data: 23|System.Collections.Generic.Dictionary`2[[CommandInputState[], Assembly-CSharp],[System.String,
         mscorlib]], mscorlib
     - Name: comparer
       Entry: 9
-      Data: 19
+      Data: 22
     - Name: 
       Entry: 12
       Data: 0
@@ -288,40 +314,12 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: Tracks
-      Entry: 7
-      Data: 21|System.Collections.Generic.List`1[[ISkillTrack, Assembly-CSharp]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 6
-    - Name: 
-      Entry: 9
-      Data: 0
-    - Name: 
-      Entry: 9
-      Data: 4
-    - Name: 
-      Entry: 9
-      Data: 6
-    - Name: 
-      Entry: 9
-      Data: 8
-    - Name: 
-      Entry: 9
-      Data: 10
-    - Name: 
-      Entry: 9
-      Data: 15
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
+    - Name: SkillJumpFrameCommandInputStateDict
+      Entry: 6
       Data: 
   SkillName: 
-  FrameCount: 8
-  FrameRate: 13
+  FrameCount: 6
+  FrameRate: 24
   cancelCommandInputState:
     CMD: 0
     InputState: 0

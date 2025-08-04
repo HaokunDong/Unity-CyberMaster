@@ -422,32 +422,88 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: Tracks
+    - Name: SkillBlockBoxData
       Entry: 7
-      Data: 21|System.Collections.Generic.List`1[[ISkillTrack, Assembly-CSharp]],
-        mscorlib
+      Data: 21|SkillBlockBoxTrack, Assembly-CSharp
+    - Name: skillClipDict
+      Entry: 7
+      Data: 22|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillBlockBoxClip,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 23|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 12
-      Data: 4
-    - Name: 
-      Entry: 9
       Data: 0
-    - Name: 
-      Entry: 9
-      Data: 6
-    - Name: 
-      Entry: 9
-      Data: 8
-    - Name: 
-      Entry: 9
-      Data: 19
     - Name: 
       Entry: 13
       Data: 
     - Name: 
       Entry: 8
       Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: SkillJumpFrameData
+      Entry: 7
+      Data: 24|SkillJumpFrameTrack, Assembly-CSharp
+    - Name: skillClipDict
+      Entry: 7
+      Data: 25|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillJumpFrameClip,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 9
+      Data: 23
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: SkillPlayerInputData
+      Entry: 7
+      Data: 26|SkillPlayerInputTrack, Assembly-CSharp
+    - Name: skillClipDict
+      Entry: 7
+      Data: 27|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillPlayerInputClip,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 9
+      Data: 23
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: AfterSkillCommandInputStateDict
+      Entry: 6
+      Data: 
+    - Name: ChangeSkillCommandInputStateDict
+      Entry: 6
+      Data: 
+    - Name: SkillJumpFrameCommandInputStateDict
+      Entry: 6
+      Data: 
   SkillName: 
   FrameCount: 26
-  FrameRate: 13
-  isLoopSkill: 0
+  FrameRate: 24
+  cancelCommandInputState:
+    CMD: 0
+    InputState: 0
