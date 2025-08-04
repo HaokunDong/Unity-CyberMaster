@@ -212,13 +212,13 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 12
+      Data: 6
     - Name: $v
       Entry: 7
       Data: 13|SkillVelocityClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
-      Data: 1
+      Data: 7
     - Name: FacePlayerFirstFrame
       Entry: 5
       Data: false
@@ -233,7 +233,7 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0.7
+      Data: 1.4
     - Name: 
       Entry: 4
       Data: 0
@@ -315,55 +315,7 @@ MonoBehaviour:
       Data: 18
     - Name: 
       Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
       Data: 0
-    - Name: $v
-      Entry: 7
-      Data: 21|SkillPlayerInputClip, Assembly-CSharp
-    - Name: DurationFrame
-      Entry: 3
-      Data: 18
-    - Name: inputToDoFlags
-      Entry: 3
-      Data: 4
-    - Name: NextSkillTailCutFrame
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 18
-    - Name: $v
-      Entry: 7
-      Data: 22|SkillPlayerInputClip, Assembly-CSharp
-    - Name: DurationFrame
-      Entry: 3
-      Data: 5
-    - Name: inputToDoFlags
-      Entry: 3
-      Data: 12
-    - Name: NextSkillTailCutFrame
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -375,11 +327,11 @@ MonoBehaviour:
       Data: 
     - Name: AfterSkillCommandInputStateDict
       Entry: 7
-      Data: 23|System.Collections.Generic.Dictionary`2[[CommandInputState[], Assembly-CSharp],[System.String,
+      Data: 21|System.Collections.Generic.Dictionary`2[[CommandInputState[], Assembly-CSharp],[System.String,
         mscorlib]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 24|System.Collections.Generic.ObjectEqualityComparer`1[[CommandInputState[],
+      Data: 22|System.Collections.Generic.ObjectEqualityComparer`1[[CommandInputState[],
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 8
@@ -392,13 +344,13 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 7
-      Data: 25|CommandInputState[], Assembly-CSharp
+      Data: 23|CommandInputState[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 26|CommandInputState, Assembly-CSharp
+      Data: 24|CommandInputState, Assembly-CSharp
     - Name: CMD
       Entry: 3
       Data: 1
@@ -431,11 +383,11 @@ MonoBehaviour:
       Data: 
     - Name: SkillJumpFrameCommandInputStateDict
       Entry: 7
-      Data: 27|System.Collections.Generic.Dictionary`2[[CommandInputState[], Assembly-CSharp],[System.Int32,
+      Data: 25|System.Collections.Generic.Dictionary`2[[CommandInputState[], Assembly-CSharp],[System.Int32,
         mscorlib]], mscorlib
     - Name: comparer
       Entry: 9
-      Data: 24
+      Data: 22
     - Name: 
       Entry: 12
       Data: 1
@@ -444,13 +396,13 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 7
-      Data: 28|CommandInputState[], Assembly-CSharp
+      Data: 26|CommandInputState[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 29|CommandInputState, Assembly-CSharp
+      Data: 27|CommandInputState, Assembly-CSharp
     - Name: CMD
       Entry: 3
       Data: 1
@@ -480,7 +432,7 @@ MonoBehaviour:
       Data: 
   SkillName: 
   FrameCount: 23
-  FrameRate: 25
+  FrameRate: 24
   cancelCommandInputState:
     CMD: 0
     InputState: 0
