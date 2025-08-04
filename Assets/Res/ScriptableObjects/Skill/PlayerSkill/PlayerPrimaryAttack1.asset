@@ -50,7 +50,7 @@ MonoBehaviour:
       Data: 3|SkillAnimationClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
-      Data: 11
+      Data: 21
     - Name: AnimationClip
       Entry: 10
       Data: 0
@@ -115,7 +115,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 1
+      Data: 2
     - Name: $v
       Entry: 7
       Data: 8|SkillHitBoxClip, Assembly-CSharp
@@ -212,7 +212,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 1
+      Data: 2
     - Name: $v
       Entry: 7
       Data: 13|SkillVelocityClip, Assembly-CSharp
@@ -321,19 +321,19 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 0
+      Data: 5
     - Name: $v
       Entry: 7
       Data: 21|SkillPlayerInputClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
-      Data: 4
+      Data: 5
     - Name: inputToDoFlags
       Entry: 3
       Data: 16
     - Name: NextSkillTailCutFrame
       Entry: 3
-      Data: 5
+      Data: 9
     - Name: 
       Entry: 8
       Data: 
@@ -345,13 +345,13 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 4
+      Data: 10
     - Name: $v
       Entry: 7
       Data: 22|SkillPlayerInputClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
-      Data: 7
+      Data: 11
     - Name: inputToDoFlags
       Entry: 3
       Data: 4
@@ -433,9 +433,8 @@ MonoBehaviour:
       Entry: 6
       Data: 
   SkillName: 
-  FrameCount: 11
-  FrameRate: 13
-  isAnAirSkill: 1
+  FrameCount: 21
+  FrameRate: 24
   cancelCommandInputState:
     CMD: 0
     InputState: 0

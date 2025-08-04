@@ -194,7 +194,7 @@ MonoBehaviour:
       Data: 
   SkillName: 
   FrameCount: 0
-  FrameRate: 13
+  FrameRate: 24
   cancelCommandInputState:
     CMD: 0
     InputState: 0
