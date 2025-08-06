@@ -24,6 +24,7 @@ public class GamePlayPlayer : GamePlayAIEntity, ISkillDriverUnit
     private CommandInputState attackCMI;
     private CommandInputState blockCMI;
     private Collision coll;
+    private BetterJumping betterJumping;
 
     private Vector2 velocity;
     public Vector2 Velocity
@@ -70,6 +71,7 @@ public class GamePlayPlayer : GamePlayAIEntity, ISkillDriverUnit
     private void Start()
     {
         coll = GetComponent<Collision>();
+        betterJumping ??= new BetterJumping(0.5f, 3f, 8f, GetComponent<Rigidbody2D>(), playerInput);
     }
 
     public override void AfterAIInit(Blackboard blackboard)
@@ -116,21 +118,27 @@ public class GamePlayPlayer : GamePlayAIEntity, ISkillDriverUnit
         moveVelocitySmoothDirectionInput.SetRawInput(moveInput.x);
     }
 
-    private void FixedUpdate()
+    public bool IsGrounded()
     {
-        if(playerData != null)
+        return coll? coll.onGround : true;
+    }
+
+    private void Update()
+    {
+        betterJumping.Step();
+        if (playerData != null)
         {
-            moveVelocitySmoothDirectionInput.Update(Time.fixedDeltaTime);
+            moveVelocitySmoothDirectionInput.Update(Time.deltaTime);
             Velocity = new Vector2(moveVelocitySmoothDirectionInput.CurrentValue * playerData.MaxMoveSpeed, 0);
 
-            attackInputButtonState.Update(Time.fixedDeltaTime);
-            blockInputButtonState.Update(Time.fixedDeltaTime);
+            attackInputButtonState.Update(Time.deltaTime);
+            blockInputButtonState.Update(Time.deltaTime);
 
             if (!skillDriver.IsPlaying)
             {
                 if (playerInput.GamePlay.Jump.IsPressed() && IsGrounded() && !blackboard.GetVariableValue<bool>("isLanding"))
                 {
-                    rb.velocity = new Vector2(Velocity.x, playerData.JumpForce);
+                    Jump(Vector2.up, false);
                 }
                 else
                 {
@@ -160,19 +168,7 @@ public class GamePlayPlayer : GamePlayAIEntity, ISkillDriverUnit
                 }
             }
         }
-    }
 
-    public bool IsGrounded()
-    {
-        return coll? coll.onGround : true;
-    }
-
-    private void Update()
-    {
-        if(SkillBoxManager.IsACharacterBeHitThisFrame(0))
-        {
-            LogUtils.Error("Hit", LogChannel.Battle, Color.green);
-        }
         if (ManagerCenter.Ins.PlayerInputMgr.CanGamePlayInput)
         {
             if (Input.GetKeyDown(KeyCode.P))
@@ -180,6 +176,12 @@ public class GamePlayPlayer : GamePlayAIEntity, ISkillDriverUnit
                 World.Ins.InPlayGamePlayRoot?.InteractTarget?.OnInteract();
             }
         } 
+    }
+
+    private void Jump(Vector2 dir, bool wall)
+    {
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.velocity += dir * playerData.JumpForce;
     }
 
     public override void OnHitBoxTrigger(HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue)
