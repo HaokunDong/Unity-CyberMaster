@@ -15,9 +15,6 @@ public class GamePlayPlayer : GamePlayAIEntity, ISkillDriverUnit
     public PlayerInput playerInput;
     public Vector2 moveInput = Vector2.zero;
 
-    [SerializeField] private Transform groundCheckPoint;
-    [SerializeField] private Vector2 groundCheckSize = new Vector2(0.5f, 0.1f);
-    [SerializeField] private LayerMask groundLayer;
     private PlayerTable playerData;
     private SmoothDirectionInput moveVelocitySmoothDirectionInput;
     private Dictionary<CommandInputState, string> inputSkillDict;
@@ -26,6 +23,7 @@ public class GamePlayPlayer : GamePlayAIEntity, ISkillDriverUnit
     private InputButtonState blockInputButtonState;
     private CommandInputState attackCMI;
     private CommandInputState blockCMI;
+    private Collision coll;
 
     private Vector2 velocity;
     public Vector2 Velocity
@@ -71,7 +69,7 @@ public class GamePlayPlayer : GamePlayAIEntity, ISkillDriverUnit
 
     private void Start()
     {
-        //player = GetComponent<Player>();
+        coll = GetComponent<Collision>();
     }
 
     public override void AfterAIInit(Blackboard blackboard)
@@ -164,9 +162,9 @@ public class GamePlayPlayer : GamePlayAIEntity, ISkillDriverUnit
         }
     }
 
-    public bool IsGrounded(float dy = 0)
+    public bool IsGrounded()
     {
-        return Physics2D.BoxCast(groundCheckPoint.position, groundCheckSize, 0, Vector2.down, dy, groundLayer);
+        return coll? coll.onGround : true;
     }
 
     private void Update()
@@ -204,11 +202,6 @@ public class GamePlayPlayer : GamePlayAIEntity, ISkillDriverUnit
         name = ZString.Concat(GamePlayId);
         color = Color.red;
         return true;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawCube(groundCheckPoint.position, groundCheckSize);
     }
 #endif
 }

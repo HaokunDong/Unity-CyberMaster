@@ -78,7 +78,7 @@ public class GamePlayEnemy : GamePlayAIEntity, ISkillDriverUnit
         }
     }
 
-    public bool IsGrounded(float dy = 0)
+    public bool IsGrounded()
     {
         return true;
     }
