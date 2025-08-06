@@ -293,6 +293,7 @@ public class SkillDriver
         }
 
         IsPlaying = false;
+        animator.speed = 1f;
     }
 
     public void OnHit(HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue)
