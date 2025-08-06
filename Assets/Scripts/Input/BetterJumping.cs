@@ -1,30 +1,31 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class BetterJumping
+public class BetterJumping : MonoBehaviour
 {
-    private float gate;
-    private float fallMultiplier;
-    private float lowJumpMultiplier;
-    
+    private PlayerInput playerInput;
     private Rigidbody2D rb;
-    private PlayerInput input;
+    public float fallMultiplier = 2.5f;
+    public float lowJumpMultiplier = 2f;
 
-    public BetterJumping(float g, float f, float l, Rigidbody2D rb, PlayerInput input)
+    void Start()
     {
-        gate = g;
-        fallMultiplier = f;
-        lowJumpMultiplier = l;
-        this.rb = rb;
-        this.input = input;
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    public void Step()
+    public void SetPlayerInput(PlayerInput playerInput)
     {
-        if (rb.velocity.y < -gate)
+        this.playerInput = playerInput;
+    }
+
+    void Update()
+    {
+        if (rb.velocity.y < 0)
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
-        else if (rb.velocity.y > gate && !input.GamePlay.Jump.IsPressed())
+        else if (rb.velocity.y > 0 && (playerInput != null && !playerInput.GamePlay.Jump.IsPressed()))
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }

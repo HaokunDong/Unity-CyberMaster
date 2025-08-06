@@ -15,7 +15,6 @@ public class GamePlayPlayerHasVelocityConditionTask : ConditionTask<GamePlayPlay
     public XY checkAxis = XY.X;
     public BBParameter<float> velocityCheckValue = new BBParameter<float>(0);
     public bool useABS = true;
-    public bool useRigidBody = false;
     public CompareMethod checkType = CompareMethod.EqualTo;
     [SliderField(0, 0.1f)]
     public float differenceThreshold = 0.05f;
@@ -24,7 +23,7 @@ public class GamePlayPlayerHasVelocityConditionTask : ConditionTask<GamePlayPlay
 
     protected override bool OnCheck()
     {
-        var vec = useRigidBody ? agent.rb.velocity : agent.Velocity;
+        var vec = agent.rb.velocity;
         if (checkAxis == XY.X)
         {
             if(useABS)

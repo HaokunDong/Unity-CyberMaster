@@ -16,18 +16,18 @@ namespace Everlasting.Config
 		public readonly string Graph;
 		public readonly float MaxMoveSpeed;
 		public readonly float JumpForce;
-		public readonly Vector2[] AttackDistance;
+		public readonly float DashSpeed;
 		public readonly string PrimaryAttackSkillPath;
 		public readonly string BlockSkillPath;
 		
-		public PlayerTable(uint Id, string Prefab, string Graph, float MaxMoveSpeed, float JumpForce, Vector2[] AttackDistance, string PrimaryAttackSkillPath, string BlockSkillPath)
+		public PlayerTable(uint Id, string Prefab, string Graph, float MaxMoveSpeed, float JumpForce, float DashSpeed, string PrimaryAttackSkillPath, string BlockSkillPath)
 		{
 			this.Id = Id;
 			this.Prefab = Prefab;
 			this.Graph = Graph;
 			this.MaxMoveSpeed = MaxMoveSpeed;
 			this.JumpForce = JumpForce;
-			this.AttackDistance = AttackDistance;
+			this.DashSpeed = DashSpeed;
 			this.PrimaryAttackSkillPath = PrimaryAttackSkillPath;
 			this.BlockSkillPath = BlockSkillPath;
 		}
@@ -45,18 +45,6 @@ namespace Everlasting.Config
 			public static int ConfigCount;
 			
 			private static string[] poolString = null;
-			private static Vector2[][] poolVector2Array = null;
-			
-			private static Vector2[] LoadVector2Array(IConfigBinary binary)
-			{
-				var count = binary.ReadInt();
-				var arr = new Vector2[count];
-				for(int i = 0; i < count; i++)
-				{
-					arr[i] = new Vector2(binary.ReadFloat(),binary.ReadFloat());
-				}
-				return arr;
-			}
 			
 			public static async UniTask Load()
 			{
@@ -72,14 +60,6 @@ namespace Everlasting.Config
 				}
 				{
 					int count = binary.ReadInt();
-					poolVector2Array =  new Vector2[count][];
-					for(int i = 0; i < count; i++)
-					{
-						poolVector2Array[i] = LoadVector2Array(binary);
-					}
-				}
-				{
-					int count = binary.ReadInt();
 					ConfigCount = count;
 					ConfigList = new PlayerTable[count];
 					for(int i = 0; i < count; i++)
@@ -89,10 +69,10 @@ namespace Everlasting.Config
 						var Graph = poolString[binary.ReadInt()];
 						var MaxMoveSpeed = binary.ReadFloat();
 						var JumpForce = binary.ReadFloat();
-						var AttackDistance = poolVector2Array[binary.ReadInt()];
+						var DashSpeed = binary.ReadFloat();
 						var PrimaryAttackSkillPath = poolString[binary.ReadInt()];
 						var BlockSkillPath = poolString[binary.ReadInt()];
-						var cfg = new PlayerTable(Id, Prefab, Graph, MaxMoveSpeed, JumpForce, AttackDistance, PrimaryAttackSkillPath, BlockSkillPath);
+						var cfg = new PlayerTable(Id, Prefab, Graph, MaxMoveSpeed, JumpForce, DashSpeed, PrimaryAttackSkillPath, BlockSkillPath);
 						ConfigList[i] = cfg;
 						ConfigDic.Add(Id, cfg);
 					}

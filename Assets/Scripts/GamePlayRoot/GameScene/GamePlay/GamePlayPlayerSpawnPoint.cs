@@ -23,8 +23,8 @@ public class GamePlayPlayerSpawnPoint : GamePlaySpawnPoint<GamePlayPlayer>
             World.Ins.SetPlayer(p);
             if (p != null)
             {
-                p.graphPath = data.Graph;
-                p.pauseWhenInvisible = false;
+                //p.graphPath = data.Graph;
+                //p.pauseWhenInvisible = false;
             }
             //临时兼容老Player处理
             //if (Quaternion.Angle(transform.rotation, Quaternion.identity) > 90)

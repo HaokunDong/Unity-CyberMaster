@@ -277,7 +277,7 @@ public class GamePlayRoot : MonoBehaviour, ICustomHierarchyComment
         if (World.Ins.Player == null) return;
 
         Vector2 origin = World.Ins.Player.transform.position;
-        Vector2 facing = World.Ins.Player.GetFacingDirection().normalized;
+        Vector2 facing = new Vector2(World.Ins.Player.facingDir, 0);
         float maxDistance = World.Ins.Player.maxInteractDistance;
         int layerMask = LayerMask.GetMask("Interactable", "NPC");
 
