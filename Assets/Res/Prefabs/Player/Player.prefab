@@ -128,7 +128,7 @@ MonoBehaviour:
   - {x: 0.2206626, y: -0.9899998, z: 0}
   m_ShapePathHash: 136114589
   m_Mesh: {fileID: 0}
-  m_InstanceId: 68666
+  m_InstanceId: 51358
   m_LocalBounds:
     m_Center: {x: 0.0049883127, y: -0.031554222, z: 0}
     m_Extent: {x: 0.21567428, y: 0.95844555, z: 0}
@@ -169,24 +169,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GamePlayId: 0
+  facingRight: 1
+  sr: {fileID: 0}
   maxInteractDistance: 5
   moveInput: {x: 0, y: 0}
   rb: {fileID: 7533107135046402557}
-  speed: 10
-  jumpForce: 50
   slideSpeed: 5
   wallJumpLerp: 10
-  dashSpeed: 20
   canMove: 1
   wallGrab: 0
   wallJumped: 0
   wallSlide: 0
   isDashing: 0
-  side: 1
-  dashParticle: {fileID: 0}
-  jumpParticle: {fileID: 0}
-  wallJumpParticle: {fileID: 0}
-  slideParticle: {fileID: 0}
 --- !u!114 &4818484040377043870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,6 +231,7 @@ GameObject:
   - component: {fileID: 6184492182659863994}
   - component: {fileID: 5525440868676629496}
   - component: {fileID: 7855615409825322099}
+  - component: {fileID: 5097672668620994346}
   m_Layer: 6
   m_Name: Animator
   m_TagString: Untagged
@@ -440,6 +435,19 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 820cc1055e3054018841c59d52fa5db1, type: 2}
+--- !u!114 &5097672668620994346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1632458685840708588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 647a17a6cfc8b4e49b582c2fda753005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sr: {fileID: 0}
 --- !u!1 &2568497917624387223
 GameObject:
   m_ObjectHideFlags: 0

@@ -28,9 +28,13 @@ public abstract class GamePlayEntity : MonoBehaviour, ICustomHierarchyComment
     public GamePlaySpawnPoint spawnPoint;
 
     public int facingDir { get; private set; } = 1;
-    protected bool facingRight = true;
-
-    public virtual void Init() { }
+    public bool facingRight = true;
+    
+    public SpriteRenderer sr;
+    public virtual void Init() 
+    {
+        sr = GetComponentInChildren<SpriteRenderer>();
+    }
 
     public virtual bool isFacingPlayer()
     {
@@ -78,7 +82,7 @@ public abstract class GamePlayEntity : MonoBehaviour, ICustomHierarchyComment
     {
         facingDir = facingDir * -1;
         facingRight = !facingRight;
-        transform.Rotate(0, 180, 0);
+        sr.flipX = !facingRight;
     }
 
     public void FlipData()

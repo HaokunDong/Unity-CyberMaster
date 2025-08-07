@@ -3,6 +3,7 @@ using Everlasting.Config;
 using GameBase.Log;
 using Localization;
 using Managers;
+using System.IO;
 using System.Threading.Tasks;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -63,6 +64,7 @@ public class GameFacade : MonoBehaviour
     #region 初始化结束后
     private async Task OnInitEnd()
     {
+        ResourceManager.LoadAssetAsync<GameObject>(Path.Combine("Effects", "GhostTrail"), ResType.Prefab).Forget();
 #if UNITY_EDITOR
         GamePlayLevelId = (uint)EditorPrefs.GetInt("SelectedGamePlayLevelId", (int)GamePlayLevelId);
 #endif
