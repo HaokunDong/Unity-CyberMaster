@@ -38,6 +38,7 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
     public bool wallJumped;
     public bool wallSlide;
     public bool isDashing;
+    public bool isInPushing;
 
     [Space]
     private bool groundTouch;
@@ -163,8 +164,10 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
                         float xRaw = moveInput.x;
                         float yRaw = moveInput.y;
                         Vector2 dir = new Vector2(x, 0);
-
-                        Walk(dir);
+                        if(!isInPushing)
+                        {
+                            Walk(dir);
+                        }
                         anim?.SetHorizontalMovement(x, y, rb ? rb.velocity.y : 0);
 
                         //if (coll.onWall && Input.GetButton("Fire3") && canMove)
@@ -420,6 +423,25 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
             Flip();
         }
     }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("EnemyHead"))
+        {
+            isInPushing = true;
+            Vector2 direction = new Vector2(transform.position.x > other.transform.position.x ? 2f : -2f, -1f);
+            rb.velocity = direction * playerData.JumpForce;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("EnemyHead"))
+        {
+            isInPushing = false;
+        }
+    }
+
 
 #if UNITY_EDITOR
     public override bool GetHierarchyComment(out string name, out Color color)

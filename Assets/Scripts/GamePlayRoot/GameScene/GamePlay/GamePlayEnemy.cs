@@ -86,7 +86,7 @@ public class GamePlayEnemy : GamePlayAIEntity, ISkillDriverUnit
     private async UniTask GroundFit()
     {
         rb.bodyType = RigidbodyType2D.Dynamic;
-        await UniTask.DelayFrame(1);
+        await UniTask.DelayFrame(10);
         rb.bodyType = RigidbodyType2D.Kinematic;
     }
 
