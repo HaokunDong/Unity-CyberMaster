@@ -160,14 +160,14 @@ namespace GameEditor.MonoHook
         //    SaveDragEndListener.OnGuiCheckSave();
         //    ori(self);
         //}
-        
+
         // [MonoHookMethod("UnityEngine.CoreModule", "UnityEngine.Mesh", "Internal_Create", isNative = true)]
         // public static void MeshCreateHook(Mesh mono)
         // {
         //     Debug.LogError("hahahahah");
         //     MonoHookManager.methodName2NativeDetour["MeshCreateHook"].GenerateTrampoline<Action<Mesh>>()(mono);
         // }
-        
+
         // [MonoHookPropertyAttribute("UnityEditor.CoreModule", "UnityEditor.PlayerSettings", "runInBackground",
         //     MonoHookPropertyAttribute.HookType.SetMethod, isNative = true)]
         // public static void RunInBackground_Set(PlayerSettings settings, bool value)
@@ -175,14 +175,14 @@ namespace GameEditor.MonoHook
         //     Debug.LogError($"runInBackground_Set {value}");
         //     MonoHookManager.methodName2NativeDetour["RunInBackground_Set"].GenerateTrampoline<Action<PlayerSettings, bool>>()(settings, value);
         // }
-        
+
         // [MonoHookMethod("UnityEngine.CoreModule", "UnityEngine.GameObject", "SetActive", isNative = true)]
         // public static void GoSetActiveHook(GameObject go, bool value)
         // {
         //     Debug.LogError($"GoSetActiveHook {go.GetPath()} {value}");
         //     MonoHookManager.methodName2NativeDetour["GoSetActiveHook"].GenerateTrampoline<Action<GameObject, bool>>()(go, value);
         // }
-        
+
         // [MonoHookMethod("UnityEditor.CoreModule", "UnityEditor.AssetDatabase", "LoadAssetAtPath", 
         //     isNative = true, paramTypes = new []{typeof(string), typeof(Type)})]
         // public static Object AssetDatabaseLoadAssetAtPathHook(string assetPath, Type type)
@@ -190,7 +190,7 @@ namespace GameEditor.MonoHook
         //     Debug.LogError($"AssetDatabaseLoadAssetAtPathHook {assetPath} {type}");
         //     return MonoHookManager.methodName2NativeDetour["AssetDatabaseLoadAssetAtPathHook"].GenerateTrampoline<Func<string, Type, Object>>()(assetPath, type);
         // }
-        
+
         // [MonoHookPropertyAttribute("UnityEditor.CoreModule", "UnityEditor.Selection", "activeGameObject", MonoHookPropertyAttribute.HookType.SetMethod, isNative:true)]
         // public static void SelectionActiveGameObjectSet(GameObject go)
         // {
@@ -211,7 +211,7 @@ namespace GameEditor.MonoHook
         //     LogUtils.Error($"SelectionObjectsSet");
         //     MonoHookManager.methodName2NativeDetour["SelectionObjectsSet"].GenerateTrampoline<Action<Object[]>>()(objs);
         // }
-        
+
         // [MonoHookMethod("UnityEngine.CoreModule", "UnityEngine.Object", "Destroy", paramTypes:new Type[]{typeof(Object)})]
         // public static void GODestroyHook(Action<Object> ori, Object obj)
         // {
@@ -225,7 +225,14 @@ namespace GameEditor.MonoHook
         //     Debug.LogError($"GameObject DestroyImmediate {obj.name}");
         //     ori(obj);
         // }
-        
+
+        //[MonoHookProperty("UnityEngine.Physics2DModule", "UnityEngine.Rigidbody2D", "velocity", MonoHookPropertyAttribute.HookType.SetMethod, isNative: true)]
+        //public static void SetVelocityHook(Rigidbody2D rb, Vector2 v)
+        //{
+        //    LogUtils.Error("SetVelocityHook " + v);
+        //    MonoHookManager.methodName2NativeDetour["SetVelocityHook"].GenerateTrampoline<Action<Rigidbody2D, Vector2>>()(rb, v);
+        //}
+
         // [MonoHookMethod("DOTween", "DG.Tweening.ShortcutExtensions", "DOMove")]
         // public static TweenerCore<Vector3, Vector3, VectorOptions> DOMoveHook(Func<Transform, Vector3,float, bool, TweenerCore<Vector3, Vector3, VectorOptions>> ori, 
         //     Transform target,
@@ -236,7 +243,7 @@ namespace GameEditor.MonoHook
         //     Debug.LogError($"DOMoveHook {target.gameObject.GetPath()}");
         //     return ori(target, endValue, duration, snapping);
         // }
-        
+
         // [MonoHookMethod("UniTask", "Cysharp.Threading.Tasks.AutoResetUniTaskCompletionSource", "TryReturn")]
         // public static bool AutoResetUniTaskCompletionSourceTryReturnHook(Func<AutoResetUniTaskCompletionSource, bool> ori, AutoResetUniTaskCompletionSource obj)
         // {

@@ -33,6 +33,15 @@ public class Collision : MonoBehaviour
         wallSide = onRightWall ? -1 : 1;
     }
 
+    public bool ChenckAround()
+    {
+        Vector2 pointA = (Vector2)transform.position + bottomOffset + leftOffset;
+        Vector2 pointB = (Vector2)transform.position - bottomOffset + rightOffset;
+
+        Collider2D hit = Physics2D.OverlapArea(pointA, pointB, groundLayer);
+        return hit != null;
+    }
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -42,5 +51,9 @@ public class Collision : MonoBehaviour
         Gizmos.DrawWireSphere((Vector2)transform.position + bottomOffset, collisionRadius);
         Gizmos.DrawWireSphere((Vector2)transform.position + rightOffset, collisionRadius);
         Gizmos.DrawWireSphere((Vector2)transform.position + leftOffset, collisionRadius);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere((Vector2)transform.position + bottomOffset + leftOffset, collisionRadius);
+        Gizmos.DrawWireSphere((Vector2)transform.position - bottomOffset + rightOffset, collisionRadius);
     }
 }

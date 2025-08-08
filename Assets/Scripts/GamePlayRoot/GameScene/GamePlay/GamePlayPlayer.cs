@@ -1,8 +1,9 @@
-using Cysharp.Text;
+Ôªøusing Cysharp.Text;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Everlasting.Config;
 using GameBase.Log;
+using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,16 +34,22 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
     public float wallJumpLerp = 10;
 
     [Space]
-    public bool canMove;
+    [ShowInInspector, ReadOnly]
+    public bool canMove = true;
+    [ShowInInspector, ReadOnly]
     public bool wallGrab;
+    [ShowInInspector, ReadOnly]
     public bool wallJumped;
+    [ShowInInspector, ReadOnly]
     public bool wallSlide;
+    [ShowInInspector, ReadOnly]
     public bool isDashing;
+    [ShowInInspector, ReadOnly]
     public bool isInPushing;
-
-    [Space]
-    private bool groundTouch;
-    private bool hasDashed;
+    [ShowInInspector, ReadOnly]
+    public bool groundTouch;
+    [ShowInInspector, ReadOnly]
+    public bool hasDashed;
 
     //[Space]
     //public ParticleSystem dashParticle;
@@ -66,7 +73,7 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
             gameObject.GetComponentInChildren<Rigidbody2D>(),
             (HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue) =>
             {
-                LogUtils.Warning($"π•ª˜√¸÷–¿‡–Õ: {hitRestype} π•ª˜’ﬂGPId: {attackerGPId}  ‹ª˜’ﬂGPId: {beHitterGPId} …À∫¶ª˘◊º÷µ: {damageBaseValue}");
+                LogUtils.Warning($"ÊîªÂáªÂëΩ‰∏≠Á±ªÂûã: {hitRestype} ÊîªÂáªËÄÖGPId: {attackerGPId} ÂèóÂáªËÄÖGPId: {beHitterGPId} ‰º§ÂÆ≥Âü∫ÂáÜÂÄº: {damageBaseValue}");
             },
             () => Time.fixedDeltaTime,
             () => facingDir,
@@ -148,7 +155,7 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
                     {
                         if (inputSkillDict.TryGetValue(matchCMI, out var ps))
                         {
-                            //‘⁄¥•∑¢ººƒ‹«∞æÕ«Âø’ ‰»Î◊¥Ã¨ ∑¿÷π¡¨–¯¥•∑¢∂‡¥Œººƒ‹
+                            //Âú®Ëß¶ÂèëÊäÄËÉΩÂâçÂ∞±Ê∏ÖÁ©∫ËæìÂÖ•Áä∂ÊÄÅ Èò≤Ê≠¢ËøûÁª≠Ëß¶ÂèëÂ§öÊ¨°ÊäÄËÉΩ
                             InputButtonState.GetButtonState(matchCMI.CMD)?.ClearFlagThisFrame();
 
                             if (!ps.IsNullOrWhitespace())
@@ -161,9 +168,13 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
                     {
                         float x = moveVelocitySmoothDirectionInput.CurrentValue;
                         float y = moveInput.y;
+                        if(Mathf.Approximately(x * x + y * y, 1) && !Mathf.Approximately(x, 0) && isOnGround)
+                        {
+                            x = x > 0 ? 1 : -1;
+                        }
                         float xRaw = moveInput.x;
                         float yRaw = moveInput.y;
-                        Vector2 dir = new Vector2(x, 0);
+                        Vector2 dir = new Vector2(x, y);
                         if(!isInPushing)
                         {
                             Walk(dir);
@@ -194,10 +205,11 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
                         {
                             rb.gravityScale = 0;
                             if (x > .2f || x < -.2f)
+                            {
                                 rb.velocity = new Vector2(rb.velocity.x, 0);
+                            }
 
                             float speedModifier = y > 0 ? .5f : 1;
-
                             rb.velocity = new Vector2(rb.velocity.x, y * (playerData.MaxMoveSpeed * speedModifier));
                         }
                         else
@@ -215,7 +227,9 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
                         }
 
                         if (!coll.onWall || coll.onGround)
+                        {
                             wallSlide = false;
+                        }
 
                         if (playerInput.GamePlay.Jump.WasPressedThisFrame())
                         {
@@ -334,8 +348,8 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
 
     private void WallSlide()
     {
-        //if (coll.wallSide != side)
-            //anim.Flip(side * -1);
+        if (coll.wallSide != facingDir)
+            Flip();
 
         if (!canMove)
             return;
@@ -346,7 +360,6 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
             pushingWall = true;
         }
         float push = pushingWall ? 0 : rb.velocity.x;
-
         rb.velocity = new Vector2(push, -slideSpeed);
     }
 
@@ -360,6 +373,14 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
 
         if (!wallJumped)
         {
+            if (!isOnGround && !wallGrab && !wallSlide)
+            {
+                if(coll.ChenckAround())
+                {
+                    //‰∏ÄÁÇπÁÇπÂú∞ÊñπËπ≠Âà∞Â¢ôÔºå‰ΩÜÊòØÂèà‰∏çÂΩ¢ÊàêÊäìÂ¢ôÊªëÂ¢ôÁöÑÊó∂ÂÄô‰∏çÂìçÂ∫îËæìÂÖ•ÂÄºÔºåÈò≤Ê≠¢ÂáåÁ©∫Âç°Â¢ô‰∏ä
+                    return;
+                }
+            }
             rb.velocity = new Vector2(dir.x * playerData.MaxMoveSpeed, rb.velocity.y);
         }
         else
@@ -372,7 +393,6 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
     {
         //slideParticle.transform.parent.localScale = new Vector3(ParticleSide(), 1, 1);
         //ParticleSystem particle = wall ? wallJumpParticle : jumpParticle;
-
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.velocity += dir * playerData.JumpForce;
 

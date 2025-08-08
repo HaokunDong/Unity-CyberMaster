@@ -5,7 +5,6 @@ using Everlasting.Base;
 using MonoMod.RuntimeDetour;
 using Sirenix.Utilities;
 using UnityEditor;
-using UnityEditor.VersionControl;
 using UnityEngine;
 
 namespace GameEditor.MonoHook
