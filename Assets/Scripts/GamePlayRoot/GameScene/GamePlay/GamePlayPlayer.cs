@@ -27,7 +27,7 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
     public SkillDriver skillDriverImp => skillDriver;
 
     [HideInInspector]
-    public InputMovement movement;
+    public NormalInputMovement normalMovement;
 
     public bool isOnGround => IsGrounded();
 
@@ -50,8 +50,8 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
             () => { FacePlayer(); }
         );
         GetComponent<BetterJumping>().SetPlayerInput(playerInput);
-        movement = GetComponent<InputMovement>();
-        movement.Init(playerData, this, playerInput);
+        normalMovement = GetComponent<NormalInputMovement>();
+        normalMovement.Init(playerData, this, playerInput);
     }
 
     private void Start()
@@ -92,7 +92,7 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
 
     public bool IsGrounded()
     {
-        return movement.IsGrounded();
+        return normalMovement.IsGrounded();
     }
 
     private void Update()
@@ -134,7 +134,7 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
                     }
                     else
                     {
-                        movement.OnMoveInput(moveVelocitySmoothDirectionInput.CurrentValue, moveInput);
+                        normalMovement.OnMoveInput(moveVelocitySmoothDirectionInput.CurrentValue, moveInput);
                     }
                 }
             }

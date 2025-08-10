@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4818484040377043870}
   - component: {fileID: 8241642720777344390}
   - component: {fileID: 6595756427103509108}
+  - component: {fileID: 307788844630404156}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -132,7 +133,7 @@ MonoBehaviour:
   - {x: 0.2206626, y: -0.9899998, z: 0}
   m_ShapePathHash: 136114589
   m_Mesh: {fileID: 0}
-  m_InstanceId: 40754
+  m_InstanceId: 48520
   m_LocalBounds:
     m_Center: {x: 0.0049883127, y: -0.031554222, z: 0}
     m_Extent: {x: 0.21567428, y: 0.95844555, z: 0}
@@ -177,7 +178,8 @@ MonoBehaviour:
   sr: {fileID: 0}
   maxInteractDistance: 5
   moveInput: {x: 0, y: 0}
-  movement: {fileID: 0}
+  normalMovement: {fileID: 0}
+  stairMovement: {fileID: 0}
 --- !u!114 &4818484040377043870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +237,28 @@ MonoBehaviour:
   jumpParticle: {fileID: 6345256754285653068}
   wallJumpParticle: {fileID: 5804429775089145076}
   slideParticle: {fileID: 1433278512806025323}
+--- !u!114 &307788844630404156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613682682762765996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 603295221cfb2b14f9896aa8de0bcb84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stairMoveSpeed: 4
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 8
+  onStairs: 0
+  detectionRadius: 0.1
+  detectionStep: 0.02
+  maxDetectionHeight: 2
+  downRayLength: 1
+  downCheckForwardOffset: 0.1
 --- !u!1 &1632458685840708588
 GameObject:
   m_ObjectHideFlags: 0

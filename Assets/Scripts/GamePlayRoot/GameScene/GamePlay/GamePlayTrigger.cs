@@ -85,7 +85,7 @@ public class GamePlayTrigger : GamePlayEntity
         wasInside = isInside;
     }
 
-    private void TriggerEnter()
+    protected virtual void TriggerEnter()
     {
         var root = World.Ins.GetRootByEntityId(GamePlayId);
         root?.SendGamePlayMsg(new OnTriggerEventMsg
@@ -95,7 +95,7 @@ public class GamePlayTrigger : GamePlayEntity
         });
     }
 
-    private void TriggerExit()
+    protected virtual void TriggerExit()
     {
         var root = World.Ins.GetRootByEntityId(GamePlayId);
         root?.SendGamePlayMsg(new OnTriggerEventMsg

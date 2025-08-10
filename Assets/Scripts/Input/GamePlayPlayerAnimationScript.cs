@@ -3,7 +3,7 @@ using UnityEngine;
 public class GamePlayPlayerAnimationScript : MonoBehaviour
 {
     private Animator anim;
-    private InputMovement move;
+    private NormalInputMovement move;
     private Collision coll;
     [HideInInspector]
     public SpriteRenderer sr;
@@ -12,7 +12,7 @@ public class GamePlayPlayerAnimationScript : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         coll = GetComponentInParent<Collision>();
-        move = GetComponentInParent<InputMovement>();
+        move = GetComponentInParent<NormalInputMovement>();
         sr = GetComponent<SpriteRenderer>();
     }
 
