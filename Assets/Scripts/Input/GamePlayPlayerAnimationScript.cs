@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GamePlayPlayerAnimationScript : MonoBehaviour
 {
     private Animator anim;
-    private GamePlayPlayer move;
+    private InputMovement move;
     private Collision coll;
     [HideInInspector]
     public SpriteRenderer sr;
@@ -14,7 +12,7 @@ public class GamePlayPlayerAnimationScript : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         coll = GetComponentInParent<Collision>();
-        move = GetComponentInParent<GamePlayPlayer>();
+        move = GetComponentInParent<InputMovement>();
         sr = GetComponent<SpriteRenderer>();
     }
 

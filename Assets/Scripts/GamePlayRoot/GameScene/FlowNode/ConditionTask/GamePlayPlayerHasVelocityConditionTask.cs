@@ -23,7 +23,7 @@ public class GamePlayPlayerHasVelocityConditionTask : ConditionTask<GamePlayPlay
 
     protected override bool OnCheck()
     {
-        var vec = agent.rb.velocity;
+        var vec = agent.movement.rb.velocity;
         if (checkAxis == XY.X)
         {
             if(useABS)
