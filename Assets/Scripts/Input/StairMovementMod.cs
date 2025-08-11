@@ -1,35 +1,25 @@
-﻿using Cysharp.Threading.Tasks;
-using Sirenix.OdinInspector;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
-public class StairMovementMod : MonoBehaviour
+public class StairMovementMod
 {
-    [ShowInInspector, ReadOnly, NonSerialized]
     public bool onStairs;
 
+    private NormalInputMovement movement;
     private Rigidbody2D rb;
-    private Collider2D col;
     private Vector2 stairInput;
     private List<Vector3> stairEdgePoints;
 
-    void Start()
+    public void Init(NormalInputMovement movement, Rigidbody2D rb)
     {
-        rb = GetComponent<Rigidbody2D>();
-        col = GetComponent<Collider2D>();
+        this.movement = movement;
+        this.rb = rb;
     }
 
     public void SetData(List<Vector3> es)
     {
         stairEdgePoints = es;
         onStairs = (stairEdgePoints != null && stairEdgePoints.Count > 0);
-        if(!onStairs)
-        {
-            col.isTrigger = false;
-            rb.bodyType = RigidbodyType2D.Dynamic;
-        }
     }
 
     public void OnStairMoveInput(Vector2 input, float speed, bool isOnGround)
@@ -38,15 +28,10 @@ public class StairMovementMod : MonoBehaviour
 
         if (!onStairs || Mathf.Abs(stairInput.x) < 0.01f)
         {
-            col.isTrigger = false;
-            rb.bodyType = RigidbodyType2D.Dynamic;
             return;
         }
-        col.isTrigger = true;
         if (isOnGround)
         {
-            col.isTrigger = true;
-
             Vector2 pos = rb.position;
             float targetX = pos.x + stairInput.x * speed * Time.deltaTime;
 
@@ -66,14 +51,7 @@ public class StairMovementMod : MonoBehaviour
 
             if (leftIndex == -1)
             {
-                col.isTrigger = false;
-                rb.bodyType = RigidbodyType2D.Dynamic;
-                async UniTask M()
-                {
-                    await UniTask.DelayFrame(1);
-                    rb.position = new Vector2(targetX, pos.y);
-                }
-                M().Forget();
+                rb.position = new Vector2(targetX, pos.y);
                 return;
             }
 
@@ -95,15 +73,14 @@ public class StairMovementMod : MonoBehaviour
                 rb.position = new Vector2(targetX, targetY);
             }
 
-            if(leftIndex <= 1 || leftIndex >= stairEdgePoints.Count - 2)
+            if(leftIndex <= 0)
             {
-                col.isTrigger = false;
-                rb.bodyType = RigidbodyType2D.Dynamic;
+                movement.SetNormalCapsuleCollider2dSize();
             }
-        }
-        else
-        {
-            col.isTrigger = false;
+            else
+            {
+                movement.SetStairCapsuleCollider2dSize();
+            }
         }
     }
 }

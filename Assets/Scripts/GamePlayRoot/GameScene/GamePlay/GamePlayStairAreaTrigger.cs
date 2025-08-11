@@ -9,6 +9,7 @@ public class StairAreaTrigger : GamePlayTrigger
 {
     public Tilemap groundTilemap;        // 地面Tilemap引用
     public Vector2Int scanPadding = new Vector2Int(1, 1); // 扩展扫描范围
+    [ReadOnly]
     public List<Vector3> stairEdgePoints = new();
 
     protected override void TriggerEnter()

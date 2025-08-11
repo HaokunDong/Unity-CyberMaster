@@ -14,6 +14,7 @@ public class NormalInputMovement : MonoBehaviour
     [Space]
     public float slideSpeed = 5;
     public float wallJumpLerp = 10;
+    public float stairCapsuleCollider2dSize = 0.2f;
 
     [Space]
     [ShowInInspector, ReadOnly, NonSerialized]
@@ -40,18 +41,23 @@ public class NormalInputMovement : MonoBehaviour
     public ParticleSystem slideParticle;
 
     private Collision coll;
+    private CapsuleCollider2D capsuleCollider2d;
     private GamePlayPlayerAnimationScript anim;
     private PlayerTable playerData;
     private GamePlayEntity gpEntity;
     private PlayerInput playerInput;
     private StairMovementMod sMod;
+    private float coliderSizeX;
 
     private void Start()
     {
         coll = GetComponent<Collision>();
+        capsuleCollider2d = GetComponent<CapsuleCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<GamePlayPlayerAnimationScript>();
-        sMod = GetComponent<StairMovementMod>();
+        sMod ??= new();
+        sMod.Init(this, rb);
+        coliderSizeX = capsuleCollider2d.size.x;
     }
 
     public void Init(PlayerTable data, GamePlayEntity e, PlayerInput inp)
@@ -66,7 +72,18 @@ public class NormalInputMovement : MonoBehaviour
         if(sMod != null)
         {
             sMod.SetData(stairEdgePoints);
+            capsuleCollider2d.size = new Vector2(stairEdgePoints == null ? coliderSizeX : stairCapsuleCollider2dSize, capsuleCollider2d.size.y);
         }
+    }
+
+    public void SetNormalCapsuleCollider2dSize()
+    {
+        capsuleCollider2d.size = new Vector2(coliderSizeX, capsuleCollider2d.size.y);
+    }
+
+    public void SetStairCapsuleCollider2dSize()
+    {
+        capsuleCollider2d.size = new Vector2(stairCapsuleCollider2dSize, capsuleCollider2d.size.y);
     }
 
     public bool IsGrounded()
@@ -89,7 +106,7 @@ public class NormalInputMovement : MonoBehaviour
         {
             if(sMod != null && sMod.onStairs)
             {
-                sMod.OnStairMoveInput(new Vector2(sx, y), playerData.MaxMoveSpeed * 0.8f, IsGrounded());
+                sMod.OnStairMoveInput(new Vector2(sx, y), playerData.MaxMoveSpeed, IsGrounded());
             }
             else
             {
@@ -131,21 +148,7 @@ public class NormalInputMovement : MonoBehaviour
         }
         else
         {
-            if(sMod != null && sMod.onStairs && IsGrounded())
-            {
-                if (rb.bodyType != RigidbodyType2D.Static)
-                {
-                    rb.bodyType = RigidbodyType2D.Static;
-                }
-            }
-            else
-            {
-                if(rb.bodyType != RigidbodyType2D.Dynamic)
-                {
-                    rb.bodyType = RigidbodyType2D.Dynamic;
-                }
-                rb.gravityScale = 3;
-            }
+            rb.gravityScale = 3;
         }
 
         if (coll.onWall && !coll.onGround)
