@@ -80,7 +80,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 1613682682762765996}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 80368b48d4e9c2e4cb12f8e2737aa52a, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -132,7 +132,7 @@ MonoBehaviour:
   - {x: 0.2206626, y: -0.9899998, z: 0}
   m_ShapePathHash: 136114589
   m_Mesh: {fileID: 0}
-  m_InstanceId: 37764
+  m_InstanceId: 62516
   m_LocalBounds:
     m_Center: {x: 0.0049883127, y: -0.031554222, z: 0}
     m_Extent: {x: 0.21567428, y: 0.95844555, z: 0}
@@ -231,6 +231,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   slideSpeed: 5
   wallJumpLerp: 10
+  stairCapsuleCollider2dSize: 0.2
   dashParticle: {fileID: 6538895314239152061}
   jumpParticle: {fileID: 6345256754285653068}
   wallJumpParticle: {fileID: 5804429775089145076}

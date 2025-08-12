@@ -22,6 +22,7 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
     private InputButtonState blockInputButtonState;
     private CommandInputState attackCMI;
     private CommandInputState blockCMI;
+    private Camera mainCamera;
 
     public GamePlayEntity skillDriverOwner => this;
     public SkillDriver skillDriverImp => skillDriver;
@@ -41,10 +42,7 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
             typeof(GamePlayPlayer),
             gameObject.GetComponentInChildren<Animator>(),
             gameObject.GetComponentInChildren<Rigidbody2D>(),
-            (HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue) =>
-            {
-                LogUtils.Warning($"攻击命中类型: {hitRestype} 攻击者GPId: {attackerGPId} 受击者GPId: {beHitterGPId} 伤害基准值: {damageBaseValue}");
-            },
+            OnHitBoxTrigger,
             () => Time.fixedDeltaTime,
             () => facingDir,
             () => { FacePlayer(); }
@@ -67,6 +65,8 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
             blockCMI = new CommandInputState { CMD = InputCommand.Block, InputState = InputButtonFlags.JustPressed };
             inputSkillDict[blockCMI] = playerData.BlockSkillPath;
         }
+
+        mainCamera = Camera.main;
     }
 
     private void OnEnable()
@@ -141,13 +141,49 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
         }
     }
 
-    public override void OnHitBoxTrigger(HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue)
+    public override void OnHitBoxTrigger(HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue, Vector2 hitPoint)
     {
-        base.OnHitBoxTrigger(hitRestype, attackerGPId, beHitterGPId, damageBaseValue);
+        GamePlayEnemy enemy = null;
+        if (attackerGPId > 0)
+        {
+            enemy = World.Ins.GetRootByEntityId(attackerGPId).GetAGamePlayEntity<GamePlayEnemy>(attackerGPId);
+        }
+        else
+        {
+            enemy = World.Ins.GetRootByEntityId(beHitterGPId).GetAGamePlayEntity<GamePlayEnemy>(beHitterGPId);
+        }
 
-        GamePlayEnemy enemy = World.Ins.GetRootByEntityId(attackerGPId).GetAGamePlayEntity<GamePlayEnemy>(attackerGPId);
+        switch(hitRestype)
+        {
+            case HitResType.EnemyHitPlayerBody:
+                if(normalMovement.isDashing)
+                {
+                    //完美闪避
+                    RippleController.Ins.AddRipple(hitPoint, mainCamera);
+                    var curve = AnimationCurve.Constant(0, 0, 1);
+                    BulletTimeTool.PlayBulletTime(3, 0.2f, curve, new Vector2(1f, 0.3f));
+                }
+                else if (skillDriver.IsPlayingABlockSkill())
+                {
+                    //普通格挡
+                }
+                else
+                {
+                    //受伤
+                }
+                break;
+            case HitResType.EnemyHitPlayerBlock:
+                break;
+            case HitResType.PlayerEnemyBladeFight:
+                BladeFightEffectController.Ins.StartBladeFightEffect(hitPoint, mainCamera, 0.3f, 0.4f);
+                break;
+            case HitResType.PlayerHitEnemyBody:
+                break;
+            case HitResType.PlayerHitEnemyBlock:
+                break;
+        }
 
-        if(!isFacing(enemy))
+        if(enemy != null && !isFacing(enemy))
         {
             Flip();
         }

@@ -3,7 +3,6 @@ using Cysharp.Threading.Tasks;
 using Everlasting.Config;
 using GameBase.Log;
 using NodeCanvas.Framework;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class GamePlayEnemy : GamePlayAIEntity, ISkillDriverUnit
@@ -63,10 +62,7 @@ public class GamePlayEnemy : GamePlayAIEntity, ISkillDriverUnit
             typeof(GamePlayEnemy),
             animator,
             rb,
-            (HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue) => 
-                {
-                    World.Ins.Player.OnHitBoxTrigger(hitRestype, attackerGPId, beHitterGPId, damageBaseValue);
-                },
+            OnHitBoxTrigger,
             () => Time.fixedDeltaTime,
             () => facingDir,
             () => { FacePlayer(); }
@@ -76,6 +72,10 @@ public class GamePlayEnemy : GamePlayAIEntity, ISkillDriverUnit
         {
             GroundFit().Forget();
         }
+    }
+
+    public override void OnHitBoxTrigger(HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue, Vector2 hitPoint)
+    {
     }
 
     public bool IsGrounded()

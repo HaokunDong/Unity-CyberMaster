@@ -60,6 +60,18 @@ public class SkillDriver
         }
     }
 
+    public bool IsPlayingABlockSkill()
+    {
+        if (IsPlaying)
+        {
+            if(skillConfig != null && skillConfig.SkillBlockBoxData != null && skillConfig.SkillBlockBoxData.skillClipDict.Count > 0)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private HitResType hitResTp = HitResType.None;
     public HitResType HitResTp
     {
@@ -85,12 +97,12 @@ public class SkillDriver
 
     public event Action OnSkillFinished;
     private event Func<int> OnGetFaceDir;
-    public event Action<HitResType, uint, uint, float> OnHitBoxTriggered;
+    public event Action<HitResType, uint, uint, float, Vector2> OnHitBoxTriggered;
     private event Action OnFacePlayer;
 
     private List<ISkillTrack> tracks;
 
-    public SkillDriver(GamePlayEntity entity, Type type, Animator animator, Rigidbody2D rb, Action<HitResType, uint, uint, float> OnHitBoxTriggered, Func<float> getDeltaTime, Func<int> getDir, Action facePlayer)
+    public SkillDriver(GamePlayEntity entity, Type type, Animator animator, Rigidbody2D rb, Action<HitResType, uint, uint, float, Vector2> OnHitBoxTriggered, Func<float> getDeltaTime, Func<int> getDir, Action facePlayer)
     {
         this.owner = entity;
         this.SkillOwnerGPId = entity.GamePlayId;
@@ -296,9 +308,9 @@ public class SkillDriver
         animator.speed = 1f;
     }
 
-    public void OnHit(HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue)
+    public void OnHit(HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue, Vector2 hitPoint)
     {
-        OnHitBoxTriggered?.Invoke(hitRestype, attackerGPId, beHitterGPId, damageBaseValue);
+        OnHitBoxTriggered?.Invoke(hitRestype, attackerGPId, beHitterGPId, damageBaseValue, hitPoint);
         HitResTp = hitRestype;
     }
 }

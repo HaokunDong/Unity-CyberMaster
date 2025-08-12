@@ -110,7 +110,7 @@ public abstract class GamePlayEntity : MonoBehaviour, ICustomHierarchyComment
         
     }
 
-    public virtual void OnHitBoxTrigger(HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue)
+    public virtual void OnHitBoxTrigger(HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue, Vector2 hitPoint)
     {
 
     }

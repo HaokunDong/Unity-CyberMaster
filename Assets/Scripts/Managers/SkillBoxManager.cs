@@ -67,6 +67,7 @@ public class SkillBoxManager
     private static Dictionary<uint, bool> charBeHit = null;
     private static Dictionary<uint, bool> charBeHitBlocked = null;
     private static Dictionary<uint, bool> charBladeFighted = null;
+    private static Dictionary<uint, GamePlayEnemy> playerHittedEnemies = null;
 
     public void Init()
     {
@@ -79,6 +80,7 @@ public class SkillBoxManager
         charBeHit ??= new();
         charBeHitBlocked ??= new();
         charBladeFighted ??= new();
+        playerHittedEnemies ??= new();
         hitCalUnits = new HitCalUnit[10];
         for (int i = 0; i < hitCalUnits.Length; i++)
         {
@@ -108,6 +110,7 @@ public class SkillBoxManager
             charBeHit.Clear();
             charBeHitBlocked.Clear();
             charBladeFighted.Clear();
+            playerHittedEnemies.Clear();
             await UniTask.Yield(PlayerLoopTiming.LastPostLateUpdate);
         }
     }
@@ -172,14 +175,15 @@ public class SkillBoxManager
                         var (ec, es, er) = TransformBox(origin, faceDir, eBox);
                         if (BoxOverlap(pc, ps, pr, ec, es, er))
                         {
-                            sd.OnHit(HitResType.PlayerEnemyBladeFight, kv.Key, 0, 1);
+                            var hitPoint = (pc + ec) / 2f;
+                            sd.OnHit(HitResType.PlayerEnemyBladeFight, kv.Key, 0, 1, hitPoint);
                             sd.skillConfig.SkillAttackTimeWindowData.Hit(sd.CurrentFrame);
                             kv.Value.hasFinish = true;
 
                             charBladeFighted[kv.Key] = true;
                             charBladeFighted[0] = true;
 
-                            playerHitCalUnit.skillDriver.OnHit(HitResType.PlayerEnemyBladeFight, 0, kv.Key, 1);
+                            playerHitCalUnit.skillDriver.OnHit(HitResType.PlayerEnemyBladeFight, 0, kv.Key, 1, hitPoint);
                             finishedPlayerHitEnemy.Add(kv.Key);
                             finish = true;
                             break;
@@ -223,7 +227,8 @@ public class SkillBoxManager
                         var (ec, es, er) = TransformBox(origin, faceDir, eBox);
                         if (BoxOverlap(pc, ps, pr, ec, es, er))
                         {
-                            playerHitCalUnit.skillDriver.OnHit(HitResType.PlayerHitEnemyBlock, 0, kv.Key, playerClip.HitDamageValue);
+                            playerHitCalUnit.skillDriver.OnHit(HitResType.PlayerHitEnemyBlock, 0, kv.Key, playerClip.HitDamageValue, ec);
+                            sd.OnHit(HitResType.PlayerHitEnemyBlock, 0, kv.Key, playerClip.HitDamageValue, ec);
                             finishedPlayerHitEnemy.Add(kv.Key);
                             charBeHitBlocked[kv.Key] = true;
                             finish = true;
@@ -260,6 +265,7 @@ public class SkillBoxManager
                     {
                         playerHitEnemyBodyId.Add(eid);
                         finishedPlayerHitEnemy.Add(eid);
+                        playerHittedEnemies.Add(eid, enemy);
                     }
                 }
             }
@@ -267,7 +273,8 @@ public class SkillBoxManager
 
         foreach (var id in playerHitEnemyBodyId)
         {
-            playerHitCalUnit.skillDriver.OnHit(HitResType.PlayerHitEnemyBody, 0, id, playerClip.HitDamageValue);
+            playerHitCalUnit.skillDriver.OnHit(HitResType.PlayerHitEnemyBody, 0, id, playerClip.HitDamageValue, playerHittedEnemies[id].transform.position);
+            playerHittedEnemies[id].OnHitBoxTrigger(HitResType.PlayerHitEnemyBody, 0, id, playerClip.HitDamageValue, playerHittedEnemies[id].transform.position);
             charBeHit[id] = true;
         }
     }
@@ -301,7 +308,8 @@ public class SkillBoxManager
                         var (ec, es, er) = TransformBox(origin, faceDir, eBox);
                         if (BoxOverlap(pc, ps, pr, ec, es, er))
                         {
-                            sd.OnHit(HitResType.EnemyHitPlayerBlock, kv.Key, 0, clip.HitDamageValue);
+                            sd.OnHit(HitResType.EnemyHitPlayerBlock, kv.Key, 0, clip.HitDamageValue, pc);
+                            playerHitCalUnit.skillDriver.OnHit(HitResType.EnemyHitPlayerBlock, kv.Key, 0, clip.HitDamageValue, pc);
                             sd.skillConfig.SkillAttackTimeWindowData.Hit(sd.CurrentFrame);
                             charBeHitBlocked[0] = true;
                             kv.Value.hasFinish = true;
@@ -350,7 +358,8 @@ public class SkillBoxManager
 
             if (hits.Count > 0)
             {
-                sd.OnHit(HitResType.EnemyHitPlayerBody, kv.Key, 0, clip.HitDamageValue);
+                sd.OnHit(HitResType.EnemyHitPlayerBody, kv.Key, 0, clip.HitDamageValue, World.Ins.Player.transform.position);
+                World.Ins.Player.OnHitBoxTrigger(HitResType.EnemyHitPlayerBody, kv.Key, 0, clip.HitDamageValue, World.Ins.Player.transform.position);
                 sd.skillConfig.SkillAttackTimeWindowData.Hit(sd.CurrentFrame);
                 charBeHit[0] = true;
                 kv.Value.hasFinish = true;

@@ -215,8 +215,6 @@ public class NormalInputMovement : MonoBehaviour
 
     private void Dash(float x, float y)
     {
-        RippleController.Ins.AddRipple(transform.position, Camera.main);
-
         hasDashed = true;
         anim.SetTrigger("dash");
         rb.velocity = Vector2.zero;

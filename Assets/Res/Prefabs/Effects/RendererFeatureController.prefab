@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5375060992563858720}
   - component: {fileID: 654455741325748704}
+  - component: {fileID: 7996875562721754151}
   m_Layer: 0
-  m_Name: RippleController
+  m_Name: RendererFeatureController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,3 +49,24 @@ MonoBehaviour:
   maxRadius: 0.2
   rippleSpeed: 0.5
   duration: 4
+--- !u!114 &7996875562721754151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081615729031314936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 391e366272122b3478db344c09484d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bladeFightMaterial: {fileID: 2100000, guid: f47545dace01b724b9f3667647cc0b95, type: 2}
+  centerCount: 5
+  centers:
+  - {x: 0.1, y: 0.1}
+  - {x: 0.2, y: 0.2}
+  - {x: 0.3, y: 0.3}
+  - {x: 0.4, y: 0.4}
+  - {x: 0.5, y: 0.5}
+  radius: 0
