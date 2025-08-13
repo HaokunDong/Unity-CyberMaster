@@ -1,4 +1,4 @@
-using System;
+锘縰sing System;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Text;
@@ -156,7 +156,7 @@ public class SkillDriver
     public async UniTask PlayAsync()
     {
         skillTailCutFrame = -1;
-        skillCTS?.Cancel(); // 先取消之前的
+        skillCTS?.Cancel(); // 鍏堝彇娑堜箣鍓嶇殑
         skillCTS = new CancellationTokenSource();
 
         try
@@ -165,7 +165,7 @@ public class SkillDriver
         }
         catch (OperationCanceledException)
         {
-            LogUtils.Trace("技能被取消", LogChannel.Battle, Color.cyan);
+            LogUtils.Trace("鎶�鑳借鍙栨秷", LogChannel.Battle, Color.cyan);
         }
     }
 
@@ -180,10 +180,10 @@ public class SkillDriver
 
         if(waitMinTime)
         {
-            await UniTask.WaitUntil(() => Time.realtimeSinceStartup - startTime > 0.1f);//todo 坑:技能至少执行0.1秒 否则动画驱动那里可能有问题
+            await UniTask.WaitUntil(() => Time.realtimeSinceStartup - startTime > 0.1f);
         }
 
-        skillCTS?.Cancel(); // 正确取消异步任务
+        skillCTS?.Cancel(); // 姝ｇ‘鍙栨秷寮傛浠诲姟
         skillCTS?.Dispose();
         skillCTS = null;
 

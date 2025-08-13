@@ -91,6 +91,25 @@ public class NormalInputMovement : MonoBehaviour
         return coll ? coll.onGround : true;
     }
 
+    public bool IsBeginDash(Vector2 mi)
+    {
+        float xRaw = mi.x;
+        float yRaw = mi.y;
+        if (playerInput.GamePlay.Dash.WasPressedThisFrame() && !hasDashed)
+        {
+            if (xRaw == 0 && yRaw == 0)
+            {
+                Dash(gpEntity.facingDir, yRaw);
+            }
+            else
+            {
+                Dash(xRaw, yRaw);
+            }
+            return true;
+        }
+        return false;
+    }
+
     public void OnMoveInput(float sx, Vector2 mi)
     {
         float x = sx;
@@ -173,18 +192,6 @@ public class NormalInputMovement : MonoBehaviour
                 Jump(Vector2.up, false);
             if (coll.onWall && !coll.onGround)
                 WallJump();
-        }
-
-        if (playerInput.GamePlay.Dash.WasPressedThisFrame() && !hasDashed)
-        {
-            if (xRaw == 0 && yRaw == 0)
-            {
-                Dash(gpEntity.facingDir, yRaw);
-            }
-            else
-            {
-                Dash(xRaw, yRaw);
-            }
         }
 
         if (coll.onGround && !groundTouch)

@@ -108,33 +108,41 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
                 moveVelocitySmoothDirectionInput.Update(Time.deltaTime);
                 attackInputButtonState.Update(Time.deltaTime);
                 blockInputButtonState.Update(Time.deltaTime);
-                if (!skillDriver.IsPlaying)
-                {
-                    CommandInputState matchCMI = null;
-                    if (attackInputButtonState.IsMatchAny(attackCMI))
-                    {
-                        matchCMI = attackCMI;
-                    }
-                    else if (blockInputButtonState.IsMatchAny(blockCMI))
-                    {
-                        matchCMI = blockCMI;
-                    }
-                    if (matchCMI != null)
-                    {
-                        if (inputSkillDict.TryGetValue(matchCMI, out var ps))
-                        {
-                            //在触发技能前就清空输入状态 防止连续触发多次技能
-                            InputButtonState.GetButtonState(matchCMI.CMD)?.ClearFlagThisFrame();
 
-                            if (!ps.IsNullOrWhitespace())
+                if(normalMovement.IsBeginDash(moveInput))//Dask能打断取消任意技能
+                {
+                    skillDriver.CancelSkill(false, true).Forget();
+                }
+                else
+                {
+                    if (!skillDriver.IsPlaying)
+                    {
+                        CommandInputState matchCMI = null;
+                        if (attackInputButtonState.IsMatchAny(attackCMI))
+                        {
+                            matchCMI = attackCMI;
+                        }
+                        else if (blockInputButtonState.IsMatchAny(blockCMI))
+                        {
+                            matchCMI = blockCMI;
+                        }
+                        if (matchCMI != null)
+                        {
+                            if (inputSkillDict.TryGetValue(matchCMI, out var ps))
                             {
-                                skillDriver.ChangeSkillAsync(ps).Forget();
+                                //在触发技能前就清空输入状态 防止连续触发多次技能
+                                InputButtonState.GetButtonState(matchCMI.CMD)?.ClearFlagThisFrame();
+
+                                if (!ps.IsNullOrWhitespace())
+                                {
+                                    skillDriver.ChangeSkillAsync(ps).Forget();
+                                }
                             }
                         }
-                    }
-                    else
-                    {
-                        normalMovement.OnMoveInput(moveVelocitySmoothDirectionInput.CurrentValue, moveInput);
+                        else
+                        {
+                            normalMovement.OnMoveInput(moveVelocitySmoothDirectionInput.CurrentValue, moveInput);
+                        }
                     }
                 }
             }
@@ -173,6 +181,7 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
                 }
                 break;
             case HitResType.EnemyHitPlayerBlock:
+                //完美格挡
                 break;
             case HitResType.PlayerEnemyBladeFight:
                 BladeFightEffectController.Ins.StartBladeFightEffect(hitPoint, mainCamera, 0.3f, 0.4f);
