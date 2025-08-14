@@ -48,6 +48,7 @@ public class NormalInputMovement : MonoBehaviour
     private PlayerInput playerInput;
     private StairMovementMod sMod;
     private float coliderSizeX;
+    private Cooldown dashCooldown;
 
     private void Start()
     {
@@ -58,6 +59,11 @@ public class NormalInputMovement : MonoBehaviour
         sMod ??= new();
         sMod.Init(this, rb);
         coliderSizeX = capsuleCollider2d.size.x;
+        if(dashCooldown == null)
+        {
+            var gp = ManagerCenter.Ins.CooldownMgr.GetOrCreateGroup(playerData.Id, UpdateMode.FixedUpdate);
+            dashCooldown = gp.Set("PlayerDash", 0.5f);
+        }
     }
 
     public void Init(PlayerTable data, GamePlayEntity e, PlayerInput inp)
@@ -95,7 +101,7 @@ public class NormalInputMovement : MonoBehaviour
     {
         float xRaw = mi.x;
         float yRaw = mi.y;
-        if (playerInput.GamePlay.Dash.WasPressedThisFrame() && !hasDashed)
+        if (playerInput.GamePlay.Dash.WasPressedThisFrame() && !hasDashed && dashCooldown.IsReady)
         {
             if (xRaw == 0 && yRaw == 0)
             {
@@ -222,6 +228,7 @@ public class NormalInputMovement : MonoBehaviour
 
     private void Dash(float x, float y)
     {
+        dashCooldown.Reset();
         hasDashed = true;
         anim.SetTrigger("dash");
         rb.velocity = Vector2.zero;
