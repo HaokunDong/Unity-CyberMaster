@@ -111,7 +111,7 @@ public class SkillPlayerInputClip : SkillClipBase
                     var cs = kvp.Key;
                     if(CheckAllMatch(ref cs, kvp.Value, true))
                     {
-                        config.skillDriver.ChangeSkillAsync(kvp.Value).Forget();
+                        config.skillDriver.ChangeSkillAsync(kvp.Value, true).Forget();
                         return;
                     }
                 }

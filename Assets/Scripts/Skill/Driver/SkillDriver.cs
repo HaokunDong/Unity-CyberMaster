@@ -153,7 +153,7 @@ public class SkillDriver
         }
     }
 
-    public async UniTask PlayAsync()
+    public async UniTask PlayAsync(bool resetVelocity)
     {
         skillTailCutFrame = -1;
         skillCTS?.Cancel(); // 先取消之前的
@@ -161,7 +161,7 @@ public class SkillDriver
 
         try
         {
-            await PlayFromFrame(0, skillCTS.Token);
+            await PlayFromFrame(0, resetVelocity, skillCTS.Token);
         }
         catch (OperationCanceledException)
         {
@@ -198,7 +198,7 @@ public class SkillDriver
         IsPlaying = false;
     }
 
-    public async UniTask ChangeSkillAsync(string newSkillPath)
+    public async UniTask ChangeSkillAsync(string newSkillPath, bool resetVelocity)
     {
         SkillConfig newSkill = null;
         if(!newSkillPath.StartsWith("Skill/"))
@@ -214,13 +214,17 @@ public class SkillDriver
         if(newSkill != null)
         {
             SetSkill(newSkill);
-            await PlayAsync();
+            await PlayAsync(resetVelocity);
         }
     }
 
-    public async UniTask PlayFromFrame(int startFrame, CancellationToken token)
+    public async UniTask PlayFromFrame(int startFrame, bool resetVelocity, CancellationToken token)
     {
         if (skillConfig == null) return;
+        if(resetVelocity && rb != null)
+        {
+            rb.velocity = Vector2.zero;
+        }
 
         IsPlaying = true;
         isPaused = false;
@@ -272,7 +276,7 @@ public class SkillDriver
                         var nextSkill = await ResourceManager.LoadAssetAsync<SkillConfig>(ZString.Concat("Skill/", bufferedSkillName), ResType.ScriptObject);
                         bufferedSkillName = null;
                         SetSkill(nextSkill);
-                        await PlayAsync();
+                        await PlayAsync(resetVelocity);
                     }
                     else
                     {

@@ -30,7 +30,7 @@ public class PlaySkillAction : ActionTask<ISkillDriverUnit>
                 }
                 agent.skillDriverImp.OnSkillFinished += OnSkillFinished;
                 agent.skillDriverImp.SetSkill(skill);
-                agent.skillDriverImp.PlayAsync().Forget();
+                agent.skillDriverImp.PlayAsync(true).Forget();
                 return;
             }
         }

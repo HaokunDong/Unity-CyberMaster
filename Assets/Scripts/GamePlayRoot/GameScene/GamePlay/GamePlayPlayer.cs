@@ -152,7 +152,7 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
 
                                 if (!ps.IsNullOrWhitespace())
                                 {
-                                    skillDriver.ChangeSkillAsync(ps).Forget();
+                                    skillDriver.ChangeSkillAsync(ps, true).Forget();
                                 }
                             }
                         }
