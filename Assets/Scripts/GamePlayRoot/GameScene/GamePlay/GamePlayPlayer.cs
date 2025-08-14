@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using Everlasting.Config;
 using GameBase.Log;
 using Sirenix.Utilities;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -95,8 +96,24 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
         return normalMovement.IsGrounded();
     }
 
+    public float cr;
+    public float vr;
+    public Color fc;
+
     private void Update()
     {
+        if(!skillDriver.IsPlaying && IsGrounded() && Mathf.Abs(normalMovement.rb.velocity.x) <= 0.02f)
+        {
+            FluidController.Ins.QueueDrawAtPoint(
+                transform.position + (facingRight ? new Vector3(-0.4f, -0.3f, 0) : new Vector3(0.4f, -0.3f, 0)),
+                fc,
+                facingRight ? new Vector2(-0.42261826f, -0.90630779f) : new Vector2(0.42261826f, -0.90630779f),
+                cr,
+                vr,
+                FluidController.VelocityType.Direct
+            );
+        }
+
         if (playerData != null && ManagerCenter.Ins.PlayerInputMgr.CanGamePlayInput)
         {
             if (World.Ins.InPlayGamePlayRoot != null && World.Ins.InPlayGamePlayRoot.InteractTarget != null && playerInput.GamePlay.Interact.WasPressedThisFrame())

@@ -132,7 +132,7 @@ MonoBehaviour:
   - {x: 0.2206626, y: -0.9899998, z: 0}
   m_ShapePathHash: 136114589
   m_Mesh: {fileID: 0}
-  m_InstanceId: 62516
+  m_InstanceId: 58352
   m_LocalBounds:
     m_Center: {x: 0.0049883127, y: -0.031554222, z: 0}
     m_Extent: {x: 0.21567428, y: 0.95844555, z: 0}
@@ -178,6 +178,9 @@ MonoBehaviour:
   maxInteractDistance: 5
   moveInput: {x: 0, y: 0}
   normalMovement: {fileID: 0}
+  cr: 0.025
+  vr: 0.07
+  fc: {r: 0, g: 0.9764706, b: 1, a: 1}
 --- !u!114 &4818484040377043870
 MonoBehaviour:
   m_ObjectHideFlags: 0
