@@ -26,6 +26,8 @@ public class SkillConfig : SerializedScriptableObject
     public SkillJumpFrameTrack SkillJumpFrameData = new SkillJumpFrameTrack();
     [NonSerialized, OdinSerialize, ReadOnly]
     public SkillPlayerInputTrack SkillPlayerInputData = new SkillPlayerInputTrack();
+    [NonSerialized, OdinSerialize, ReadOnly]
+    public SkillAttributeTrack SkillAttributeData = new SkillAttributeTrack();
 
     [LabelText("技能结束连招"), GUIColor(0.3f, 0.8f, 0.8f, 1f), ShowIf("@AfterSkillCommandInputStateDict != null")] public Dictionary<CommandInputState[], string> AfterSkillCommandInputStateDict;
 #if UNITY_EDITOR

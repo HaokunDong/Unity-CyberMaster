@@ -82,9 +82,13 @@ public partial class SkillEditorInspector : Editor
         {
             DrawTrackItem(playerInputTrackItem);
         }
+        else if (currentTrackItem is AttributeTrackItem dashTrackItem)
+        {
+            DrawTrackItem(dashTrackItem);
+        }
 
-        //É¾³ý
-        Button deleteButton = new Button(DeleteButtonClick);
+            //É¾³ý
+            Button deleteButton = new Button(DeleteButtonClick);
         deleteButton.text = "É¾³ý";
         deleteButton.style.backgroundColor = new Color(1, 0, 0, 0.5f);
         root.Add(deleteButton);

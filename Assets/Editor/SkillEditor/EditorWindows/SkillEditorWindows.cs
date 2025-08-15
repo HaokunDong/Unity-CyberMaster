@@ -574,6 +574,7 @@ public class SkillEditorWindows : EditorWindow
         InitTrack<BlockBoxTrack, SkillBlockBoxClip>(skillConfig.SkillBlockBoxData.skillClipDict, "格挡");
         InitTrack<JumpFrameTrack, SkillJumpFrameClip>(skillConfig.SkillJumpFrameData.skillClipDict, "跳到指定帧");
         InitTrack<PlayerInputTrack, SkillPlayerInputClip>(skillConfig.SkillPlayerInputData.skillClipDict, "玩家输入");
+        InitTrack<AttributeTrack, SkillAttributeClip>(SkillConfig.SkillAttributeData.skillClipDict, "属性");
     }
 
     private void OnEnable()
