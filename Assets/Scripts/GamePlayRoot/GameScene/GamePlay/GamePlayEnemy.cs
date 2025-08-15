@@ -82,10 +82,10 @@ public class GamePlayEnemy : GamePlayAIEntity, ISkillDriverUnit
             player = World.Ins.GetRootByEntityId(beHitterGPId).GetAGamePlayEntity<GamePlayPlayer>(beHitterGPId);
         }
 
-        if (PlayerTable.GetTableData(beHitterGPId).Invincible)
+/*        if ()
         {
             Debug.Log("Invicible");
-        }
+        }*/
         //Debug.Log("Hit!!!!!!!!!");
     }
 
