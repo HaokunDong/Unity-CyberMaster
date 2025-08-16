@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87e7ff321ae55a84893e116b6aa0a84a, type: 3}
-  m_Name: TestAttribute
+  m_Name: DashSkill
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -204,9 +204,37 @@ MonoBehaviour:
     - Name: DurationFrame
       Entry: 3
       Data: 5
-    - Name: IsInvincible
-      Entry: 5
-      Data: true
+    - Name: AddSkillAttributes
+      Entry: 7
+      Data: 18|System.Collections.Generic.List`1[[AddSkillAttribute, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 19|AddSkillAttribute, Assembly-CSharp
+    - Name: GPAType
+      Entry: 3
+      Data: 1
+    - Name: GPAAType
+      Entry: 3
+      Data: 1
+    - Name: value
+      Entry: 4
+      Data: 1
+    - Name: duration
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -232,7 +260,7 @@ MonoBehaviour:
       Entry: 6
       Data: 
   SkillName: 
-  FrameCount: 7
+  FrameCount: 5
   FrameRate: 24
   isAnAirSkill: 0
   cancelCommandInputState:

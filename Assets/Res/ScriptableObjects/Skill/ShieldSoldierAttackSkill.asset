@@ -492,6 +492,32 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: SkillAttributeData
+      Entry: 7
+      Data: 28|SkillAttributeTrack, Assembly-CSharp
+    - Name: skillClipDict
+      Entry: 7
+      Data: 29|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillAttributeClip,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 30|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: AfterSkillCommandInputStateDict
       Entry: 6
       Data: 
@@ -504,6 +530,7 @@ MonoBehaviour:
   SkillName: 
   FrameCount: 26
   FrameRate: 24
+  isAnAirSkill: 0
   cancelCommandInputState:
     CMD: 0
     InputState: 0

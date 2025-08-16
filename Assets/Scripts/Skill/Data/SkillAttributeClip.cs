@@ -5,17 +5,22 @@ using UnityEngine;
 
 public class SkillAttributeClip : SkillClipBase
 {
-    public bool IsInvincible = true;
+    public List<AddSkillAttribute> AddSkillAttributes;
 
     [NonSerialized]
     public SkillAttributeTrack parentTrack;
 
-    public override void OnClipFirstFrame(int frame)
+    public override void OnClipUpdate(int frame)
     {
-        base.OnClipFirstFrame(frame);
-        if (IsInvincible)
+        base.OnClipUpdate(frame);
+        if(AddSkillAttributes != null)
         {
-            //parentTrack.skillConfig
+            var len = AddSkillAttributes.Count;
+            for(int i = 0; i < len; i++)
+            {
+                var asa = AddSkillAttributes[i];
+                parentTrack.skillConfig.skillDriver.AddAttribute(asa);
+            }
         }
     }
 }
@@ -30,7 +35,6 @@ public class SkillAttributeTrack : BaseSkillTrack<SkillAttributeClip>
         foreach (var clip in skillClipDict.Values)
         {
             clip.parentTrack = this;
-            
         }
     }
 }

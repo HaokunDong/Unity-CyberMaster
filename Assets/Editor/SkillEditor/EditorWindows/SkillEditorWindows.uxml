@@ -35,5 +35,4 @@
             <ui:IMGUIContainer name="SelectLine" style="position: absolute; left: 10px;" />
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:UnsignedLongField label="Unsigned Long Field" value="42" />
 </ui:UXML>

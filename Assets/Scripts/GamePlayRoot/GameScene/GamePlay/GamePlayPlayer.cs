@@ -2,6 +2,7 @@
 using Cysharp.Threading.Tasks;
 using Everlasting.Config;
 using GameBase.Log;
+using Managers;
 using Sirenix.Utilities;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
     private CommandInputState attackCMI;
     private CommandInputState blockCMI;
     private Camera mainCamera;
+    private SkillConfig dashSkillConfig;
 
     public GamePlayEntity skillDriverOwner => this;
     public SkillDriver skillDriverImp => skillDriver;
@@ -51,6 +53,12 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
         GetComponent<BetterJumping>().SetPlayerInput(playerInput);
         normalMovement = GetComponent<NormalInputMovement>();
         normalMovement.Init(playerData, this, playerInput);
+        LoadDaskSkill().Forget();
+    }
+
+    private async UniTask LoadDaskSkill()
+    {
+        dashSkillConfig = await ResourceManager.LoadAssetAsync<SkillConfig>("Skill/PlayerSkill/DashSkill", ResType.ScriptObject);
     }
 
     private void Start()
@@ -102,7 +110,7 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
 
     private void Update()
     {
-        if(!skillDriver.IsPlaying && IsGrounded() && Mathf.Abs(normalMovement.rb.velocity.x) <= 0.02f)
+        if(normalMovement != null && normalMovement.rb != null && !skillDriver.IsPlaying && IsGrounded() && Mathf.Abs(normalMovement.rb.velocity.x) <= 0.02f)
         {
             FluidController.Ins.QueueDrawAtPoint(
                 transform.position + (facingRight ? new Vector3(-0.4f, -0.3f, 0) : new Vector3(0.4f, -0.3f, 0)),
@@ -128,7 +136,12 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
 
                 if(normalMovement.IsBeginDash(moveInput))//Dask能打断取消任意技能
                 {
-                    skillDriver.CancelSkill(false, true).Forget();
+                    async UniTask DashSkill()
+                    {
+                        await UniTask.DelayFrame(3);
+                        skillDriver.ChangeSkillAsync(dashSkillConfig, false).Forget();
+                    }
+                    DashSkill().Forget();
                 }
                 else
                 {
@@ -158,7 +171,10 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
                         }
                         else
                         {
-                            normalMovement.OnMoveInput(moveVelocitySmoothDirectionInput.CurrentValue, moveInput);
+                            if(normalMovement != null && normalMovement.rb != null)
+                            {
+                                normalMovement.OnMoveInput(moveVelocitySmoothDirectionInput.CurrentValue, moveInput);
+                            }
                         }
                     }
                 }
@@ -171,17 +187,17 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
         GamePlayEnemy enemy = null;
         if (attackerGPId > 0)
         {
-            enemy = World.Ins.GetRootByEntityId(attackerGPId).GetAGamePlayEntity<GamePlayEnemy>(attackerGPId);
+            enemy = World.Ins.GetRootByEntityId(attackerGPId)?.GetAGamePlayEntity<GamePlayEnemy>(attackerGPId);
         }
         else
         {
-            enemy = World.Ins.GetRootByEntityId(beHitterGPId).GetAGamePlayEntity<GamePlayEnemy>(beHitterGPId);
+            enemy = World.Ins.GetRootByEntityId(beHitterGPId)?.GetAGamePlayEntity<GamePlayEnemy>(beHitterGPId);
         }
 
         switch(hitRestype)
         {
             case HitResType.EnemyHitPlayerBody:
-                if(normalMovement.isDashing)
+                if(skillDriver.HasActiveAttribute(GamePlayAttributeType.Invincible))
                 {
                     //完美闪避
                     RippleController.Ins.AddRipple(hitPoint, mainCamera);

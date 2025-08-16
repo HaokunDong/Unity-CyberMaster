@@ -23,9 +23,10 @@ public class SkillDriver
     private GamePlayEntity owner;
     private CancellationTokenSource skillCTS;
 
-    public SkillConfig skillConfig { get; private set; } = null;
+    public SkillConfig skillConfig { get; set; } = null;
     public uint SkillOwnerGPId { get; private set; }
     public Type ShillOwnerGPType { get; private set; }
+    public SkillAttributeData attributeData;
 
     private int currentFrame;
     public int CurrentFrame => currentFrame;
@@ -113,6 +114,13 @@ public class SkillDriver
         this.OnGetFaceDir = getDir;
         this.OnFacePlayer = facePlayer;
         this.OnHitBoxTriggered = OnHitBoxTriggered;
+
+        attributeData = new SkillAttributeData(
+            entity as ISkillDriverUnit,
+            this,
+            () => CurrentFrame,
+            getDeltaTime
+        );
     }
 
     public void BufferNextSkill(string skillName, int tailCutFrame)
@@ -193,6 +201,9 @@ public class SkillDriver
             OnSkillFinished?.Invoke();
         }
 
+        // 清除所有属性
+        ClearAllAttributes();
+
         bufferedSkillName = null;
         skillConfig = null;
         IsPlaying = false;
@@ -212,6 +223,19 @@ public class SkillDriver
             cancelTask
         );
         if(newSkill != null)
+        {
+            SetSkill(newSkill);
+            await PlayAsync(resetVelocity);
+        }
+    }
+
+    public async UniTask ChangeSkillAsync(SkillConfig newSkill, bool resetVelocity)
+    {
+        var cancelTask = CancelSkill(false, false);
+        await UniTask.WhenAll(
+            cancelTask
+        );
+        if (newSkill != null)
         {
             SetSkill(newSkill);
             await PlayAsync(resetVelocity);
@@ -262,6 +286,9 @@ public class SkillDriver
                         t.Update(currentFrame);
                     }
 
+                    // 更新属性管理器
+                    attributeData.UpdateAttributes();
+
                     currentFrame++;
                 }
                 
@@ -299,6 +326,55 @@ public class SkillDriver
     public void Resume()
     {
         isPaused = false;
+    }
+
+    /// <summary>
+    /// 添加技能属性
+    /// </summary>
+    /// <param name="type">属性类型</param>
+    /// <param name="value">属性值</param>
+    /// <param name="addType">添加方式</param>
+    /// <param name="duration">持续时间（帧数或秒数，取决于添加方式）</param>
+    public void AddAttribute(AddSkillAttribute aa)
+    {
+        attributeData.AddAttribute(aa);
+    }
+
+    /// <summary>
+    /// 移除指定类型的所有属性
+    /// </summary>
+    /// <param name="type">属性类型</param>
+    public void RemoveAllAttributes(GamePlayAttributeType type)
+    {
+        attributeData.RemoveAllAttributes(type);
+    }
+
+    /// <summary>
+    /// 获取指定类型的属性总值
+    /// </summary>
+    /// <param name="type">属性类型</param>
+    /// <returns>属性总值</returns>
+    public float GetAttributeValue(GamePlayAttributeType type)
+    {
+        return attributeData.GetAttributeValue(type);
+    }
+
+    /// <summary>
+    /// 检查是否有指定类型的激活属性
+    /// </summary>
+    /// <param name="type">属性类型</param>
+    /// <returns>是否有激活的属性</returns>
+    public bool HasActiveAttribute(GamePlayAttributeType type)
+    {
+        return attributeData.HasActiveAttribute(type);
+    }
+
+    /// <summary>
+    /// 清除所有属性
+    /// </summary>
+    public void ClearAllAttributes()
+    {
+        attributeData.ClearAllAttributes();
     }
 
     public void Stop()

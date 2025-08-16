@@ -442,6 +442,10 @@ public class SkillEditorWindows : EditorWindow
 
     private void AutoTrimByAnimationData(SkillConfig config)
     {
+        if(skillConfig.SkillAnimationData == null || skillConfig.SkillAnimationData.skillClipDict == null || skillConfig.SkillAnimationData.skillClipDict.Count <= 0)
+        {
+            return;
+        }
         var maxFrame = 0;
         var tracks = config.GetTracks();
         foreach (var kvp in config.SkillAnimationData.skillClipDict)
