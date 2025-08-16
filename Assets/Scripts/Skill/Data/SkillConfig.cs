@@ -97,6 +97,7 @@ public class SkillConfig : SerializedScriptableObject
         if (!Tracks.Contains(SkillBlockBoxData)) Tracks.Add(SkillBlockBoxData ??= new());
         if (!Tracks.Contains(SkillJumpFrameData) && HasData(SkillJumpFrameData)) Tracks.Add(SkillJumpFrameData);
         if (!Tracks.Contains(SkillPlayerInputData) && HasData(SkillPlayerInputData)) Tracks.Add(SkillPlayerInputData);
+        if (!Tracks.Contains(SkillAttributeData) && HasData(SkillAttributeData)) Tracks.Add(SkillAttributeData);
         return Tracks;
     }
 
