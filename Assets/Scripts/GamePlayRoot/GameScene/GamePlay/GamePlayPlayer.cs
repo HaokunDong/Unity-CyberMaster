@@ -26,6 +26,8 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
     private CommandInputState blockCMI;
     private Camera mainCamera;
     private SkillConfig dashSkillConfig;
+    private Animator animator = null;
+    private int skillLayerIndex = -1;
 
     public GamePlayEntity skillDriverOwner => this;
     public SkillDriver skillDriverImp => skillDriver;
@@ -37,13 +39,18 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
 
     private void Awake()
     {
+        animator ??= gameObject.GetComponentInChildren<Animator>();
+        if(skillLayerIndex == -1)
+        {
+            skillLayerIndex = animator.GetLayerIndex("SkillLayer");
+        }
         playerInput ??= new PlayerInput();
         playerData = PlayerTable.GetTableData(TableId);
         moveVelocitySmoothDirectionInput ??= new SmoothDirectionInput(1f, 3f, 0.1f, 0.05f);
         skillDriver ??= new SkillDriver(
             this,
             typeof(GamePlayPlayer),
-            gameObject.GetComponentInChildren<Animator>(),
+            animator,
             gameObject.GetComponentInChildren<Rigidbody2D>(),
             OnHitBoxTrigger,
             () => Time.fixedDeltaTime,
@@ -211,6 +218,13 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
                 else
                 {
                     //受伤
+                    var actionValue = enemy.skillDriver.GetAttributeValue(GamePlayAttributeType.ActionValue);
+                    var saValue = skillDriver.GetAttributeValue(GamePlayAttributeType.SuperArmor);
+                    if(saValue <= actionValue)
+                    {
+                        skillDriver.CancelSkill(false, true).Forget();
+                        PlaySkillLayerAnim("PlayerBeAttacked").Forget();
+                    }
                 }
                 break;
             case HitResType.EnemyHitPlayerBlock:
@@ -222,6 +236,8 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
             case HitResType.PlayerHitEnemyBody:
                 break;
             case HitResType.PlayerHitEnemyBlock:
+                skillDriver.CancelSkill(false, true).Forget();
+                PlaySkillLayerAnim("PlayerBeStunned").Forget();
                 break;
         }
 
@@ -229,6 +245,14 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
         {
             Flip();
         }
+    }
+
+    private async UniTask PlaySkillLayerAnim(string animName)
+    {
+        playerInput.Disable();
+        await animator.PlayAndWaitAsync(animName, skillLayerIndex);
+        animator.Play("Empty", skillLayerIndex, 0f);
+        playerInput.Enable();
     }
 
 #if UNITY_EDITOR
