@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using DG.Tweening;
 
 /// <summary>
 /// 时间分组
@@ -224,16 +223,6 @@ public static class CustomTimeSystem
         g.ActiveBulletTime?.CTS.Cancel();
         g.ActiveBulletTime = null;
         SetTimeScale(group, 1f);
-    }
-
-    #endregion
-
-    #region DOTween 扩展
-
-    public static T IgnoreTimeScaleTween<T>(this T tween, bool ignore = true) where T : Tween
-    {
-        tween.SetUpdate(ignore);
-        return tween;
     }
 
     #endregion
