@@ -26,6 +26,7 @@ public class GameFacade : MonoBehaviour
     {
         ManagerCenter.Ins.TickersMgr?.Update(Time.deltaTime);
         ManagerCenter.Ins.CooldownMgr?.TickByMode(UpdateMode.Update, Time.deltaTime, Time.unscaledDeltaTime);
+        CustomTimeSystem.Update();
     }
     #region 初始化
     private async UniTask Init()

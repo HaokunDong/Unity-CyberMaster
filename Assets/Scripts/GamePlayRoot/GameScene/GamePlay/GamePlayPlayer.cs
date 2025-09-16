@@ -47,13 +47,14 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
         playerInput ??= new PlayerInput();
         playerData = PlayerTable.GetTableData(TableId);
         moveVelocitySmoothDirectionInput ??= new SmoothDirectionInput(1f, 3f, 0.1f, 0.05f);
+        CustomTimeSystem.RegisterUnit(gameObject, TimeGroup.Player);
         skillDriver ??= new SkillDriver(
             this,
             typeof(GamePlayPlayer),
             animator,
             gameObject.GetComponentInChildren<Rigidbody2D>(),
             OnHitBoxTrigger,
-            () => Time.fixedDeltaTime,
+            () => CustomTimeSystem.FixedDeltaTimeOf(TimeGroup.Player),
             () => facingDir,
             () => { FacePlayer(); }
         );
@@ -98,6 +99,12 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
         playerInput.GamePlay.Run.performed -= OnMoveInput;
         playerInput.GamePlay.Run.canceled -= OnMoveInput;
         playerInput.Disable();
+    }
+
+    public override void OnDispose()
+    {
+        base.OnDispose();
+        CustomTimeSystem.UnregisterUnit(gameObject, TimeGroup.Player);
     }
 
     private void OnMoveInput(InputAction.CallbackContext context)
@@ -145,7 +152,7 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
                 {
                     async UniTask DashSkill()
                     {
-                        await UniTask.DelayFrame(3);
+                        await UniTask.DelayFrame(1);
                         skillDriver.ChangeSkillAsync(dashSkillConfig, false).Forget();
                     }
                     DashSkill().Forget();
@@ -208,8 +215,16 @@ public class GamePlayPlayer : GamePlayEntity, ISkillDriverUnit
                 {
                     //完美闪避
                     RippleController.Ins.AddRipple(hitPoint, mainCamera);
-                    var curve = AnimationCurve.Constant(0, 0, 1);
-                    BulletTimeTool.PlayBulletTime(3, 0.2f, curve, new Vector2(1f, 0.3f));
+                    //var curve = AnimationCurve.Constant(0, 0, 1);
+                    //BulletTimeTool.PlayBulletTime(3, 0.2f, curve, new Vector2(1f, 0.3f));
+
+                    CustomTimeSystem.PlayBulletTime(
+                        weight: 10,
+                        group: TimeGroup.Enemy,
+                        durationRealtime: 1f,
+                        curve: AnimationCurve.EaseInOut(0, 0, 1, 1),
+                        timeScaleRange: new Vector2(0.01f, 1f)
+                    );
                 }
                 else if (skillDriver.IsPlayingABlockSkill())
                 {

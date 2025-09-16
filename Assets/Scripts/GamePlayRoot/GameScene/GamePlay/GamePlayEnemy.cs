@@ -57,13 +57,15 @@ public class GamePlayEnemy : GamePlayAIEntity, ISkillDriverUnit
             blackboard.SetVariableValue("BlockSkillOnePath", data.BlockSkillOnePath);
         }
 
+        CustomTimeSystem.RegisterUnit(gameObject, TimeGroup.Enemy);
+
         skillDriver = new SkillDriver(
             this,
             typeof(GamePlayEnemy),
             animator,
             rb,
             OnHitBoxTrigger,
-            () => Time.fixedDeltaTime,
+            () => CustomTimeSystem.FixedDeltaTimeOf(TimeGroup.Enemy),
             () => facingDir,
             () => { FacePlayer(); }
         );
@@ -122,6 +124,7 @@ public class GamePlayEnemy : GamePlayAIEntity, ISkillDriverUnit
     {
         base.OnDispose();
         ManagerCenter.Ins.CooldownMgr.RemoveOwner(GamePlayId);
+        CustomTimeSystem.UnregisterUnit(gameObject, TimeGroup.Enemy);
     }
 
 #if UNITY_EDITOR

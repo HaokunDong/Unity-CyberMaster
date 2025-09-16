@@ -17,9 +17,9 @@ public interface ISkillDriverUnit
 
 public class SkillDriver
 {
+    public readonly Func<float> getDeltaTime;
     private readonly Animator animator;
     private readonly Rigidbody2D rb;
-    private readonly Func<float> getDeltaTime;
     private GamePlayEntity owner;
     private CancellationTokenSource skillCTS;
 
@@ -115,12 +115,7 @@ public class SkillDriver
         this.OnFacePlayer = facePlayer;
         this.OnHitBoxTriggered = OnHitBoxTriggered;
 
-        attributeData = new SkillAttributeData(
-            entity as ISkillDriverUnit,
-            this,
-            () => CurrentFrame,
-            getDeltaTime
-        );
+        attributeData = new SkillAttributeData(this);
     }
 
     public void BufferNextSkill(string skillName, int tailCutFrame)

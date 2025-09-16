@@ -203,7 +203,7 @@ MonoBehaviour:
       Data: 17|SkillAttributeClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
-      Data: 5
+      Data: 7
     - Name: AddSkillAttributes
       Entry: 7
       Data: 18|System.Collections.Generic.List`1[[AddSkillAttribute, Assembly-CSharp]],
@@ -260,7 +260,7 @@ MonoBehaviour:
       Entry: 6
       Data: 
   SkillName: 
-  FrameCount: 5
+  FrameCount: 9
   FrameRate: 24
   isAnAirSkill: 0
   cancelCommandInputState:
