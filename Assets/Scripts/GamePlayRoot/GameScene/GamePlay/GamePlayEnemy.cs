@@ -78,6 +78,7 @@ public class GamePlayEnemy : GamePlayAIEntity, ISkillDriverUnit
 
     public override void OnHitBoxTrigger(HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue, Vector2 hitPoint)
     {
+        base.OnHitBoxTrigger(hitRestype, attackerGPId, beHitterGPId, damageBaseValue, hitPoint);
     }
 
     public bool IsGrounded()

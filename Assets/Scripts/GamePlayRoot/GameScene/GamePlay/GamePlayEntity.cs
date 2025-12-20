@@ -6,6 +6,8 @@ using UnityEngine;
 
 public abstract class GamePlayEntity : MonoBehaviour, ICustomHierarchyComment
 {
+    private bool isHitBoxTriggerCalled = false;
+
     [ReadOnly]
     public uint GamePlayId;
     [ReadOnly, NonSerialized]
@@ -112,8 +114,19 @@ public abstract class GamePlayEntity : MonoBehaviour, ICustomHierarchyComment
 
     public virtual void OnHitBoxTrigger(HitResType hitRestype, uint attackerGPId, uint beHitterGPId, float damageBaseValue, Vector2 hitPoint)
     {
-
+        isHitBoxTriggerCalled = true;
     }
+
+    public bool GetHitBoxTriggerCalled()
+    {
+        if (isHitBoxTriggerCalled)
+        {
+            isHitBoxTriggerCalled = false;
+            return true;
+        }
+        return false;
+    }
+
 
 #if UNITY_EDITOR
     public abstract bool GetHierarchyComment(out string name, out Color color);

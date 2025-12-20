@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GamePlayId: 1000101003
+  facingRight: 1
+  sr: {fileID: 0}
   spawnEntityTableId: 55001
   timing: 1
   needRaycastDetect: 0
@@ -507,6 +509,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GamePlayId: 1000102001
+  facingRight: 1
+  sr: {fileID: 0}
   triggerType: 0
   triggerCooldown: 0
   targetLayerMask:
@@ -557,6 +561,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GamePlayId: 1000101007
+  facingRight: 1
+  sr: {fileID: 0}
   spawnEntityTableId: 45003
   timing: 1
   needRaycastDetect: 0
@@ -588,7 +594,7 @@ Transform:
   m_GameObject: {fileID: 2001927307811410052}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20, y: -2.3, z: 0}
+  m_LocalPosition: {x: 7.26, y: -2.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -607,6 +613,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GamePlayId: 1000101002
+  facingRight: 1
+  sr: {fileID: 0}
   spawnEntityTableId: 0
   timing: 1
   needRaycastDetect: 0
@@ -20777,6 +20785,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GamePlayId: 1000101005
+  facingRight: 1
+  sr: {fileID: 0}
   spawnEntityTableId: 45001
   timing: 1
   needRaycastDetect: 0
@@ -20827,6 +20837,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GamePlayId: 1000101006
+  facingRight: 1
+  sr: {fileID: 0}
   spawnEntityTableId: 45002
   timing: 1
   needRaycastDetect: 0
@@ -21412,6 +21424,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GamePlayId: 1000101004
+  facingRight: 1
+  sr: {fileID: 0}
   spawnEntityTableId: 55001
   timing: 1
   needRaycastDetect: 0
@@ -21748,6 +21762,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GamePlayId: 1000101001
+  facingRight: 1
+  sr: {fileID: 0}
   spawnEntityTableId: 35001
   timing: 0
   needRaycastDetect: 0
