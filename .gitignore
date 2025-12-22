@@ -79,3 +79,5 @@ crashlytics-build.properties
 /Assets/StreamingAssets/ab
 Assets/StreamingAssets/ab.meta
 /Assets/StreamingAssets/Audio
+/Packages/com.bezi.sidekick
+/.bezisidekick
