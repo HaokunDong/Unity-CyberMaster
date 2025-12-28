@@ -355,45 +355,35 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: SkillAttributeData
+      Entry: 7
+      Data: 25|SkillAttributeTrack, Assembly-CSharp
+    - Name: skillClipDict
+      Entry: 7
+      Data: 26|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillAttributeClip,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 27|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: AfterSkillCommandInputStateDict
       Entry: 7
-      Data: 25|System.Collections.Generic.Dictionary`2[[CommandInputState[], Assembly-CSharp],[System.String,
-        mscorlib]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 26|System.Collections.Generic.ObjectEqualityComparer`1[[CommandInputState[],
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: ChangeSkillCommandInputStateDict
-      Entry: 7
-      Data: 27|System.Collections.Generic.Dictionary`2[[CommandInputState[], Assembly-CSharp],[System.String,
-        mscorlib]], mscorlib
-    - Name: comparer
-      Entry: 9
-      Data: 26
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: SkillJumpFrameCommandInputStateDict
-      Entry: 7
-      Data: 28|System.Collections.Generic.Dictionary`2[[CommandInputState[], Assembly-CSharp],[System.Int32,
+      Data: 28|System.Collections.Generic.Dictionary`2[[CommandInputState[], Assembly-CSharp],[System.String,
         mscorlib]], mscorlib
     - Name: comparer
       Entry: 7
@@ -411,9 +401,46 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: ChangeSkillCommandInputStateDict
+      Entry: 7
+      Data: 30|System.Collections.Generic.Dictionary`2[[CommandInputState[], Assembly-CSharp],[System.String,
+        mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 9
+      Data: 29
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: SkillJumpFrameCommandInputStateDict
+      Entry: 7
+      Data: 31|System.Collections.Generic.Dictionary`2[[CommandInputState[], Assembly-CSharp],[System.Int32,
+        mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 32|System.Collections.Generic.ObjectEqualityComparer`1[[CommandInputState[],
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   SkillName: 
   FrameCount: 6
   FrameRate: 24
+  isAnAirSkill: 0
   cancelCommandInputState:
     CMD: 2
     InputState: 4

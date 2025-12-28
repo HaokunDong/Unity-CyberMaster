@@ -50,7 +50,7 @@ MonoBehaviour:
       Data: 3|SkillAnimationClip, Assembly-CSharp
     - Name: DurationFrame
       Entry: 3
-      Data: 6
+      Data: 30
     - Name: AnimationClip
       Entry: 10
       Data: 0
@@ -159,7 +159,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 0
+      Data: 5
     - Name: $v
       Entry: 7
       Data: 12|SkillBlockBoxClip, Assembly-CSharp
@@ -344,7 +344,7 @@ MonoBehaviour:
       Entry: 6
       Data: 
   SkillName: 
-  FrameCount: 6
+  FrameCount: 30
   FrameRate: 24
   isAnAirSkill: 0
   cancelCommandInputState:

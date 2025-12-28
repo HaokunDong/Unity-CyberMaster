@@ -325,13 +325,39 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: SkillAttributeData
+      Entry: 7
+      Data: 21|SkillAttributeTrack, Assembly-CSharp
+    - Name: skillClipDict
+      Entry: 7
+      Data: 22|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[SkillAttributeClip,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 23|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: AfterSkillCommandInputStateDict
       Entry: 7
-      Data: 21|System.Collections.Generic.Dictionary`2[[CommandInputState[], Assembly-CSharp],[System.String,
+      Data: 24|System.Collections.Generic.Dictionary`2[[CommandInputState[], Assembly-CSharp],[System.String,
         mscorlib]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 22|System.Collections.Generic.ObjectEqualityComparer`1[[CommandInputState[],
+      Data: 25|System.Collections.Generic.ObjectEqualityComparer`1[[CommandInputState[],
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 8
@@ -344,13 +370,13 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 7
-      Data: 23|CommandInputState[], Assembly-CSharp
+      Data: 26|CommandInputState[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 24|CommandInputState, Assembly-CSharp
+      Data: 27|CommandInputState, Assembly-CSharp
     - Name: CMD
       Entry: 3
       Data: 1
@@ -383,11 +409,11 @@ MonoBehaviour:
       Data: 
     - Name: SkillJumpFrameCommandInputStateDict
       Entry: 7
-      Data: 25|System.Collections.Generic.Dictionary`2[[CommandInputState[], Assembly-CSharp],[System.Int32,
+      Data: 28|System.Collections.Generic.Dictionary`2[[CommandInputState[], Assembly-CSharp],[System.Int32,
         mscorlib]], mscorlib
     - Name: comparer
       Entry: 9
-      Data: 22
+      Data: 25
     - Name: 
       Entry: 12
       Data: 1
@@ -396,13 +422,13 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 7
-      Data: 26|CommandInputState[], Assembly-CSharp
+      Data: 29|CommandInputState[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 27|CommandInputState, Assembly-CSharp
+      Data: 30|CommandInputState, Assembly-CSharp
     - Name: CMD
       Entry: 3
       Data: 1
@@ -433,6 +459,7 @@ MonoBehaviour:
   SkillName: 
   FrameCount: 23
   FrameRate: 24
+  isAnAirSkill: 0
   cancelCommandInputState:
     CMD: 0
     InputState: 0
